@@ -1,32 +1,27 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <nav
+      class="d-flex justify-content-around navbar navbar-light"
+      style="margin: 10px 0px"
+    >
+      <b-button v-b-toggle.sidebar-1>MENU</b-button>
+      <h1 style="margin: 0px;">분노의 민원</h1>
+      <p style="margin: 0px;">로그인</p>
+    </nav>
+
+    <b-sidebar id="sidebar-1" title="분노의 민원" shadow>
+      <div class="px-3 py-2">
+        <router-link to="/">Home</router-link><br />
+        <router-link to="/thumbnail">제보목록</router-link><br />
+        <router-link to="/status">교통 안전 현황</router-link><br />
+        <router-link to="/map">지도로 보기</router-link>
+      </div>
+    </b-sidebar>
+
+    <div class="container">
+      <router-view />
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>
