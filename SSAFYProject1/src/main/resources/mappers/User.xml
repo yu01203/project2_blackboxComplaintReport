@@ -4,79 +4,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mappers/user.xml -->
-<mapper namespace="com.happyhouse.repository.UserRepository"> <!-- mybatis는 namespace필수!! -->
+<mapper namespace="com.ssafy.repository.UserRepository"> <!-- mybatis는 namespace필수!! -->
 
 	<!-- 로그인 -->
 	<select id="select" resultType="User">
-		select user_no as userNo, id, password, name, tel, address
+		select user_no as userNo, email, password, name, gender, birth, phone
 		from user
 		where id=#{id} and password=#{password}
 	</select>
-	
-	<!-- 회원상세 -->
-	<select id="selectUser" resultType="User">
-		select user_no as userNo, id, password, name, tel, address
-		from user
-		where id=#{id}
-	</select>
-
-	<!-- 회원가입 -->
-	<insert id="insert">
-		insert into user(id, password, name, tel, address)
-		values(#{id}, #{password}, #{name}, #{tel}, #{address})
-	</insert>
-
-	<!-- 회원정보 수정 -->
-	<update id="update">
-		update user
-		set password=#{password}, name=#{name}, tel=#{tel}, address=#{address}
-		where id=#{id}
-	</update>
-
-	<!-- 회원목록 -->
-	<select id="userList" resultType="User">
-		select user_no as userNo, id, password, name, tel, address
-		from user
-		where 1=1
-		<if test="key != 'all'">
-			<if test="key == 'id'">
-				and id like concat('%', #{word}, '%')
-			</if>
-			<if test="key == 'name'">
-				and name like concat('%',#{word},'%')
-			</if>
-		</if>
-		<if test="key == 'all'">
-			and (id like concat('%', #{word}, '%')
-			or name like concat('%',#{word},'%'))
-		</if>
-		limit #{currentPage}, #{sizePerPage}
-	</select>
-
-	<!-- 삭제 -->
-	<select id="delete" resultType="Integer">
-		delete from user
-		where user_no in
-		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</select>
-	
-	<select id="getTotalCount" resultType="Integer">
-		select count(*)
-		from user
-		where 1=1
-		<if test="key != 'all'">
-			<if test="key == 'id'">
-				and id like concat('%', #{word}, '%')
-			</if>
-			<if test="key == 'name'">
-				and name like concat('%',#{word},'%')
-			</if>
-		</if>
-		<if test="key == 'all'">
-			and (id like concat('%', #{word}, '%')
-			or name like concat('%',#{word},'%'))
-		</if>
-   </select>
 </mapper>
