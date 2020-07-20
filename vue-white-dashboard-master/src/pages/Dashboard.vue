@@ -134,7 +134,7 @@
         </card>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks">
           <template slot="header">
@@ -179,7 +179,7 @@
           </div>
         </card>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
