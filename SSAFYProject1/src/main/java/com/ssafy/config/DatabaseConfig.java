@@ -8,3 +8,4 @@ import org.springframework.context.annotation.Configuration;
 		basePackages = "com.ssafy.repository"
 )
 public class DatabaseConfig {}
+

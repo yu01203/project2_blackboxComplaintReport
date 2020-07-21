@@ -16,6 +16,26 @@ public class UserServiceImpl implements UserService {
 	public User login(User user) throws Exception {
 		return repo.select(user);
 	}
+
+	@Override
+	public User detail(String email) throws Exception {
+		return repo.selectUser(email);
+	}
+
+	@Override
+	public int signUp(User user) throws Exception {
+		return repo.insert(user);
+	}
+
+	@Override
+	public int modify(User user) throws Exception {
+		return repo.update(user);
+	}
+
+	@Override
+	public int remove(String email) throws Exception {
+		return repo.delete(email);
+	}
 	
 	
 }
