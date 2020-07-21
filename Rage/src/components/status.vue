@@ -8,6 +8,7 @@
           <img
             src="https://www.mdon.co.kr/data/photos/20200311/art_15840186768258_7f8ba8.png"
             alt="sample"
+            style="width: 350px; heighe: 300px;"
           />
         </b-col>
         <b-col>
@@ -15,6 +16,7 @@
           <img
             src="https://www.foodsafetykorea.go.kr/img/minwon/stat_2020_05.jpg"
             alt="sample"
+            style="width: 350px; heighe: 300px;"
           />
         </b-col>
         <b-col>
@@ -22,6 +24,7 @@
           <img
             src="https://www.sema.or.kr/images/front/about/totalMem03_u1.png"
             alt="sample"
+            style="width: 350px; heighe: 300px;"
           />
         </b-col>
       </b-row>
@@ -31,7 +34,7 @@
 
 <script>
 export default {
-  name: "status",
+  name: "status"
 };
 </script>
 

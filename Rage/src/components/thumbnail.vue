@@ -23,12 +23,12 @@
                   Some quick example text to build on the card title and make up the
                   bulk of the card's content.
                 </b-card-text>
-              </b-card-body> -->
+              </b-card-body>-->
 
               <b-list-group flush>
                 <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜</b-list-group-item>
-                <b-list-group-item>시간</b-list-group-item>
+                <b-list-group-item>날짜:</b-list-group-item>
+                <b-list-group-item>시간:</b-list-group-item>
               </b-list-group>
 
               <b-card-body>
@@ -58,7 +58,7 @@
                   Some quick example text to build on the card title and make up the
                   bulk of the card's content.
                 </b-card-text>
-              </b-card-body> -->
+              </b-card-body>-->
 
               <b-list-group flush>
                 <b-list-group-item>위치:</b-list-group-item>
@@ -73,8 +73,8 @@
             </b-card>
           </div>
         </b-col>
-        <b-col> </b-col>
-        <b-col> </b-col>
+        <b-col></b-col>
+        <b-col></b-col>
       </b-row>
 
       <!-- <b-row>
@@ -82,14 +82,14 @@
         <b-col>col</b-col>
         <b-col>col</b-col>
         <b-col>col</b-col>
-      </b-row> -->
+      </b-row>-->
     </b-container>
   </div>
 </template>
 
 <script>
 export default {
-  name: "thumbnail",
+  name: "thumbnail"
 };
 </script>
 
