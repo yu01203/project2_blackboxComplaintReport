@@ -10,7 +10,7 @@ public class User {
 	private String phone;
 
 	public User() {}
-	public User(int userNo, String email, String password, String name, String gender, String birth) {
+	public User(int userNo, String email, String password, String name, String gender, String birth, String phone) {
 		this.UserNo = userNo;
 		this.email = email;
 		this.password = password;
@@ -75,5 +75,10 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "User [UserNo=" + UserNo + ", email=" + email + ", password=" + password + ", name=" + name + ", gender="
+				+ gender + ", birth=" + birth + ", phone=" + phone + "]";
+	}
 }
