@@ -1,12 +1,16 @@
 <template>
   <div>
     <nav
-      class="d-flex justify-content-around navbar navbar-light"
-      style="margin: 10px 0px"
+      class="d-flex justify-content-around navbar navbar-light fixed-top"
+      style="padding: 16px; background-color: #ffffff;"
     >
-      <b-button v-b-toggle.sidebar-1>MENU</b-button>
-      <h1 style="margin: 0px;">분노의 민원</h1>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <b-button v-b-toggle.sidebar-1 class="bg-info border-info">MENU</b-button>
+      <h1 class="ft-dh" style="margin: 0px;">분노의 민원</h1>
+      <!-- 로그인 버튼 -->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-info rounded"
+        style="padding: 7px 13px;"
+      >
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -17,7 +21,7 @@
             <li class="nav-item">
               <div>
                 <div v-if="this.$session.get('email') == null">
-                  <a v-b-modal.modal-1>로그인</a>
+                  <a v-b-modal.modal-1 style="color: white">로그인</a>
                 </div>
                 <div v-else-if="this.$session.get('email') != null">
                   <a v-on:click="sessionDistroy" style="cursor:pointer;"
@@ -25,7 +29,12 @@
                   >
                 </div>
 
-                <b-modal id="modal-1" title="로그인" hide-footer>
+                <b-modal
+                  id="modal-1"
+                  title="로그인"
+                  style="padding: 16px 32px;"
+                  hide-footer
+                >
                   <div class="modal-body">
                     <form @submit.prevent>
                       <div class="form-group">
@@ -34,7 +43,7 @@
                           class="form-control"
                           id="email"
                           ref="email"
-                          placeholder="Email을 입력하세요"
+                          placeholder="이메일을 입력하세요"
                           v-model="email"
                         />
                       </div>
@@ -44,7 +53,7 @@
                           class="form-control"
                           id="pw"
                           ref="pw"
-                          placeholder="PW를 입력하세요"
+                          placeholder="비밀번호를 입력하세요"
                           v-model="pw"
                         />
                       </div>
@@ -59,21 +68,24 @@
                     </form>
                   </div>
 
-                  <b-button class="btn btn-primary" v-b-modal.modal-multi-1
-                    >아이디 찾기</b-button
-                  >
-                  <b-button class="btn btn-primary" v-b-modal.modal-multi-2
-                    >비밀번호 찾기</b-button
-                  >
-                  <b-button class="btn btn-primary" v-b-modal.modal-multi-3
-                    >회원가입</b-button
-                  >
+                  <div class="d-flex justify-content-around">
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-1
+                      >이메일 찾기</b-button
+                    >
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-2
+                      >비밀번호 찾기</b-button
+                    >
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-3
+                      >회원가입</b-button
+                    >
+                  </div>
                 </b-modal>
-                <b-modal id="modal-multi-1" title="아이디찾기" hide-footer>
-                  <p class="my-2">아이디찾기</p>
+
+                <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
+                  <p class="my-2">이메일 찾기</p>
                 </b-modal>
-                <b-modal id="modal-multi-2" title="비밀번호찾기" hide-footer>
-                  <p class="my-2">비밀번호찾기</p>
+                <b-modal id="modal-multi-2" title="비밀번호 찾기" hide-footer>
+                  <p class="my-2">비밀번호 찾기</p>
                 </b-modal>
                 <b-modal id="modal-multi-3" title="회원가입" hide-footer>
                   <div class="modal-body">
@@ -134,7 +146,7 @@
 
                 <b-modal id="modal-memberInfo" title="회원정보" hide-footer>
                   <div class="form-group">
-                    <label>아이디 :</label>
+                    <label>이메일 :</label>
                     <br />
                     <div v-text="this.$session.get('id')"></div>
                   </div>
@@ -214,23 +226,46 @@
     <b-sidebar id="sidebar-1" title="분노의 민원" shadow>
       <div id="sidebar-content" class="d-flex flex-column px-5 py-4">
         <p>
-          <router-link to="/">Home</router-link>
+          <router-link to="/" style="text-decoration: none;">Home</router-link>
         </p>
         <p>
-          <router-link to="/thumbnail">제보목록</router-link>
+          <router-link to="/thumbnail" style="text-decoration: none;"
+            >제보목록</router-link
+          >
         </p>
         <p>
-          <router-link to="/status">교통 안전 현황</router-link>
+          <router-link to="/status" style="text-decoration: none;"
+            >교통 안전 현황</router-link
+          >
         </p>
         <p>
-          <router-link to="/map">지도로 보기</router-link>
+          <router-link to="/map" style="text-decoration: none;"
+            >지도로 보기</router-link
+          >
         </p>
       </div>
     </b-sidebar>
 
+    <br />
+    <br />
+    <br />
+    <br />
+
     <div class="container">
       <router-view />
     </div>
+
+    <br />
+    <br />
+    <br />
+    <footer
+      class="mastfoot m-0 fixed-bottom"
+      style="background-color: #ffffff;"
+    >
+      <div class="text-center">
+        <p class="mt-3">SSAFY 3기 공통 Project 2반 11조 나도내가무섭조</p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -259,7 +294,7 @@ export default {
     checkHandlerLogin() {
       let err = true;
       let msg = "";
-      !this.email && ((msg = "아이디를 입력해주세요"), (err = false)),
+      !this.email && ((msg = "이메일을 입력해주세요"), (err = false)),
         this.$refs.email.focus();
       err && !this.pw && ((msg = "비밀번호를 입력해주세요"), (err = false)),
         this.$refs.pw.focus();
@@ -450,11 +485,28 @@ export default {
 </script>
 
 <style>
+/* 사이드바 토글 */
 #sidebar-1 {
   padding: 10px;
 }
 
-#sidebar-content {
-  padding: 10px;
+/* 전체 기본 폰트 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 타이틀 */
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
+.ft-dh {
+  font-family: "Do Hyeon", sans-serif;
+  color: darkblue;
+}
+
+/* 로그인 모달 */
+#modal-1___BV_modal_header_ {
+  padding: 16px 16px 16px 32px;
 }
 </style>
