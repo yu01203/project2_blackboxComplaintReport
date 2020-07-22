@@ -62,8 +62,8 @@
 
               <b-list-group flush>
                 <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜</b-list-group-item>
-                <b-list-group-item>시간</b-list-group-item>
+                <b-list-group-item>날짜:</b-list-group-item>
+                <b-list-group-item>시간:</b-list-group-item>
               </b-list-group>
 
               <b-card-body>
@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: "thumbnail"
+  name: "thumbnail",
 };
 </script>
 
