@@ -1,16 +1,13 @@
 <template>
   <div>
     <nav
-      class="d-flex justify-content-around navbar navbar-light fixed-top"
+      class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info"
       style="padding: 16px; background-color: #ffffff;"
     >
       <b-button v-b-toggle.sidebar-1 class="bg-info border-info">MENU</b-button>
       <h1 class="ft-dh" style="margin: 0px;">분노의 민원</h1>
       <!-- 로그인 버튼 -->
-      <nav
-        class="navbar navbar-expand-lg navbar-light bg-info rounded"
-        style="padding: 7px 13px;"
-      >
+      <nav class="navbar navbar-expand-lg navbar-light bg-info rounded" style="padding: 7px 13px;">
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -24,17 +21,10 @@
                   <a v-b-modal.modal-1 style="color: white">로그인</a>
                 </div>
                 <div v-else-if="this.$session.get('email') != null">
-                  <a v-on:click="sessionDistroy" style="cursor:pointer;"
-                    >로그아웃</a
-                  >
+                  <a v-on:click="sessionDistroy" style="cursor:pointer;">로그아웃</a>
                 </div>
 
-                <b-modal
-                  id="modal-1"
-                  title="로그인"
-                  style="padding: 16px 32px;"
-                  hide-footer
-                >
+                <b-modal id="modal-1" title="로그인" style="padding: 16px 32px;" hide-footer>
                   <div class="modal-body">
                     <form @submit.prevent>
                       <div class="form-group">
@@ -61,26 +51,17 @@
                         <button
                           class="btn btn-primary btn-lg btn-block login-btn"
                           @click="checkHandlerLogin"
-                        >
-                          로그인
-                        </button>
+                        >로그인</button>
                       </div>
                     </form>
                   </div>
 
                   <div class="d-flex justify-content-around">
-                    <b-button class="btn btn-primary" v-b-modal.modal-multi-1
-                      >이메일 찾기</b-button
-                    >
-                    <b-button class="btn btn-primary" v-b-modal.modal-multi-2
-                      >비밀번호 찾기</b-button
-                    >
-                    <b-button class="btn btn-primary" v-b-modal.modal-multi-3
-                      >회원가입</b-button
-                    >
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
+                    <b-button class="btn btn-primary" v-b-modal.modal-multi-3>회원가입</b-button>
                   </div>
                 </b-modal>
-
                 <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
                   <p class="my-2">이메일 찾기</p>
                 </b-modal>
@@ -96,7 +77,7 @@
                         class="form-control"
                         id="email"
                         ref="email"
-                        placeholder="email을 입력하세요"
+                        placeholder="이메일을 입력하세요"
                         v-model="email"
                       />
                     </div>
@@ -107,7 +88,7 @@
                         class="form-control"
                         id="pw"
                         ref="pw"
-                        placeholder="PW를 입력하세요"
+                        placeholder="비밀번호를 입력하세요"
                         v-model="pw"
                       />
                     </div>
@@ -120,6 +101,28 @@
                         ref="name"
                         placeholder="name을 입력하세요"
                         v-model="name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>성별 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="gender"
+                        ref="gender"
+                        placeholder="남 또는 여"
+                        v-model="gender"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>생년월일 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="birth"
+                        ref="birth"
+                        placeholder="2020-01-01"
+                        v-model="birth"
                       />
                     </div>
                     <div class="form-group">
@@ -137,9 +140,7 @@
                       <button
                         class="btn btn-primary btn-lg btn-block login-btn"
                         @click="checkHandlerInsert"
-                      >
-                        회원가입
-                      </button>
+                      >회원가입</button>
                     </div>
                   </div>
                 </b-modal>
@@ -148,7 +149,7 @@
                   <div class="form-group">
                     <label>이메일 :</label>
                     <br />
-                    <div v-text="this.$session.get('id')"></div>
+                    <div v-text="this.$session.get('email')"></div>
                   </div>
                   <div class="form-group">
                     <label>비밀번호 :</label>
@@ -179,41 +180,48 @@
                       class="form-control"
                       id="name"
                       ref="name"
-                      placeholder="name을 입력하세요"
+                      placeholder="이름을 입력하세요"
                       v-model="name"
                     />
                   </div>
                   <div class="form-group">
-                    <label>이메일 :</label>
+                    <label>성별 :</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="email"
-                      ref="email"
-                      placeholder="email을 입력하세요"
-                      v-model="email"
+                      id="gender"
+                      ref="gender"
+                      placeholder="남 또는 여"
+                      v-model="gender"
                     />
                   </div>
                   <div class="form-group">
-                    <label>핸드폰번호 :</label>
+                    <label>생년월일 :</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="birth"
+                      ref="birth"
+                      placeholder="2020-01-01"
+                      v-model="birth"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>핸드폰 번호 :</label>
                     <input
                       type="text"
                       class="form-control"
                       id="phone"
                       ref="phone"
-                      placeholder="phone을 입력하세요"
+                      placeholder="핸드폰 번호를 입력하세요"
                       v-model="phone"
                     />
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary" @click="checkHandlerModify">
-                      회원정보수정
-                    </button>
+                    <button class="btn btn-primary" @click="checkHandlerModify">회원정보수정</button>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary" @click="deleteHandler">
-                      회원탈퇴
-                    </button>
+                    <button class="btn btn-primary" @click="deleteHandler">회원탈퇴</button>
                   </div>
                 </b-modal>
               </div>
@@ -226,22 +234,16 @@
     <b-sidebar id="sidebar-1" title="분노의 민원" shadow>
       <div id="sidebar-content" class="d-flex flex-column px-5 py-4">
         <p>
-          <router-link to="/" style="text-decoration: none;">Home</router-link>
+          <router-link to="/">Home</router-link>
         </p>
         <p>
-          <router-link to="/thumbnail" style="text-decoration: none;"
-            >제보목록</router-link
-          >
+          <router-link to="/thumbnail">제보목록</router-link>
         </p>
         <p>
-          <router-link to="/status" style="text-decoration: none;"
-            >교통 안전 현황</router-link
-          >
+          <router-link to="/status">교통 안전 현황</router-link>
         </p>
         <p>
-          <router-link to="/map" style="text-decoration: none;"
-            >지도로 보기</router-link
-          >
+          <router-link to="/map">지도로 보기</router-link>
         </p>
       </div>
     </b-sidebar>
@@ -258,8 +260,9 @@
     <br />
     <br />
     <br />
+
     <footer
-      class="mastfoot m-0 fixed-bottom"
+      class="mastfoot m-0 fixed-bottom border-top border-info"
       style="background-color: #ffffff;"
     >
       <div class="text-center">
@@ -275,7 +278,7 @@ import http from "@/util/http-common";
 export default {
   name: "App",
   props: {
-    type: { type: String },
+    type: { type: String }
   },
   data: function() {
     return {
@@ -286,7 +289,7 @@ export default {
       name: this.$session.get("name"),
       gender: this.$session.get("gender"),
       birth: this.$session.get("birth"),
-      phone: this.$session.get("phone"),
+      phone: this.$session.get("phone")
     };
   },
   methods: {
@@ -294,7 +297,7 @@ export default {
     checkHandlerLogin() {
       let err = true;
       let msg = "";
-      !this.email && ((msg = "이메일을 입력해주세요"), (err = false)),
+      !this.email && ((msg = "아이디를 입력해주세요"), (err = false)),
         this.$refs.email.focus();
       err && !this.pw && ((msg = "비밀번호를 입력해주세요"), (err = false)),
         this.$refs.pw.focus();
@@ -307,18 +310,18 @@ export default {
       http
         .post(`/login`, {
           email: this.email,
-          password: this.pw,
+          password: this.pw
         })
-        //.data({
-        //})
         .then(({ data }) => {
           let msg = "로그인에 실패하였습니다.";
           if (data === "success") {
             msg = "로그인이 완료되었습니다.";
+            this.$session.set("email", this.email);
+            console.log(this.$session.get("email"));
+            this.$router.push("/");
+            this.$router.go();
           }
-          this.$router.push("/");
           alert(msg);
-          this.$router.go();
         })
         .catch(() => {
           alert("에러가 발생했습니다.");
@@ -347,10 +350,10 @@ export default {
         (err = false),
         this.$refs.gender.focus());
       err &&
-        !this.brith &&
+        !this.birth &&
         ((msg = "생년월일을 입력해주세요"),
         (err = false),
-        this.$refs.brith.focus());
+        this.$refs.birth.focus());
       err &&
         !this.phone &&
         ((msg = "핸드폰번호를 입력해주세요"),
@@ -368,7 +371,7 @@ export default {
           name: this.name,
           gender: this.gender,
           birth: this.birth,
-          phone: this.phone,
+          phone: this.phone
         })
         .then(({ data }) => {
           // 여기서부터 코딩
@@ -412,6 +415,16 @@ export default {
         (err = false),
         this.$refs.email.focus());
       err &&
+        !this.gender &&
+        ((msg = "성별을 입력해주세요"),
+        (err = false),
+        this.$refs.gender.focus());
+      err &&
+        !this.birth &&
+        ((msg = "생년월일을 입력해주세요"),
+        (err = false),
+        this.$refs.birth.focus());
+      err &&
         !this.phone &&
         ((msg = "핸드폰번호를 입력해주세요"),
         (err = false),
@@ -433,7 +446,7 @@ export default {
           name: this.name,
           gender: this.gender,
           birth: this.birth,
-          phone: this.phone,
+          phone: this.phone
         })
         .then(({ data }) => {
           // 여기서부터 코딩
@@ -464,8 +477,14 @@ export default {
 
     // 회원삭제
     deleteHandler() {
+      console.log(this.$session.get("email"));
       http
-        .delete(``)
+        .post(
+          `del`,
+          JSON.stringify({
+            email: this.$session.get("email")
+          })
+        )
         .then(({ data }) => {
           let msg = "회원삭제에 실패하였습니다..";
           if (data === "success") {
@@ -479,8 +498,8 @@ export default {
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
