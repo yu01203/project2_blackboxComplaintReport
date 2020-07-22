@@ -27,9 +27,10 @@ public class UserController {
 		User input = new User();
 		input.setEmail(email);
 		input.setPassword(password);
-		
+
 		try {
 			User user = service.login(input);
+			
 			if(user != null) {
 				session.setAttribute("userinfo", user);
 				result = "success";
