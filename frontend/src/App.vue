@@ -5,7 +5,7 @@
       style="padding: 16px; background-color: #ffffff;"
     >
       <b-button v-b-toggle.sidebar-1 class="bg-info border-info">MENU</b-button>
-      <h1 class="ft-dh" style="margin: 0px;">분노의 민원</h1>
+      <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1>
       <!-- 로그인 버튼 -->
       <nav class="navbar navbar-expand-lg navbar-light bg-info rounded" style="padding: 7px 13px;">
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -63,10 +63,123 @@
                   </div>
                 </b-modal>
                 <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
-                  <p class="my-2">이메일 찾기</p>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>이름 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        ref="name"
+                        placeholder="이름을 입력하세요"
+                        v-model="name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>성별 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="gender"
+                        ref="gender"
+                        placeholder="남 또는 여"
+                        v-model="gender"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>생년월일 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="birth"
+                        ref="birth"
+                        placeholder="2020-01-01"
+                        v-model="birth"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>핸드폰 번호 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        ref="phone"
+                        placeholder="핸드폰 번호를 입력하세요"
+                        v-model="phone"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <button
+                        class="btn btn-primary btn-lg btn-block login-btn"
+                        @click="checkHandlerInsert"
+                      >회원가입</button>
+                    </div>
+                  </div>
                 </b-modal>
                 <b-modal id="modal-multi-2" title="비밀번호 찾기" hide-footer>
-                  <p class="my-2">비밀번호 찾기</p>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>이메일 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="email"
+                        ref="email"
+                        placeholder="이메일을 입력하세요"
+                        v-model="email"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>이름 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        ref="name"
+                        placeholder="이름을 입력하세요"
+                        v-model="name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>성별 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="gender"
+                        ref="gender"
+                        placeholder="남 또는 여"
+                        v-model="gender"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>생년월일 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="birth"
+                        ref="birth"
+                        placeholder="2020-01-01"
+                        v-model="birth"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>핸드폰 번호 :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        ref="phone"
+                        placeholder="핸드폰 번호를 입력하세요"
+                        v-model="phone"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <button
+                        class="btn btn-primary btn-lg btn-block login-btn"
+                        @click="checkHandlerInsert"
+                      >회원가입</button>
+                    </div>
+                  </div>
                 </b-modal>
                 <b-modal id="modal-multi-3" title="회원가입" hide-footer>
                   <div class="modal-body">
@@ -99,7 +212,7 @@
                         class="form-control"
                         id="name"
                         ref="name"
-                        placeholder="name을 입력하세요"
+                        placeholder="이름을 입력하세요"
                         v-model="name"
                       />
                     </div>
@@ -126,13 +239,13 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label>핸드폰번호 :</label>
+                      <label>핸드폰 번호 :</label>
                       <input
                         type="text"
                         class="form-control"
                         id="phone"
                         ref="phone"
-                        placeholder="phone을 입력하세요"
+                        placeholder="핸드폰 번호를 입력하세요"
                         v-model="phone"
                       />
                     </div>
@@ -234,16 +347,16 @@
     <b-sidebar id="sidebar-1" title="분노의 민원" shadow>
       <div id="sidebar-content" class="d-flex flex-column px-5 py-4">
         <p>
-          <router-link to="/">Home</router-link>
+          <router-link to="/" style="text-decoration: none;">Home</router-link>
         </p>
         <p>
-          <router-link to="/thumbnail">제보목록</router-link>
+          <router-link to="/thumbnail" style="text-decoration: none;">제보목록</router-link>
         </p>
         <p>
-          <router-link to="/status">교통 안전 현황</router-link>
+          <router-link to="/status" style="text-decoration: none;">교통 안전 현황</router-link>
         </p>
         <p>
-          <router-link to="/map">지도로 보기</router-link>
+          <router-link to="/map" style="text-decoration: none;">지도로 보기</router-link>
         </p>
       </div>
     </b-sidebar>
@@ -278,9 +391,9 @@ import http from "@/util/http-common";
 export default {
   name: "App",
   props: {
-    type: { type: String }
+    type: { type: String },
   },
-  data: function() {
+  data: function () {
     return {
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
@@ -289,7 +402,7 @@ export default {
       name: this.$session.get("name"),
       gender: this.$session.get("gender"),
       birth: this.$session.get("birth"),
-      phone: this.$session.get("phone")
+      phone: this.$session.get("phone"),
     };
   },
   methods: {
@@ -310,7 +423,7 @@ export default {
       http
         .post(`/login`, {
           email: this.email,
-          password: this.pw
+          password: this.pw,
         })
         .then(({ data }) => {
           let msg = "로그인에 실패하였습니다.";
@@ -371,7 +484,7 @@ export default {
           name: this.name,
           gender: this.gender,
           birth: this.birth,
-          phone: this.phone
+          phone: this.phone,
         })
         .then(({ data }) => {
           // 여기서부터 코딩
@@ -446,7 +559,7 @@ export default {
           name: this.name,
           gender: this.gender,
           birth: this.birth,
-          phone: this.phone
+          phone: this.phone,
         })
         .then(({ data }) => {
           // 여기서부터 코딩
@@ -482,7 +595,7 @@ export default {
         .post(
           `del`,
           JSON.stringify({
-            email: this.$session.get("email")
+            email: this.$session.get("email"),
           })
         )
         .then(({ data }) => {
@@ -498,34 +611,42 @@ export default {
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
 /* 사이드바 토글 */
 #sidebar-1 {
-  padding: 10px;
+  padding: 15px;
 }
 
 /* 전체 기본 폰트 */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 
-* {
-  font-family: "Noto Sans KR", sans-serif;
+.ft-bhs {
+  font-family: "Black Han Sans", sans-serif;
+  color: #17a2b8;
 }
 
 /* 타이틀 */
-@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 
-.ft-dh {
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
+
+* {
   font-family: "Do Hyeon", sans-serif;
-  color: darkblue;
+  color: navy;
 }
 
 /* 로그인 모달 */
 #modal-1___BV_modal_header_ {
   padding: 16px 16px 16px 32px;
+}
+
+/* 라우터 링크 */
+p a {
+  color: black;
+  font-size: 120%;
 }
 </style>
