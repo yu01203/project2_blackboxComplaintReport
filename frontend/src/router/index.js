@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Mapp from "../components/map.vue";
-import Mypage from "../components/mypage.vue";
 import Status from "../components/status.vue";
 import Thumbnail from "../components/thumbnail.vue";
 
@@ -18,11 +17,6 @@ const routes = [
     path: "/map",
     name: "map",
     component: Mapp,
-  },
-  {
-    path: "/mypage",
-    name: "mypage",
-    component: Mypage,
   },
   {
     path: "/status",

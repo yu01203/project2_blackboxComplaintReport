@@ -18,287 +18,59 @@
               </template>
 
               <b-list-group flush>
-                <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜:</b-list-group-item>
-                <b-list-group-item>시간:</b-list-group-item>
+                <b-list-group-item>
+                  <div class="mb-3">
+                    상태 : <strong>{{ selected }}</strong>
+                  </div>
+                  <b-form-select
+                    v-model="selected"
+                    :options="options"
+                    class="mb-0"
+                    value-field="item"
+                    text-field="name"
+                    disabled-field="notEnabled"
+                  ></b-form-select>
+                </b-list-group-item>
+                <b-list-group-item>위치 :</b-list-group-item>
+                <b-list-group-item>날짜 :</b-list-group-item>
+                <b-list-group-item>시간 :</b-list-group-item>
               </b-list-group>
 
               <b-card-body>
                 <div class="text-center">
-                  <b-button v-b-modal.modal-2>신고!</b-button>
+                  <b-button
+                    v-b-modal.modal-2
+                    variant="info"
+                    style="width: 100%;"
+                    >상세보기 및 신고</b-button
+                  >
 
-                  <b-modal id="modal-2" title="BootstrapVue">
+                  <b-modal id="modal-2" title="제보 상세보기">
+                    <!-- 동영상 -->
                     <div>
-                      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                        <b-form-group
-                          id="input-group-1"
-                          label="Email address:"
-                          label-for="input-1"
-                          description="We'll never share your email with anyone else."
-                        >
-                          <b-form-input
-                            id="input-1"
-                            v-model="form.email"
-                            type="email"
-                            required
-                            placeholder="Enter email"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                          <b-form-input
-                            id="input-2"
-                            v-model="form.name"
-                            required
-                            placeholder="Enter name"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                          <b-form-select id="input-3" v-model="form.food" :options="foods" required></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-4">
-                          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                          </b-form-checkbox-group>
-                        </b-form-group>
-
-                        <b-button type="submit" variant="primary">Submit</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
-                      </b-form>
-                      <b-card class="mt-3" header="Form Data Result">
-                        <pre class="m-0">{{ form }}</pre>
-                      </b-card>
+                      <b-embed
+                        type="iframe"
+                        aspect="16by9"
+                        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                        allowfullscreen
+                      ></b-embed>
                     </div>
-                  </b-modal>
-                </div>
-              </b-card-body>
-            </b-card>
-          </div>
-        </b-col>
-
-        <!-- card1 -->
-        <b-col>
-          <div>
-            <b-card
-              no-body
-              style="max-width: 20rem;"
-              img-src="https://placekitten.com/380/200"
-              img-alt="Image"
-              img-top
-            >
-              <template v-slot:header>
-                <h4 class="mb-0 text-center">범죄 유형</h4>
-              </template>
-
-              <b-list-group flush>
-                <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜:</b-list-group-item>
-                <b-list-group-item>시간:</b-list-group-item>
-              </b-list-group>
-
-              <b-card-body>
-                <div class="text-center">
-                  <b-button v-b-modal.modal-3>신고!</b-button>
-
-                  <b-modal id="modal-3" title="BootstrapVue">
+                    <hr />
+                    <!-- 세부사항 -->
                     <div>
-                      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                        <b-form-group
-                          id="input-group-1"
-                          label="Email address:"
-                          label-for="input-1"
-                          description="We'll never share your email with anyone else."
-                        >
-                          <b-form-input
-                            id="input-1"
-                            v-model="form.email"
-                            type="email"
-                            required
-                            placeholder="Enter email"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                          <b-form-input
-                            id="input-2"
-                            v-model="form.name"
-                            required
-                            placeholder="Enter name"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                          <b-form-select id="input-3" v-model="form.food" :options="foods" required></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-4">
-                          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                          </b-form-checkbox-group>
-                        </b-form-group>
-
-                        <b-button type="submit" variant="primary">Submit</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
-                      </b-form>
-                      <b-card class="mt-3" header="Form Data Result">
-                        <pre class="m-0">{{ form }}</pre>
-                      </b-card>
+                      <p>범죄 유형</p>
+                      <p>위치</p>
+                      <p>날짜</p>
+                      <p>시간</p>
                     </div>
-                  </b-modal>
-                </div>
-              </b-card-body>
-            </b-card>
-          </div>
-        </b-col>
-
-        <!-- card1 -->
-        <b-col>
-          <div>
-            <b-card
-              no-body
-              style="max-width: 20rem;"
-              img-src="https://placekitten.com/380/200"
-              img-alt="Image"
-              img-top
-            >
-              <template v-slot:header>
-                <h4 class="mb-0 text-center">범죄 유형</h4>
-              </template>
-
-              <b-list-group flush>
-                <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜:</b-list-group-item>
-                <b-list-group-item>시간:</b-list-group-item>
-              </b-list-group>
-
-              <b-card-body>
-                <div class="text-center">
-                  <b-button v-b-modal.modal-4>신고!</b-button>
-
-                  <b-modal id="modal-4" title="BootstrapVue">
+                    <hr />
+                    <!-- 제보내용 -->
                     <div>
-                      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                        <b-form-group
-                          id="input-group-1"
-                          label="Email address:"
-                          label-for="input-1"
-                          description="We'll never share your email with anyone else."
-                        >
-                          <b-form-input
-                            id="input-1"
-                            v-model="form.email"
-                            type="email"
-                            required
-                            placeholder="Enter email"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                          <b-form-input
-                            id="input-2"
-                            v-model="form.name"
-                            required
-                            placeholder="Enter name"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                          <b-form-select id="input-3" v-model="form.food" :options="foods" required></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-4">
-                          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                          </b-form-checkbox-group>
-                        </b-form-group>
-
-                        <b-button type="submit" variant="primary">Submit</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
-                      </b-form>
-                      <b-card class="mt-3" header="Form Data Result">
-                        <pre class="m-0">{{ form }}</pre>
-                      </b-card>
-                    </div>
-                  </b-modal>
-                </div>
-              </b-card-body>
-            </b-card>
-          </div>
-        </b-col>
-
-        <!-- card1 -->
-        <b-col>
-          <div>
-            <b-card
-              no-body
-              style="max-width: 20rem;"
-              img-src="https://placekitten.com/380/200"
-              img-alt="Image"
-              img-top
-            >
-              <template v-slot:header>
-                <h4 class="mb-0 text-center">범죄 유형</h4>
-              </template>
-
-              <b-list-group flush>
-                <b-list-group-item>위치:</b-list-group-item>
-                <b-list-group-item>날짜:</b-list-group-item>
-                <b-list-group-item>시간:</b-list-group-item>
-              </b-list-group>
-
-              <b-card-body>
-                <div class="text-center">
-                  <b-button v-b-modal.modal-5>신고!</b-button>
-
-                  <b-modal id="modal-5" title="BootstrapVue">
-                    <div>
-                      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                        <b-form-group
-                          id="input-group-1"
-                          label="Email address:"
-                          label-for="input-1"
-                          description="We'll never share your email with anyone else."
-                        >
-                          <b-form-input
-                            id="input-1"
-                            v-model="form.email"
-                            type="email"
-                            required
-                            placeholder="Enter email"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                          <b-form-input
-                            id="input-2"
-                            v-model="form.name"
-                            required
-                            placeholder="Enter name"
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                          <b-form-select id="input-3" v-model="form.food" :options="foods" required></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group id="input-group-4">
-                          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                          </b-form-checkbox-group>
-                        </b-form-group>
-
-                        <b-button type="submit" variant="primary">Submit</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
-                      </b-form>
-                      <b-card class="mt-3" header="Form Data Result">
-                        <pre class="m-0">{{ form }}</pre>
-                      </b-card>
+                      <div class="mb-2">-{{ text }}</div>
+                      <b-form-input
+                        v-model="text"
+                        placeholder="Enter your name"
+                      ></b-form-input>
                     </div>
                   </b-modal>
                 </div>
@@ -317,41 +89,17 @@ export default {
 
   data() {
     return {
-      form: {
-        email: "",
-        name: "",
-        food: null,
-        checked: []
-      },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
+      // selectbox
+      selected: "신고 미접수",
+      options: [
+        { item: "신고 미접수", name: "신고 미접수" },
+        { item: "접수 완료", name: "접수 완료" },
+        { item: "처리 완료", name: "처리 완료" },
       ],
-      show: true
+      // 제보 내용
+      text: "",
     };
   },
-  methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    }
-  }
 };
 </script>
 

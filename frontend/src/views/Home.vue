@@ -1,6 +1,7 @@
 <template>
   <div>
     <Thumbnail />
+    <br />
     <Status />
   </div>
 </template>
