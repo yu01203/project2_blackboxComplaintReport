@@ -380,17 +380,17 @@
           >
         </p>
         <p>
-          <router-link to="/thumbnail" style="text-decoration: none;"
+          <router-link to="/caselist" style="text-decoration: none;"
             >제보 목록</router-link
           >
         </p>
         <p>
-          <router-link to="/status" style="text-decoration: none;"
+          <router-link to="/reportinfo" style="text-decoration: none;"
             >제보 현황</router-link
           >
         </p>
         <p>
-          <router-link to="/map" style="text-decoration: none;"
+          <router-link to="/mapmain" style="text-decoration: none;"
             >지도 보기</router-link
           >
         </p>

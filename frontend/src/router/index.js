@@ -1,9 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import Home from "../views/Home.vue";
-import Mapp from "../components/map.vue";
-import Status from "../components/status.vue";
-import Thumbnail from "../components/thumbnail.vue";
+import CaseList from "../views/CaseList.vue";
+import ReportInfo from "../views/ReportInfo.vue";
+import MapMain from "../views/MapMain.vue";
 
 Vue.use(VueRouter);
 
@@ -14,19 +15,19 @@ const routes = [
     component: Home,
   },
   {
-    path: "/map",
-    name: "map",
-    component: Mapp,
+    path: "/caselist",
+    name: "CaseList",
+    component: CaseList,
   },
   {
-    path: "/status",
-    name: "status",
-    component: Status,
+    path: "/reportinfo",
+    name: "ReportInfo",
+    component: ReportInfo,
   },
   {
-    path: "/thumbnail",
-    name: "thumbnail",
-    component: Thumbnail,
+    path: "/mapmain",
+    name: "MapMain",
+    component: MapMain,
   },
 ];
 
