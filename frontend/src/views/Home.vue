@@ -1,20 +1,20 @@
 <template>
   <div>
-    <Thumbnail />
+    <CaseList />
     <br />
-    <Status />
+    <ReportInfo />
   </div>
 </template>
 
 <script>
-import Thumbnail from "@/components/thumbnail.vue";
-import Status from "@/components/status.vue";
+import CaseList from "@/views/CaseList.vue";
+import ReportInfo from "@/views/ReportInfo.vue";
 
 export default {
   name: "Home",
   components: {
-    Thumbnail,
-    Status,
+    CaseList,
+    ReportInfo,
   },
 };
 </script>
