@@ -46,3 +46,75 @@ SHH오픈 후, 윈도우를 통해 제어 가능(PUTTY)
 -> 덮어쓰기가 가능한 덕분에 1~10번까지의 파일명 지정 후, 이벤트 시, 최근 6개 파일 합치는 방향으로 진행할 듯.
 
 #### AWS서버 배포 관련해서 404error 처리를 위한 정보 수집.
+
+
+
+### 0724
+
+##### 파이썬 영상 처리 알고리즘(이라기엔 너무 허접하지만)
+
+```python
+A = list(range(0, 10))
+N = 0
+#N = (N + 1) % 10
+
+#파일 선택
+select_num = N
+B = []
+for _ in range(4, 10):
+    title_num = (select_num + _) % 10
+    #title_num 6번 반복
+    B.append(title_num)
+print(B)
+```
+
+->0부터 차례로 간다는 가정하에 파일 번호 리스트로 받는거
+
+```python
+A = list(range(0, 10))
+N = 0
+#N = (N + 1) % 10
+
+#파일 선택
+select_num = N
+for i in range(10):
+    B = []
+    select_num = i
+    for _ in range(4, 10):
+        title_num = (select_num + _) % 10
+        q = 'video' + str(title_num)
+        #title_num 6번 반복
+        B.append(q)
+    print(B)
+```
+
+```python
+['video4', 'video5', 'video6', 'video7', 'video8', 'video9']
+['video5', 'video6', 'video7', 'video8', 'video9', 'video0']
+['video6', 'video7', 'video8', 'video9', 'video0', 'video1']
+['video7', 'video8', 'video9', 'video0', 'video1', 'video2']
+['video8', 'video9', 'video0', 'video1', 'video2', 'video3']
+['video9', 'video0', 'video1', 'video2', 'video3', 'video4']
+['video0', 'video1', 'video2', 'video3', 'video4', 'video5']
+['video1', 'video2', 'video3', 'video4', 'video5', 'video6']
+['video2', 'video3', 'video4', 'video5', 'video6', 'video7']
+['video3', 'video4', 'video5', 'video6', 'video7', 'video8']
+```
+
+10개의 파일일 경우 차라리 하드코딩으로 각 경우에 어떤 파일을 합칠지 정하는게 나을 것이라 예상
+
+
+
+##### Dropbox 메뉴 도움
+
+#### mysql 설치 및 공부
+
+- 잘 모르겠음...
+
+
+
+### 0727
+
+#### IOT 서버 전송 공부
+
+#### 프론트 드랍박스 공부

@@ -9,6 +9,10 @@ import VueSession from "vue-session";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+// selectbox
+import vSelect from "vselect-component";
+
+Vue.use(vSelect);
 
 Vue.use(BootstrapVue);
 //로그인 복붙
