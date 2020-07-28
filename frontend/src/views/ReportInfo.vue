@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>제보 현황</h1>
+    <h1>제보현황</h1>
     <b-container class="bv-example-row bv-example-row-flex-cols">
       <b-row align-v="stretch">
         <b-col>
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "status",
+  name: "ReportInfo",
 };
 </script>
 
