@@ -1,26 +1,14 @@
 <template>
-  <div>
-    <NavBar />
-    <!-- sidebar -->
-    <SideBar />
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <div class="container">
-      <router-view />
+  <div class="wrapper1">
+    <div class="wrapper2">
+      <NavBar />
+      <SideBar />
+      <div class="container mb-3">
+        <router-view />
+      </div>
     </div>
 
-    <br />
-    <br />
-    <br />
-
-    <footer
-      class="mastfoot m-0 fixed-bottom border-top border-info"
-      style="background-color: #ffffff;"
-    >
+    <footer class="mastfoot m-0 border-top border-info" style="background-color: #ffffff;">
       <div class="text-center">
         <p class="mt-3">SSAFY 3기 공통 Project 2반 11조 나도내가무섭조</p>
       </div>
@@ -29,8 +17,8 @@
 </template>
 
 <script>
-import NavBar from '@/components/layout/NavBar.vue'
-import SideBar from '@/components/layout/SideBar.vue'
+import NavBar from "@/components/layout/NavBar.vue";
+import SideBar from "@/components/layout/SideBar.vue";
 
 export default {
   name: "App",
@@ -62,5 +50,22 @@ export default {
 p a {
   color: black;
   font-size: 120%;
+}
+
+.wrapper1 {
+  position: relative;
+  min-height: 85vh;
+}
+
+.wrapper2 {
+  margin-top: 90px;
+  padding-bottom: 2.5rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 </style>
