@@ -36,7 +36,7 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
 
    ```bash
    $ git add <작업한 디렉토리 경로>
-   $ git commit -m "Front-end|Layout|Sidebar Modified"
+   $ git commit -m "S03P12A211 | Front-end > Layout > Sidebar Modified"
    $ git push
    ```
 
