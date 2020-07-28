@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "map",
+  name: "MapMain",
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>제보 목록</h1>
+    <h1>제보목록</h1>
     <b-container class="bv-example-row">
       <b-row>
         <!-- card1 -->
@@ -105,7 +105,7 @@
 
 <script>
 export default {
-  name: "thumbnail",
+  name: "CaseList",
 
   data() {
     return {
