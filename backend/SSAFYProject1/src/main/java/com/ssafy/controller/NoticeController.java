@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 //http://localhost:9999/happyhouse/swagger-ui.html
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-@RequestMapping("/api/notice")
+@RequestMapping("/user/notice")
 public class NoticeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
