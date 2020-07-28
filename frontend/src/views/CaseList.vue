@@ -43,14 +43,15 @@
                   <!-- 모달 -->
                   <b-modal id="modal-2" title="제보 상세보기" hide-footer>
                     <!-- 동영상 -->
-                    <div>
+                    <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
+                    <!-- <div>
                       <b-embed
                         type="iframe"
                         aspect="16by9"
-                        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                        src="http://d1xevv8xa9hsha.cloudfront.net/video2.mp4"
                         allowfullscreen
                       ></b-embed>
-                    </div>
+                    </div>-->
                     <hr />
                     <!-- 세부사항 -->
                     <div>

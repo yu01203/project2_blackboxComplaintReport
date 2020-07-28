@@ -11,14 +11,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 // selectbox
 import vSelect from "vselect-component";
+//동영상 스트뤼밍
+import VueCoreVideoPlayer from "vue-core-video-player";
 
 Vue.use(vSelect);
 
 Vue.use(BootstrapVue);
+
 //로그인 복붙
 Vue.use(VModal);
 Vue.use(VueSession, sessionOptions);
 //
+Vue.use(VueCoreVideoPlayer);
+
 Vue.config.productionTip = false;
 
 var sessionOptions = {
