@@ -3,12 +3,17 @@
     <div class="wrapper2">
       <NavBar />
       <SideBar />
+      <br />
       <div class="container mb-3">
         <router-view />
       </div>
+      <br />
     </div>
 
-    <footer class="mastfoot m-0 border-top border-info" style="background-color: #ffffff;">
+    <footer
+      class="mastfoot m-0 border-top border-info"
+      style="background-color: #ffffff;"
+    >
       <div class="text-center">
         <p class="mt-3">SSAFY 3기 공통 Project 2반 11조 나도내가무섭조</p>
       </div>
@@ -67,5 +72,9 @@ footer {
   bottom: 0;
   width: 100%;
   height: 2.5rem;
+}
+
+h1 {
+  margin-bottom: 16px;
 }
 </style>
