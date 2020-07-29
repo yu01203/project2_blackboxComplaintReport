@@ -50,7 +50,7 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
 ## 현재 인스톨된 NPM 패키지 리스트 만들기
 
 ```bash
-$ npm shrinkwarp
+$ npm shrinkwrap
 ```
 
 - 현재 경로에 npm-shrinkwrap.json 작성
