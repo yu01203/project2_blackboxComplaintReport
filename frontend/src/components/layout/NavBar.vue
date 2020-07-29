@@ -20,7 +20,9 @@
           style="padding: 7px 13px; margin: 0px 45px;"
         >
           <div>
-            <a v-b-modal.modal-1 style="color: white; text-decoration: none;">로그인</a>
+            <a v-b-modal.modal-1 style="color: white; text-decoration: none;"
+              >로그인</a
+            >
           </div>
         </b-button>
 
@@ -31,9 +33,13 @@
             style="padding: 7px 13px;"
           >
             <div>
-              <a v-b-modal.modal-memberInfo style="color: white; text-decoration: none;">회원정보</a>
-            </div>
-          </b-button>&nbsp;
+              <a
+                v-b-modal.modal-memberInfo
+                style="color: white; text-decoration: none;"
+                >회원정보</a
+              >
+            </div> </b-button
+          >&nbsp;
           <b-button
             v-if="this.$session.get('email') != null"
             class="bg-info rounded border-info"
@@ -43,7 +49,8 @@
               <a
                 v-on:click="sessionDistroy"
                 style="cursor:pointer; color: white; text-decoration: none;"
-              >로그아웃</a>
+                >로그아웃</a
+              >
             </div>
           </b-button>
         </div>
@@ -51,7 +58,12 @@
 
       <!-- 모달 -->
       <div>
-        <b-modal id="modal-1" title="로그인" style="padding: 16px 32px;" hide-footer>
+        <b-modal
+          id="modal-1"
+          title="로그인"
+          style="padding: 16px 32px;"
+          hide-footer
+        >
           <div class="modal-body">
             <form @submit.prevent>
               <div class="form-group">
@@ -78,15 +90,23 @@
                 <button
                   class="btn btn-primary btn-lg btn-block login-btn"
                   @click="checkHandlerLogin"
-                >로그인</button>
+                >
+                  로그인
+                </button>
               </div>
             </form>
           </div>
 
           <div class="d-flex justify-content-around">
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-3>회원가입</b-button>
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-1
+              >이메일 찾기</b-button
+            >
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-2
+              >비밀번호 찾기</b-button
+            >
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-3
+              >회원가입</b-button
+            >
           </div>
         </b-modal>
         <!-- 이메일 찾기 -->
@@ -140,7 +160,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -206,7 +228,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -283,7 +307,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -362,7 +388,9 @@
             />
           </div>
           <div class="form-group d-flex justify-content-around">
-            <button class="btn btn-info" @click="checkHandlerModify">회원정보수정</button>
+            <button class="btn btn-info" @click="checkHandlerModify">
+              회원정보수정
+            </button>
             <button class="btn btn-info" @click="deleteHandler">
               <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
             </button>
@@ -381,7 +409,7 @@ export default {
   props: {
     type: { type: String },
   },
-  data: function () {
+  data: function() {
     return {
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
@@ -479,6 +507,8 @@ export default {
           let msg = "회원가입에 실패하였습니다.";
           if (data === "success") {
             msg = "회원가입이 완료되었습니다.";
+            this.$router.push("/");
+            this.$router.go();
           }
           alert(msg);
           this.$root.$emit("bv::hide::modal", "modal-multi-3");
