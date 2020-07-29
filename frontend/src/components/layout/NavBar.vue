@@ -391,9 +391,26 @@ export default {
       gender: this.$session.get("gender"),
       birth: this.$session.get("birth"),
       phone: this.$session.get("phone"),
+
+      // 토큰 관리
+      jwt: module.require("jsonwebtoken"),
+      access_token: this.$route.query.token,
+      CLIENT_ID: "px2gRec1H_fbAwS22rLW",
+      redirectURI: "http://localhost:9999/ssafy/api/sns/login",
+      state: 123,
+      naverLoginURL:
+        "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
   methods: {
+    // 네이버 아이디 로그인
+    naverLogin() {
+      this.naverLoginURL += "&client_id=" + this.CLIENT_ID;
+      this.naverLoginURL += "&redirect_uri=" + this.redirectURI;
+      this.naverLoginURL += "&state=" + this.state;
+
+      location.href = this.naverLoginURL;
+    },
     // 로그인
     checkHandlerLogin() {
       let err = true;
@@ -565,8 +582,18 @@ export default {
 
     // 세션 삭제
     sessionDistroy() {
+      if (this.jwt) {
+        alert("네이버 로그아웃");
+        http.post(`/sns/logout`).then(({ data }) => {
+          if (data == "success") {
+            alert("로그아웃 " + data);
+            this.$router.push("/");
+          }
+        });
+      }
       this.$session.destroy();
-      this.$router.go();
+      this.jwt = "";
+      this.access_token = "";
       this.email = "";
       this.pw = "";
       this.name = "";
@@ -574,6 +601,7 @@ export default {
       this.birth = "";
       this.phone = "";
       this.joindate = "";
+      // this.$router.push("/");
     },
 
     // 회원삭제
