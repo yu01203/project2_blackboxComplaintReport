@@ -57,6 +57,12 @@
                         allowfullscreen
                       ></b-embed>
                     </div>-->
+                    <vue-player
+                      src="http://d1xevv8xa9hsha.cloudfront.net/video2.mp4"
+                      poster="http://d1xevv8xa9hsha.cloudfront.net/video2.mp4"
+                      title="this is a title"
+                      v-model="playing"
+                    ></vue-player>
                     <hr />
                     <!-- 세부사항 -->
                     <div>
@@ -117,9 +123,13 @@
 </template>
 
 <script>
+import vuePlayer from "@algoz098/vue-player";
+
 export default {
   name: "CaseList",
-
+  components: {
+    vuePlayer,
+  },
   data() {
     return {
       // selectbox-1

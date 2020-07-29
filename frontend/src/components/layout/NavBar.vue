@@ -81,21 +81,28 @@
                   v-model="pw"
                 />
               </div>
-              <div class="form-group">
+              <div class="form-group ">
                 <!-- 로그인 버튼 -->
-                <button
-                  class="btn btn-primary btn-lg btn-block login-btn"
+                <a
+                  class="btn btn-primary text-decoration-none m-auto"
                   @click="checkHandlerLogin"
+                  style="width: 100%; height: 50px;"
                 >
-                  로그인
-                </button>
+                  <p style="color: white; font-size: 20px; margin-top: 4px;">
+                    로그인
+                  </p>
+                </a>
+                <br />
+                <hr />
                 <!-- 네이버 로그인 버튼 -->
-                <button @click="naverLogin" class="btn btn-outline-light">
+                <div class="text-center">
                   <img
-                    width="70%"
+                    @click="naverLogin"
+                    width="60%"
+                    style="cursor: pointer;"
                     src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"
                   />
-                </button>
+                </div>
               </div>
             </form>
           </div>
@@ -419,7 +426,7 @@ export default {
     // 네이버 로그인
     this.$session.set("email", this.jwt.decode(this.access_token).email);
   },
-  data: function () {
+  data: function() {
     return {
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
@@ -624,12 +631,6 @@ export default {
     sessionDistroy() {
       if (this.jwt) {
         alert("네이버 로그아웃");
-        http.post(`/sns/logout`).then(({ data }) => {
-          if (data == "success") {
-            alert("로그아웃 " + data);
-            location.href = "http://localhost:8080/";
-          }
-        });
       }
       this.$session.destroy();
       this.jwt = "";
@@ -641,7 +642,7 @@ export default {
       this.birth = "";
       this.phone = "";
       this.joindate = "";
-      // this.$router.push("/");
+      this.$router.push("/");
     },
 
     // 회원삭제
