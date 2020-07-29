@@ -55,7 +55,7 @@ $ npm shrinkwrap
 
 - 현재 경로에 npm-shrinkwrap.json 작성
   
-- shrinkwarp: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
+- shrinkwrap: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
   
 - 해당 npm을 공유받는 사람은 
 
