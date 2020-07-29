@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>제보목록</h1>
+    <h1 class="text-center mb-3">제보목록</h1>
     <b-container class="bv-example-row">
       <b-row>
         <!-- card1 -->
@@ -39,7 +39,12 @@
 
               <b-card-body>
                 <div class="text-center">
-                  <b-button v-b-modal.modal-2 variant="info" style="width: 100%;">상세보기 및 신고하기</b-button>
+                  <b-button
+                    v-b-modal.modal-2
+                    variant="info"
+                    style="width: 100%;"
+                    >상세보기 및 신고하기</b-button
+                  >
                   <!-- 모달 -->
                   <b-modal id="modal-2" title="제보 상세보기" hide-footer>
                     <!-- 동영상 -->
@@ -70,12 +75,18 @@
                       <p>위반시간 :</p>
                       <div class="mb-2">
                         <div class="mb-2">위반차량번호 : {{ text1 }}</div>
-                        <b-form-input v-model="text1" placeholder="위반차량번호를 정확하게 입력해주세요."></b-form-input>
+                        <b-form-input
+                          v-model="text1"
+                          placeholder="위반차량번호를 정확하게 입력해주세요."
+                        ></b-form-input>
                       </div>
                       <p>위반장소 :</p>
                       <div class="mb-2">
                         <div class="mb-2">위반위치 : {{ text2 }}</div>
-                        <b-form-input v-model="text2" placeholder="위반위치를 입력해주세요. 최대 20자까지 입력가능합니다."></b-form-input>
+                        <b-form-input
+                          v-model="text2"
+                          placeholder="위반위치를 입력해주세요. 최대 20자까지 입력가능합니다."
+                        ></b-form-input>
                       </div>
                       <div class="mb-2">
                         <div class="mb-2">신고내용 : {{ text3 }}</div>
@@ -91,7 +102,8 @@
                         href="http://onetouch.police.go.kr/"
                         onclick="window.open(this.href);return false;"
                         target="_blank"
-                      >스마트 국민제보로 신고하러 가기</b-button>
+                        >스마트 국민제보로 신고하러 가기</b-button
+                      >
                     </div>
                   </b-modal>
                 </div>

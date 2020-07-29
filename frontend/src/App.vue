@@ -73,8 +73,4 @@ footer {
   width: 100%;
   height: 2.5rem;
 }
-
-h1 {
-  margin-bottom: 16px;
-}
 </style>

@@ -173,6 +173,6 @@ public class SNSController {
 		System.out.println(access_token);
 		System.out.println(res.toString());
 		
-		return "redirect:http://localhost:8081";
+		return "redirect:http://localhost:8080";
 	}
 }

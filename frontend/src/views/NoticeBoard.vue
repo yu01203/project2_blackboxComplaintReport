@@ -1,7 +1,13 @@
 <template>
   <div>
-    <h1>공지사항</h1>
-    <b-table bordered outlined hover :items="noticeitems" :fields="fields"></b-table>
+    <h1 class="text-center mb-3">공지사항</h1>
+    <b-table
+      bordered
+      outlined
+      hover
+      :items="noticeitems"
+      :fields="fields"
+    ></b-table>
   </div>
 </template>
 
