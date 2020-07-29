@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 import CaseList from "../views/CaseList.vue";
 import ReportInfo from "../views/ReportInfo.vue";
 import MapMain from "../views/MapMain.vue";
+import NoticeBoard from "../views/NoticeBoard.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
     path: "/mapmain",
     name: "MapMain",
     component: MapMain,
+  },
+  {
+    path: "/noticeboard",
+    name: "NoticeBoard",
+    component: NoticeBoard,
   },
 ];
 

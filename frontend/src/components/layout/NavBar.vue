@@ -79,12 +79,6 @@
                   class="btn btn-primary btn-lg btn-block login-btn"
                   @click="checkHandlerLogin"
                 >로그인</button>
-                <button @click="naverLogin">
-                  <img
-                    width="223"
-                    src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"
-                  />
-                </button>
               </div>
             </form>
           </div>
@@ -386,10 +380,6 @@ export default {
   name: "NavBar",
   props: {
     type: { type: String },
-  },
-  created() {
-    // 네이버 로그인
-    this.$session.set("email", this.jwt.decode(this.access_token).email);
   },
   data: function () {
     return {
