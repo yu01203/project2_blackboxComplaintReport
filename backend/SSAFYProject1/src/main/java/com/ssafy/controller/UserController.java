@@ -19,7 +19,7 @@ import com.ssafy.service.UserService;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-@RequestMapping("user")
+@RequestMapping("api/user")
 public class UserController {
 
 	@Autowired
@@ -82,12 +82,15 @@ public class UserController {
 	public String signUp(@RequestBody User user, Model model) {
 		System.out.println("회원 등록 시도");
 		String result = "";
-		System.out.println(user);
+		System.out.println(user);		
 		
 		try {
-			int number = service.signUp(user);
-			if(number == 1) result = "success";
-			else result = "fail";
+			if(service.detail(user.getEmail()) == null) result = "fail";
+			else {
+				int number = service.signUp(user);
+				if (number == 1) result = "success";
+				else result = "fail";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "error";
