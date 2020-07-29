@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
@@ -93,7 +92,7 @@ public class SNSController {
 	 * 요청 헤더 예) Authorization: Bearer + access_token
 	*/
 	private String getUserInfo(String access_token) {
-		String header = "Bearer " + access_token; // Bearer 다음에 공백 추가
+		String header = "Bearer " + access_token; // Bearer 다음에 공백 추가(네이버 요구 형식)
 		try {
 			String apiURL = "https://openapi.naver.com/v1/nid/me";
 			
@@ -124,7 +123,6 @@ public class SNSController {
 	/* 네이버 프로필 데이터 암호화 */
 	private String createJWTToken(int id, String name, String email) {
 		String token = null;
-		DecodedJWT jwt = null;
 
 		try {
 			// 토큰 유효 기간
@@ -143,9 +141,15 @@ public class SNSController {
 		return token;
 	}
 	
+	/*
+	 * 네이버 로그아웃
+	 * 접근 토큰 삭제
+	*/
 	@PostMapping("/logout")
-	public String logout() throws Exception { // @ResponseBody
+	public String logout() throws Exception {
 		System.out.println("네이버 로그아웃 시도");
+		
+		// 접근 토큰 삭제 URL
 		String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=";
 		apiURL += clientId + "&client_secret=";
 		apiURL += naverClientSecret + "&access_token=";
@@ -158,20 +162,19 @@ public class SNSController {
 		BufferedReader br;
 
 		if (responseCode == 200) { // 정상 호출
-			System.out.println("삭제 성공!!");
+			System.out.println("Access Token Delete Success");
 			access_token=null;
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		} else { // 에러 발생
-			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-		}
+		} else br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		
 		String inputLine;
-		StringBuffer res = new StringBuffer();
+		StringBuffer response = new StringBuffer();
 		while ((inputLine = br.readLine()) != null) {
-			res.append(inputLine);
+			response.append(inputLine);
 		}
 		br.close();
-		System.out.println(access_token);
-		System.out.println(res.toString());
+		
+		System.out.println(response.toString());
 		
 		return "redirect:http://localhost:8080";
 	}
