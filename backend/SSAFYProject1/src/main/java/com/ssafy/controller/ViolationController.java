@@ -28,7 +28,7 @@ public class ViolationController {
 	@Autowired
 	ViolationService violationService;
 
-	@GetMapping()
+	@GetMapping
 	public List<Violation> viewViolaions(@RequestBody Map<String, Object> param) throws Exception {
 		System.out.println("신고 정보 리스트 조회");
 
@@ -41,23 +41,33 @@ public class ViolationController {
 
 	@GetMapping("{userNo}/{violationNo}")
 	public Violation viewViolation(@PathVariable int userNo, @PathVariable int violationNo) throws Exception {
+		System.out.println("신고 정보 조회");
+		
 		Violation violation = violationService.viewViolation(violationNo, userNo);
-
 		return violation;
 	}
 
 	@PostMapping
-	public String addViolation() throws Exception {
-		return null;
+	public String addViolation(@RequestBody Violation violation) throws Exception {
+		System.out.println("신고하기");
+		
+		if(violationService.addViolation(violation) == 1) return "success";
+		return "fail";
 	}
 
 	@PutMapping
-	public String modifyViolation() throws Exception {
-		return "";
+	public String modifyViolation(@RequestBody Violation violation) throws Exception {
+		System.out.println("신고 정보 수정");
+		
+		if(violationService.modifyViolation(violation) == 1) return "success";
+		return "fail";
 	}
 
-	@DeleteMapping
-	public String removeViolation() throws Exception {
-		return "";
+	@DeleteMapping("{userNo}/{violationNo}")
+	public String removeViolation(@PathVariable int violationNo, @PathVariable int userNo) throws Exception {
+		System.out.println("신고 정보 삭제");
+		
+		if(violationService.removeViolation(violationNo, userNo) == 1) return "success";
+		return "fail";
 	}
 }
