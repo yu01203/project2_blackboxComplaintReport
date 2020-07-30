@@ -1,16 +1,17 @@
 <template>
   <div>
-    <img
-      src="https://www.koroad.or.kr/cmm/fms/epkoroadFileDown.do?board_code=GABBS_050&board_num=134005&file_num=179782"
-      alt="sample"
-      style="width: 100%;"
-    />
+    <NaverMap />
   </div>
 </template>
 
 <script>
+import NaverMap from "@/components/NaverMap.vue";
+
 export default {
   name: "MapMain",
+  components: {
+    NaverMap,
+  },
 };
 </script>
 
