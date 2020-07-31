@@ -16,34 +16,34 @@
       <div>
         <b-button
           v-if="this.$session.get('email') == null"
+          v-b-modal.modal-1
           class="bg-info rounded border-info"
-          style="padding: 7px 13px; margin: 0px 45px;"
+          style="padding: 7px 13px;"
         >
           <div>
-            <a v-b-modal.modal-1 style="color: white; text-decoration: none;">로그인</a>
+            <a style="color: white; text-decoration: none;">로그인</a>
           </div>
         </b-button>
 
         <div>
           <b-button
             v-if="this.$session.get('email') != null"
+            v-b-modal.modal-memberInfo
             class="bg-info rounded border-info"
             style="padding: 7px 13px;"
           >
             <div>
-              <a v-b-modal.modal-memberInfo style="color: white; text-decoration: none;">회원정보</a>
+              <a style="color: white; text-decoration: none;">회원정보</a>
             </div>
           </b-button>&nbsp;
           <b-button
             v-if="this.$session.get('email') != null"
+            v-on:click="sessionDistroy"
             class="bg-info rounded border-info"
             style="padding: 7px 13px;"
           >
             <div>
-              <a
-                v-on:click="sessionDistroy"
-                style="cursor:pointer; color: white; text-decoration: none;"
-              >로그아웃</a>
+              <a style="cursor: pointer; color: white; text-decoration: none;">로그아웃</a>
             </div>
           </b-button>
         </div>
@@ -75,10 +75,25 @@
                 />
               </div>
               <div class="form-group">
-                <button
-                  class="btn btn-primary btn-lg btn-block login-btn"
+                <!-- 로그인 버튼 -->
+                <a
+                  class="btn btn-primary text-decoration-none m-auto"
                   @click="checkHandlerLogin"
-                >로그인</button>
+                  style="width: 100%; height: 50px;"
+                >
+                  <p style="color: white; font-size: 20px; margin-top: 4px;">로그인</p>
+                </a>
+                <br />
+                <hr />
+                <!-- 네이버 로그인 버튼 -->
+                <div class="text-center">
+                  <img
+                    @click="naverLogin"
+                    width="60%"
+                    style="cursor: pointer;"
+                    src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"
+                  />
+                </div>
               </div>
             </form>
           </div>
@@ -86,7 +101,7 @@
           <div class="d-flex justify-content-around">
             <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
             <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-3>회원가입</b-button>
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-3 style="margin: 0px 10px;">회원가입</b-button>
           </div>
         </b-modal>
         <!-- 이메일 찾기 -->
@@ -381,6 +396,10 @@ export default {
   props: {
     type: { type: String },
   },
+  created() {
+    // 네이버 로그인
+    this.$session.set("email", this.jwt.decode(this.access_token).email);
+  },
   data: function () {
     return {
       // 백엔드에서 필요로 하는 데이터
@@ -391,9 +410,26 @@ export default {
       gender: this.$session.get("gender"),
       birth: this.$session.get("birth"),
       phone: this.$session.get("phone"),
+
+      // 토큰 관리
+      jwt: module.require("jsonwebtoken"),
+      access_token: this.$route.query.token,
+      CLIENT_ID: "px2gRec1H_fbAwS22rLW",
+      redirectURI: "http://localhost:9999/ssafy/api/sns/login",
+      state: 123,
+      naverLoginURL:
+        "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
   methods: {
+    // 네이버 아이디 로그인
+    naverLogin() {
+      this.naverLoginURL += "&client_id=" + this.CLIENT_ID;
+      this.naverLoginURL += "&redirect_uri=" + this.redirectURI;
+      this.naverLoginURL += "&state=" + this.state;
+
+      location.href = this.naverLoginURL;
+    },
     // 로그인
     checkHandlerLogin() {
       let err = true;
@@ -479,6 +515,8 @@ export default {
           let msg = "회원가입에 실패하였습니다.";
           if (data === "success") {
             msg = "회원가입이 완료되었습니다.";
+            this.$router.push("/");
+            this.$router.go();
           }
           alert(msg);
           this.$root.$emit("bv::hide::modal", "modal-multi-3");
@@ -565,15 +603,11 @@ export default {
 
     // 세션 삭제
     sessionDistroy() {
-      this.$session.destroy();
-      this.$router.go();
-      this.email = "";
-      this.pw = "";
-      this.name = "";
-      this.gender = "";
-      this.birth = "";
-      this.phone = "";
-      this.joindate = "";
+      if (this.jwt) {
+        http.get("/sns/logout").then(({ data }) => {
+          alert("네이버 로그아웃 " + data);
+        });
+      }
     },
 
     // 회원삭제

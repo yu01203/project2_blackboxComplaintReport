@@ -19,7 +19,7 @@ import com.ssafy.service.UserService;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-@RequestMapping("user")
+@RequestMapping("api/user")
 public class UserController {
 
 	@Autowired
@@ -31,17 +31,15 @@ public class UserController {
 		String result = "";
 		
 		System.out.println(param);
-//		System.out.println(email + " " + password);
 		
-//		System.out.println(input);
 		User input = new User();
 		input.setEmail(param.get("email").toString());
 		input.setPassword(param.get("password").toString());
 
 		try {
-			User user = service.login(input);
+			User user = service.login(input); // 회원 조회
 			
-			if(user != null) {
+			if(user != null) { // 회원 존재
 				session.setAttribute("userinfo", user);
 				result = "success";
 			} else result = "null";
@@ -67,7 +65,7 @@ public class UserController {
 		
 		try {
 			User user = service.detail(email);
-			result = "success"; // 회원 조회는 테이블에서 눌러서 조회 -> User == null 일 경우가 없ㅇ므
+			result = "success"; // 회원 조회는 테이블에서 눌러서 조회 -> User == null 일 경우가 없음
 			
 			model.addAttribute("userinfo", user);
 		} catch (Exception e) {
@@ -82,12 +80,15 @@ public class UserController {
 	public String signUp(@RequestBody User user, Model model) {
 		System.out.println("회원 등록 시도");
 		String result = "";
-		System.out.println(user);
+		System.out.println(user);		
 		
 		try {
-			int number = service.signUp(user);
-			if(number == 1) result = "success";
-			else result = "fail";
+			if(service.detail(user.getEmail()) == null) result = "fail";
+			else {
+				int number = service.signUp(user);
+				if (number == 1) result = "success";
+				else result = "fail";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "error";

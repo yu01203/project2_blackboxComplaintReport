@@ -1,18 +1,25 @@
 <template>
   <div>
-    <h1>제보목록</h1>
+    <h1 class="text-center mb-3">제보목록</h1>
     <b-container class="bv-example-row">
       <b-row>
         <!-- card1 -->
         <b-col>
           <div>
-            <b-card
+            <!-- <b-card
               no-body
               style="max-width: 20rem;"
               img-src="https://placekitten.com/380/200"
               img-alt="Image"
               img-top
-            >
+            >-->
+            <b-card no-body style="max-width: 20rem;">
+              <vue-player
+                src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+                poster="https://via.placeholder.com/150"
+                title="this is a title"
+                v-model="playing"
+              ></vue-player>
               <template v-slot:header>
                 <h4 class="mb-0 text-center">위반 항목</h4>
               </template>
@@ -44,14 +51,12 @@
                   <b-modal id="modal-2" title="제보 상세보기" hide-footer>
                     <!-- 동영상 -->
                     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
-                    <!-- <div>
-                      <b-embed
-                        type="iframe"
-                        aspect="16by9"
-                        src="http://d1xevv8xa9hsha.cloudfront.net/video2.mp4"
-                        allowfullscreen
-                      ></b-embed>
-                    </div>-->
+                    <vue-player
+                      src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+                      poster="https://via.placeholder.com/150"
+                      title="this is a title"
+                      v-model="playing"
+                    ></vue-player>
                     <hr />
                     <!-- 세부사항 -->
                     <div>
@@ -105,9 +110,13 @@
 </template>
 
 <script>
+import vuePlayer from "@algoz098/vue-player";
+
 export default {
   name: "CaseList",
-
+  components: {
+    vuePlayer,
+  },
   data() {
     return {
       // selectbox-1
