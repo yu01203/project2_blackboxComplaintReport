@@ -44,14 +44,9 @@
                 <b-list-group-item>위반장소 :</b-list-group-item>
               </b-list-group>
 
-              <b-card-body :items="noticeitems">
+              <b-card-body>
                 <div class="text-center">
-                  <b-button
-                    v-b-modal.modal-2
-                    variant="info"
-                    style="width: 100%;"
-                    @click="customHandler"
-                  >상세보기 및 신고하기</b-button>
+                  <b-button v-b-modal.modal-2 variant="info" style="width: 100%;">상세보기 및 신고하기</b-button>
                   <!-- 모달 -->
                   <b-modal id="modal-2" title="제보 상세보기" hide-footer>
                     <!-- 동영상 -->
@@ -76,25 +71,8 @@
                           disabled-field="notEnabled"
                         ></b-form-select>
                       </p>
-                      <p>
-                        <label>아이디 :</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="item"
-                          ref="item"
-                          v-model="car_num"
-                        />
-                      </p>
-                      <p>
-                        <label>위반일자 :</label>
-                        <input type="text" class="form-control" id="date" ref="date" v-model="date" />
-                      </p>
-
-                      <p>
-                        <label>위반시간 :</label>
-                        <input type="text" class="form-control" id="time" ref="time" v-model="time" />
-                      </p>
+                      <p>위반일자 :</p>
+                      <p>위반시간 :</p>
                       <div class="mb-2">
                         <div class="mb-2">위반차량번호 : {{ text1 }}</div>
                         <b-form-input v-model="text1" placeholder="위반차량번호를 정확하게 입력해주세요."></b-form-input>
@@ -132,17 +110,12 @@
 </template>
 
 <script>
-import http from "@/util/http-common";
 import vuePlayer from "@algoz098/vue-player";
-// import { mapGetters } from "vuex";
 
 export default {
   name: "CaseList",
   components: {
     vuePlayer,
-  },
-  props: {
-    type: { type: String },
   },
   data() {
     return {
@@ -180,49 +153,7 @@ export default {
       text1: "",
       text2: "",
       text3: "",
-
-      //DB에서 가져온 내용 여기 저장할거임. 변수선언
-      violation_no: "",
-      user_no: "",
-      item: "",
-      date: "",
-      time: "",
-      car_num: "",
-      address: "",
-      spot: "",
-      contents: "",
-      video_url: "",
     };
-  },
-  methods: {
-    customHandler() {
-      http
-        .get(`/violation/1/1`)
-        .then(({ data }) => {
-          if (data != null) {
-            //alert로 단위테스트 1회  => data.x  는 DB에서 받아온 Object를 data에 넣고 data.x로 그 data에 들어간 object 중 x라는 json에 접근
-            // alert("바이오번호! " + data.violationNo);
-            this.violation_no = data.violationNo;
-            this.user_no = data.userNo;
-            this.item = data.item;
-            this.date = data.date;
-            this.time = data.time;
-            this.car_num = data.carNum;
-            this.address = data.address;
-            this.spot = data.spot;
-            this.contents = data.contents;
-            this.video_url = data.videoUrl;
-
-            //이건 내부변수에 값이 제대로 들어갔나 확인하는 단위테스트
-            alert("차번호! " + this.car_num);
-          } else {
-            alert("동영상 정보 불러오기 실패했습니다.");
-          }
-        })
-        .catch(() => {
-          alert("에러가 발생했습니다.");
-        });
-    },
   },
 };
 </script>
