@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info"
+    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info p-1"
     style="padding: 16px; background-color: #ffffff;"
   >
     <!-- 1 -->
