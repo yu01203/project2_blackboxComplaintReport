@@ -184,3 +184,20 @@ Session에 토큰 값이 중간에 사라짐
 - 자체 회원, SNS 회원, 신고 테이블 관계 설정 방법 고안 필요
 - 2개의 회원 테이블을 한번에 신고 테이블에 관계를 설정할 수 있다면 베스틑
 - 자체 회원 - 신고 / SNS 회원 - 신고
+
+------------------------------------------------------------------
+2020-08-03
+
+SNS User 데이터 관리 기능
+- SNS User Table Modeling
+- SNS Violation Table Modeling
+- SNS User - SNS Violation Relationship Setting
+- SNS User Repository
+- SNS User Service, ServiceImpl
+- SNS Domain
+- SNS User SQL Statement 작성(SNSUser.xml)
+
+Swagger UI 적용
+- UserController
+- ViolationController
+- SNSUserController
