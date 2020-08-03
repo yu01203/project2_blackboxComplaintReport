@@ -6,17 +6,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: [],
-    item: {},
+    violationitems: [],
+    violationitem: {},
     noticeitems: [],
     noticeitem: {},
   },
   getters: {
-    items(state) {
-      return state.items;
+    violationitems(state) {
+      return state.violationitems;
     },
-    item(state) {
-      return state.item;
+    violationitem(state) {
+      return state.violationitem;
     },
     noticeitems(state) {
       return state.noticeitems;
@@ -26,11 +26,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setBoards(state, payload) {
-      state.items = payload;
+    setViolations(state, payload) {
+      state.violationitems = payload;
     },
-    setBoard(state, payload) {
-      state.item = payload;
+    setViolation(state, payload) {
+      state.violationitem = payload;
     },
     setNotices(state, payload) {
       state.noticeitems = payload;
@@ -40,19 +40,19 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getBoards(context) {
+    getViolations(context) {
       http
-        .get("/member")
+        .get("/violation")
         .then(({ data }) => {
-          context.commit("setBoards", data);
+          context.commit("setViolations", data);
         })
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
     },
-    getBoard(context, payload) {
+    getViolation(context, payload) {
       http.get(payload).then(({ data }) => {
-        context.commit("setBoard", data);
+        context.commit("setViolations", data);
       });
     },
     getNotices(context) {
