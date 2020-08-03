@@ -8,7 +8,8 @@
 
     <!-- 2 -->
     <router-link to="/" style="text-decoration: none;">
-      <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1>
+      <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
+      <img src="@/assets/Logo_1.png" alt="logo-image" />
     </router-link>
 
     <!-- 3 -->
