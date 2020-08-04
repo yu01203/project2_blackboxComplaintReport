@@ -42,7 +42,7 @@ export default new Vuex.Store({
   actions: {
     getViolations(context) {
       http
-        .get("/violation")
+        .get(`/violation/1`)
         .then(({ data }) => {
           context.commit("setViolations", data);
         })
