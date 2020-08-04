@@ -23,6 +23,7 @@ import com.ssafy.service.ViolationService;
 
 import io.swagger.annotations.ApiOperation;
 
+// http://localhost:9999/ssafy/swagger-ui.html
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequestMapping("api/violation")
@@ -44,7 +45,7 @@ public class ViolationController {
 		return new ResponseEntity<List<Violation>>(violationService.viewViolationList(userNo), HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "모든 제보 정보를 리스트로 반환한다.", response = Violation.class)
+	@ApiOperation(value = "회원의 제보 정보를 리스트로 반환한다.", response = Violation.class)
 	@GetMapping("{userNo}/{violationNo}")
 	public ResponseEntity<Violation> viewViolation(@PathVariable int userNo, @PathVariable int violationNo) throws Exception {
 		logger.debug("신고  조회 - 호출");
@@ -53,6 +54,7 @@ public class ViolationController {
 		return new ResponseEntity<Violation>(violationService.viewViolation(violationNo, userNo), HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "회원 제보 정보를 등록 후 성공 여부를 반환한다.")
 	@PostMapping
 	public ResponseEntity<String> addViolation(@RequestBody Violation violation) throws Exception {
 		logger.debug("신고 정보 삽입 - 호출");
@@ -61,6 +63,7 @@ public class ViolationController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
 
+	@ApiOperation(value = "회원 제보 정보를 수정 후 성공 여부를 반환한다.")
 	@PutMapping
 	public ResponseEntity<String> modifyViolation(@RequestBody Violation violation) throws Exception {
 		logger.debug("신고 정보 수정 - 호출");
@@ -69,6 +72,7 @@ public class ViolationController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
 
+	@ApiOperation(value = "회원 제보 정보를 삭제 후 성공 여부를 반환한다.")
 	@DeleteMapping("{userNo}/{violationNo}")
 	public ResponseEntity<String> removeViolation(@PathVariable int violationNo, @PathVariable int userNo) throws Exception {
 		logger.debug("신고 정보 삭제 - 호출");
