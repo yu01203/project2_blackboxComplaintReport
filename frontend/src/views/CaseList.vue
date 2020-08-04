@@ -4,16 +4,9 @@
     <b-container class="bv-example-row">
       <b-row>
         <!-- card1 -->
-        <b-col>
+        <b-col cols="4" v-for="violationitem in violationitems" :key="violationitem.etag">
           <div>
-            <!-- <b-card
-              no-body
-              style="max-width: 20rem;"
-              img-src="https://placekitten.com/380/200"
-              img-alt="Image"
-              img-top
-            >-->
-            <b-card no-body style="max-width: 20rem;">
+            <b-card class="mb-3" no-body style="max-width: 20rem;">
               <vue-player
                 src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
                 poster="https://via.placeholder.com/150"
@@ -39,21 +32,20 @@
                     disabled-field="notEnabled"
                   ></b-form-select>
                 </b-list-group-item>
-                <b-list-group-item>위반일자 :</b-list-group-item>
-                <b-list-group-item>위반시간 :</b-list-group-item>
-                <b-list-group-item>위반장소 :</b-list-group-item>
+                <b-list-group-item>위반일자 : {{ violationitem.date }}</b-list-group-item>
+                <b-list-group-item>위반시간 : {{ violationitem.time }}</b-list-group-item>
+                <b-list-group-item>위반위치 : {{ violationitem.address }}</b-list-group-item>
               </b-list-group>
 
               <b-card-body :items="noticeitems">
                 <div class="text-center">
                   <b-button
-                    v-b-modal.modal-2
+                    v-b-modal="modalId(violationitem.violationNo)"
                     variant="info"
                     style="width: 100%;"
-                    @click="customHandler"
                   >상세보기 및 신고하기</b-button>
                   <!-- 모달 -->
-                  <b-modal id="modal-2" title="제보 상세보기" hide-footer>
+                  <b-modal :id="'modal' + violationitem.violationNo" title="제보 상세보기" hide-footer>
                     <!-- 동영상 -->
                     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
                     <vue-player
@@ -68,7 +60,7 @@
                       <p>
                         위반항목 :
                         <b-form-select
-                          v-model="selected2"
+                          v-model="violationitem.item"
                           :options="options2"
                           class="mb-0"
                           value-field="item"
@@ -77,41 +69,74 @@
                         ></b-form-select>
                       </p>
                       <p>
-                        <label>아이디 :</label>
+                        <label>위반일자 :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="date"
+                          readonly
+                          ref="date"
+                          v-model="violationitem.date"
+                        />
+                      </p>
+
+                      <p>
+                        <label>위반시간 :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="time"
+                          readonly
+                          ref="time"
+                          v-model="violationitem.time"
+                        />
+                      </p>
+                      <p>
+                        <label>위반차량번호 :</label>
                         <input
                           type="text"
                           class="form-control"
                           id="item"
                           ref="item"
-                          v-model="car_num"
+                          v-model="violationitem.carNum"
                         />
                       </p>
                       <p>
-                        <label>위반일자 :</label>
-                        <input type="text" class="form-control" id="date" ref="date" v-model="date" />
+                        <label>위반장소 :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="item"
+                          ref="item"
+                          v-model="violationitem.spot"
+                        />
                       </p>
-
                       <p>
-                        <label>위반시간 :</label>
-                        <input type="text" class="form-control" id="time" ref="time" v-model="time" />
+                        <label>위반위치 :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="item"
+                          readonly
+                          ref="item"
+                          v-model="violationitem.address"
+                        />
                       </p>
-                      <div class="mb-2">
-                        <div class="mb-2">위반차량번호 : {{ text1 }}</div>
-                        <b-form-input v-model="text1" placeholder="위반차량번호를 정확하게 입력해주세요."></b-form-input>
-                      </div>
-                      <p>위반장소 :</p>
-                      <div class="mb-2">
-                        <div class="mb-2">위반위치 : {{ text2 }}</div>
-                        <b-form-input v-model="text2" placeholder="위반위치를 입력해주세요. 최대 20자까지 입력가능합니다."></b-form-input>
-                      </div>
-                      <div class="mb-2">
-                        <div class="mb-2">신고내용 : {{ text3 }}</div>
-                        <b-form-input
-                          v-model="text3"
-                          placeholder="자세한 신고내용을 입력해주세요. 예) 신호 위반 시 상황, 차량 색상 등"
-                        ></b-form-input>
-                      </div>
+                      <p>
+                        <label>신고내용 :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="item"
+                          ref="item"
+                          v-model="violationitem.contents"
+                        />
+                      </p>
                       <hr />
+                      <div class="d-flex justify-content-between mb-3">
+                        <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
+                        <b-button variant="danger" style="width: 45%;" @click="saveHandler">삭제하기</b-button>
+                      </div>
                       <b-button
                         variant="info"
                         style="width: 100%;"
@@ -134,7 +159,8 @@
 <script>
 import http from "@/util/http-common";
 import vuePlayer from "@algoz098/vue-player";
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
+import moment from "moment";
 
 export default {
   name: "CaseList",
@@ -176,48 +202,127 @@ export default {
         { item: "고속도로 갓길통행 위반", name: "고속도로 갓길통행 위반" },
         { item: "기타", name: "기타" },
       ],
-      // 제보 내용
-      text1: "",
-      text2: "",
-      text3: "",
 
       //DB에서 가져온 내용 여기 저장할거임. 변수선언
-      violation_no: "",
-      user_no: "",
-      item: "",
-      date: "",
-      time: "",
-      car_num: "",
-      address: "",
-      spot: "",
-      contents: "",
-      video_url: "",
+      // violation_no: "",
+      // user_no: "",
+      // item: "",
+      // date: "",
+      // time: "",
+      // car_num: "",
+      // address: "",
+      // spot: "",
+      // contents: "",
+      // video_url: "",
     };
   },
+  mounted: function () {
+    this.getFormatDate();
+  },
+  created() {
+    this.$store.dispatch("getViolations");
+  },
+  computed: {
+    ...mapGetters(["violationitems"]),
+  },
   methods: {
-    customHandler() {
+    // customHandlers() {
+    //   http
+    //     .get(`/violation/${this.$session.get("user_no")}`)
+    //     .then(({ data }) => {
+    //       if (data != null) {
+    //         //alert로 단위테스트 1회  => data.x  는 DB에서 받아온 Object를 data에 넣고 data.x로 그 data에 들어간 object 중 x라는 json에 접근
+    //         // alert("바이오번호! " + data.violationNo);
+    //         this.violation_no = data.violationNo;
+    //         this.user_no = data.userNo;
+    //         this.item = data.item;
+    //         this.date = data.date;
+    //         this.time = data.time;
+    //         this.car_num = data.carNum;
+    //         this.address = data.address;
+    //         this.spot = data.spot;
+    //         this.contents = data.contents;
+    //         this.video_url = data.videoUrl;
+    //       } else {
+    //         alert("모든 동영상 정보 불러오기 실패했습니다.");
+    //       }
+    //     })
+    //     .catch(() => {
+    //       alert("에러가 발생했습니다.");
+    //     });
+    // },
+    // customHandler() {
+    //   http
+    //     .get(`/violation/${this.$session.get("user_no")}/${violationNo}`)
+    //     .then(({ data }) => {
+    //       if (data != null) {
+    //         //alert로 단위테스트 1회  => data.x  는 DB에서 받아온 Object를 data에 넣고 data.x로 그 data에 들어간 object 중 x라는 json에 접근
+    //         // alert("바이오번호! " + data.violationNo);
+    //         this.violation_no = data.violationNo;
+    //         this.user_no = data.userNo;
+    //         this.item = data.item;
+    //         this.date = data.date;
+    //         this.time = data.time;
+    //         this.car_num = data.carNum;
+    //         this.address = data.address;
+    //         this.spot = data.spot;
+    //         this.contents = data.contents;
+    //         this.video_url = data.videoUrl;
+    //         //이건 내부변수에 값이 제대로 들어갔나 확인하는 단위테스트
+    //         // alert("차번호! " + this.car_num);
+    //       } else {
+    //         alert("동영상 정보 불러오기 실패했습니다.");
+    //       }
+    //     })
+    //     .catch(() => {
+    //       alert("에러가 발생했습니다.");
+    //     });
+    // },
+    modalId(i) {
+      return "modal" + i;
+    },
+    getFormatDate(violationitems) {
+      return moment(new Date(violationitems)).format("YYYY.MM.DD HH:mm:ss");
+    },
+    saveHandler() {
       http
-        .get(`/violation/1/1`)
+        .put(`/violation`, {
+          violationNo: this.violation_no,
+          userNo: this.user_no,
+          item: this.item,
+          carNum: this.car_num,
+          spot: this.spot,
+          contents: this.contents,
+        })
         .then(({ data }) => {
-          if (data != null) {
-            //alert로 단위테스트 1회  => data.x  는 DB에서 받아온 Object를 data에 넣고 data.x로 그 data에 들어간 object 중 x라는 json에 접근
-            // alert("바이오번호! " + data.violationNo);
-            this.violation_no = data.violationNo;
-            this.user_no = data.userNo;
-            this.item = data.item;
-            this.date = data.date;
-            this.time = data.time;
-            this.car_num = data.carNum;
-            this.address = data.address;
-            this.spot = data.spot;
-            this.contents = data.contents;
-            this.video_url = data.videoUrl;
-
-            //이건 내부변수에 값이 제대로 들어갔나 확인하는 단위테스트
-            alert("차번호! " + this.car_num);
-          } else {
-            alert("동영상 정보 불러오기 실패했습니다.");
+          let msg = "저장에 실패하였습니다.";
+          if (data === "success") {
+            msg = "저장이 완료되었습니다.";
           }
+          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          alert(msg);
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+    deleteHandler() {
+      http
+        .post(
+          `del`,
+          JSON.stringify({
+            email: this.$session.get("email"),
+          })
+        )
+        .then(({ data }) => {
+          let msg = "회원삭제에 실패하였습니다..";
+          if (data === "success") {
+            msg = "회원삭제가 완료되었습니다.";
+          }
+          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          alert(msg);
+          this.$session.destroy();
+          this.$router.go();
         })
         .catch(() => {
           alert("에러가 발생했습니다.");
