@@ -201,3 +201,19 @@ Swagger UI 적용
 - UserController
 - ViolationController
 - SNSUserController
+
+------------------------------------------------------------------
+2020-08-04
+
+로그인 기능 추가 수정 및 보완
+
+회원 신고 기능 추가 수정 및 보완
+
+신고 현황 테이블 모델링
+- Situation Teble
+- no, date, accident, report, handling
+
+SNS 유저의 신고 기능 만들기
+- SNS Violation Controller
+- SNS Violation Service, ServiceImpl
+- SNS Violation Repository
