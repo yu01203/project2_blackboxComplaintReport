@@ -39,7 +39,7 @@ public class UserController {
 	
 	@ApiOperation(value = "로그인 후 성공 여부를 반환한다.")
 	@PostMapping("login") // 로그인
-	public ResponseEntity<String> login(@RequestBody Map<String, Object> param, HttpSession session) {
+	public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, Object> param, Map<String, Object> map) {
 		logger.debug("login - 호출");
 		System.out.println(param);
 		
@@ -51,12 +51,19 @@ public class UserController {
 			User user = service.login(input); // 회원 조회
 			
 			if(user != null) { // 회원 존재
-				session.setAttribute("userinfo", user);
-				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-			} else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+				// session.setAttribute("userinfo", user);
+				map.put("userinfo", user);
+				map.put("success", SUCCESS);
+				
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("fail", FAIL);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+			map.put("error", ERROR);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 	
@@ -94,7 +101,7 @@ public class UserController {
 		System.out.println(user);		
 		
 		try {
-			if(service.detail(user.getEmail()) == null) return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+			if(service.detail(user.getEmail()) != null) return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 			else {
 				int number = service.signUp(user);
 				if (number == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
