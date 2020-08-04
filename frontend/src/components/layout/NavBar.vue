@@ -446,7 +446,7 @@ export default {
     },
     loginHandler() {
       http
-        .post(`/login`, {
+        .post(`/user/login`, {
           email: this.email,
           password: this.pw,
         })
@@ -604,11 +604,24 @@ export default {
 
     // 세션 삭제
     sessionDistroy() {
-      if (this.jwt) {
-        http.get("/sns/logout").then(({ data }) => {
-          alert("네이버 로그아웃 " + data);
+      if (this.access_token != null) {
+        alert("네이버 로그아웃");
+        http.post(`/sns/logout`).then(({ data }) => {
+          if (data == "success") {
+            alert("로그아웃 " + data);
+            location.href = "http://localhost:8080/";
+          }
         });
       }
+      this.$session.destroy();
+      this.jwt = "";
+      this.access_token = "";
+      this.email = "";
+      this.pw = "";
+      this.name = "";
+      this.birth = "";
+      this.phone = "";
+      this.joindate = "";
     },
 
     // 회원삭제
