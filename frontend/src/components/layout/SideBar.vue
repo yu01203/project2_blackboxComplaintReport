@@ -16,6 +16,9 @@
       <p>
         <router-link to="/mapmain" style="text-decoration: none; color: navy;">지도보기</router-link>
       </p>
+      <p>
+        <router-link to="/geotest" style="text-decoration: none; color: navy;">죠로케이션 테스트</router-link>
+      </p>
     </div>
   </b-sidebar>
 </template>

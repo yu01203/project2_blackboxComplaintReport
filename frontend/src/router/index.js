@@ -7,6 +7,8 @@ import ReportInfo from "../views/ReportInfo.vue";
 import MapMain from "../views/MapMain.vue";
 import NoticeBoard from "../views/NoticeBoard.vue";
 
+import GeoTest from "../views/GeoTest.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -34,6 +36,11 @@ const routes = [
     path: "/noticeboard",
     name: "NoticeBoard",
     component: NoticeBoard,
+  },
+  {
+    path: "/geotest",
+    name: "GeoTest",
+    component: GeoTest,
   },
 ];
 
