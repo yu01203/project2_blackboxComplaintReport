@@ -67,7 +67,7 @@
               </div>
               <div class="form-group">
                 <input
-                  type="passward"
+                  type="password"
                   class="form-control"
                   id="pw"
                   ref="pw"
@@ -264,14 +264,18 @@
             </div>
             <div class="form-group">
               <label>성별 :</label>
-              <input
+              <input type="radio" id="one" value="남" v-model="gender" />
+              <label for="one">남</label>
+              <input type="radio" id="two" value="여" v-model="gender" />
+              <label for="two">여</label>
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="gender"
                 ref="gender"
                 placeholder="남 또는 여"
                 v-model="gender"
-              />
+              />-->
             </div>
             <div class="form-group">
               <label>생년월일 :</label>
@@ -423,6 +427,15 @@ export default {
     };
   },
   methods: {
+    validEmail: function (email) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      return re.test(email);
+    },
+    validBirth: function (birth) {
+      var re = /^\d{4}-\d{2}-\d{2}$/;
+      return re.test(birth);
+    },
+
     // 네이버 아이디 로그인
     naverLogin() {
       this.naverLoginURL += "&client_id=" + this.CLIENT_ID;
@@ -470,40 +483,40 @@ export default {
     checkHandlerInsert() {
       let err = true;
       let msg = "";
-      !this.email &&
-        ((msg = "이메일을 입력해주세요"),
-        (err = false),
-        this.$refs.email.focus());
-      err &&
-        !this.pw &&
-        ((msg = "비밀번호를 입력해주세요"),
-        (err = false),
-        this.$refs.pw.focus());
-      err &&
-        !this.name &&
-        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
-      err &&
-        !this.gender &&
-        ((msg = "성별을 입력해주세요"),
-        (err = false),
-        this.$refs.gender.focus());
-      err &&
-        !this.birth &&
-        ((msg = "생년월일을 입력해주세요"),
-        (err = false),
-        this.$refs.birth.focus());
+      if (!this.validEmail(this.email)) {
+        (msg = "이메일 형식을 지켜주세요"),
+          (err = false),
+          this.$refs.email.focus();
+      } else if (this.pw.length <= 6) {
+        (msg = "비밀번호를 7자 이상 입력해주세요"),
+          (err = false),
+          this.$refs.pw.focus();
+      } else if (!this.validBirth(this.birth)) {
+        (msg = "올바른 생년월일을 입력해주세요"),
+          (err = false),
+          this.$refs.birth.focus();
+      } else if (this.gender == null) {
+        alert("성별을 선택해 주세요");
+        (msg = "성별을 선택해 주세요"),
+          (err = false),
+          this.$refs.gender.focus();
+      }
       err &&
         !this.phone &&
         ((msg = "핸드폰번호를 입력해주세요"),
         (err = false),
         this.$refs.phone.focus());
+      err &&
+        !this.name &&
+        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
 
       if (!err) alert(msg);
       else this.insertHandler();
     },
+
     insertHandler() {
       http
-        .post(``, {
+        .post(`/user`, {
           email: this.email,
           password: this.pw,
           name: this.name,
@@ -580,7 +593,7 @@ export default {
     },
     modifyHandler() {
       http
-        .put(``, {
+        .put(`/user`, {
           email: this.$session.get("email"),
           password: this.pw,
           name: this.name,
@@ -629,7 +642,7 @@ export default {
       console.log(this.$session.get("email"));
       http
         .post(
-          `del`,
+          `/user/del`,
           JSON.stringify({
             email: this.$session.get("email"),
           })
