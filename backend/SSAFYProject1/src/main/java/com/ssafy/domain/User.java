@@ -1,7 +1,7 @@
 package com.ssafy.domain;
 
 public class User {
-	private int UserNo;
+	private int userNo;
 	private String email;
 	private String password;
 	private String name;
@@ -11,7 +11,7 @@ public class User {
 
 	public User() {}
 	public User(int userNo, String email, String password, String name, String gender, String birth, String phone) {
-		this.UserNo = userNo;
+		this.userNo = userNo;
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -21,11 +21,11 @@ public class User {
 	}
 
 	public int getUserNo() {
-		return UserNo;
+		return userNo;
 	}
 
 	public void setUserNo(int userNo) {
-		UserNo = userNo;
+		this.userNo = userNo;
 	}
 
 	public String getEmail() {
@@ -78,7 +78,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [UserNo=" + UserNo + ", email=" + email + ", password=" + password + ", name=" + name + ", gender="
+		return "User [userNo=" + userNo + ", email=" + email + ", password=" + password + ", name=" + name + ", gender="
 				+ gender + ", birth=" + birth + ", phone=" + phone + "]";
 	}
 }

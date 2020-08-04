@@ -464,11 +464,16 @@ export default {
           password: this.pw,
         })
         .then(({ data }) => {
+          // JSON 형태
           let msg = "로그인에 실패하였습니다.";
-          if (data === "success") {
+
+          if (data.success === "success") {
             msg = "로그인이 완료되었습니다.";
+            //alert(data.userinfo.userNo);
             this.$session.set("email", this.email);
+            this.$session.set("userNo", data.userinfo.userNo);
             console.log(this.$session.get("email"));
+            console.log(this.$session.get("userNo"));
             this.$router.push("/");
             this.$router.go();
           }
