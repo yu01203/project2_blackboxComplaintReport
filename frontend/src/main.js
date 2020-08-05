@@ -21,6 +21,10 @@ Vue.use(vSelect);
 import vuePlayer from "@algoz098/vue-player";
 Vue.component(vuePlayer);
 
+// session
+import VueSessionStorage from "vue-sessionstorage";
+Vue.use(VueSessionStorage);
+
 //로그인 복붙
 Vue.use(VModal);
 Vue.use(VueSession, sessionOptions);

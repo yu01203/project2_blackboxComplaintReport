@@ -1,15 +1,26 @@
 <template>
-  <nav
+  <!-- <nav
     class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info p-1"
+    style="padding: 16px; background-color: #ffffff;"
+  > -->
+  <nav
+    class="container navbar navbar-light fixed-top border-bottom border-info p-1"
     style="padding: 16px; background-color: #ffffff;"
   >
     <!-- 1 -->
-    <b-button v-b-toggle.sidebar-1 class="bg-info border-info">MENU</b-button>
+    <b-button v-b-toggle.sidebar-1 class="float-left bg-info border-info"
+      >MENU</b-button
+    >
+    <div v-if="this.$session.get('email') != null"></div>
 
     <!-- 2 -->
     <router-link to="/" class="text-center" style="text-decoration: none;">
       <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
-      <img src="@/assets/Logo_1.png" alt="logo-image" style="width: 30%;" />
+      <img
+        src="@/assets/Logo_1.png"
+        alt="logo-image"
+        style="width: 40%; margin-bottom: 10px;"
+      />
     </router-link>
 
     <!-- 3 -->
@@ -18,7 +29,7 @@
         <b-button
           v-if="this.$session.get('email') == null"
           v-b-modal.modal-1
-          class="bg-info rounded border-info"
+          class="float-right bg-info rounded border-info"
           style="padding: 7px 13px;"
         >
           <div>
@@ -35,8 +46,8 @@
           >
             <div>
               <a style="color: white; text-decoration: none;">회원정보</a>
-            </div>
-          </b-button>&nbsp;
+            </div> </b-button
+          >&nbsp;
           <b-button
             v-if="this.$session.get('email') != null"
             v-on:click="sessionDistroy"
@@ -44,7 +55,9 @@
             style="padding: 7px 13px;"
           >
             <div>
-              <a style="cursor: pointer; color: white; text-decoration: none;">로그아웃</a>
+              <a style="cursor: pointer; color: white; text-decoration: none;"
+                >로그아웃</a
+              >
             </div>
           </b-button>
         </div>
@@ -52,7 +65,12 @@
 
       <!-- 모달 -->
       <div>
-        <b-modal id="modal-1" title="로그인" style="padding: 16px 32px;" hide-footer>
+        <b-modal
+          id="modal-1"
+          title="로그인"
+          style="padding: 16px 32px;"
+          hide-footer
+        >
           <div class="modal-body">
             <form @submit.prevent>
               <div class="form-group">
@@ -82,7 +100,9 @@
                   @click="checkHandlerLogin"
                   style="width: 100%; height: 50px;"
                 >
-                  <p style="color: white; font-size: 20px; margin-top: 4px;">로그인</p>
+                  <p style="color: white; font-size: 20px; margin-top: 4px;">
+                    로그인
+                  </p>
                 </a>
                 <br />
                 <hr />
@@ -100,9 +120,18 @@
           </div>
 
           <div class="d-flex justify-content-around">
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-3 style="margin: 0px 10px;">회원가입</b-button>
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-1
+              >이메일 찾기</b-button
+            >
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-2
+              >비밀번호 찾기</b-button
+            >
+            <b-button
+              class="btn btn-primary"
+              v-b-modal.modal-multi-3
+              style="margin: 0px 10px;"
+              >회원가입</b-button
+            >
           </div>
         </b-modal>
         <!-- 이메일 찾기 -->
@@ -156,7 +185,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -222,7 +253,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -303,7 +336,9 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >회원가입</button>
+              >
+                회원가입
+              </button>
             </div>
           </div>
         </b-modal>
@@ -382,7 +417,9 @@
             />
           </div>
           <div class="form-group d-flex justify-content-around">
-            <button class="btn btn-info" @click="checkHandlerModify">회원정보수정</button>
+            <button class="btn btn-info" @click="checkHandlerModify">
+              회원정보수정
+            </button>
             <button class="btn btn-info" @click="deleteHandler">
               <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
             </button>
@@ -395,17 +432,14 @@
 
 <script>
 import http from "@/util/http-common";
+import { mapGetters } from "vuex";
 
 export default {
   name: "NavBar",
   props: {
     type: { type: String },
   },
-  created() {
-    // 네이버 로그인
-    this.$session.set("email", this.jwt.decode(this.access_token).email);
-  },
-  data: function () {
+  data: function() {
     return {
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
@@ -426,12 +460,31 @@ export default {
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
+  created() {
+    // 네이버 로그인
+    if (this.access_token != null)
+      this.$session.set("email", this.jwt.decode(this.access_token).email);
+    // violations 받아오기
+    // this.$store.dispatch("getViolations");
+    // console.log("여기는 크리에이티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
+  },
+  mounted: function() {
+    // this.$store.dispatch("getViolations");
+    // console.log("여기는 마운티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
+  },
+  computed: {
+    ...mapGetters(["violationitems"]),
+  },
   methods: {
-    validEmail: function (email) {
+    validEmail: function(email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
       return re.test(email);
     },
-    validBirth: function (birth) {
+    validBirth: function(birth) {
       var re = /^\d{4}-\d{2}-\d{2}$/;
       return re.test(birth);
     },
@@ -472,17 +525,26 @@ export default {
             //alert(data.userinfo.userNo);
             this.$session.set("email", this.email);
             this.$session.set("userNo", data.userinfo.userNo);
-            console.log(this.$session.get("email"));
-            console.log(this.$session.get("userNo"));
+            // sessionStorage.setItem("vue-session-key", "this.email");
+            // sessionStorage.setItem("vue-session-key", "data.userinfo.userNo");
+
+            // this.$store.dispatch("getViolations");
+            // console.log("로그인 데이터");
+            // console.log(this.$session.get("email"));
+            // console.log(this.$session.get("userNo"));
             this.$router.push("/");
             this.$router.go();
           }
           alert(msg);
+          // this.getVio();
         })
         .catch(() => {
-          alert("에러가 발생했습니다.");
+          alert("에러가 발생했습니다-login.");
         });
     },
+    // getVio() {
+    //   this.$store.dispatch("getViolations");
+    // },
 
     // 회원가입
     checkHandlerInsert() {

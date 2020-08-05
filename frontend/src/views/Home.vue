@@ -2,8 +2,8 @@
   <div>
     <div v-if="this.$session.get('email') != null">
       <CaseList />
+      <br />
     </div>
-    <br />
     <ReportInfo />
   </div>
 </template>

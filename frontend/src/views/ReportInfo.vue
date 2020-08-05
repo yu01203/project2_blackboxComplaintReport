@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br />
     <h1 class="text-center mb-3">제보현황</h1>
     <b-container class="bv-example-row bv-example-row-flex-cols">
       <b-row align-v="stretch">
