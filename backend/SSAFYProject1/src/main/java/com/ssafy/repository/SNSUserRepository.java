@@ -2,17 +2,17 @@ package com.ssafy.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.ssafy.domain.User;
+import com.ssafy.domain.SNSUser;
 
 @Repository
 public interface SNSUserRepository {
-	User select(User user) throws Exception;
+	SNSUser select(SNSUser user) throws Exception;
 
-	User selectUser(String email) throws Exception;
+	SNSUser selectUser(String email) throws Exception;
 
-	int insert(User user) throws Exception;
+	int insert(SNSUser user) throws Exception;
 
-	int update(User user) throws Exception;
+	int update(SNSUser user) throws Exception;
 
 	int delete(String email) throws Exception;
 }

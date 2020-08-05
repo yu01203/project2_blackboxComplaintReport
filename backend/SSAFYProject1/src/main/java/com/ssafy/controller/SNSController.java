@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.ssafy.domain.User;
+import com.ssafy.domain.SNSUser;
 import com.ssafy.service.SNSUserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +52,7 @@ public class SNSController {
 	public String naverCallback(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state)
 			throws Exception {
 		logger.debug("네이버 로그인 - 호출");
-		User user = new User();
+		SNSUser user = new SNSUser();
 
 		String naverLoginURL; // 접근 토큰 발급 요청 URL
 		naverLoginURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
@@ -109,7 +109,7 @@ public class SNSController {
 		// User Table에 데이터 저장
 		try {
 			logger.debug("네이버 회원 등록 - 호출");
-			if(snsUserService.detail(user.getEmail()) == null) {
+			if(snsUserService.detail(user.getEmail().toString()) == null) {
 				if(snsUserService.signUp(user) == 1) System.out.println("DB Insert Success!!");
 			}
 		} catch (Exception e) {

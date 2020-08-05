@@ -41,6 +41,7 @@ public class ViolationController {
 	@GetMapping("{userNo}")
 	public ResponseEntity<List<Violation>> viewViolaions(@PathVariable int userNo) throws Exception {
 		logger.debug("신고 리스트 조회 - 호출");
+		System.out.println("userNo >> " + userNo);
 		// 이메일로 회원번호 조회
 		return new ResponseEntity<List<Violation>>(violationService.viewViolationList(userNo), HttpStatus.OK);
 	}
