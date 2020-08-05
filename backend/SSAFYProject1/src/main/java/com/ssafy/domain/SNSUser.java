@@ -7,10 +7,10 @@ public class SNSUser {
 	private String email;
 	private String name;
 	private String gender;
-	private Date birth;
+	private String birth;
 
 	public SNSUser() {}
-	public SNSUser(String userNo, String email, String name, String gender, Date birth) {
+	public SNSUser(String userNo, String email, String name, String gender, String birth) {
 		this.userNo = userNo;
 		this.email = email;
 		this.name = name;
@@ -50,11 +50,11 @@ public class SNSUser {
 		this.gender = gender;
 	}
 
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 
