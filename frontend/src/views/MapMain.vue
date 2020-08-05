@@ -1,16 +1,20 @@
 <template>
   <div>
-    <img
-      src="https://www.koroad.or.kr/cmm/fms/epkoroadFileDown.do?board_code=GABBS_050&board_num=134005&file_num=179782"
-      alt="sample"
-      style="width: 100%;"
-    />
+    <KakaoMap />
+    <!-- <NaverMap /> -->
   </div>
 </template>
 
 <script>
+import KakaoMap from "@/components/KakaoMap.vue";
+// import NaverMap from "@/components/NaverMap.vue";
+
 export default {
-  name: "map",
+  name: "MapMain",
+  components: {
+    KakaoMap,
+    // NaverMap,
+  },
 };
 </script>
 

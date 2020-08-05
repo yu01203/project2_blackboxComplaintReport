@@ -1,145 +1,79 @@
 <template>
+  <!-- <nav
+    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info p-1"
+    style="padding: 16px; background-color: #ffffff;"
+  > -->
   <nav
-  class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info"
-  style="padding: 16px; background-color: #ffffff;"
->
-    <b-button v-b-toggle.sidebar-1 class="bg-info border-info">MENU</b-button>
-    <router-link to="/" style="text-decoration: none;">
-      <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1>
+    class="container navbar navbar-light fixed-top border-bottom border-info p-1"
+    style="padding: 16px; background-color: #ffffff;"
+  >
+    <!-- 1 -->
+    <b-button v-b-toggle.sidebar-1 class="float-left bg-info border-info"
+      >MENU</b-button
+    >
+    <div v-if="this.$session.get('email') != null"></div>
+
+    <!-- 2 -->
+    <router-link to="/" class="text-center" style="text-decoration: none;">
+      <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
+      <img
+        src="@/assets/Logo_1.png"
+        alt="logo-image"
+        style="width: 40%; margin-bottom: 10px;"
+      />
     </router-link>
 
-    <!-- 로그인 버튼 -->
-    <b-button class="bg-info rounded border-info" style="padding: 7px 13px;">
+    <!-- 3 -->
+    <div>
       <div>
-        <div v-if="this.$session.get('email') != null">
-          <a v-b-modal.modal-memberInfo>회원정보</a>
-        </div>
+        <b-button
+          v-if="this.$session.get('email') == null"
+          v-b-modal.modal-1
+          class="float-right bg-info rounded border-info"
+          style="padding: 7px 13px;"
+        >
+          <div>
+            <a style="color: white; text-decoration: none;">로그인</a>
+          </div>
+        </b-button>
 
         <div>
-          <div v-if="this.$session.get('email') == null">
-            <a v-b-modal.modal-1 style="color: white; text-decoration: none;"
-              >로그인</a
-            >
-          </div>
-          <div v-else-if="this.$session.get('email') != null">
-            <a
-              v-on:click="sessionDistroy"
-              style="cursor:pointer; text-decoration: none;"
-              >로그아웃</a
-            >
-          </div>
-
-          <b-modal
-            id="modal-1"
-            title="로그인"
-            style="padding: 16px 32px;"
-            hide-footer
+          <b-button
+            v-if="this.$session.get('email') != null"
+            v-b-modal.modal-memberInfo
+            class="bg-info rounded border-info"
+            style="padding: 7px 13px;"
           >
-            <div class="modal-body">
-              <form @submit.prevent>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    ref="email"
-                    placeholder="이메일을 입력하세요"
-                    v-model="email"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="passward"
-                    class="form-control"
-                    id="pw"
-                    ref="pw"
-                    placeholder="비밀번호를 입력하세요"
-                    v-model="pw"
-                  />
-                </div>
-                <div class="form-group">
-                  <button
-                    class="btn btn-primary btn-lg btn-block login-btn"
-                    @click="checkHandlerLogin"
-                  >
-                    로그인
-                  </button>
-                </div>
-              </form>
+            <div>
+              <a style="color: white; text-decoration: none;">회원정보</a>
+            </div> </b-button
+          >&nbsp;
+          <b-button
+            v-if="this.$session.get('email') != null"
+            v-on:click="sessionDistroy"
+            class="bg-info rounded border-info"
+            style="padding: 7px 13px;"
+          >
+            <div>
+              <a style="cursor: pointer; color: white; text-decoration: none;"
+                >로그아웃</a
+              >
             </div>
+          </b-button>
+        </div>
+      </div>
 
-            <div class="d-flex justify-content-around">
-              <b-button class="btn btn-primary" v-b-modal.modal-multi-1
-                >이메일 찾기</b-button
-              >
-              <b-button class="btn btn-primary" v-b-modal.modal-multi-2
-                >비밀번호 찾기</b-button
-              >
-              <b-button class="btn btn-primary" v-b-modal.modal-multi-3
-                >회원가입</b-button
-              >
-            </div>
-          </b-modal>
-          <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
-            <div class="modal-body">
+      <!-- 모달 -->
+      <div>
+        <b-modal
+          id="modal-1"
+          title="로그인"
+          style="padding: 16px 32px;"
+          hide-footer
+        >
+          <div class="modal-body">
+            <form @submit.prevent>
               <div class="form-group">
-                <label>이름 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  ref="name"
-                  placeholder="이름을 입력하세요"
-                  v-model="name"
-                />
-              </div>
-              <div class="form-group">
-                <label>성별 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="gender"
-                  ref="gender"
-                  placeholder="남 또는 여"
-                  v-model="gender"
-                />
-              </div>
-              <div class="form-group">
-                <label>생년월일 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="birth"
-                  ref="birth"
-                  placeholder="2020-01-01"
-                  v-model="birth"
-                />
-              </div>
-              <div class="form-group">
-                <label>핸드폰 번호 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  ref="phone"
-                  placeholder="핸드폰 번호를 입력하세요"
-                  v-model="phone"
-                />
-              </div>
-              <div class="form-group">
-                <button
-                  class="btn btn-primary btn-lg btn-block login-btn"
-                  @click="checkHandlerInsert"
-                >
-                  회원가입
-                </button>
-              </div>
-            </div>
-          </b-modal>
-          <b-modal id="modal-multi-2" title="비밀번호 찾기" hide-footer>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>이메일 :</label>
                 <input
                   type="text"
                   class="form-control"
@@ -150,74 +84,6 @@
                 />
               </div>
               <div class="form-group">
-                <label>이름 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  ref="name"
-                  placeholder="이름을 입력하세요"
-                  v-model="name"
-                />
-              </div>
-              <div class="form-group">
-                <label>성별 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="gender"
-                  ref="gender"
-                  placeholder="남 또는 여"
-                  v-model="gender"
-                />
-              </div>
-              <div class="form-group">
-                <label>생년월일 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="birth"
-                  ref="birth"
-                  placeholder="2020-01-01"
-                  v-model="birth"
-                />
-              </div>
-              <div class="form-group">
-                <label>핸드폰 번호 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  ref="phone"
-                  placeholder="핸드폰 번호를 입력하세요"
-                  v-model="phone"
-                />
-              </div>
-              <div class="form-group">
-                <button
-                  class="btn btn-primary btn-lg btn-block login-btn"
-                  @click="checkHandlerInsert"
-                >
-                  회원가입
-                </button>
-              </div>
-            </div>
-          </b-modal>
-          <b-modal id="modal-multi-3" title="회원가입" hide-footer>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>이메일 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="email"
-                  ref="email"
-                  placeholder="이메일을 입력하세요"
-                  v-model="email"
-                />
-              </div>
-              <div class="form-group">
-                <label>비밀번호 :</label>
                 <input
                   type="password"
                   class="form-control"
@@ -228,86 +94,115 @@
                 />
               </div>
               <div class="form-group">
-                <label>이름 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  ref="name"
-                  placeholder="이름을 입력하세요"
-                  v-model="name"
-                />
-              </div>
-              <div class="form-group">
-                <label>성별 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="gender"
-                  ref="gender"
-                  placeholder="남 또는 여"
-                  v-model="gender"
-                />
-              </div>
-              <div class="form-group">
-                <label>생년월일 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="birth"
-                  ref="birth"
-                  placeholder="2020-01-01"
-                  v-model="birth"
-                />
-              </div>
-              <div class="form-group">
-                <label>핸드폰 번호 :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  ref="phone"
-                  placeholder="핸드폰 번호를 입력하세요"
-                  v-model="phone"
-                />
-              </div>
-              <div class="form-group">
-                <button
-                  class="btn btn-primary btn-lg btn-block login-btn"
-                  @click="checkHandlerInsert"
+                <!-- 로그인 버튼 -->
+                <a
+                  class="btn btn-primary text-decoration-none m-auto"
+                  @click="checkHandlerLogin"
+                  style="width: 100%; height: 50px;"
                 >
-                  회원가입
-                </button>
+                  <p style="color: white; font-size: 20px; margin-top: 4px;">
+                    로그인
+                  </p>
+                </a>
+                <br />
+                <hr />
+                <!-- 네이버 로그인 버튼 -->
+                <div class="text-center">
+                  <img
+                    @click="naverLogin"
+                    width="60%"
+                    style="cursor: pointer;"
+                    src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"
+                  />
+                </div>
               </div>
-            </div>
-          </b-modal>
+            </form>
+          </div>
 
-          <b-modal id="modal-memberInfo" title="회원정보" hide-footer>
+          <div class="d-flex justify-content-around">
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-1
+              >이메일 찾기</b-button
+            >
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-2
+              >비밀번호 찾기</b-button
+            >
+            <b-button
+              class="btn btn-primary"
+              v-b-modal.modal-multi-3
+              style="margin: 0px 10px;"
+              >회원가입</b-button
+            >
+          </div>
+        </b-modal>
+        <!-- 이메일 찾기 -->
+        <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
+          <div class="modal-body">
             <div class="form-group">
-              <label>이메일 :</label>
-              <br />
-              <div v-text="this.$session.get('email')"></div>
-            </div>
-            <div class="form-group">
-              <label>비밀번호 :</label>
+              <label>이름 :</label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
-                id="pw"
-                ref="pw"
-                placeholder="비밀번호를 입력하세요"
-                v-model="pw"
+                id="name"
+                ref="name"
+                placeholder="이름을 입력하세요"
+                v-model="name"
               />
             </div>
             <div class="form-group">
-              <label>비밀번호 확인 :</label>
+              <label>성별 :</label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
-                id="pw_re"
-                ref="pw_re"
-                placeholder="비밀번호 한번 더 입력하세요"
-                v-model="pw_re"
+                id="gender"
+                ref="gender"
+                placeholder="남 또는 여"
+                v-model="gender"
+              />
+            </div>
+            <div class="form-group">
+              <label>생년월일 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="birth"
+                ref="birth"
+                placeholder="2020-01-01"
+                v-model="birth"
+              />
+            </div>
+            <div class="form-group">
+              <label>핸드폰 번호 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                ref="phone"
+                placeholder="핸드폰 번호를 입력하세요"
+                v-model="phone"
+              />
+            </div>
+            <div class="form-group">
+              <button
+                class="btn btn-primary btn-lg btn-block login-btn"
+                @click="checkHandlerInsert"
+              >
+                회원가입
+              </button>
+            </div>
+          </div>
+        </b-modal>
+        <!-- 비밀번호 찾기 -->
+        <b-modal id="modal-multi-2" title="비밀번호 찾기" hide-footer>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>이메일 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                ref="email"
+                placeholder="이메일을 입력하세요"
+                v-model="email"
               />
             </div>
             <div class="form-group">
@@ -355,27 +250,192 @@
               />
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" @click="checkHandlerModify">
-                회원정보수정
+              <button
+                class="btn btn-primary btn-lg btn-block login-btn"
+                @click="checkHandlerInsert"
+              >
+                회원가입
               </button>
+            </div>
+          </div>
+        </b-modal>
+        <!-- 회원가입 -->
+        <b-modal id="modal-multi-3" title="회원가입" hide-footer>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>이메일 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                ref="email"
+                placeholder="이메일을 입력하세요"
+                v-model="email"
+              />
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" @click="deleteHandler">
-                회원탈퇴
+              <label>비밀번호 :</label>
+              <input
+                type="password"
+                class="form-control"
+                id="pw"
+                ref="pw"
+                placeholder="비밀번호를 입력하세요"
+                v-model="pw"
+              />
+            </div>
+            <div class="form-group">
+              <label>이름 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                ref="name"
+                placeholder="이름을 입력하세요"
+                v-model="name"
+              />
+            </div>
+            <div class="form-group">
+              <label>성별 :</label>
+              <input type="radio" id="one" value="남" v-model="gender" />
+              <label for="one">남</label>
+              <input type="radio" id="two" value="여" v-model="gender" />
+              <label for="two">여</label>
+              <!-- <input
+                type="text"
+                class="form-control"
+                id="gender"
+                ref="gender"
+                placeholder="남 또는 여"
+                v-model="gender"
+              />-->
+            </div>
+            <div class="form-group">
+              <label>생년월일 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="birth"
+                ref="birth"
+                placeholder="2020-01-01"
+                v-model="birth"
+              />
+            </div>
+            <div class="form-group">
+              <label>핸드폰 번호 :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                ref="phone"
+                placeholder="핸드폰 번호를 입력하세요"
+                v-model="phone"
+              />
+            </div>
+            <div class="form-group">
+              <button
+                class="btn btn-primary btn-lg btn-block login-btn"
+                @click="checkHandlerInsert"
+              >
+                회원가입
               </button>
             </div>
-          </b-modal>
-        </div>
+          </div>
+        </b-modal>
+        <!-- 회원정보 -->
+        <b-modal id="modal-memberInfo" title="회원정보" hide-footer>
+          <div class="form-group">
+            <label class="d-flex">
+              이메일:
+              <div class="ml-1" v-text="this.$session.get('email')"></div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>비밀번호:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="pw"
+              ref="pw"
+              placeholder="비밀번호를 입력하세요"
+              v-model="pw"
+            />
+          </div>
+          <div class="form-group">
+            <label>비밀번호 확인:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="pw_re"
+              ref="pw_re"
+              placeholder="비밀번호 한번 더 입력하세요"
+              v-model="pw_re"
+            />
+          </div>
+          <div class="form-group">
+            <label>이름:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              ref="name"
+              placeholder="이름을 입력하세요"
+              v-model="name"
+            />
+          </div>
+          <div class="form-group">
+            <label>성별:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="gender"
+              ref="gender"
+              placeholder="남 또는 여"
+              v-model="gender"
+            />
+          </div>
+          <div class="form-group">
+            <label>생년월일:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="birth"
+              ref="birth"
+              placeholder="2020-01-01"
+              v-model="birth"
+            />
+          </div>
+          <div class="form-group">
+            <label>핸드폰 번호:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              ref="phone"
+              placeholder="핸드폰 번호를 입력하세요"
+              v-model="phone"
+            />
+          </div>
+          <div class="form-group d-flex justify-content-around">
+            <button class="btn btn-info" @click="checkHandlerModify">
+              회원정보수정
+            </button>
+            <button class="btn btn-info" @click="deleteHandler">
+              <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
+            </button>
+          </div>
+        </b-modal>
       </div>
-    </b-button>
+    </div>
   </nav>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'NavBar',
+  name: "NavBar",
   props: {
     type: { type: String },
   },
@@ -389,9 +449,54 @@ export default {
       gender: this.$session.get("gender"),
       birth: this.$session.get("birth"),
       phone: this.$session.get("phone"),
+
+      // 토큰 관리
+      jwt: module.require("jsonwebtoken"),
+      access_token: this.$route.query.token,
+      CLIENT_ID: "px2gRec1H_fbAwS22rLW",
+      redirectURI: "http://localhost:9999/ssafy/api/sns/login",
+      state: 123,
+      naverLoginURL:
+        "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
+  created() {
+    // 네이버 로그인
+    if (this.access_token != null)
+      this.$session.set("email", this.jwt.decode(this.access_token).email);
+    // violations 받아오기
+    // this.$store.dispatch("getViolations");
+    // console.log("여기는 크리에이티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
+  },
+  mounted: function() {
+    // this.$store.dispatch("getViolations");
+    // console.log("여기는 마운티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
+  },
+  computed: {
+    ...mapGetters(["violationitems"]),
+  },
   methods: {
+    validEmail: function(email) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      return re.test(email);
+    },
+    validBirth: function(birth) {
+      var re = /^\d{4}-\d{2}-\d{2}$/;
+      return re.test(birth);
+    },
+
+    // 네이버 아이디 로그인
+    naverLogin() {
+      this.naverLoginURL += "&client_id=" + this.CLIENT_ID;
+      this.naverLoginURL += "&redirect_uri=" + this.redirectURI;
+      this.naverLoginURL += "&state=" + this.state;
+
+      location.href = this.naverLoginURL;
+    },
     // 로그인
     checkHandlerLogin() {
       let err = true;
@@ -407,64 +512,78 @@ export default {
     },
     loginHandler() {
       http
-        .post(`/login`, {
+        .post(`/user/login`, {
           email: this.email,
           password: this.pw,
         })
         .then(({ data }) => {
+          // JSON 형태
           let msg = "로그인에 실패하였습니다.";
-          if (data === "success") {
+
+          if (data.success === "success") {
             msg = "로그인이 완료되었습니다.";
+            //alert(data.userinfo.userNo);
             this.$session.set("email", this.email);
-            console.log(this.$session.get("email"));
+            this.$session.set("userNo", data.userinfo.userNo);
+            // sessionStorage.setItem("vue-session-key", "this.email");
+            // sessionStorage.setItem("vue-session-key", "data.userinfo.userNo");
+
+            // this.$store.dispatch("getViolations");
+            // console.log("로그인 데이터");
+            // console.log(this.$session.get("email"));
+            // console.log(this.$session.get("userNo"));
             this.$router.push("/");
             this.$router.go();
           }
           alert(msg);
+          // this.getVio();
         })
         .catch(() => {
-          alert("에러가 발생했습니다.");
+          alert("에러가 발생했습니다-login.");
         });
     },
+    // getVio() {
+    //   this.$store.dispatch("getViolations");
+    // },
 
     // 회원가입
     checkHandlerInsert() {
       let err = true;
       let msg = "";
-      !this.email &&
-        ((msg = "이메일을 입력해주세요"),
-        (err = false),
-        this.$refs.email.focus());
-      err &&
-        !this.pw &&
-        ((msg = "비밀번호를 입력해주세요"),
-        (err = false),
-        this.$refs.pw.focus());
-      err &&
-        !this.name &&
-        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
-      err &&
-        !this.gender &&
-        ((msg = "성별을 입력해주세요"),
-        (err = false),
-        this.$refs.gender.focus());
-      err &&
-        !this.birth &&
-        ((msg = "생년월일을 입력해주세요"),
-        (err = false),
-        this.$refs.birth.focus());
+      if (!this.validEmail(this.email)) {
+        (msg = "이메일 형식을 지켜주세요"),
+          (err = false),
+          this.$refs.email.focus();
+      } else if (this.pw.length <= 6) {
+        (msg = "비밀번호를 7자 이상 입력해주세요"),
+          (err = false),
+          this.$refs.pw.focus();
+      } else if (!this.validBirth(this.birth)) {
+        (msg = "올바른 생년월일을 입력해주세요"),
+          (err = false),
+          this.$refs.birth.focus();
+      } else if (this.gender == null) {
+        alert("성별을 선택해 주세요");
+        (msg = "성별을 선택해 주세요"),
+          (err = false),
+          this.$refs.gender.focus();
+      }
       err &&
         !this.phone &&
         ((msg = "핸드폰번호를 입력해주세요"),
         (err = false),
         this.$refs.phone.focus());
+      err &&
+        !this.name &&
+        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
 
       if (!err) alert(msg);
       else this.insertHandler();
     },
+
     insertHandler() {
       http
-        .post(``, {
+        .post(`/user`, {
           email: this.email,
           password: this.pw,
           name: this.name,
@@ -477,6 +596,8 @@ export default {
           let msg = "회원가입에 실패하였습니다.";
           if (data === "success") {
             msg = "회원가입이 완료되었습니다.";
+            this.$router.push("/");
+            this.$router.go();
           }
           alert(msg);
           this.$root.$emit("bv::hide::modal", "modal-multi-3");
@@ -539,7 +660,7 @@ export default {
     },
     modifyHandler() {
       http
-        .put(``, {
+        .put(`/user`, {
           email: this.$session.get("email"),
           password: this.pw,
           name: this.name,
@@ -563,12 +684,21 @@ export default {
 
     // 세션 삭제
     sessionDistroy() {
+      if (this.access_token != null) {
+        alert("네이버 로그아웃");
+        http.post(`/sns/logout`).then(({ data }) => {
+          if (data == "success") {
+            alert("로그아웃 " + data);
+            location.href = "http://localhost:8080/";
+          }
+        });
+      }
       this.$session.destroy();
-      this.$router.go();
+      this.jwt = "";
+      this.access_token = "";
       this.email = "";
       this.pw = "";
       this.name = "";
-      this.gender = "";
       this.birth = "";
       this.phone = "";
       this.joindate = "";
@@ -579,7 +709,7 @@ export default {
       console.log(this.$session.get("email"));
       http
         .post(
-          `del`,
+          `/user/del`,
           JSON.stringify({
             email: this.$session.get("email"),
           })
@@ -599,7 +729,7 @@ export default {
         });
     },
   },
-}
+};
 </script>
 
 <style>

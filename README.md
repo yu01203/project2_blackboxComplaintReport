@@ -36,7 +36,7 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
 
    ```bash
    $ git add <작업한 디렉토리 경로>
-   $ git commit -m "Front-end|Layout|Sidebar Modified"
+   $ git commit -m "S03P12A211 | Front-end > Layout > Sidebar Modified"
    $ git push
    ```
 
@@ -50,12 +50,12 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
 ## 현재 인스톨된 NPM 패키지 리스트 만들기
 
 ```bash
-$ npm shrinkwarp
+$ npm shrinkwrap
 ```
 
 - 현재 경로에 npm-shrinkwrap.json 작성
   
-- shrinkwarp: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
+- shrinkwrap: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
   
 - 해당 npm을 공유받는 사람은 
 

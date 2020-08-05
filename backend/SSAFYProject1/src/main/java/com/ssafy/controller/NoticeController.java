@@ -47,6 +47,7 @@ public class NoticeController {
 	@PostMapping
 	public ResponseEntity<String> writeNotice(@RequestBody Notice notice) {
 		logger.debug("writeNotice - 호출");
+		System.out.println(notice);
 		if (noticeService.writeNotice(notice)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
