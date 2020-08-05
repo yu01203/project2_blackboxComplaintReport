@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1 class="text-center mb-3">제보목록</h1>
+    <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">
+      제보목록
+    </h1>
     <b-container class="bv-example-row">
       <b-row>
         <!-- card1 -->
-        <b-col cols="4" v-for="violationitem in violationitems" :key="violationitem.etag">
+        <b-col
+          cols="4"
+          v-for="violationitem in local_violationitems"
+          :key="violationitem.etag"
+        >
           <div>
             <b-card class="mb-3" no-body style="max-width: 20rem;">
               <vue-player
@@ -32,9 +38,15 @@
                     disabled-field="notEnabled"
                   ></b-form-select>
                 </b-list-group-item>
-                <b-list-group-item>위반일자 : {{ violationitem.date }}</b-list-group-item>
-                <b-list-group-item>위반시간 : {{ violationitem.time }}</b-list-group-item>
-                <b-list-group-item>위반위치 : {{ violationitem.address }}</b-list-group-item>
+                <b-list-group-item
+                  >위반일자 : {{ violationitem.date }}</b-list-group-item
+                >
+                <b-list-group-item
+                  >위반시간 : {{ violationitem.time }}</b-list-group-item
+                >
+                <b-list-group-item
+                  >위반위치 : {{ violationitem.address }}</b-list-group-item
+                >
               </b-list-group>
 
               <b-card-body :items="noticeitems">
@@ -43,9 +55,14 @@
                     v-b-modal="modalId(violationitem.violationNo)"
                     variant="info"
                     style="width: 100%;"
-                  >상세보기 및 신고하기</b-button>
+                    >상세보기 및 신고하기</b-button
+                  >
                   <!-- 모달 -->
-                  <b-modal :id="'modal' + violationitem.violationNo" title="제보 상세보기" hide-footer>
+                  <b-modal
+                    :id="'modal' + violationitem.violationNo"
+                    title="제보 상세보기"
+                    hide-footer
+                  >
                     <!-- 동영상 -->
                     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
                     <vue-player
@@ -134,8 +151,18 @@
                       </p>
                       <hr />
                       <div class="d-flex justify-content-between mb-3">
-                        <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
-                        <b-button variant="danger" style="width: 45%;" @click="saveHandler">삭제하기</b-button>
+                        <b-button
+                          variant="primary"
+                          style="width: 45%;"
+                          @click="saveHandler"
+                          >저장하기</b-button
+                        >
+                        <b-button
+                          variant="danger"
+                          style="width: 45%;"
+                          @click="saveHandler"
+                          >삭제하기</b-button
+                        >
                       </div>
                       <b-button
                         variant="info"
@@ -143,7 +170,8 @@
                         href="http://onetouch.police.go.kr/"
                         onclick="window.open(this.href);return false;"
                         target="_blank"
-                      >스마트 국민제보로 신고하러 가기</b-button>
+                        >스마트 국민제보로 신고하러 가기</b-button
+                      >
                     </div>
                   </b-modal>
                 </div>
@@ -204,24 +232,58 @@ export default {
       ],
 
       //DB에서 가져온 내용 여기 저장할거임. 변수선언
-      // violation_no: "",
-      // user_no: "",
-      // item: "",
-      // date: "",
-      // time: "",
-      // car_num: "",
-      // address: "",
-      // spot: "",
-      // contents: "",
-      // video_url: "",
+      violation_no: "",
+      user_no: "",
+      item: "",
+      date: "",
+      time: "",
+      car_num: "",
+      address: "",
+      spot: "",
+      contents: "",
+      video_url: "",
+      local_violationitems: [],
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.getFormatDate();
+    // this.$store.dispatch("getViolations");
+    // console.log("여기는 마운티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
   },
   created() {
-    this.$store.dispatch("getViolations");
+    // this.$store.dispatch(
+    //   "getViolations",
+    //   `/violation/${this.$session.get("userNo")}`
+    // );
+    // alert(this.$session.get("userNo"));
+    // this.$store.dispatch("getViolation");
+    // console.log("여기는 크리에이티드");
+    // console.log(this.$session.get("email"));
+    // console.log(this.$session.get("userNo"));
+    http
+      .get(`/violation/${this.$session.get("userNo")}`)
+      .then(({ data }) => {
+        if (data != null) {
+          // alert("들어옴");
+          // alert(data);
+          this.local_violationitems = data;
+        } else {
+          alert(" 실패했습니다.");
+        }
+      })
+      .catch(() => {
+        alert("에러가 발생했습니다.");
+      });
   },
+  // updated() {
+  //   console.log("업데이티드");
+  //   this.$store.dispatch("getViolations");
+  //   // console.log("여기는 크리에이티드");
+  //   // console.log(this.$session.get("email"));
+  //   // console.log(this.$session.get("userNo"));
+  // },
   computed: {
     ...mapGetters(["violationitems"]),
   },
@@ -278,6 +340,10 @@ export default {
     //       alert("에러가 발생했습니다.");
     //     });
     // },
+
+    getVio() {
+      this.$store.dispatch("getViolations");
+    },
     modalId(i) {
       return "modal" + i;
     },
