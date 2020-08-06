@@ -51,7 +51,7 @@ public class UserController {
 		input.setEmail(param.get("email").toString());
 		input.setPassword(param.get("password").toString());
 		
-		Gson gson = new Gson();					// Gson
+		// Gson gson = new Gson();					// Gson
 		JSONObject object = new JSONObject();	// JSON In Java
 		
 		try {
@@ -59,15 +59,15 @@ public class UserController {
 			
 			if(user != null) { // 회원 존재
 				// Gson
-				map.put("userinfo", user);
-				map.put("success", SUCCESS);
+				// map.put("userinfo", user);
+				// map.put("success", SUCCESS);
 				
 				// JSON In Java
 				object.put("userinfo", new JSONObject(user));
 				object.put("success", SUCCESS);
 				
 				System.out.println(object.toString());
-				System.out.println(gson.toJson(map));
+				// System.out.println(gson.toJson(map));
 				
 				return new ResponseEntity<String>(object.toString(), HttpStatus.OK); // gson.toJson(map)
 			} else {
@@ -91,7 +91,7 @@ public class UserController {
 	
 	@ApiOperation(value = "이메일에 맞는 회원 정보를 반환한다.", response = User.class)
 	@GetMapping // 회원 조회
-	public ResponseEntity<Map<String, Object>> userInfo(String email, Model model) {
+	public ResponseEntity<Map<String, Object>> userInfo(String email) {
 		logger.debug("회원조회 - 호출");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -129,16 +129,24 @@ public class UserController {
 	
 	@ApiOperation(value = "회원수정 후 성공 여부를 반환한다.")
 	@PutMapping // 회원 수정
-	public ResponseEntity<String> update(@RequestBody User user) {
+	public ResponseEntity<Map<String, Object>> update(@RequestBody User user) {
 		logger.debug("회원수정 - 호출");
 		System.out.println(user);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			if(service.modify(user) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-			else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+			if (service.modify(user) == 1) {
+				map.put("userinfo", service.detail(user.getEmail()));
+				map.put("success", SUCCESS);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("fail", FAIL);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+			map.put("error", ERROR);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
 		}
 	}
 	
