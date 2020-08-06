@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">제보목록</h1>
+    <br />
+    <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
     <b-container class="bv-example-row">
       <b-row>
         <Case
-          v-for="violationitem in local_violationitems"
+          v-for="violationitem in this.$store.state.violationitems"
           :key="violationitem.violationNo"
           :violationitem="violationitem"
         />
@@ -29,7 +30,7 @@ export default {
   props: {},
   data() {
     return {
-      local_violationitems: [],
+      // local_violationitems: [],
     };
   },
   created() {
@@ -37,7 +38,8 @@ export default {
       .get(`/violation/${this.$session.get("userNo")}`)
       .then(({ data }) => {
         if (data != null) {
-          this.local_violationitems = data;
+          // this.local_violationitems = data;
+          this.$store.state.violationitems = data;
         } else {
           alert(" 실패했습니다.");
         }

@@ -3,12 +3,7 @@
     <div>
       <div variant="info" style="width: 100%;" class="shadow p-3 mb-4 bg-white rounded">
         <div class="m-0" no-body style="max-width: 20rem;">
-          <vue-player
-            src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
-            poster="https://via.placeholder.com/150"
-            title
-          ></vue-player>
-
+          <vue-player :src="violationitem.videoUrl" poster="https://via.placeholder.com/150" title></vue-player>
           <b-list-group flush>
             <a href="javascript:void(0)">
               <b-list-group-item>
