@@ -15,4 +15,8 @@ public interface UserRepository {
 	int update(User user) throws Exception;
 
 	int delete(String email) throws Exception;
+	
+	String findEmail(User user) throws Exception;
+	
+	User findPassword(User user) throws Exception;
 }

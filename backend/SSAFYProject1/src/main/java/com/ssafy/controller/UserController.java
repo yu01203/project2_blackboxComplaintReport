@@ -2,6 +2,7 @@ package com.ssafy.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +33,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("api/user")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 	private static final String ERROR = "error";
@@ -155,5 +156,45 @@ public class UserController {
 			e.printStackTrace();
 			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
 		}
+	}
+	
+	@ApiOperation(value = "이메일을 찾은 후 이메일을 반환한다.")
+	@PostMapping("findEmail")
+	public ResponseEntity<String> findEmail(@RequestBody User user) {
+		logger.debug("이메일 찾기 - 호출");
+		System.out.println(user);
+		
+		try {
+			String email = service.findEmail(user);
+			if(email != null) return new ResponseEntity<String>(email, HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	
+	@ApiOperation(value = "이메일을 찾은 후 랜덤 비밀번호를 반환한다.")
+	@PostMapping("findPassword")
+	public ResponseEntity<String> findPassword(@RequestBody User input) {
+		logger.debug("비밀번호 찾기 - 호출");
+		System.out.println(input);
+		
+		try {
+			User user = service.findPassword(input);
+			if(user != null) {
+				String password = UUID.randomUUID().toString();
+				System.out.println(password);
+				password = password.substring(password.lastIndexOf("-") + 1);
+				System.out.println(password);
+				user.setPassword(password);
+				
+				if(service.modify(user) == 1) return new ResponseEntity<String>(password, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 }
