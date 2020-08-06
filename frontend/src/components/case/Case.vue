@@ -37,7 +37,6 @@
               v-b-modal="modalId(violationitem.violationNo)"
               variant="info"
               style="width: 100%;"
-              :tempNum="violationitem.violationNo"
             >상세보기 및 신고하기</b-button>
             <!-- 모달 -->
             <CaseModal :violationitem="violationitem" />

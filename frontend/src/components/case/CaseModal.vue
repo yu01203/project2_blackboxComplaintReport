@@ -2,11 +2,23 @@
   <b-modal :id="'modal' + violationitem.violationNo" title="제보 상세보기" hide-footer>
     <!-- 동영상 -->
     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
-    <vue-player
-      src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
-      poster="https://via.placeholder.com/150"
-      title="this is a title"
-    ></vue-player>
+    <div class="text-center justify-content-center p-0">
+      <vue-player
+        src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+        poster="https://via.placeholder.com/150"
+        title="this is a title"
+        class="mb-2 px-auto"
+      ></vue-player>
+      <!-- <video id="video1" style="width:100%" controls>
+        <source src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4" type="video/mp4" />
+      </video>-->
+      <a
+        href="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+        download
+        class="btn btn-success"
+        style="width:100%"
+      >영상 다운로드</a>
+    </div>
     <hr />
     <!-- 세부사항 -->
     <div>
@@ -23,26 +35,12 @@
       </p>
       <p>
         <label>위반일자 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="date"
-          readonly
-          ref="date"
-          v-model="violationitem.date"
-        />
+        <input type="text" class="form-control" id="date" readonly ref="date" v-model="this.date" />
       </p>
 
       <p>
         <label>위반시간 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="time"
-          readonly
-          ref="time"
-          v-model="violationitem.time"
-        />
+        <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
       </p>
       <p>
         <label>위반차량번호 :</label>
@@ -102,6 +100,12 @@ export default {
     violationitem: {
       type: Object,
     },
+    date: {
+      type: Object,
+    },
+    time: {
+      type: Object,
+    },
   },
   data() {
     return {
@@ -145,7 +149,10 @@ export default {
           if (data === "success") {
             msg = "저장이 완료되었습니다.";
           }
-          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          this.$root.$emit(
+            "bv::hide::modal",
+            "modal" + this.violationitem.violationNo
+          );
           alert(msg);
         })
         .catch(() => {

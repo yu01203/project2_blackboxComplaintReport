@@ -5,10 +5,7 @@
 </template>
 
 <script>
-// import axios from "axios";
-
-// const ClientId = "kj0kkvm3ws";
-// const NmapApi = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ClientId}`;
+var NaverApiKey = process.env.VUE_APP_NAVER_API_KEY;
 
 export default {
   mounted() {
@@ -17,23 +14,21 @@ export default {
     } else {
       const script = document.createElement("script");
       /* global naver */
-      script.onload = () => naver.maps.load(this.initMap);
-      script.src =
-        "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=kj0kkvm3ws";
+      script.onload = () => naver.maps.onJSContentLoaded(this.initMap);
+      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NaverApiKey}&callback=initMap`;
       document.head.appendChild(script);
     }
+    // if (document.readyState === "complete") {
+    //   this.initMap();
+    // } else {
+    //   document.body.onload = function () {
+    //     this.initMap();
+    //   };
+    // }
   },
   methods: {
     initMap() {
-      // # alt 1
       var container = document.getElementById("map");
-      // var options = {
-      //   center: new naver.maps.LatLng(33.450701, 126.570667),
-      //   level: 3,
-      // };
-
-      // var map = new naver.maps.Map(container, options);
-      // map.setMapTypeId(naver.maps.MapTypeId.HYBRID);
       var mapOptions = {
         center: new naver.maps.LatLng(37.3595704, 127.105399),
         zoom: 10,
