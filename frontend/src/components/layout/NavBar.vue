@@ -2,25 +2,19 @@
   <!-- <nav
     class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info p-1"
     style="padding: 16px; background-color: #ffffff;"
-  > -->
+  >-->
   <nav
     class="container navbar navbar-light fixed-top border-bottom border-info p-1"
     style="padding: 16px; background-color: #ffffff;"
   >
     <!-- 1 -->
-    <b-button v-b-toggle.sidebar-1 class="float-left bg-info border-info"
-      >MENU</b-button
-    >
+    <b-button v-b-toggle.sidebar-1 class="float-left bg-info border-info">MENU</b-button>
     <div v-if="this.$session.get('email') != null"></div>
 
     <!-- 2 -->
     <router-link to="/" class="text-center" style="text-decoration: none;">
       <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
-      <img
-        src="@/assets/Logo_1.png"
-        alt="logo-image"
-        style="width: 40%; margin-bottom: 10px;"
-      />
+      <img src="@/assets/Logo_1.png" alt="logo-image" style="width: 40%; margin-bottom: 10px;" />
     </router-link>
 
     <!-- 3 -->
@@ -46,8 +40,8 @@
           >
             <div>
               <a style="color: white; text-decoration: none;">회원정보</a>
-            </div> </b-button
-          >&nbsp;
+            </div>
+          </b-button>&nbsp;
           <b-button
             v-if="this.$session.get('email') != null"
             v-on:click="sessionDistroy"
@@ -55,9 +49,7 @@
             style="padding: 7px 13px;"
           >
             <div>
-              <a style="cursor: pointer; color: white; text-decoration: none;"
-                >로그아웃</a
-              >
+              <a style="cursor: pointer; color: white; text-decoration: none;">로그아웃</a>
             </div>
           </b-button>
         </div>
@@ -65,12 +57,7 @@
 
       <!-- 모달 -->
       <div>
-        <b-modal
-          id="modal-1"
-          title="로그인"
-          style="padding: 16px 32px;"
-          hide-footer
-        >
+        <b-modal id="modal-1" title="로그인" style="padding: 16px 32px;" hide-footer>
           <div class="modal-body">
             <form @submit.prevent>
               <div class="form-group">
@@ -100,9 +87,7 @@
                   @click="checkHandlerLogin"
                   style="width: 100%; height: 50px;"
                 >
-                  <p style="color: white; font-size: 20px; margin-top: 4px;">
-                    로그인
-                  </p>
+                  <p style="color: white; font-size: 20px; margin-top: 4px;">로그인</p>
                 </a>
                 <br />
                 <hr />
@@ -120,18 +105,9 @@
           </div>
 
           <div class="d-flex justify-content-around">
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-1
-              >이메일 찾기</b-button
-            >
-            <b-button class="btn btn-primary" v-b-modal.modal-multi-2
-              >비밀번호 찾기</b-button
-            >
-            <b-button
-              class="btn btn-primary"
-              v-b-modal.modal-multi-3
-              style="margin: 0px 10px;"
-              >회원가입</b-button
-            >
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
+            <b-button class="btn btn-primary" v-b-modal.modal-multi-3 style="margin: 0px 10px;">회원가입</b-button>
           </div>
         </b-modal>
         <!-- 이메일 찾기 -->
@@ -182,12 +158,7 @@
               />
             </div>
             <div class="form-group">
-              <button
-                class="btn btn-primary btn-lg btn-block login-btn"
-                @click="checkHandlerInsert"
-              >
-                회원가입
-              </button>
+              <button class="btn btn-primary btn-lg btn-block login-btn" @click="findEmail">이메일 찾기</button>
             </div>
           </div>
         </b-modal>
@@ -252,10 +223,8 @@
             <div class="form-group">
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
-                @click="checkHandlerInsert"
-              >
-                회원가입
-              </button>
+                @click="findPassword"
+              >비밀번호 찾기</button>
             </div>
           </div>
         </b-modal>
@@ -336,9 +305,7 @@
               <button
                 class="btn btn-primary btn-lg btn-block login-btn"
                 @click="checkHandlerInsert"
-              >
-                회원가입
-              </button>
+              >회원가입</button>
             </div>
           </div>
         </b-modal>
@@ -373,7 +340,10 @@
             />
           </div>
           <div class="form-group">
-            <label>이름:</label>
+            <label class="d-flex">
+              이름:
+              <div class="ml-1" v-text="this.$session.get('name')"></div>
+            </label>
             <input
               type="text"
               class="form-control"
@@ -384,7 +354,10 @@
             />
           </div>
           <div class="form-group">
-            <label>성별:</label>
+            <label class="d-flex">
+              성별:
+              <div class="ml-1" v-text="this.$session.get('gender')"></div>
+            </label>
             <input
               type="text"
               class="form-control"
@@ -395,7 +368,10 @@
             />
           </div>
           <div class="form-group">
-            <label>생년월일:</label>
+            <label class="d-flex">
+              생년월일:
+              <div class="ml-1" v-text="this.$session.get('birth')"></div>
+            </label>
             <input
               type="text"
               class="form-control"
@@ -406,7 +382,10 @@
             />
           </div>
           <div class="form-group">
-            <label>핸드폰 번호:</label>
+            <label class="d-flex">
+              핸드폰 번호:
+              <div class="ml-1" v-text="this.$session.get('phone')"></div>
+            </label>
             <input
               type="text"
               class="form-control"
@@ -417,9 +396,7 @@
             />
           </div>
           <div class="form-group d-flex justify-content-around">
-            <button class="btn btn-info" @click="checkHandlerModify">
-              회원정보수정
-            </button>
+            <button class="btn btn-info" @click="checkHandlerModify">회원정보수정</button>
             <button class="btn btn-info" @click="deleteHandler">
               <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
             </button>
@@ -439,7 +416,7 @@ export default {
   props: {
     type: { type: String },
   },
-  data: function() {
+  data: function () {
     return {
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
@@ -470,7 +447,7 @@ export default {
     // console.log(this.$session.get("email"));
     // console.log(this.$session.get("userNo"));
   },
-  mounted: function() {
+  mounted: function () {
     // this.$store.dispatch("getViolations");
     // console.log("여기는 마운티드");
     // console.log(this.$session.get("email"));
@@ -480,11 +457,11 @@ export default {
     ...mapGetters(["violationitems"]),
   },
   methods: {
-    validEmail: function(email) {
+    validEmail: function (email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
       return re.test(email);
     },
-    validBirth: function(birth) {
+    validBirth: function (birth) {
       var re = /^\d{4}-\d{2}-\d{2}$/;
       return re.test(birth);
     },
@@ -525,13 +502,17 @@ export default {
             //alert(data.userinfo.userNo);
             this.$session.set("email", this.email);
             this.$session.set("userNo", data.userinfo.userNo);
+            this.$session.set("name", data.userinfo.name);
+            this.$session.set("gender", data.userinfo.gender);
+            this.$session.set("birth", data.userinfo.birth);
+            this.$session.set("phone", data.userinfo.phone);
             // sessionStorage.setItem("vue-session-key", "this.email");
             // sessionStorage.setItem("vue-session-key", "data.userinfo.userNo");
 
             // this.$store.dispatch("getViolations");
             // console.log("로그인 데이터");
             // console.log(this.$session.get("email"));
-            // console.log(this.$session.get("userNo"));
+            console.log(this.$session.get("name"));
             this.$router.push("/");
             this.$router.go();
           }
@@ -673,6 +654,11 @@ export default {
           let msg = "회원수정에 실패하였습니다.";
           if (data === "success") {
             msg = "회원수정이 완료되었습니다.";
+            this.$session.set("userNo", data.userinfo.userNo);
+            this.$session.set("name", data.userinfo.name);
+            this.$session.set("gender", data.userinfo.gender);
+            this.$session.set("birth", data.userinfo.birth);
+            this.$session.set("phone", data.userinfo.phone);
           }
           this.$root.$emit("bv::hide::modal", "modal-memberInfo");
           alert(msg);
@@ -702,6 +688,7 @@ export default {
       this.birth = "";
       this.phone = "";
       this.joindate = "";
+      this.$router.push("/");
     },
 
     // 회원삭제
@@ -723,6 +710,56 @@ export default {
           alert(msg);
           this.$session.destroy();
           this.$router.go();
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+
+    // 이메일 찾기
+    findEmail() {
+      http
+        .post(`/user/findEmail`, {
+          name: this.name,
+          gender: this.gender,
+          birth: this.birth,
+          phone: this.phone,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          if (data == "fail") {
+            alert("없는 회원입니다.");
+          }
+          if (data != "fail") {
+            alert(data);
+            this.$root.$emit("bv::hide::modal", "modal-multi-1");
+          }
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+
+    // 비밀번호 찾기
+    findPassword() {
+      http
+        .post(`/user/findPassword`, {
+          email: this.email,
+          name: this.name,
+          gender: this.gender,
+          birth: this.birth,
+          phone: this.phone,
+        })
+        .then(({ data }) => {
+          if (data == "fail") {
+            alert("잘못된 정보입니다.");
+          }
+          if (data != "fail") {
+            alert(
+              "임시 비밀번호 입니다. 로그인 후 비밀번호를 수정해 주세요." + data
+            );
+            this.$root.$emit("bv::hide::modal", "modal-multi-2");
+          }
         })
         .catch(() => {
           alert("에러가 발생했습니다.");

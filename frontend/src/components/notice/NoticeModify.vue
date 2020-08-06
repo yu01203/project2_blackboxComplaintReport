@@ -1,5 +1,5 @@
 !<template>
-  <div class="container" align="center">
+  <div class="container mt-3" align="center">
     <div class="col-lg-6" align="center">
       <h1>공지사항</h1>
       <div class="form-group" align="center">
@@ -28,10 +28,10 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" @click="checkHandlerModify">
-      수정완료
-    </button>
-    <router-link to="/notice" class="btn btn-primary">취소</router-link>
+    <div class="d-flex justify-content-around" style="width: 40%;">
+      <button type="button" class="btn btn-primary" @click="checkHandlerModify">수정완료</button>
+      <router-link to="/noticeboard" class="btn btn-info">목록으로</router-link>
+    </div>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ import { mapGetters } from "vuex";
 import http from "@/util/http-common";
 export default {
   name: "read",
-  data: function() {
+  data: function () {
     return {
       notice_no: this.$session.get("notice_no"),
       notice_id: this.$session.get("notice_id"),
