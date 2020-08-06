@@ -3,7 +3,7 @@
     <!-- 동영상 -->
     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
     <vue-player
-      src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+      :src="violationitem.videoUrl"
       poster="https://via.placeholder.com/150"
       title="this is a title"
     ></vue-player>
@@ -145,7 +145,10 @@ export default {
           if (data === "success") {
             msg = "저장이 완료되었습니다.";
           }
-          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          this.$root.$emit(
+            "bv::hide::modal",
+            "modal" + this.violationitem.violationNo
+          );
           alert(msg);
         })
         .catch(() => {
@@ -165,7 +168,10 @@ export default {
           if (data === "success") {
             msg = "회원삭제가 완료되었습니다.";
           }
-          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          this.$root.$emit(
+            "bv::hide::modal",
+            "modal" + this.violationitem.violationNo
+          );
           alert(msg);
           this.$session.destroy();
           this.$router.go();

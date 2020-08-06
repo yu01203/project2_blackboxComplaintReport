@@ -354,10 +354,15 @@
             />
           </div>
           <div class="form-group">
-            <label class="d-flex">
+            <label>성별 :</label>
+            <input type="radio" id="one" value="남" v-model="gender" />
+            <label for="one">남</label>
+            <input type="radio" id="two" value="여" v-model="gender" />
+            <label for="two">여</label>
+            <!-- <label class="d-flex">
               성별:
               <div class="ml-1" v-text="this.$session.get('gender')"></div>
-            </label>
+            </label>-->
             <input
               type="text"
               class="form-control"
@@ -652,7 +657,7 @@ export default {
         .then(({ data }) => {
           // 여기서부터 코딩
           let msg = "회원수정에 실패하였습니다.";
-          if (data === "success") {
+          if (data.success === "success") {
             msg = "회원수정이 완료되었습니다.";
             this.$session.set("userNo", data.userinfo.userNo);
             this.$session.set("name", data.userinfo.name);
@@ -662,6 +667,7 @@ export default {
           }
           this.$root.$emit("bv::hide::modal", "modal-memberInfo");
           alert(msg);
+          this.$router.go();
         })
         .catch(() => {
           alert("에러가 발생했습니다.");
