@@ -4,7 +4,7 @@
     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
     <div class="text-center justify-content-center p-0">
       <vue-player
-        src="violationitem.videoUrl"
+        :src="violationitem.videoUrl"
         poster="https://via.placeholder.com/150"
         title="this is a title"
         class="mb-2 px-auto"
@@ -12,12 +12,7 @@
       <!-- <video id="video1" style="width:100%" controls>
         <source src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4" type="video/mp4" />
       </video>-->
-      <a
-        href="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
-        download
-        class="btn btn-success"
-        style="width:100%"
-      >영상 다운로드</a>
+      <a :href="violationitem.videoUrl" download class="btn btn-success" style="width:100%">영상 다운로드</a>
     </div>
     <hr />
     <!-- 세부사항 -->
