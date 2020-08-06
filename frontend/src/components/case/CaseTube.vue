@@ -1,13 +1,7 @@
 <template>
   <b-col cols="4">
     <div>
-      <div
-        v-b-modal="modalId(violationitem.violationNo)"
-        variant="info"
-        style="width: 100%;"
-        :tempNum="violationitem.violationNo"
-        class="shadow p-3 mb-4 bg-white rounded"
-      >
+      <div variant="info" style="width: 100%;" class="shadow p-3 mb-4 bg-white rounded">
         <div class="m-0" no-body style="max-width: 20rem;">
           <vue-player
             src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
@@ -28,12 +22,18 @@
                 ></b-form-select>
               </b-list-group-item>
             </a>
-            <div class="d-flex justify-content-between">
-              <p class="mb-0" style="font-size: 1rem">{{ violationitem.date }}</p>
-              <p class="mb-0">{{ violationitem.time }}</p>
-            </div>
-            <div>
-              <p class="mb-0" style="font-size: 2rem">{{ violationitem.address }}</p>
+            <div
+              v-b-modal="modalId(violationitem.violationNo)"
+              :tempNum="violationitem.violationNo"
+            >
+              <br />
+              <div class="d-flex justify-content-between">
+                <p class="mb-0" style="font-size: 1rem">{{ violationitem.date }}</p>
+                <p class="mb-0">{{ violationitem.time }}</p>
+              </div>
+              <div>
+                <p class="mb-0" style="font-size: 2rem">{{ violationitem.address }}</p>
+              </div>
             </div>
           </b-list-group>
           <CaseModal :violationitem="violationitem" />
