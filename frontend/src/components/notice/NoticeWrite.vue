@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>공지사항 글쓰기</h1>
+  <div class="mt-3">
+    <h1 class="text-center">공지사항 글쓰기</h1>
     <div class="container" align="center">
       <div class="col-lg-6" align="center">
         <form id="writeform" method="post" action>
@@ -27,11 +27,11 @@
               v-model="notice_content"
             ></textarea>
           </div>
-          <button type="button" class="btn btn-primary" @click="checkHandler">
-            글작성
-          </button>
-          <button type="reset" class="btn btn-warning">초기화</button>
-          <router-link to="/notice" class="btn btn-primary">취소</router-link>
+          <div class="d-flex justify-content-around mt-3" style="width: 100%;">
+            <button type="button" class="btn btn-primary" @click="checkHandler">글작성</button>
+            <button type="reset" class="btn btn-warning">초기화</button>
+            <router-link to="/noticeboard" class="btn btn-info">취소</router-link>
+          </div>
         </form>
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
   props: {
     type: { type: String },
   },
-  data: function() {
+  data: function () {
     return {
       notice_no: "",
       notice_id: "",

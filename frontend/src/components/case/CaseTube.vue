@@ -10,7 +10,7 @@
         <div class="mx-auto" no-body style="max-width: 20rem;">
           <div style="pointer-events: none">
             <video style="width:100%">
-              <source src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4" type="video/mp4" />
+              <source :src="violationitem.videoUrl" type="video/mp4" />
             </video>
           </div>
 

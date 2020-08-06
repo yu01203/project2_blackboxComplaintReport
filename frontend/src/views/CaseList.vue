@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br />
     <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
     <b-container class="bv-example-row">
       <b-row>
@@ -28,13 +29,16 @@ export default {
   },
   props: {},
   data() {
-    return {};
+    return {
+      // local_violationitems: [],
+    };
   },
   created() {
     http
       .get(`/violation/${this.$session.get("userNo")}`)
       .then(({ data }) => {
         if (data != null) {
+          // this.local_violationitems = data;
           this.$store.state.violationitems = data;
         } else {
           alert(" 실패했습니다.");

@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("api/snsViolation")
 public class SNSViolationController {
-	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SNSViolationController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 

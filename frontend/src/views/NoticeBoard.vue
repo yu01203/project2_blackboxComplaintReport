@@ -1,11 +1,12 @@
 <template>
   <div>
     <br />
-    <h1 class="text-center mb-3">공지사항</h1>
-    <div v-if="this.$session.get('email') == 'admin'">
-      <router-link to="/noticeWrite" class="nav-link" align="right"
-        >글쓰기</router-link
-      >
+    <h1 class="text-center mb-0">공지사항</h1>
+    <br />
+    <div v-if="this.$session.get('email') == 'admin'" class="float-right mb-3">
+      <router-link to="/noticeWrite" class="nav-link" align="right">
+        <b-button class="float-left bg-info border-info">글쓰기</b-button>
+      </router-link>
     </div>
     <b-table
       bordered
@@ -14,7 +15,18 @@
       :items="noticeitems"
       :fields="fields"
       @row-clicked="rowClicked"
+      :per-page="perPage"
+      :current-page="currentPage"
     ></b-table>
+
+    <b-pagination
+      v-model="currentPage"
+      pills
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+      align="center"
+    ></b-pagination>
   </div>
 </template>
 
@@ -25,6 +37,8 @@ export default {
   name: "NoticeBoard",
   data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       fields: [
         {
           key: "notice_no",
@@ -85,5 +99,14 @@ th > div {
   color: white;
   font-size: 120%;
   font-weight: normal;
+}
+
+.page-item .page-link {
+  color: #17a2b8;
+}
+
+.page-item.active .page-link {
+  background-color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
 }
 </style>
