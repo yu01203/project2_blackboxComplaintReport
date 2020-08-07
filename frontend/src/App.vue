@@ -10,7 +10,7 @@
       <br />
     </div>
 
-    <footer class="mastfoot m-0 border-top border-info" style="background-color: #ffffff;">
+    <footer class="mastfoot m-0 border-top" style="background-color: #ffffff;">
       <div class="text-center">
         <p class="mt-3">SSAFY 3기 공통 Project 2반 11조 나도내가무섭조</p>
       </div>
