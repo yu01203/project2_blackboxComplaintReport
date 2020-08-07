@@ -91,12 +91,12 @@ export default {
     // Function for a test
     dummyColor() {
       if (this.violationitem.violationNo % 2 == 0) {
-        this.selected1 = "신고 미접수";
+        this.selected1 = "처리 완료";
       } else if (this.violationitem.violationNo % 2) {
         this.selected1 = "접수 완료";
       }
       if (this.violationitem.violationNo > 7) {
-        this.selected1 = "처리 완료";
+        this.selected1 = "신고 미접수";
       }
     },
     changeColor() {

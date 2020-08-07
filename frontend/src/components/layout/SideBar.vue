@@ -9,7 +9,7 @@
       <p>
         <router-link to="/noticeboard" style="text-decoration: none; color: navy;">공지사항</router-link>
       </p>
-      <p>
+      <p v-if="this.$store.state.violationitems.length != 0">
         <router-link to="/caselist" style="text-decoration: none; color: navy;">제보목록</router-link>
       </p>
       <p>
