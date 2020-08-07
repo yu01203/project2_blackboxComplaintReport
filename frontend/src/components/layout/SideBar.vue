@@ -3,7 +3,7 @@
     <div id="sidebar-content" class="d-flex flex-column px-4 py-0">
       <p style="font-size: 150%">
         <router-link to="/" style="text-decoration: none; color: navy;">
-          <img src="@/assets/Logo_3.png" alt="logo" style="width:100%" />
+          <img src="@/assets/Logo_solid.png" alt="logo" style="width:100%" />
         </router-link>
       </p>
       <p>
