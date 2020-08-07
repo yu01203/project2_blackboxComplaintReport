@@ -5,7 +5,7 @@
     <b-container class="bv-example-row">
       <b-row>
         <Case
-          v-for="violationitem in this.$store.state.violationitems"
+          v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
           :key="violationitem.violationNo"
           :violationitem="violationitem"
         />
@@ -53,6 +53,7 @@ export default {
       this.$store.dispatch("getViolations");
     },
   },
+  computed: {},
 };
 </script>
 
