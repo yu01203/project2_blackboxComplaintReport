@@ -1,14 +1,14 @@
 <template>
   <!-- <nav
-    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-info p-1"
+    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-danger p-1"
     style="padding: 16px; background-color: #ffffff;"
   >-->
   <nav
-    class="container navbar navbar-light fixed-top border-bottom border-info p-1"
+    class="container navbar navbar-light fixed-top border-bottom p-1"
     style="padding: 16px; background-color: #ffffff;"
   >
     <!-- 1 -->
-    <b-button v-b-toggle.sidebar-1 class="float-left bg-info border-info">MENU</b-button>
+    <b-button v-b-toggle.sidebar-1 class="float-left bg-danger border-danger">MENU</b-button>
     <div v-if="this.$session.get('email') != null"></div>
 
     <!-- 2 -->
@@ -23,7 +23,7 @@
         <b-button
           v-if="this.$session.get('email') == null"
           v-b-modal.modal-1
-          class="float-right bg-info rounded border-info"
+          class="float-right bg-danger rounded border-danger"
           style="padding: 7px 13px;"
         >
           <div>
@@ -35,7 +35,7 @@
           <b-button
             v-if="this.$session.get('email') != null"
             v-b-modal.modal-memberInfo
-            class="bg-info rounded border-info"
+            class="bg-danger rounded border-danger"
             style="padding: 7px 13px;"
           >
             <div>
@@ -45,7 +45,7 @@
           <b-button
             v-if="this.$session.get('email') != null"
             v-on:click="sessionDistroy"
-            class="bg-info rounded border-info"
+            class="bg-danger rounded border-danger"
             style="padding: 7px 13px;"
           >
             <div>
