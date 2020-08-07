@@ -698,6 +698,7 @@ export default {
       this.phone = "";
       this.joindate = "";
       this.$router.push("/");
+      this.$router.go();
     },
 
     // 회원삭제
