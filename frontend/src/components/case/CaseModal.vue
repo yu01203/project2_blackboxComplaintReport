@@ -3,15 +3,9 @@
     <!-- 동영상 -->
     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
     <div class="text-center justify-content-center p-0">
-      <vue-player
-        :src="violationitem.videoUrl"
-        poster="https://via.placeholder.com/150"
-        title="this is a title"
-        class="mb-2 px-auto"
-      ></vue-player>
-      <!-- <video id="video1" style="width:100%" controls>
-        <source src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4" type="video/mp4" />
-      </video>-->
+      <video id="video1" style="width:100%" controls>
+        <source :src="violationitem.videoUrl" type="video/mp4" />
+      </video>
       <a :href="violationitem.videoUrl" download class="btn btn-success" style="width:100%">영상 다운로드</a>
     </div>
     <hr />
@@ -84,12 +78,12 @@
 
 <script>
 import http from "@/util/http-common";
-import vuePlayer from "@algoz098/vue-player";
+// import vuePlayer from "@algoz098/vue-player";
 
 export default {
   name: "CaseModal",
   components: {
-    vuePlayer,
+    // vuePlayer,
   },
   props: {
     violationitem: {
