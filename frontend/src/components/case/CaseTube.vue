@@ -13,8 +13,8 @@
               <source :src="violationitem.videoUrl" type="video/mp4" />
             </video>
           </div>
-          <p>{{ violationitem }}</p>
-          <p>{{ this.violationitem.reportStatus }}</p>
+          <p>violationitem.reportStatus: {{violationitem.reportStatus}}</p>
+          <p>selected1: {{ selected1 }}</p>
           <b-list-group flush>
             <b-list-group-item class="mt-1 p-0" @click="clickPrevent">
               <b-form-select
@@ -44,6 +44,7 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment";
+import http from "@/util/http-common";
 
 import CaseModal from "@/components/case/CaseModal.vue";
 
@@ -59,8 +60,7 @@ export default {
   },
   data() {
     return {
-      selected1: "신고 미접수",
-      // selected1: "",
+      selected1: "",
       options1: [
         { item: "신고 미접수", name: "신고 미접수" },
         { item: "접수 완료", name: "접수 완료" },
@@ -73,13 +73,13 @@ export default {
   },
   mounted: function () {
     this.getFormatDate(this.violationitem);
-    this.changeStatus();
-    this.changeColor();
+    this.mountStatus();
+    // this.changeColor();
     this.DateTransform();
   },
   updated() {
     this.changeStatus();
-    this.changeColor();
+    // this.changeColor();
   },
   methods: {
     modalId(i) {
@@ -91,25 +91,52 @@ export default {
     getFormatDate(violationitem) {
       return moment(new Date(violationitem.date)).format("YYYY.MM.DD");
     },
-    // Function for a test
-    changeColor() {
-      var selected = this.selected1;
-      if (selected == "신고 미접수") {
+    mountStatus() {
+      var selected = this.violationitem.reportStatus;
+      if (selected == 0) {
+        this.selected1 = "신고 미접수";
         this.classes = "bg-secondary text-light";
-      } else if (selected == "접수 완료") {
+        this.violationitem.reportStatus = 0;
+      } else if (selected == 1) {
+        this.selected1 = "접수 완료";
         this.classes = "bg-primary text-white";
-      } else if (selected == "처리 완료") {
+        this.violationitem.reportStatus = 1;
+      } else if (selected == 2) {
+        this.selected1 = "처리 완료";
         this.classes = "bg-success text-white";
+        this.violationitem.reportStatus = 2;
       }
     },
-    // changeStatus() {
-    //   var selected = this.violationitem.reportStatus;
-    //   if (selected == 0) {
-    //     this.selected1 = "신고 미접수";
-    //   } else if (selected == 1) {
-    //     this.selected1 = "접수 완료";
-    //   } else if (selected == 2) {
-    //     this.selected1 = "처리 완료";
+    updateStatus() {
+      if (
+        this.selected1 === "접수 완료" &&
+        this.violationitem.reportStatus != 0
+      ) {
+        http
+          .put(`/violation`, {
+            reportStatus: 0,
+          })
+          .then(({ data }) => {
+            let msg = "저장에 실패하였습니다.";
+            if (data === "success") {
+              msg = "저장이 완료되었습니다.";
+            }
+            alert(msg);
+          })
+          .catch(() => {
+            alert("에러가 발생했습니다.");
+          });
+      }
+    },
+    // changeColor() {
+    //   var selected = this.selected1;
+    //   if (selected == "신고 미접수") {
+    //     this.classes = "bg-secondary text-light";
+    //     this.violationitem.reportStatus = 0;
+    //   } else if (selected == "접수 완료") {
+    //     this.classes = "bg-primary text-white";
+    //   } else if (selected == "처리 완료") {
+    //     this.classes = "bg-success text-white";
     //   }
     // },
     clickPrevent(event) {
