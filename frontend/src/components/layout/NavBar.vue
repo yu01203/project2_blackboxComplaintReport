@@ -452,20 +452,7 @@ export default {
       this.$session.set("name", this.jwt.decode(this.access_token).name);
       this.$session.set("gender", this.jwt.decode(this.access_token).gender);
       this.$session.set("birth", this.jwt.decode(this.access_token).birth);
-      this.$session.set("isSNS", this.jwt.decode(this.access_token).isSNS);
-      //this.$session.set("phone", "010-1111-1111");
     }
-    console.log(
-      this.$session.get("userNo") +
-        this.$session.get("email") +
-        this.$session.get("name") +
-        this.$session.get("isSNS")
-    );
-    // violations 받아오기
-    // this.$store.dispatch("getViolations");
-    // console.log("여기는 크리에이티드");
-    // console.log(this.$session.get("email"));
-    // console.log(this.$session.get("userNo"));
   },
   mounted: function () {
     // this.$store.dispatch("getViolations");

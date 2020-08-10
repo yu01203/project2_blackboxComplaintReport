@@ -2,6 +2,7 @@
   <div>
     <br />
     <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
+
     <b-container class="bv-example-row">
       <b-row>
         <Case
