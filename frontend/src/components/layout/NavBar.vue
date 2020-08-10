@@ -438,7 +438,7 @@ export default {
       // 토큰 관리
       jwt: module.require("jsonwebtoken"),
       access_token: this.$route.query.token,
-      redirectURI: "http://localhost:9999/ssafy/api/sns/login",
+      redirectURI: "http://localhost:8399/ssafy/api/sns/login",
       state: 123,
       naverLoginURL:
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
