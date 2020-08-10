@@ -147,4 +147,12 @@ public class Violation {
 		this.lng = lng;
 	}
 
+	@Override
+	public String toString() {
+		return "Violation [violationNo=" + violationNo + ", userNo=" + userNo + ", email=" + email + ", item=" + item
+				+ ", date=" + date + ", time=" + time + ", carNum=" + carNum + ", spot=" + spot + ", address=" + address
+				+ ", contents=" + contents + ", videoUrl=" + videoUrl + ", reportStatus=" + reportStatus + ", lat="
+				+ lat + ", lng=" + lng + "]";
+	}
+
 }
