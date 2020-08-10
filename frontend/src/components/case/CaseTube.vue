@@ -28,7 +28,7 @@
               ></b-form-select>
             </b-list-group-item>
             <div class="d-flex justify-content-between text-secondary">
-              <p class="mb-0">{{ date }} {{ time }}</p>
+              <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p>
             </div>
             <div>
               <p class="mb-0" style="font-size: 18px">{{ violationitem.address }}</p>

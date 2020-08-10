@@ -446,13 +446,13 @@ export default {
   },
   created() {
     // 네이버 로그인
-    if (this.access_token != null)
+    if (this.access_token != null) {
+      this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
       this.$session.set("email", this.jwt.decode(this.access_token).email);
-    // violations 받아오기
-    // this.$store.dispatch("getViolations");
-    // console.log("여기는 크리에이티드");
-    // console.log(this.$session.get("email"));
-    // console.log(this.$session.get("userNo"));
+      this.$session.set("name", this.jwt.decode(this.access_token).name);
+      this.$session.set("gender", this.jwt.decode(this.access_token).gender);
+      this.$session.set("birth", this.jwt.decode(this.access_token).birth);
+    }
   },
   mounted: function () {
     // this.$store.dispatch("getViolations");
