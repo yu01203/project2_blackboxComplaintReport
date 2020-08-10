@@ -13,7 +13,8 @@
               <source :src="violationitem.videoUrl" type="video/mp4" />
             </video>
           </div>
-
+          <p>{{ violationitem }}</p>
+          <p>{{ this.violationitem.reportStatus }}</p>
           <b-list-group flush>
             <b-list-group-item class="mt-1 p-0" @click="clickPrevent">
               <b-form-select
@@ -59,6 +60,7 @@ export default {
   data() {
     return {
       selected1: "신고 미접수",
+      // selected1: "",
       options1: [
         { item: "신고 미접수", name: "신고 미접수" },
         { item: "접수 완료", name: "접수 완료" },
@@ -71,11 +73,12 @@ export default {
   },
   mounted: function () {
     this.getFormatDate(this.violationitem);
-    this.dummyColor();
+    this.changeStatus();
     this.changeColor();
     this.DateTransform();
   },
   updated() {
+    this.changeStatus();
     this.changeColor();
   },
   methods: {
@@ -89,16 +92,6 @@ export default {
       return moment(new Date(violationitem.date)).format("YYYY.MM.DD");
     },
     // Function for a test
-    dummyColor() {
-      if (this.violationitem.violationNo % 2 == 0) {
-        this.selected1 = "처리 완료";
-      } else if (this.violationitem.violationNo % 2) {
-        this.selected1 = "접수 완료";
-      }
-      if (this.violationitem.violationNo > 7) {
-        this.selected1 = "신고 미접수";
-      }
-    },
     changeColor() {
       var selected = this.selected1;
       if (selected == "신고 미접수") {
@@ -109,6 +102,16 @@ export default {
         this.classes = "bg-success text-white";
       }
     },
+    // changeStatus() {
+    //   var selected = this.violationitem.reportStatus;
+    //   if (selected == 0) {
+    //     this.selected1 = "신고 미접수";
+    //   } else if (selected == 1) {
+    //     this.selected1 = "접수 완료";
+    //   } else if (selected == 2) {
+    //     this.selected1 = "처리 완료";
+    //   }
+    // },
     clickPrevent(event) {
       event.stopPropagation();
     },
