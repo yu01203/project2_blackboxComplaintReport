@@ -71,6 +71,8 @@ public class ViolationServiceImpl implements ViolationService {
 			System.out.println(regionDo + " " + regionSiGu + " " + regionRo);
 			String address = regionDo + " " + regionSiGu + " " + regionRo;
 			violation.setAddress(address);
+			
+			System.out.println(violation.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

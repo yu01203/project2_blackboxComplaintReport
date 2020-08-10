@@ -41,7 +41,9 @@ public class ViolationController {
 	@GetMapping("{userNo}")
 	public ResponseEntity<List<Violation>> viewViolaions(@PathVariable int userNo) throws Exception {
 		logger.debug("신고 리스트 조회 - 호출");
-		System.out.println("userNo >> " + userNo);
+		List<Violation> test = violationService.viewViolationList(userNo);
+		System.out.println(test);
+		
 		// 이메일로 회원번호 조회
 		return new ResponseEntity<List<Violation>>(violationService.viewViolationList(userNo), HttpStatus.OK);
 	}
@@ -50,8 +52,6 @@ public class ViolationController {
 	@GetMapping("{userNo}/{violationNo}")
 	public ResponseEntity<Violation> viewViolation(@PathVariable int userNo, @PathVariable int violationNo) throws Exception {
 		logger.debug("신고  조회 - 호출");
-		Violation abc = violationService.viewViolation(violationNo, userNo);
-		System.out.println(abc.toString());
 		return new ResponseEntity<Violation>(violationService.viewViolation(violationNo, userNo), HttpStatus.OK);
 	}
 
@@ -59,7 +59,6 @@ public class ViolationController {
 	@PostMapping
 	public ResponseEntity<String> addViolation(@RequestBody Violation violation) throws Exception {
 		logger.debug("신고 정보 삽입 - 호출");
-		System.out.println(violation);
 		
 		if(violationService.addViolation(violation) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
