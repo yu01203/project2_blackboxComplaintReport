@@ -59,6 +59,7 @@ public class ViolationController {
 	@PostMapping
 	public ResponseEntity<String> addViolation(@RequestBody Violation violation) throws Exception {
 		logger.debug("신고 정보 삽입 - 호출");
+		System.out.println(violation);
 		
 		if(violationService.addViolation(violation) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
