@@ -438,7 +438,7 @@ export default {
       // 토큰 관리
       jwt: module.require("jsonwebtoken"),
       access_token: this.$route.query.token,
-      redirectURI: "http://localhost:9999/ssafy/api/sns/login",
+      redirectURI: "http://localhost:8399/ssafy/api/sns/login",
       state: 123,
       naverLoginURL:
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
@@ -446,8 +446,21 @@ export default {
   },
   created() {
     // 네이버 로그인
-    if (this.access_token != null)
+    if (this.access_token != null) {
+      this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
       this.$session.set("email", this.jwt.decode(this.access_token).email);
+      this.$session.set("name", this.jwt.decode(this.access_token).name);
+      this.$session.set("gender", this.jwt.decode(this.access_token).gender);
+      this.$session.set("birth", this.jwt.decode(this.access_token).birth);
+      this.$session.set("isSNS", this.jwt.decode(this.access_token).isSNS);
+      //this.$session.set("phone", "010-1111-1111");
+    }
+    console.log(
+      this.$session.get("userNo") +
+        this.$session.get("email") +
+        this.$session.get("name") +
+        this.$session.get("isSNS")
+    );
     // violations 받아오기
     // this.$store.dispatch("getViolations");
     // console.log("여기는 크리에이티드");
