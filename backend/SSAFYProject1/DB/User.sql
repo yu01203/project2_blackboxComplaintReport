@@ -7,5 +7,6 @@ CREATE TABLE `user` (
   `gender` VARCHAR(2) NULL,
   `birth` DATE NULL,
   `phone` VARCHAR(45) NULL,
+  `isSNS` BOOLEAN NULL,
   PRIMARY KEY (`user_no`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_bin;

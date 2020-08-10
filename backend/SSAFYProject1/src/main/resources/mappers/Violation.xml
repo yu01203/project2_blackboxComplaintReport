@@ -8,24 +8,24 @@
 	
 	<!-- 신고 내용 1개 조회 -->
 	<select id="select" resultType="Violation">
-		select 	violation_no as violationNo, user_no as userNo,
-				item, date, time, car_Num as carNum, spot, address, contents, video_url as videoUrl
+		select 	violation_no as violationNo, user_no as userNo, report_status as reportStatus
+				item, date, time, car_Num as carNum, spot, address, contents, video_url as videoUrl, report_status as reportStatus
 		from violation
 		where violation_no=#{violationNo} AND user_no=#{userNo}
 	</select>
 
 	<!-- 신고자 별 내용 리스트 조회 -->
 	<select id="selectAll" resultType="Violation">
-		select 	violation_no as violationNo, user_no as userNo,
-				item, date, time, car_num as carNum, spot, address, contents, video_url as videoUrl
+		select 	violation_no as violationNo, user_no as userNo, report_status as reportStatus
+				item, date, time, car_num as carNum, spot, address, contents, video_url as videoUrl, report_status as reportStatus
 		from violation
 		where user_no=#{userNo}
 	</select>
 	
 	<!-- 신고 내용 등록 -->
 	<insert id="insert">
-		insert into violation(user_no, item, date, time, car_num, spot, address, contents, video_url)
-		values(#{userNo}, #{item}, #{date}, #{time}, #{carNum}, #{spot}, #{address}, #{contents}, #{videoUrl})
+		insert into violation(user_no, item, date, time, car_num, spot, address, contents, video_url, report_status, lat, lng)
+		values(#{userNo}, #{item}, #{date}, #{time}, #{carNum}, #{spot}, #{address}, #{contents}, #{videoUrl}, #{reportStatus} #{lat}, #{lng})
 	</insert>
 	
 	<!-- 신고 내용 수정 -->
