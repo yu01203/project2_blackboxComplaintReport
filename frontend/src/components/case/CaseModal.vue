@@ -63,7 +63,7 @@
       <hr />
       <div class="d-flex justify-content-between mb-3">
         <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
-        <b-button variant="danger" style="width: 45%;" @click="saveHandler">삭제하기</b-button>
+        <b-button variant="danger" style="width: 45%;" @click="deleteHandler">삭제하기</b-button>
       </div>
       <b-button
         variant="info"
@@ -145,28 +145,24 @@ export default {
           alert(msg);
         })
         .catch(() => {
-          alert("에러가 발생했습니다. 요기요!");
+          alert("에러가 발생했습니다.");
         });
     },
     deleteHandler() {
       http
-        .post(
-          `del`,
-          JSON.stringify({
-            email: this.$session.get("email"),
-          })
+        .delete(
+          `/violation/${this.violationitem.userNo}/${this.violationitem.violationNo}`
         )
         .then(({ data }) => {
-          let msg = "회원삭제에 실패하였습니다..";
+          let msg = "삭제에 실패하였습니다.";
           if (data === "success") {
-            msg = "회원삭제가 완료되었습니다.";
+            msg = "삭제가 완료되었습니다.";
           }
           this.$root.$emit(
             "bv::hide::modal",
             "modal" + this.violationitem.violationNo
           );
           alert(msg);
-          this.$session.destroy();
           this.$router.go();
         })
         .catch(() => {
