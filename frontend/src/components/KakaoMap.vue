@@ -2,9 +2,8 @@
   <div id="app">
     <!-- Map Division -->
     <div id="map"></div>
-
     <!-- Modal Division -->
-    <div v-for="violationitem in this.$store.state.violationitems" :key="violationitem.violationNo">
+    <div v-for="violationitem in items" :key="violationitem.violationNo">
       <b-button
         hidden
         :id="'modalButton' + violationitem.violationNo"
@@ -55,7 +54,14 @@
 
           <p>
             <label>위반시간 :</label>
-            <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
+            <input
+              type="text"
+              class="form-control"
+              id="time"
+              readonly
+              ref="time"
+              v-model="violationitem.time"
+            />
           </p>
           <p>
             <label>위반차량번호 :</label>
@@ -117,12 +123,21 @@
 </template>
 
 <script>
+// import http from "@/util/http-common";
+
 var KakaoApi = process.env.VUE_APP_KAKAO_API_KEY;
 
 export default {
   name: "Map",
+  props: {
+    items: {
+      type: Array,
+    },
+  },
   data() {
     return {
+      // items: this.$store.state.violationitems,
+      // items: [],
       options2: [
         { item: "신호위반", name: "신호위반" },
         { item: "끼어들기 금지 위반", name: "끼어들기 금지 위반" },
@@ -201,8 +216,8 @@ export default {
       // });
 
       // Make Markers Ver. 2
-      for (var i = 0; i < this.$store.state.violationitems.length; i++) {
-        const violationitem = this.$store.state.violationitems[i];
+      for (var i = 0; i < this.items.length; i++) {
+        const violationitem = this.items[i];
 
         var markerPosition = new kakao.maps.LatLng(
           violationitem.lat,
@@ -249,12 +264,28 @@ export default {
       }
     },
   },
+  created() {
+    // http
+    //   .get(`/violation/${this.$session.get("userNo")}`)
+    //   .then(({ data }) => {
+    //     if (data) {
+    //       // this.local_violationitems = data;
+    //       this.items = data;
+    //       // alert("ㅔㅗ");
+    //     } else {
+    //       alert(" 실패했습니다.");
+    //     }
+    //   })
+    //   .catch(() => {
+    //     alert("에러가 발생했습니다.");
+    //   });
+  },
 };
 </script>
 
 <style>
 #map {
-  width: 1080px;
-  height: 720px;
+  width: 80vw;
+  height: 80vh;
 }
 </style>

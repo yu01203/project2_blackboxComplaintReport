@@ -78,9 +78,11 @@ export default {
     this.DateTransform();
   },
   updated() {
-    this.changeStatus();
+    // this.changeStatus();
+    // this.changeStatus();
     // this.changeColor();
   },
+  watch: {},
   methods: {
     modalId(i) {
       return "modal" + i;
@@ -106,6 +108,36 @@ export default {
         this.classes = "bg-success text-white";
         this.violationitem.reportStatus = 2;
       }
+    },
+    changeStatus() {
+      var selected = this.selected1;
+      var changedNum = this.violationitem.reportStatus;
+      if (selected == "신고 미접수") {
+        this.classes = "bg-secondary text-light";
+        changedNum = 0;
+      } else if (selected == "접수 완료") {
+        this.classes = "bg-primary text-white";
+        changedNum = 1;
+      } else if (selected == "처리 완료") {
+        this.classes = "bg-success text-white";
+        this.violationitem.reportStatus = 2;
+        changedNum = 2;
+      }
+      console.log(changedNum);
+      http
+        .put(`/violation`, {
+          reportStatus: changedNum,
+        })
+        .then(({ data }) => {
+          let msg = "저장에 실패하였습니다.";
+          if (data === "success") {
+            msg = "저장이 완료되었습니다.";
+          }
+          alert(msg);
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
     },
     updateStatus() {
       if (
