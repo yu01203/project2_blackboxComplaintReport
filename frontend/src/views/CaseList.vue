@@ -1,8 +1,12 @@
 <template>
   <div>
-    <div>
-      <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
-
+    <br />
+    <h1 class="text-center">제보목록</h1>
+    <div class="text-right mb-3">
+      <span class="mr-2">search :</span>
+      <input type="text" v-model="searchText" @keydown.enter="searchOnlist" />
+    </div>
+    <div v-if="searchviolationitems.length == 0">
       <b-container class="bv-example-row">
         <b-row>
           <Case
@@ -13,10 +17,9 @@
         </b-row>
       </b-container>
     </div>
-    <div>
-      <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">제보목록 서치</h1>
+    <div v-else>
+      <!-- <h1 class="text-center mb-3">제보목록 서치</h1> -->
 
-      <input type="text" v-model="searchText" @keydown.enter="searchOnlist" />
       <b-container class="bv-example-row">
         <b-row>
           <Case
@@ -56,7 +59,7 @@ export default {
       .get(`/violation/${this.$session.get("userNo")}`)
       .then(({ data }) => {
         if (data != null) {
-          // this.local_violationitems = data;
+          this.local_violationitems = data;
           this.$store.state.violationitems = data;
         } else {
           alert(" 실패했습니다.");
@@ -65,6 +68,7 @@ export default {
       .catch(() => {
         alert("에러가 발생했습니다.");
       });
+    this.searchOnlist();
   },
   methods: {
     getVio() {
