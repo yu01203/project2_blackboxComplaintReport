@@ -3,7 +3,7 @@
     <div>
       <b-card class="mb-3" no-body style="max-width: 20rem;">
         <vue-player
-          src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
+          :src="violationitem.videoUrl"
           poster="https://via.placeholder.com/150"
           title="this is a title"
         ></vue-player>
@@ -37,7 +37,6 @@
               v-b-modal="modalId(violationitem.violationNo)"
               variant="info"
               style="width: 100%;"
-              :tempNum="violationitem.violationNo"
             >상세보기 및 신고하기</b-button>
             <!-- 모달 -->
             <CaseModal :violationitem="violationitem" />

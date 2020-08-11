@@ -1,16 +1,18 @@
 <template>
   <div>
+<<<<<<< frontend/src/views/CaseList.vue
     <div>
-      <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">제보목록</h1>
-      <b-container class="bv-example-row">
-        <b-row>
-          <Case
-            v-for="violationitem in local_violationitems"
-            :key="violationitem.violationNo"
-            :violationitem="violationitem"
-          />
-        </b-row>
-      </b-container>
+      <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
+
+    <b-container class="bv-example-row">
+      <b-row>
+        <Case
+          v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
+          :key="violationitem.violationNo"
+          :violationitem="violationitem"
+        />
+      </b-row>
+    </b-container>
     </div>
     <div>
       <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">제보목록 서치</h1>
@@ -26,6 +28,8 @@
         </b-row>
       </b-container>
     </div>
+
+>>>>>>> frontend/src/views/CaseList.vue
   </div>
 </template>
 
@@ -45,9 +49,11 @@ export default {
   props: {},
   data() {
     return {
+<<<<<<< frontend/src/views/CaseList.vue
       local_violationitems: [],
       searchText: "",
       searchviolationitems: [],
+>>>>>>> frontend/src/views/CaseList.vue
     };
   },
   created() {
@@ -55,7 +61,8 @@ export default {
       .get(`/violation/${this.$session.get("userNo")}`)
       .then(({ data }) => {
         if (data != null) {
-          this.local_violationitems = data;
+          // this.local_violationitems = data;
+          this.$store.state.violationitems = data;
         } else {
           alert(" 실패했습니다.");
         }
@@ -86,6 +93,7 @@ export default {
       }
     },
   },
+  computed: {},
 };
 </script>
 

@@ -1,19 +1,17 @@
 <template>
   <div>
-    <KakaoMap />
-    <!-- <NaverMap /> -->
+    <Map />
   </div>
 </template>
 
 <script>
-import KakaoMap from "@/components/KakaoMap.vue";
-// import NaverMap from "@/components/NaverMap.vue";
+import Map from "@/components/KakaoMap.vue";
+// import Map from "@/components/NaverMap.vue";
 
 export default {
   name: "MapMain",
   components: {
-    KakaoMap,
-    // NaverMap,
+    Map,
   },
 };
 </script>

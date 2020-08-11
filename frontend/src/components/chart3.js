@@ -1,4 +1,5 @@
 import { Bar } from "vue-chartjs";
+import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
@@ -23,9 +24,30 @@ export default {
         {
           label: "처리 현황",
           backgroundColor: "#8888ff",
-          data: [28, 20, 15, 32, 20, 40, 18, 45, 40, 20, 12, 20],
+          data: [
+            // this.$session.get("situations")[2][0].count,
+            // this.$session.get("situations")[2][1].count,
+            // this.$session.get("situations")[2][2].count,
+            // this.$session.get("situations")[2][3].count,
+            // this.$session.get("situations")[2][4].count,
+            // this.$session.get("situations")[2][5].count,
+            // this.$session.get("situations")[2][6].count,
+            // this.$session.get("situations")[2][7].count,
+            // this.$session.get("situations")[2][8].count,
+            // this.$session.get("situations")[2][9].count,
+            // this.$session.get("situations")[2][10].count,
+            // this.$session.get("situations")[2][11].count,
+          ],
         },
       ],
     });
+  },
+  computed: {
+    ...mapGetters(["situationitems"]),
+  },
+
+  created() {
+    this.$store.dispatch("getSituations");
+    this.data = this.situationitems;
   },
 };

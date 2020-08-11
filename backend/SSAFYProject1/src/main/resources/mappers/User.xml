@@ -8,22 +8,22 @@
 
 	<!-- 로그인 -->
 	<select id="select" resultType="User">
-		select user_no as userNo, email, password, name, gender, birth, phone
+		select user_no as userNo, email, password, name, gender, birth, phone, isSNS
 		from user
 		where email=#{email} and password=#{password}
 	</select>
 	
 	<!-- 회원 조회 -->
 	<select id="selectUser" resultType="User">
-		select user_no as userNo, email, password, name, gender, birth, phone
+		select user_no as userNo, email, password, name, gender, birth, phone, isSNS
 		from user
 		where email=#{email}
 	</select>
 	
 	<!-- 회원 등록 -->
 	<insert id="insert">
-		insert into user(email, password, name, gender, birth, phone)
-		values(#{email}, #{password}, #{name}, #{gender}, #{birth}, #{phone})
+		insert into user(email, password, name, gender, birth, phone, isSNS)
+		values(#{email}, #{password}, #{name}, #{gender}, #{birth}, #{phone}, #{isSNS})
 	</insert>
 	
 	<!-- 회원 수정 -->
@@ -38,4 +38,15 @@
 		delete from user
 		where email=#{email}
 	</delete>
+	
+	<select id="findEmail" resultType="String">
+		select email from user
+		where name=#{name} and gender=#{gender} and birth=#{birth} and phone=#{phone}
+	</select>
+	
+	<select id="findPassword" resultType="User">
+		select user_no as userNo, email, password, name, gender, birth, phone
+		from user
+		where email=#{email} and name=#{name} and gender=#{gender} and birth=#{birth} and phone=#{phone}
+	</select>
 </mapper>

@@ -10,6 +10,8 @@ export default new Vuex.Store({
     violationitem: {},
     noticeitems: [],
     noticeitem: {},
+    situationitems: [],
+    situationitem: {},
   },
   getters: {
     violationitems(state) {
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     noticeitem(state) {
       return state.noticeitem;
     },
+    situationitems(state) {
+      return state.situationitems;
+    },
+    situationitem(state) {
+      return state.situationitem;
+    },
   },
   mutations: {
     setViolations(state, payload) {
@@ -37,6 +45,12 @@ export default new Vuex.Store({
     },
     setNotice(state, payload) {
       state.noticeitem = payload;
+    },
+    setSituations(state, payload) {
+      state.situationitems = payload;
+    },
+    setSituation(state, payload) {
+      state.situationitem = payload;
     },
   },
   actions: {
@@ -76,6 +90,21 @@ export default new Vuex.Store({
     getNotice(context, payload) {
       http.get(payload).then(({ data }) => {
         context.commit("setNotice", data);
+      });
+    },
+    getSituations(context) {
+      http
+        .get("/situation")
+        .then(({ data }) => {
+          context.commit("setSituations", data);
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+    getSituation(context, payload) {
+      http.get(payload).then(({ data }) => {
+        context.commit("setSituation", data);
       });
     },
   },

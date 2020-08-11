@@ -2,6 +2,7 @@ package com.ssafy.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.ssafy.domain.User;
 import com.ssafy.service.UserService;
 
@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("api/user")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 	private static final String ERROR = "error";
@@ -50,7 +50,7 @@ public class UserController {
 		input.setEmail(param.get("email").toString());
 		input.setPassword(param.get("password").toString());
 		
-		Gson gson = new Gson();					// Gson
+		// Gson gson = new Gson();					// Gson
 		JSONObject object = new JSONObject();	// JSON In Java
 		
 		try {
@@ -58,15 +58,15 @@ public class UserController {
 			
 			if(user != null) { // 회원 존재
 				// Gson
-				map.put("userinfo", user);
-				map.put("success", SUCCESS);
+				// map.put("userinfo", user);
+				// map.put("success", SUCCESS);
 				
 				// JSON In Java
 				object.put("userinfo", new JSONObject(user));
 				object.put("success", SUCCESS);
 				
 				System.out.println(object.toString());
-				System.out.println(gson.toJson(map));
+				// System.out.println(gson.toJson(map));
 				
 				return new ResponseEntity<String>(object.toString(), HttpStatus.OK); // gson.toJson(map)
 			} else {
@@ -90,7 +90,7 @@ public class UserController {
 	
 	@ApiOperation(value = "이메일에 맞는 회원 정보를 반환한다.", response = User.class)
 	@GetMapping // 회원 조회
-	public ResponseEntity<Map<String, Object>> userInfo(String email, Model model) {
+	public ResponseEntity<Map<String, Object>> userInfo(String email) {
 		logger.debug("회원조회 - 호출");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -128,16 +128,24 @@ public class UserController {
 	
 	@ApiOperation(value = "회원수정 후 성공 여부를 반환한다.")
 	@PutMapping // 회원 수정
-	public ResponseEntity<String> update(@RequestBody User user) {
+	public ResponseEntity<Map<String, Object>> update(@RequestBody User user) {
 		logger.debug("회원수정 - 호출");
 		System.out.println(user);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			if(service.modify(user) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-			else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+			if (service.modify(user) == 1) {
+				map.put("userinfo", service.detail(user.getEmail()));
+				map.put("success", SUCCESS);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("fail", FAIL);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+			map.put("error", ERROR);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
 		}
 	}
 	
@@ -155,5 +163,45 @@ public class UserController {
 			e.printStackTrace();
 			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
 		}
+	}
+	
+	@ApiOperation(value = "이메일을 찾은 후 이메일을 반환한다.")
+	@PostMapping("findEmail")
+	public ResponseEntity<String> findEmail(@RequestBody User user) {
+		logger.debug("이메일 찾기 - 호출");
+		System.out.println(user);
+		
+		try {
+			String email = service.findEmail(user);
+			if(email != null) return new ResponseEntity<String>(email, HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	
+	@ApiOperation(value = "이메일을 찾은 후 랜덤 비밀번호를 반환한다.")
+	@PostMapping("findPassword")
+	public ResponseEntity<String> findPassword(@RequestBody User input) {
+		logger.debug("비밀번호 찾기 - 호출");
+		System.out.println(input);
+		
+		try {
+			User user = service.findPassword(input);
+			if(user != null) {
+				String password = UUID.randomUUID().toString();
+				System.out.println(password);
+				password = password.substring(password.lastIndexOf("-") + 1);
+				System.out.println(password);
+				user.setPassword(password);
+				
+				if(service.modify(user) == 1) return new ResponseEntity<String>(password, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 }

@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("api/violation")
 public class ViolationController {
-	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ViolationController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 
@@ -41,17 +41,17 @@ public class ViolationController {
 	@GetMapping("{userNo}")
 	public ResponseEntity<List<Violation>> viewViolaions(@PathVariable int userNo) throws Exception {
 		logger.debug("신고 리스트 조회 - 호출");
-		System.out.println("userNo >> " + userNo);
+		List<Violation> test = violationService.viewViolationList(userNo);
+		System.out.println(test);
+		
 		// 이메일로 회원번호 조회
 		return new ResponseEntity<List<Violation>>(violationService.viewViolationList(userNo), HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "회원의 제보 정보를 리스트로 반환한다.", response = Violation.class)
+	@ApiOperation(value = "회원의 제보 상세 정보를 반환한다.", response = Violation.class)
 	@GetMapping("{userNo}/{violationNo}")
 	public ResponseEntity<Violation> viewViolation(@PathVariable int userNo, @PathVariable int violationNo) throws Exception {
 		logger.debug("신고  조회 - 호출");
-		Violation abc = violationService.viewViolation(violationNo, userNo);
-		System.out.println(abc.toString());
 		return new ResponseEntity<Violation>(violationService.viewViolation(violationNo, userNo), HttpStatus.OK);
 	}
 
@@ -70,6 +70,15 @@ public class ViolationController {
 		logger.debug("신고 정보 수정 - 호출");
 		
 		if(violationService.modifyViolation(violation) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	@ApiOperation(value = "회원 제보 상태를 수정 후 성공 여부를 반환한다.")
+	@PutMapping("{userNo}/{violationNo}/{reportStatus}")
+	public ResponseEntity<String> modifyViolationCondition(@PathVariable int violationNo, @PathVariable int userNo, @PathVariable int reportStatus) throws Exception {
+		logger.debug("신고 상태 수정 - 호출");
+		
+		if(violationService.modifyCondition(violationNo, userNo, reportStatus) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
 

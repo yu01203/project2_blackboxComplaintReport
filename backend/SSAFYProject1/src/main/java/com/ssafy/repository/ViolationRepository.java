@@ -15,6 +15,8 @@ public interface ViolationRepository {
 	int insert(Violation violation) throws Exception;
 
 	int update(Violation violation) throws Exception;
+	
+	int updateCondition(int violationNo, int userNo, int reportStatus) throws Exception;
 
 	int delete(int violationNo, int userNo) throws Exception;
 }
