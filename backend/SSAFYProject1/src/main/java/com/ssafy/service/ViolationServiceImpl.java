@@ -84,6 +84,11 @@ public class ViolationServiceImpl implements ViolationService {
 	public int modifyViolation(Violation violation) throws Exception {
 		return repository.update(violation);
 	}
+	
+	@Override
+	public int modifyCondition(int violationNo, int userNo, int reportStatus) throws Exception {
+		return repository.updateCondition(violationNo, userNo, reportStatus);
+	}
 
 	@Override
 	public int removeViolation(int violationNo, int userNo) throws Exception {

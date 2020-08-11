@@ -72,6 +72,15 @@ public class ViolationController {
 		if(violationService.modifyViolation(violation) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
+	
+	@ApiOperation(value = "회원 제보 상태를 수정 후 성공 여부를 반환한다.")
+	@PutMapping("{userNo}/{violationNo}/{reportStatus}")
+	public ResponseEntity<String> modifyViolationCondition(@PathVariable int violationNo, @PathVariable int userNo, @PathVariable int reportStatus) throws Exception {
+		logger.debug("신고 상태 수정 - 호출");
+		
+		if(violationService.modifyCondition(violationNo, userNo, reportStatus) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+	}
 
 	@ApiOperation(value = "회원 제보 정보를 삭제 후 성공 여부를 반환한다.")
 	@DeleteMapping("{userNo}/{violationNo}")

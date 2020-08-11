@@ -35,6 +35,13 @@
 		where violation_no=#{violationNo} and user_no=#{userNo}
 	</update>
 	
+	<!-- 신고 상태 수정 -->
+	<update id="updateCondition">
+		update violation
+		set report_status=#{reportStatus}
+		where violation_no=#{violationNo} and user_no=#{userNo}
+	</update>
+	
 	<!-- 신고 내용 삭제 -->
 	<delete id="delete">
 		delete from violation
