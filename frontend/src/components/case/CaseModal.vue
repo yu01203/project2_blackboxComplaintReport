@@ -24,12 +24,26 @@
       </p>
       <p>
         <label>위반일자 :</label>
-        <input type="text" class="form-control" id="date" readonly ref="date" v-model="this.date" />
+        <input
+          type="text"
+          class="form-control"
+          id="date"
+          readonly
+          ref="date"
+          v-model="violationitem.date"
+        />
       </p>
 
       <p>
         <label>위반시간 :</label>
-        <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
+        <input
+          type="text"
+          class="form-control"
+          id="time"
+          readonly
+          ref="time"
+          v-model="violationitem.time"
+        />
       </p>
       <p>
         <label>위반차량번호 :</label>
