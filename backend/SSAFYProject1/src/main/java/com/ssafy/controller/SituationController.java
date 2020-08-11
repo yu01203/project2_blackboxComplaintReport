@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.domain.Notice;
-import com.ssafy.domain.Test;
+import com.ssafy.domain.Situation;
 import com.ssafy.service.SituationService;
 
 import io.swagger.annotations.ApiOperation;
@@ -45,15 +45,15 @@ public class SituationController {
 
     @ApiOperation(value = "모든 사용자들의 정보들를 반환한다.", response = List.class)
 	@GetMapping
-	public ResponseEntity<List<List<Test>>> retrieveSituation() throws Exception {
+	public ResponseEntity<List<List<Situation>>> retrieveSituation() throws Exception {
 		logger.debug("retrieveSituation - 호출");
-		return new ResponseEntity<List<List<Test>>>(service.selectAll(), HttpStatus.OK);
+		return new ResponseEntity<List<List<Situation>>>(service.selectAll(), HttpStatus.OK);
 	}
     
     @ApiOperation(value = "개인 사용자의 정보들을 반환한다.", response = List.class)    
 	@GetMapping("{userno}")
-	public ResponseEntity<List<List<Test>>> detailSituation(@PathVariable int userno) throws Exception {
+	public ResponseEntity<List<List<Situation>>> detailSituation(@PathVariable int userno) throws Exception {
 		logger.debug("retrieveUserSituation - 호출");
-		return new ResponseEntity<List<List<Test>>>(service.selectByUser(userno), HttpStatus.OK);
+		return new ResponseEntity<List<List<Situation>>>(service.selectByUser(userno), HttpStatus.OK);
 	}
 }

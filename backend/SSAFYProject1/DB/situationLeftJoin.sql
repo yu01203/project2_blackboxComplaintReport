@@ -1,7 +1,7 @@
 DROP TABLE situationLeftJoin;
 CREATE TABLE situationLeftJoin (
-  `month` varchar(5),
-  `count` varchar(10));
+  `month` int(5),
+  `count` int(10));
 
 insert into situationLeftJoin(month, count) 
 values(1 , 0),(2 , 0),(3 , 0),(4 , 0),
