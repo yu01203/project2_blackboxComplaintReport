@@ -75,7 +75,7 @@ export default {
     this.getFormatDate(this.violationitem);
     this.mountStatus();
     // this.changeColor();
-    this.DateTransform();
+    // this.DateTransform();
   },
   updated() {
     this.changeStatus();
@@ -142,22 +142,22 @@ export default {
     clickPrevent(event) {
       event.stopPropagation();
     },
-    DateTransform() {
-      var date =
-        this.violationitem.date.slice(0, 4) +
-        "년 " +
-        this.violationitem.date.slice(5, 7) +
-        "월 " +
-        this.violationitem.date.slice(8, 10) +
-        "일 ";
-      var time =
-        this.violationitem.time.slice(0, 2) +
-        "시 " +
-        this.violationitem.time.slice(3, 5) +
-        "분";
-      this.date = date;
-      this.time = time;
-    },
+    // DateTransform() {
+    //   var date =
+    //     this.violationitem.date.slice(0, 4) +
+    //     "년 " +
+    //     this.violationitem.date.slice(5, 7) +
+    //     "월 " +
+    //     this.violationitem.date.slice(8, 10) +
+    //     "일 ";
+    //   var time =
+    //     this.violationitem.time.slice(0, 2) +
+    //     "시 " +
+    //     this.violationitem.time.slice(3, 5) +
+    //     "분";
+    //   this.date = date;
+    //   this.time = time;
+    // },
   },
   computed: {
     ...mapGetters(["violationitems"]),
