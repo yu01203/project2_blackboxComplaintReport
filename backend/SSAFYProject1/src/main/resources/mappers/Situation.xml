@@ -18,7 +18,7 @@
 		where MONTH(date) = '8';
 	</select> -->
 
-	<select id="select0" resultType="Test">
+	<select id="select0" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
@@ -26,7 +26,7 @@
 		GROUP by MONTH(date)) b ON a.month = b.month
 		order by a.month;
 	</select>
-	<select id="select1" resultType="Test">
+	<select id="select1" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
@@ -34,7 +34,7 @@
 		GROUP by MONTH(date)) b ON a.month = b.month
 		order by a.month;
 	</select>
-	<select id="select2" resultType="Test">
+	<select id="select2" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
@@ -49,7 +49,7 @@
 	
 	
 	
-	<select id="selectByUser0" resultType="Test">
+	<select id="selectByUser0" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
@@ -57,7 +57,7 @@
 		GROUP by MONTH(date)) b ON a.month = b.month
 		order by a.month;
 	</select>
-		<select id="selectByUser1" resultType="Test">
+		<select id="selectByUser1" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
@@ -65,7 +65,7 @@
 		GROUP by MONTH(date)) b ON a.month = b.month
 		order by a.month;
 	</select>
-		<select id="selectByUser2" resultType="Test">
+		<select id="selectByUser2" resultType="Situation">
 		SELECT a.month, ifnull(b.count,00) as count
 		FROM  situationLeftJoin a 
 		left JOIN  (SELECT MONTH(date) as month, count(*) as count FROM  violation 
