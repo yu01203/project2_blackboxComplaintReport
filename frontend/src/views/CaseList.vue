@@ -1,7 +1,8 @@
 <template>
   <div>
-    <br />
-    <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
+<<<<<<< frontend/src/views/CaseList.vue
+    <div>
+      <h1 v-if="this.$store.state.violationitems.length != 0" class="text-center mb-3">제보목록</h1>
 
     <b-container class="bv-example-row">
       <b-row>
@@ -12,6 +13,23 @@
         />
       </b-row>
     </b-container>
+    </div>
+    <div>
+      <h1 v-if="local_violationitems.length != 0" class="text-center mb-3">제보목록 서치</h1>
+
+      <input type="text" v-model="searchText" @keydown.enter="searchOnlist" />
+      <b-container class="bv-example-row">
+        <b-row>
+          <Case
+            v-for="violationitem in searchviolationitems"
+            :key="violationitem.violationNo"
+            :violationitem="violationitem"
+          />
+        </b-row>
+      </b-container>
+    </div>
+
+>>>>>>> frontend/src/views/CaseList.vue
   </div>
 </template>
 
@@ -31,7 +49,11 @@ export default {
   props: {},
   data() {
     return {
-      // local_violationitems: [],
+<<<<<<< frontend/src/views/CaseList.vue
+      local_violationitems: [],
+      searchText: "",
+      searchviolationitems: [],
+>>>>>>> frontend/src/views/CaseList.vue
     };
   },
   created() {
@@ -52,6 +74,23 @@ export default {
   methods: {
     getVio() {
       this.$store.dispatch("getViolations");
+    },
+    searchOnlist() {
+      const emptyItems = new Array();
+      this.searchviolationitems = emptyItems;
+      for (var i in this.local_violationitems) {
+        console.log(this.local_violationitems[i]);
+        if (
+          this.local_violationitems[i].contents.indexOf(this.searchText) !=
+            -1 ||
+          this.local_violationitems[i].item.indexOf(this.searchText) != -1 ||
+          this.local_violationitems[i].spot.indexOf(this.searchText) != -1 ||
+          this.local_violationitems[i].carNum.indexOf(this.searchText) != -1 ||
+          this.local_violationitems[i].address.indexOf(this.searchText) != -1
+        ) {
+          this.searchviolationitems.push(this.local_violationitems[i]);
+        }
+      }
     },
   },
   computed: {},
