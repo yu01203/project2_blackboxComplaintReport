@@ -52,7 +52,6 @@ import Chart3 from "@/components/chart3";
 import ChartPersonal1 from "@/components/chartpersonal1";
 import ChartPersonal2 from "@/components/chartpersonal2";
 import ChartPersonal3 from "@/components/chartpersonal3";
-import http from "@/util/http-common";
 
 export default {
   name: "ReportInfo",
@@ -64,71 +63,6 @@ export default {
     ChartPersonal2,
     ChartPersonal3,
   },
-  created() {
-    if (this.$session.get("email") == null) {
-      this.$store.dispatch("getSituations");
-      if (this.$store.state.situationitems != null) {
-        this.$session.set("situations", this.$store.state.situationitems);
-      }
-    } else {
-      http
-        .get(`/situation/${this.$session.get("userNo")}`)
-        .then(({ data }) => {
-          if (data != null) {
-            this.$session.set("situation", data);
-          } else {
-            alert(" 실패했습니다.");
-          }
-        })
-        .catch(() => {
-          alert("에러가 발생했습니다.");
-        });
-    }
-    // alert(this.$session.get("situations")[0][0].count + " created");
-  },
-  // mounted() {
-  //   if (this.$session.get("email") == null) {
-  //     this.$store.dispatch("getSituations");
-  //     if (this.$store.state.situationitems != null) {
-  //       this.$session.set("situations", this.$store.state.situationitems);
-  //     }
-  //   } else {
-  //     http
-  //       .get(`/situation/${this.$session.get("userNo")}`)
-  //       .then(({ data }) => {
-  //         if (data != null) {
-  //           this.$session.set("situation", data);
-  //         } else {
-  //           alert(" 실패했습니다.");
-  //         }
-  //       })
-  //       .catch(() => {
-  //         alert("에러가 발생했습니다.");
-  //       });
-  //   }
-  //   alert(this.$session.get("situations")[0][0].count + " mounted");
-  // },
-  // updated() {
-  //   if (this.$session.get("email") == null) {
-  //     this.$store.dispatch("getSituations");
-  //     if (this.$store.state.situationitems != null) {
-  //       this.$session.set("situations", this.$store.state.situationitems);
-  //     }
-  //   } else {
-  //     http
-  //       .get(`/situation/${this.$session.get("userNo")}`)
-  //       .then(({ data }) => {
-  //         if (data != null) {
-  //           this.$session.set("situation", data);
-  //         } else {
-  //           alert(" 실패했습니다.");
-  //         }
-  //       })
-  //       .catch(() => {
-  //         alert("에러가 발생했습니다.");
-  //       });
-  //   }
-  // },
 };
 </script>
 
