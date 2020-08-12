@@ -8,9 +8,11 @@ public class User {
 	private String gender;
 	private String birth;
 	private String phone;
+	private boolean isSNS;
 
 	public User() {}
-	public User(int userNo, String email, String password, String name, String gender, String birth, String phone) {
+	public User(int userNo, String email, String password, String name, String gender, String birth, String phone,
+			boolean isSNS) {
 		this.userNo = userNo;
 		this.email = email;
 		this.password = password;
@@ -18,6 +20,7 @@ public class User {
 		this.gender = gender;
 		this.birth = birth;
 		this.phone = phone;
+		this.isSNS = isSNS;
 	}
 
 	public int getUserNo() {
@@ -76,9 +79,17 @@ public class User {
 		this.phone = phone;
 	}
 	
+	public boolean isSNS() {
+		return isSNS;
+	}
+
+	public void setSNS(boolean isSNS) {
+		this.isSNS = isSNS;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", email=" + email + ", password=" + password + ", name=" + name + ", gender="
-				+ gender + ", birth=" + birth + ", phone=" + phone + "]";
+				+ gender + ", birth=" + birth + ", phone=" + phone + ", isSNS=" + isSNS + "]";
 	}
 }

@@ -36,5 +36,20 @@ public class UserServiceImpl implements UserService {
 	public int remove(String email) throws Exception {
 		return repo.delete(email);
 	}
+
+	@Override
+	public String findEmail(User user) throws Exception {
+		return repo.findEmail(user);
+	}
+
+	@Override
+	public User findPassword(User user) throws Exception {
+		return repo.findPassword(user);
+	}
+
+	@Override
+	public User detailByNo(int userNo) throws Exception {
+		return repo.selectUserByNo(userNo);
+	}
 	
 }

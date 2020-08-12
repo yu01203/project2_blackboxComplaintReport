@@ -2,11 +2,12 @@
   <b-modal :id="'modal' + violationitem.violationNo" title="제보 상세보기" hide-footer>
     <!-- 동영상 -->
     <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
-    <vue-player
-      src="http://d1xevv8xa9hsha.cloudfront.net/abcd.mp4"
-      poster="https://via.placeholder.com/150"
-      title="this is a title"
-    ></vue-player>
+    <div class="text-center justify-content-center p-0">
+      <video id="video1" style="width:100%" controls>
+        <source :src="violationitem.videoUrl" type="video/mp4" />
+      </video>
+      <a :href="violationitem.videoUrl" download class="btn btn-success" style="width:100%">영상 다운로드</a>
+    </div>
     <hr />
     <!-- 세부사항 -->
     <div>
@@ -76,7 +77,7 @@
       <hr />
       <div class="d-flex justify-content-between mb-3">
         <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
-        <b-button variant="danger" style="width: 45%;" @click="saveHandler">삭제하기</b-button>
+        <b-button variant="danger" style="width: 45%;" @click="deleteHandler">삭제하기</b-button>
       </div>
       <b-button
         variant="info"
@@ -91,15 +92,21 @@
 
 <script>
 import http from "@/util/http-common";
-import vuePlayer from "@algoz098/vue-player";
+// import vuePlayer from "@algoz098/vue-player";
 
 export default {
   name: "CaseModal",
   components: {
-    vuePlayer,
+    // vuePlayer,
   },
   props: {
     violationitem: {
+      type: Object,
+    },
+    date: {
+      type: Object,
+    },
+    time: {
       type: Object,
     },
   },
@@ -132,42 +139,57 @@ export default {
   methods: {
     saveHandler() {
       http
-        .put(`/violation`, {
-          violationNo: this.violationitem.violationNo,
-          userNo: this.violationitem.userNo,
-          item: this.violationitem.item,
-          carNum: this.violationitem.carNum,
-          spot: this.violationitem.spot,
-          contents: this.violationitem.contents,
-        })
+        .put(
+          `/violation`,
+          {
+            violationNo: this.violationitem.violationNo,
+            userNo: this.violationitem.userNo,
+            item: this.violationitem.item,
+            carNum: this.violationitem.carNum,
+            spot: this.violationitem.spot,
+            contents: this.violationitem.contents,
+          },
+          {
+            headers: {
+              token: this.$session.get("token"),
+            },
+          }
+        )
         .then(({ data }) => {
           let msg = "저장에 실패하였습니다.";
           if (data === "success") {
             msg = "저장이 완료되었습니다.";
           }
-          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          this.$root.$emit(
+            "bv::hide::modal",
+            "modal" + this.violationitem.violationNo
+          );
           alert(msg);
         })
         .catch(() => {
-          alert("에러가 발생했습니다. 요기요!");
+          alert("에러가 발생했습니다.");
         });
     },
     deleteHandler() {
       http
-        .post(
-          `del`,
-          JSON.stringify({
-            email: this.$session.get("email"),
-          })
+        .delete(
+          `/violation/${this.violationitem.userNo}/${this.violationitem.violationNo}`,
+          {
+            headers: {
+              token: this.$session.get("token"),
+            },
+          }
         )
         .then(({ data }) => {
-          let msg = "회원삭제에 실패하였습니다..";
+          let msg = "삭제에 실패하였습니다.";
           if (data === "success") {
-            msg = "회원삭제가 완료되었습니다.";
+            msg = "삭제가 완료되었습니다.";
           }
-          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          this.$root.$emit(
+            "bv::hide::modal",
+            "modal" + this.violationitem.violationNo
+          );
           alert(msg);
-          this.$session.destroy();
           this.$router.go();
         })
         .catch(() => {

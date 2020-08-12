@@ -10,7 +10,7 @@
       <br />
     </div>
 
-    <footer class="mastfoot m-0 border-top border-info" style="background-color: #ffffff;">
+    <footer class="mastfoot m-0 border-top" style="background-color: #ffffff;">
       <div class="text-center">
         <p class="mt-3">SSAFY 3기 공통 Project 2반 11조 나도내가무섭조</p>
       </div>
@@ -20,6 +20,7 @@
 
 <script>
 import NavBar from "@/components/layout/NavBar.vue";
+// import NavBar from "@/components/layout/NavBarOrigin.vue";
 import SideBar from "@/components/layout/SideBar.vue";
 
 export default {
@@ -63,7 +64,7 @@ p a {
   padding-bottom: 2.5rem;
 }
 
-footer {
+footer.mastfoot {
   position: absolute;
   bottom: 0;
   width: 100%;

@@ -1,25 +1,24 @@
 package com.ssafy.domain;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class Violation {
 	private int violationNo;
 	private int userNo;
 	private String email;
 	private String item;
-	private Date date;
-	private Time time;
+	private String date;
+	private String time;
 	private String carNum;
 	private String spot;
 	private String address;
 	private String contents;
 	private String videoUrl;
+	private int reportStatus;
+	private String lat;
+	private String lng;
 
 	public Violation() {}
-	public Violation(int violationNo, int userNo, String email, String item, Date date, Time time, String carNum,
-			String spot, String address, String contents, String videoUrl) {
-		super();
+	public Violation(int violationNo, int userNo, String email, String item, String date, String time, String carNum,
+			String spot, String address, String contents, String videoUrl, int reportStatus, String lat, String lng) {
 		this.violationNo = violationNo;
 		this.userNo = userNo;
 		this.email = email;
@@ -31,6 +30,9 @@ public class Violation {
 		this.address = address;
 		this.contents = contents;
 		this.videoUrl = videoUrl;
+		this.reportStatus = reportStatus;
+		this.lat = lat;
+		this.lng = lng;
 	}
 
 	public int getViolationNo() {
@@ -65,19 +67,19 @@ public class Violation {
 		this.item = item;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public Time getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -121,11 +123,36 @@ public class Violation {
 		this.videoUrl = videoUrl;
 	}
 
+	public int getReportStatus() {
+		return reportStatus;
+	}
+
+	public void setReportStatus(int reportStatus) {
+		this.reportStatus = reportStatus;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	
 	@Override
 	public String toString() {
 		return "Violation [violationNo=" + violationNo + ", userNo=" + userNo + ", email=" + email + ", item=" + item
 				+ ", date=" + date + ", time=" + time + ", carNum=" + carNum + ", spot=" + spot + ", address=" + address
-				+ ", contents=" + contents + ", videoUrl=" + videoUrl + "]";
+				+ ", contents=" + contents + ", videoUrl=" + videoUrl + ", reportStatus=" + reportStatus + ", lat="
+				+ lat + ", lng=" + lng + "]";
 	}
 
 }

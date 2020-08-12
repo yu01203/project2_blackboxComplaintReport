@@ -1,19 +1,51 @@
 <template>
   <div>
-    <KakaoMap />
-    <!-- <NaverMap /> -->
+    <!-- <Map :items="this.items" /> -->
+    <Map :items="this.$store.state.violationitems" />
   </div>
 </template>
 
 <script>
-import KakaoMap from "@/components/KakaoMap.vue";
-// import NaverMap from "@/components/NaverMap.vue";
+import http from "@/util/http-common";
+
+import Map from "@/components/KakaoMap.vue";
+// import Map from "@/components/NaverMap.vue";
 
 export default {
   name: "MapMain",
+  data() {
+    return {
+      // items: [],
+    };
+  },
   components: {
-    KakaoMap,
-    // NaverMap,
+    Map,
+  },
+  created() {
+    if (this.$session.get("email")) {
+      http
+        .get(`/violation/${this.$session.get("userNo")}`, {
+          headers: {
+            token: this.$session.get("token"),
+          },
+        })
+        .then(({ data }) => {
+          if (data) {
+            // this.local_violationitems = data;
+            // this.items = data;
+            this.$store.state.violationitems = data;
+            // alert("ㅔㅗ");
+          } else {
+            alert(" 실패했습니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    }
+    // else {
+    //   alert("미로그인 사용자");
+    // }
   },
 };
 </script>

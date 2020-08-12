@@ -12,6 +12,8 @@ public interface ViolationService {
 	int addViolation(Violation violation) throws Exception;
 
 	int modifyViolation(Violation violation) throws Exception;
+	
+	int modifyCondition(int violationNo, int userNo, int reportStatus) throws Exception;
 
 	int removeViolation(int violationNo, int userNo) throws Exception;
 }

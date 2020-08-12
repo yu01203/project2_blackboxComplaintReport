@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -21,29 +20,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.ssafy.domain.SNSUser;
-import com.ssafy.service.SNSUserService;
+import com.ssafy.domain.User;
+import com.ssafy.service.UserService;
+import com.ssafy.util.JWTUtil;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 @RequestMapping("/api/sns")
-public class SNSController {
+public class SNSUserController {
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	private static final String SUCCESS = "success";
 	
 	static final String clientId = "px2gRec1H_fbAwS22rLW"; // 애플리케이션 클라이언트 아이디값";
 	static final String naverClientSecret = "iQmYgJMpWR"; // 애플리케이션 클라이언트 시크릿값
-	static final String tokenSecret = "HS256"; // 암호화 방식
 	static String access_token; // 접근 토큰
 	static String refresh_token; // 갱신 토큰
-	static String JWT_token;
 
 	@Autowired
-	SNSUserService snsUserService;
+	UserService service;
 
 	/*
 	 * 네이버 아이디로 로그인 네이버 아이디로 로그인 인증 요청 => Front
@@ -52,7 +48,8 @@ public class SNSController {
 	public String naverCallback(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state)
 			throws Exception {
 		logger.debug("네이버 로그인 - 호출");
-		SNSUser user = new SNSUser();
+		User user = new User();
+		String JWT_token = null;
 
 		String naverLoginURL; // 접근 토큰 발급 요청 URL
 		naverLoginURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
@@ -78,9 +75,8 @@ public class SNSController {
 				response.append(inputLine);
 			}
 			br.close();
-
+			
 			if (responseCode == 200) { // 성공적으로 토큰을 가져온다면
-
 				// JSON In Java API
 				JSONTokener tokener = new JSONTokener(response.toString());
 				JSONObject accessObject = new JSONObject(tokener);
@@ -92,25 +88,29 @@ public class SNSController {
 				System.out.println(userInfoObject);
 
 				int id = userInfoObject.getInt("id");
-				String name = userInfoObject.getString("name");
 				String email = userInfoObject.getString("email");
+				String name = userInfoObject.getString("name");
 				String birth = userInfoObject.getString("birthday");
-				String gender = userInfoObject.getString("gender");
+				String gender;
+				if(userInfoObject.getString("gender").equals("M")) gender = "남";
+				else gender = "여";
 				
-				user.setEmail(email); user.setName(name); user.setBirth(birth); user.setGender(gender);
+				user.setEmail(email); user.setName(name); user.setBirth(birth); user.setGender(gender); user.setSNS(true);
 				
-				JWT_token = createJWTToken(id, name, email, birth, gender);
-			}
-		} catch (Exception e) {
-			System.out.println("여기");
-			e.printStackTrace();
-		}
-
-		// User Table에 데이터 저장
-		try {
-			logger.debug("네이버 회원 등록 - 호출");
-			if(snsUserService.detail(user.getEmail().toString()) == null) {
-				if(snsUserService.signUp(user) == 1) System.out.println("DB Insert Success!!");
+				// User Table에 데이터 저장
+				try {
+					logger.debug("네이버 회원 등록 - 호출");
+					if(service.detail(user.getEmail().toString()) == null) {
+						if(service.signUp(user) == 1) System.out.println("DB Insert Success!!");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				int userNo = service.detail(email).getUserNo();
+				
+				new JWTUtil();
+				JWT_token = JWTUtil.createJWTToken(name, email, birth, gender, userNo, true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,30 +147,8 @@ public class SNSController {
 			return response.toString();
 		} catch (Exception e) {
 			System.err.println(e);
-			return "Err";
+			return "Error";
 		}
-	}
-
-	/* 네이버 프로필 데이터 암호화 */
-	private String createJWTToken(int id, String name, String email, String birthday, String gender) {
-		String token = null;
-
-		try {
-			// 토큰 유효 기간
-			Long EXPIRATION_TIME = 1000L * 60L * 10L;
-			Date issuedAt = new Date();
-			Date notBefore = new Date(issuedAt.getTime());
-			Date expiresAt = new Date(issuedAt.getTime() + EXPIRATION_TIME);
-
-			// 토큰 암호화
-			Algorithm algorithm = Algorithm.HMAC256(tokenSecret);
-			token = JWT.create().withIssuer("auth0").withSubject(name).withAudience("ssafy").withClaim("id", id)
-					.withClaim("email", email).withClaim("name", name).withClaim("birth", birthday)
-					.withClaim("gender", gender).withNotBefore(notBefore).withExpiresAt(expiresAt).sign(algorithm);
-		} catch (Exception e) {
-			System.err.println("err: " + e);
-		}
-		return token;
 	}
 
 	/*

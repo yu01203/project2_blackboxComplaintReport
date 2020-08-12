@@ -1,5 +1,5 @@
 !<template>
-  <div class="container" align="center">
+  <div class="container mt-3" align="center">
     <div class="col-lg-6" align="center">
       <h1>공지사항</h1>
       <div class="form-group" align="center">
@@ -28,10 +28,10 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" @click="checkHandlerModify">
-      수정완료
-    </button>
-    <router-link to="/notice" class="btn btn-primary">취소</router-link>
+    <div class="d-flex justify-content-around" style="width: 40%;">
+      <button type="button" class="btn btn-primary" @click="checkHandlerModify">수정완료</button>
+      <router-link to="/noticeboard" class="btn btn-info">목록으로</router-link>
+    </div>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ import { mapGetters } from "vuex";
 import http from "@/util/http-common";
 export default {
   name: "read",
-  data: function() {
+  data: function () {
     return {
       notice_no: this.$session.get("notice_no"),
       notice_id: this.$session.get("notice_id"),
@@ -76,12 +76,20 @@ export default {
     },
     modifyHandler() {
       http
-        .put(`/notice/${this.notice_no}`, {
-          notice_no: this.notice_no,
-          notice_id: this.notice_id,
-          notice_title: this.notice_title,
-          notice_content: this.notice_content,
-        })
+        .put(
+          `/notice/${this.notice_no}`,
+          {
+            notice_no: this.notice_no,
+            notice_id: this.notice_id,
+            notice_title: this.notice_title,
+            notice_content: this.notice_content,
+          },
+          {
+            headers: {
+              token: this.$session.get("token"),
+            },
+          }
+        )
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
           if (data === "success") {
@@ -99,15 +107,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1 {
   margin-bottom: 50px;
 }
 h4 {
   text-align: left;
-}
-button {
-  margin-right: 60px;
 }
 h5 {
   text-align: left;

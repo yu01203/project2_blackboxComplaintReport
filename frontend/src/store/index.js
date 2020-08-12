@@ -10,6 +10,8 @@ export default new Vuex.Store({
     violationitem: {},
     noticeitems: [],
     noticeitem: {},
+    situationitems: [],
+    situationitem: {},
   },
   getters: {
     violationitems(state) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     noticeitem(state) {
       return state.noticeitem;
+    },
+    situationitems(state) {
+      return state.situationitems;
+    },
+    situationitem(state) {
+      return state.situationitem;
     },
   },
   mutations: {
@@ -38,19 +46,21 @@ export default new Vuex.Store({
     setNotice(state, payload) {
       state.noticeitem = payload;
     },
+    setSituations(state, payload) {
+      state.situationitems = payload;
+    },
+    setSituation(state, payload) {
+      state.situationitem = payload;
+    },
   },
   actions: {
     getViolations(context) {
-      // const userNo = this.$session.get("userNo");
-      // console.log(userNo);
-      // var userData = sessionStorage.getItem("vue-session-key");
-      // console.log(this.$session.getAll());
       http
-        // .get(`/violation/1`)
-        // .get(`/violation/${this.$session.get("userNo")}`)
-        .get(`/violation`)
-        // .get(`/violation/${userNo}`)
-        // .get(`/violation/${this.violationitem.userNo}`)
+        .get(`/violation`, {
+          headers: {
+            token: this.$session.get("token"),
+          },
+        })
         .then(({ data }) => {
           context.commit("setViolations", data);
         })
@@ -59,9 +69,15 @@ export default new Vuex.Store({
         });
     },
     getViolation(context, payload) {
-      http.get(payload).then(({ data }) => {
-        context.commit("setViolations", data);
-      });
+      http
+        .get(payload, {
+          headers: {
+            token: this.$session.get("token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("setViolations", data);
+        });
     },
     getNotices(context) {
       http
@@ -76,6 +92,21 @@ export default new Vuex.Store({
     getNotice(context, payload) {
       http.get(payload).then(({ data }) => {
         context.commit("setNotice", data);
+      });
+    },
+    getSituations(context) {
+      http
+        .get("/situation")
+        .then(({ data }) => {
+          context.commit("setSituations", data);
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+    getSituation(context, payload) {
+      http.get(payload).then(({ data }) => {
+        context.commit("setSituation", data);
       });
     },
   },
