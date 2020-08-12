@@ -63,7 +63,7 @@ p a {
   padding-bottom: 2.5rem;
 }
 
-footer {
+footer.mastfoot {
   position: absolute;
   bottom: 0;
   width: 100%;
