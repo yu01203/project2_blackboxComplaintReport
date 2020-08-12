@@ -454,6 +454,7 @@ export default {
       this.$session.set("name", this.jwt.decode(this.access_token).name);
       this.$session.set("gender", this.jwt.decode(this.access_token).gender);
       this.$session.set("birth", this.jwt.decode(this.access_token).birth);
+      this.$session.set("token", this.jwt.access_token);
     }
   },
   mounted: function () {
