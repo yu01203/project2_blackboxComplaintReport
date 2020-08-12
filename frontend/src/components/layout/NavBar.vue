@@ -35,7 +35,7 @@
 
         <div>
           <b-button
-            v-if="this.$session.get('email') != null && this.$session.get('isSNS') == 0"
+            v-if="this.$session.get('email') != null && !this.$session.get('isSNS')"
             v-b-modal.modal-memberInfo
             class="bg-danger rounded border-danger"
             style="padding: 7px 13px;"
