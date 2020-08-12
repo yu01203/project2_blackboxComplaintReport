@@ -1,0 +1,241 @@
+<template>
+  <b-modal id="modal-memberInfo" title="회원정보" hide-footer>
+    <div class="form-group">
+      <label class="d-flex">
+        이메일:
+        <div class="ml-1" v-text="this.$session.get('email')"></div>
+      </label>
+    </div>
+    <div class="form-group">
+      <label>비밀번호:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="pw"
+        ref="pw"
+        placeholder="비밀번호를 입력하세요"
+        v-model="pw"
+      />
+    </div>
+    <div class="form-group">
+      <label>비밀번호 확인:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="pw_re"
+        ref="pw_re"
+        placeholder="비밀번호 한번 더 입력하세요"
+        v-model="pw_re"
+      />
+    </div>
+    <div class="form-group">
+      <label class="d-flex">
+        이름:
+        <div class="ml-1" v-text="this.$session.get('name')"></div>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        ref="name"
+        placeholder="이름을 입력하세요"
+        v-model="name"
+      />
+    </div>
+    <div class="form-group">
+      <label>성별 :</label>
+      <input type="radio" id="one" value="남" v-model="gender" />
+      <label for="one">남</label>
+      <input type="radio" id="two" value="여" v-model="gender" />
+      <label for="two">여</label>
+      <!-- <label class="d-flex">
+              성별:
+              <div class="ml-1" v-text="this.$session.get('gender')"></div>
+      </label>-->
+      <input
+        type="text"
+        class="form-control"
+        id="gender"
+        ref="gender"
+        placeholder="남 또는 여"
+        v-model="gender"
+      />
+    </div>
+    <div class="form-group">
+      <label class="d-flex">
+        생년월일:
+        <div class="ml-1" v-text="this.$session.get('birth')"></div>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="birth"
+        ref="birth"
+        placeholder="2020-01-01"
+        v-model="birth"
+      />
+    </div>
+    <div class="form-group">
+      <label class="d-flex">
+        핸드폰 번호:
+        <div class="ml-1" v-text="this.$session.get('phone')"></div>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        ref="phone"
+        placeholder="핸드폰 번호를 입력하세요"
+        v-model="phone"
+      />
+    </div>
+    <div class="form-group d-flex justify-content-around">
+      <button class="btn btn-info" @click="checkHandlerModify">회원정보수정</button>
+      <button class="btn btn-info" @click="deleteHandler">
+        <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
+      </button>
+    </div>
+  </b-modal>
+</template>
+
+<script>
+import http from "@/util/http-common";
+
+export default {
+  name: "MemberInfo",
+  data: function () {
+    return {
+      // 백엔드에서 필요로 하는 데이터
+      email: this.$session.get("email"),
+      pw: "", // 백엔드로 보낼 때 password 변수에 담아서 ex) password: this.pw
+      pw_re: "",
+      name: this.$session.get("name"),
+      gender: this.$session.get("gender"),
+      birth: this.$session.get("birth"),
+      phone: this.$session.get("phone"),
+
+      // 토큰 관리
+      jwt: module.require("jsonwebtoken"),
+      access_token: this.$route.query.token,
+      redirectURI: "http://localhost:8399/ssafy/api/sns/login",
+      state: 123,
+      naverLoginURL:
+        "https://nid.naver.com/oauth2.0/authorize?response_type=code",
+    };
+  },
+  methods: {
+    checkHandlerModify() {
+      let err = true;
+      let msg = "";
+      !this.pw &&
+        ((msg = "비밀번호를 입력해주세요"),
+        (err = false),
+        this.$refs.pw.focus());
+      err &&
+        !this.pw_re &&
+        ((msg = "재입력 비밀번호를 입력해주세요"),
+        (err = false),
+        this.$refs.pw_re.focus());
+      err &&
+        !this.name &&
+        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
+      err &&
+        !this.email &&
+        ((msg = "이메일을 입력해주세요"),
+        (err = false),
+        this.$refs.email.focus());
+      err &&
+        !this.gender &&
+        ((msg = "성별을 입력해주세요"),
+        (err = false),
+        this.$refs.gender.focus());
+      err &&
+        !this.birth &&
+        ((msg = "생년월일을 입력해주세요"),
+        (err = false),
+        this.$refs.birth.focus());
+      err &&
+        !this.phone &&
+        ((msg = "핸드폰번호를 입력해주세요"),
+        (err = false),
+        this.$refs.phone.focus());
+      err &&
+        this.pw != this.pw_re &&
+        ((msg = "비밀번호와 재입력 비밀번호가 다릅니다."),
+        (err = false),
+        this.$refs.pw_re.focus());
+
+      if (!err) alert(msg);
+      else this.modifyHandler();
+    },
+    deleteHandler() {
+      console.log(this.$session.get("email"));
+      http
+        .post(
+          `/user/del`,
+          JSON.stringify({
+            email: this.$session.get("email"),
+          }),
+          {
+            headers: {
+              token: this.$session.get("token"),
+            },
+          }
+        )
+        .then(({ data }) => {
+          let msg = "회원삭제에 실패하였습니다..";
+          if (data === "success") {
+            msg = "회원삭제가 완료되었습니다.";
+          }
+          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          alert(msg);
+          this.$session.destroy();
+          this.$router.go();
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+    modifyHandler() {
+      http
+        .put(
+          `/user`,
+          {
+            email: this.$session.get("email"),
+            password: this.pw,
+            name: this.name,
+            gender: this.gender,
+            birth: this.birth,
+            phone: this.phone,
+          },
+          {
+            headers: {
+              token: this.$session.get("token"),
+            },
+          }
+        )
+        .then(({ data }) => {
+          // 여기서부터 코딩
+          let msg = "회원수정에 실패하였습니다.";
+          if (data.success === "success") {
+            msg = "회원수정이 완료되었습니다.";
+            this.$session.set("userNo", data.userinfo.userNo);
+            this.$session.set("name", data.userinfo.name);
+            this.$session.set("gender", data.userinfo.gender);
+            this.$session.set("birth", data.userinfo.birth);
+            this.$session.set("phone", data.userinfo.phone);
+          }
+          this.$root.$emit("bv::hide::modal", "modal-memberInfo");
+          alert(msg);
+          this.$router.go();
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+  },
+};
+</script>
+
+<style>
+</style>

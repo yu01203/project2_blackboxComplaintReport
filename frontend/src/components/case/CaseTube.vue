@@ -13,20 +13,8 @@
               <source :src="violationitem.videoUrl" type="video/mp4" />
             </video>
           </div>
-          <p>violationitem.reportStatus: {{violationitem.reportStatus}}</p>
-          <p>selected1: {{ selected1 }}</p>
-          <p>selectedNo: {{selectedNo}}</p>
           <b-list-group flush>
             <b-list-group-item class="mt-1 p-0" @click="clickPrevent">
-              <!-- <b-form-select
-                v-model="selected1"
-                :options="options1"
-                :class="classes"
-                value-field="item"
-                text-field="name"
-                disabled-field="notEnabled"
-                style="width:100% "
-              ></b-form-select>-->
               <b-form-select
                 v-model="selected1"
                 :options="options1"
@@ -116,12 +104,10 @@ export default {
         .then(({ data }) => {
           let msg = "저장에 실패하였습니다.";
           if (data === "success") {
-            msg =
-              "상태가 성공적으로 변경되었단다." +
-              this.violationitem.reportStatus;
+            msg = "상태가 성공적으로 변경되었단다.";
           }
           alert(msg);
-          // console.log(data);
+          this.$router.go();
         })
         .catch(() => {
           alert("에러가 발생했습니다.");
@@ -212,36 +198,9 @@ export default {
     onClickCheck() {
       alert("check");
     },
-    // changeColor() {
-    //   var selected = this.selected1;
-    //   if (selected == "신고 미접수") {
-    //     this.classes = "bg-secondary text-light";
-    //     this.violationitem.reportStatus = 0;
-    //   } else if (selected == "접수 완료") {
-    //     this.classes = "bg-primary text-white";
-    //   } else if (selected == "처리 완료") {
-    //     this.classes = "bg-success text-white";
-    //   }
-    // },
     clickPrevent(event) {
       event.stopPropagation();
     },
-    // DateTransform() {
-    //   var date =
-    //     this.violationitem.date.slice(0, 4) +
-    //     "년 " +
-    //     this.violationitem.date.slice(5, 7) +
-    //     "월 " +
-    //     this.violationitem.date.slice(8, 10) +
-    //     "일 ";
-    //   var time =
-    //     this.violationitem.time.slice(0, 2) +
-    //     "시 " +
-    //     this.violationitem.time.slice(3, 5) +
-    //     "분";
-    //   this.date = date;
-    //   this.time = time;
-    // },
   },
   computed: {
     ...mapGetters(["violationitems"]),
