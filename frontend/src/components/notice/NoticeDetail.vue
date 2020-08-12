@@ -86,15 +86,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1 {
   margin-bottom: 50px;
 }
 h3 {
   text-align: left;
-}
-button {
-  margin-right: 60px;
 }
 h5 {
   text-align: left;
