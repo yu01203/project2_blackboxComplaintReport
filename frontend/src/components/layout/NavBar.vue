@@ -1,12 +1,12 @@
 <template>
-  <nav
+  <!-- <nav
     class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-danger p-1"
     style="padding: 16px; background-color: #ffffff;"
-  >
-    <!-- <nav
+  >-->
+  <nav
     class="container navbar navbar-light fixed-top border-bottom p-1"
     style="padding: 16px; background-color: #ffffff;"
-    >-->
+  >
     <!-- 1 -->
     <b-button v-b-toggle.sidebar-1 class="float-left bg-danger border-danger">MENU</b-button>
     <div v-if="this.$session.get('email') != null"></div>
