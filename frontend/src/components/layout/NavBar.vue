@@ -15,7 +15,11 @@
     <div class="text-center">
       <router-link to="/" style="text-decoration: none;">
         <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
-        <img src="@/assets/Logo_1.png" alt="logo-image" style="width: 40%; margin-bottom: 10px;" />
+        <img
+          src="@/assets/logos/Logo_1.png"
+          alt="logo-image"
+          style="width: 40%; margin-bottom: 10px;"
+        />
       </router-link>
     </div>
 
