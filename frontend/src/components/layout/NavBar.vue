@@ -12,10 +12,12 @@
     <div v-if="this.$session.get('email') != null"></div>
 
     <!-- 2 -->
-    <router-link to="/" class="text-center" style="text-decoration: none;">
-      <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
-      <img src="@/assets/Logo_1.png" alt="logo-image" style="width: 40%; margin-bottom: 10px;" />
-    </router-link>
+    <div class="text-center">
+      <router-link to="/" style="text-decoration: none;">
+        <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
+        <img src="@/assets/Logo_1.png" alt="logo-image" style="width: 40%; margin-bottom: 10px;" />
+      </router-link>
+    </div>
 
     <!-- 3 -->
     <div>
