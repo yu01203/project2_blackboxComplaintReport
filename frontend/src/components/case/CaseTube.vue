@@ -15,8 +15,18 @@
           </div>
           <p>violationitem.reportStatus: {{violationitem.reportStatus}}</p>
           <p>selected1: {{ selected1 }}</p>
+          <p>selectedNo: {{selectedNo}}</p>
           <b-list-group flush>
             <b-list-group-item class="mt-1 p-0" @click="clickPrevent">
+              <!-- <b-form-select
+                v-model="selected1"
+                :options="options1"
+                :class="classes"
+                value-field="item"
+                text-field="name"
+                disabled-field="notEnabled"
+                style="width:100% "
+              ></b-form-select>-->
               <b-form-select
                 v-model="selected1"
                 :options="options1"
@@ -62,13 +72,15 @@ export default {
     return {
       selected1: "",
       options1: [
-        { item: "신고 미접수", name: "신고 미접수" },
-        { item: "접수 완료", name: "접수 완료" },
-        { item: "처리 완료", name: "처리 완료" },
+        { item: "0", name: "신고 미접수" },
+        { item: "1", name: "접수 완료" },
+        { item: "2", name: "처리 완료" },
       ],
+      selectedNo: this.violationitem.reportStatus,
       classes: "",
       date: "",
       time: "",
+      statusChanged: 0,
     };
   },
   mounted: function () {
@@ -78,11 +90,39 @@ export default {
     // this.DateTransform();
   },
   updated() {
-    // this.changeStatus();
-    // this.changeStatus();
+    console.log("Document Updated");
+    this.changeStatus();
     // this.changeColor();
   },
-  watch: {},
+  watch: {
+    selectedNo: function () {
+      // alert("here!");
+      this.violationitem.reportStatus = this.selectedNo;
+      http
+        .put(
+          `/violation/${this.violationitem.userNo}/${this.violationitem.violationNo}/${this.violationitem.reportStatus}`,
+          // `/violation`,
+          {
+            userNo: this.violationitem.userNo,
+            violationNo: this.violationitem.violationNo,
+            reportStatus: this.violationitem.reportStatus,
+          }
+        )
+        .then(({ data }) => {
+          let msg = "저장에 실패하였습니다.";
+          if (data === "success") {
+            msg =
+              "상태가 성공적으로 변경되었단다." +
+              this.violationitem.reportStatus;
+          }
+          alert(msg);
+          // console.log(data);
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
+  },
   methods: {
     modalId(i) {
       return "modal" + i;
@@ -96,48 +136,44 @@ export default {
     mountStatus() {
       var selected = this.violationitem.reportStatus;
       if (selected == 0) {
-        this.selected1 = "신고 미접수";
+        this.selected1 = 0;
         this.classes = "bg-secondary text-light";
-        this.violationitem.reportStatus = 0;
+        // this.violationitem.reportStatus = 0;
       } else if (selected == 1) {
-        this.selected1 = "접수 완료";
+        this.selected1 = 1;
         this.classes = "bg-primary text-white";
-        this.violationitem.reportStatus = 1;
+        // this.violationitem.reportStatus = 1;
       } else if (selected == 2) {
-        this.selected1 = "처리 완료";
+        this.selected1 = 2;
         this.classes = "bg-success text-white";
-        this.violationitem.reportStatus = 2;
+        // this.violationitem.reportStatus = 2;
       }
     },
     changeStatus() {
+      // console.log("changeStatus on");
       var selected = this.selected1;
-      var changedNum = this.violationitem.reportStatus;
-      if (selected == "신고 미접수") {
+      if (selected == 0) {
         this.classes = "bg-secondary text-light";
-        changedNum = 0;
-      } else if (selected == "접수 완료") {
+      } else if (selected == 1) {
         this.classes = "bg-primary text-white";
-        changedNum = 1;
-      } else if (selected == "처리 완료") {
+      } else if (selected == 2) {
         this.classes = "bg-success text-white";
-        this.violationitem.reportStatus = 2;
-        changedNum = 2;
       }
-      console.log(changedNum);
-      http
-        .put(`/violation`, {
-          reportStatus: changedNum,
-        })
-        .then(({ data }) => {
-          let msg = "저장에 실패하였습니다.";
-          if (data === "success") {
-            msg = "저장이 완료되었습니다.";
-          }
-          alert(msg);
-        })
-        .catch(() => {
-          alert("에러가 발생했습니다.");
-        });
+      this.selectedNo = this.selected1;
+      // http
+      //   .put(`/violation`, {
+      //     reportStatus: changedNum,
+      //   })
+      //   .then(({ data }) => {
+      //     let msg = "저장에 실패하였습니다.";
+      //     if (data === "success") {
+      //       msg = "저장이 완료되었습니다.";
+      //     }
+      //     alert(msg);
+      //   })
+      //   .catch(() => {
+      //     alert("에러가 발생했습니다.");
+      //   });
     },
     updateStatus() {
       if (
@@ -159,6 +195,9 @@ export default {
             alert("에러가 발생했습니다.");
           });
       }
+    },
+    onClickCheck() {
+      alert("check");
     },
     // changeColor() {
     //   var selected = this.selected1;
