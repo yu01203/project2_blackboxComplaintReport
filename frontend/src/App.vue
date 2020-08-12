@@ -20,6 +20,7 @@
 
 <script>
 import NavBar from "@/components/layout/NavBar.vue";
+// import NavBar from "@/components/layout/NavBarOrigin.vue";
 import SideBar from "@/components/layout/SideBar.vue";
 
 export default {
