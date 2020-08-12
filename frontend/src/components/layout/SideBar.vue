@@ -3,7 +3,11 @@
     <div id="sidebar-content" class="d-flex flex-column px-4 py-0">
       <p>
         <router-link to="/">
-          <img src="@/assets/Logo_solid.png" alt="logo" style="width:100%; margin-bottom: 10px;" />
+          <img
+            src="@/assets/logos/Logo_solid.png"
+            alt="logo"
+            style="width:100%; margin-bottom: 10px;"
+          />
         </router-link>
       </p>
       <p>

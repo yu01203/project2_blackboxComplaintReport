@@ -8,8 +8,8 @@
 <script>
 import http from "@/util/http-common";
 
-import Map from "@/components/KakaoMap.vue";
-// import Map from "@/components/NaverMap.vue";
+import Map from "@/components/maps/KakaoMap.vue";
+// import Map from "@/components/maps/NaverMap.vue";
 
 export default {
   name: "MapMain",

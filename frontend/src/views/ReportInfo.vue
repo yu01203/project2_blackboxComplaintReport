@@ -46,12 +46,12 @@
 
 
 <script>
-import Chart1 from "@/components/chart1";
-import Chart2 from "@/components/chart2";
-import Chart3 from "@/components/chart3";
-import ChartPersonal1 from "@/components/chartpersonal1";
-import ChartPersonal2 from "@/components/chartpersonal2";
-import ChartPersonal3 from "@/components/chartpersonal3";
+import Chart1 from "@/components/charts/chart1";
+import Chart2 from "@/components/charts/chart2";
+import Chart3 from "@/components/charts/chart3";
+import ChartPersonal1 from "@/components/charts/chartpersonal1";
+import ChartPersonal2 from "@/components/charts/chartpersonal2";
+import ChartPersonal3 from "@/components/charts/chartpersonal3";
 
 export default {
   name: "ReportInfo",
