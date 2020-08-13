@@ -157,6 +157,10 @@ export default {
       ],
       date: [],
       time: [],
+      // startLat: 37.5138,
+      // startLng: 126.981,
+      startLat: 37.5013391,
+      startLng: 127.0391208,
     };
   },
   mounted() {
@@ -169,15 +173,36 @@ export default {
       script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${KakaoApi}`;
       document.head.appendChild(script);
     }
-    // this.transDateTime();
   },
   methods: {
     initMap() {
       var container = document.getElementById("map");
+      var MapOptionLevel = 1;
+
+      if (this.items.length != 0) {
+        this.startLat = this.items[this.items.length - 1].lat;
+        this.startLng = this.items[this.items.length - 1].lng;
+        MapOptionLevel = 7;
+      }
+
       var options = {
-        center: new kakao.maps.LatLng(37.5138, 126.981),
-        level: 7,
+        center: new kakao.maps.LatLng(this.startLat, this.startLng),
+        level: MapOptionLevel,
       };
+
+      // if (this.startLat && this.startLng) {
+      //   var options = {
+      //     center: new kakao.maps.LatLng(this.startLat, this.startLng),
+      //     level: 3,
+      //   };
+      //   alert("Success!");
+      // } else {
+      //   options = {
+      //     center: new kakao.maps.LatLng(37.5138, 126.981),
+      //     level: 7,
+      //   };
+      //   alert("Failed...");
+      // }
 
       var map = new kakao.maps.Map(container, options);
 
@@ -211,6 +236,12 @@ export default {
           violationitem.lat,
           violationitem.lng
         );
+
+        if (i == this.items.length - 1) {
+          this.startLat = violationitem.lat;
+          this.startLng = violationitem.lng;
+        }
+
         var marker = new kakao.maps.Marker({
           map: map,
           position: markerPosition,
