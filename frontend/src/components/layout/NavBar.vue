@@ -160,7 +160,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* 로그인 모달 */
 #modal-1___BV_modal_header_ {
   padding: 16px 16px 16px 32px;

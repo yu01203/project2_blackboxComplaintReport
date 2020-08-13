@@ -252,7 +252,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #checkbutton {
   background: linear-gradient(to bottom, #ff8888, white);
 }
