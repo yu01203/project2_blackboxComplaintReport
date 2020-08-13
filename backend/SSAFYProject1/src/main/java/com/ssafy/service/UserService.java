@@ -1,9 +1,13 @@
 package com.ssafy.service;
 
+import java.util.List;
+
 import com.ssafy.domain.User;
 
 public interface UserService {
 	User login(User user) throws Exception;
+	
+	List<User> userList() throws Exception;
 
 	User detail(String email) throws Exception;
 	

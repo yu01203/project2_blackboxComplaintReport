@@ -13,7 +13,13 @@
 		where email=#{email} and password=#{password}
 	</select>
 	
-	<!-- 회원 조회 -->
+	<!-- 전체 회원 조회 -->
+	<select id="selectAll" resultType="User">
+		select user_no as userNo, email, name, gender, birth, phone, isSNS
+		from user
+	</select>
+	
+	<!-- 이메일로 회원 조회 -->
 	<select id="selectUser" resultType="User">
 		select user_no as userNo, email, password, name, gender, birth, phone, isSNS
 		from user
@@ -46,11 +52,13 @@
 		where email=#{email}
 	</delete>
 	
+	<!-- 이메일 찾기 -->
 	<select id="findEmail" resultType="String">
 		select email from user
 		where name=#{name} and gender=#{gender} and birth=#{birth} and phone=#{phone}
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
 	<select id="findPassword" resultType="User">
 		select user_no as userNo, email, password, name, gender, birth, phone
 		from user
