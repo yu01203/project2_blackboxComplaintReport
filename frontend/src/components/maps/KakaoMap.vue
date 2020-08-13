@@ -3,7 +3,7 @@
     <!-- Map Division -->
     <div id="map"></div>
     <!-- Modal Division -->
-    <div v-for="violationitem in items" :key="violationitem.violationNo">
+    <div v-for="( violationitem, index ) in items" :key="violationitem.violationNo">
       <b-button
         hidden
         :id="'modalButton' + violationitem.violationNo"
@@ -30,7 +30,7 @@
         <!-- 세부사항 -->
         <div>
           <p>
-            위반항목 :
+            위반항목
             <b-form-select
               v-model="violationitem.item"
               :options="options2"
@@ -41,16 +41,30 @@
             ></b-form-select>
           </p>
           <p>
-            <label>위반일자 :</label>
-            <input type="text" class="form-control" id="date" readonly ref="date" v-model="date" />
+            <label for="date">위반일자</label>
+            <input
+              type="text"
+              class="form-control"
+              id="date"
+              readonly
+              ref="date"
+              v-model="date[index]"
+            />
           </p>
 
           <p>
-            <label>위반시간 :</label>
-            <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
+            <label for="time">위반시간</label>
+            <input
+              type="text"
+              class="form-control"
+              id="time"
+              readonly
+              ref="time"
+              v-model="time[index]"
+            />
           </p>
           <p>
-            <label>위반차량번호 :</label>
+            <label for="item">위반차량번호</label>
             <input
               type="text"
               class="form-control"
@@ -60,33 +74,33 @@
             />
           </p>
           <p>
-            <label>위반장소 :</label>
+            <label for="spot">위반장소</label>
             <input
               type="text"
               class="form-control"
-              id="item"
-              ref="item"
+              id="spot"
+              ref="spot"
               v-model="violationitem.spot"
             />
           </p>
           <p>
-            <label>위반위치 :</label>
+            <label for="address">위반위치</label>
             <input
               type="text"
               class="form-control"
-              id="item"
+              id="address"
               readonly
-              ref="item"
+              ref="address"
               v-model="violationitem.address"
             />
           </p>
           <p>
-            <label>신고내용 :</label>
+            <label for="contents">신고내용</label>
             <input
               type="text"
               class="form-control"
-              id="item"
-              ref="item"
+              id="contents"
+              ref="contents"
               v-model="violationitem.contents"
             />
           </p>
@@ -141,8 +155,8 @@ export default {
         { item: "고속도로 갓길통행 위반", name: "고속도로 갓길통행 위반" },
         { item: "기타", name: "기타" },
       ],
-      date: "",
-      time: "",
+      date: [],
+      time: [],
     };
   },
   mounted() {
@@ -155,7 +169,7 @@ export default {
       script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${KakaoApi}`;
       document.head.appendChild(script);
     }
-    this.transDateTime();
+    // this.transDateTime();
   },
   methods: {
     initMap() {
@@ -170,6 +184,29 @@ export default {
       for (var i = 0; i < this.items.length; i++) {
         const violationitem = this.items[i];
 
+        // Date And Time Divison
+        this.transDateTime(violationitem.date, violationitem.time);
+        // var RawDate = violationitem.date.split("-");
+        // var newDate =
+        //   RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
+        // this.date.push(newDate);
+
+        // var RawTime = violationitem.time.split(":");
+        // if (RawTime[0] >= 12) {
+        //   var ApTime = RawTime[0] - 12;
+        //   if (ApTime === 0) {
+        //     ApTime = 12;
+        //   }
+        //   var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
+        // } else {
+        //   var AmTime = RawTime[0].slice(0, 1);
+        //   if (AmTime == 0) {
+        //     AmTime = 12;
+        //   }
+        //   newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
+        // }
+        // this.time.push(newTime);
+
         var markerPosition = new kakao.maps.LatLng(
           violationitem.lat,
           violationitem.lng
@@ -180,13 +217,21 @@ export default {
           clickable: true,
         });
 
-        var iwContent =
-          // document.getElementById("my-modal");
-          '<div style="padding:5px;">' + violationitem.item + "</div>";
+        var content =
+          "<div class='ml-auto text-center' style='width:180px'>" +
+          "<div class='mx-auto' style='width:100%'>" +
+          "<p class='m-0' style='width:100%'>" +
+          this.date[i] +
+          "</p>" +
+          "<p class='m-0' style='width:100%'>" +
+          violationitem.item +
+          "</p>" +
+          "</div>" +
+          "</div>";
 
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
-          content: iwContent,
+          content: content,
           // removable: iwRemoveable,
         });
 
@@ -205,28 +250,27 @@ export default {
         })(marker, infowindow);
       }
     },
-    transDateTime() {
-      var RawDate = this.violationitem.date.split("-");
-      var newDate =
+    transDateTime(inputDate, inputTime) {
+      var RawDate = inputDate.split("-");
+      const newDate =
         RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
-      this.$store.state.violationitems;
-      this.date = newDate;
+      this.date.push(newDate);
 
-      var RawTime = this.violationitem.time.split(":");
+      var RawTime = inputTime.split(":");
       if (RawTime[0] >= 12) {
         var ApTime = RawTime[0] - 12;
         if (ApTime === 0) {
           ApTime = 12;
         }
-        var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
-        this.time = newTime;
+        const newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
+        this.time.push(newTime);
       } else {
         var AmTime = RawTime[0].slice(0, 1);
         if (AmTime == 0) {
           AmTime = 12;
         }
-        newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
-        this.time = newTime;
+        const newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
+        this.time.push(newTime);
       }
     },
   },
@@ -238,5 +282,9 @@ export default {
 #map {
   width: 80vw;
   height: 80vh;
+}
+
+label {
+  margin-bottom: 0;
 }
 </style>
