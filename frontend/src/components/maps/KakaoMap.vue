@@ -113,12 +113,6 @@ var KakaoApi = process.env.VUE_APP_KAKAO_API_KEY;
 
 export default {
   name: "Map",
-  data() {
-    return {
-      date: "",
-      time: ""
-    }
-  }
   props: {
     items: {
       type: Array,
@@ -147,6 +141,8 @@ export default {
         { item: "고속도로 갓길통행 위반", name: "고속도로 갓길통행 위반" },
         { item: "기타", name: "기타" },
       ],
+      date: "",
+      time: "",
     };
   },
   mounted() {
