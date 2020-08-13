@@ -11,6 +11,7 @@
           placeholder="이메일을 입력하세요"
           v-model="email"
         />
+        <button id="checkbutton" @click="emailCheck">이메일 중복 확인</button>
       </div>
       <div class="form-group">
         <label>비밀번호 :</label>
@@ -101,6 +102,7 @@ export default {
       state: 123,
       naverLoginURL:
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
+      emailchecked: false,
     };
   },
   methods: {
@@ -108,31 +110,37 @@ export default {
       let err = true;
       let msg = "";
       if (!this.validEmail(this.email)) {
-        (msg = "이메일 형식을 지켜주세요"),
+        (msg = "이메일 형식을 지켜주세요."),
           (err = false),
           this.$refs.email.focus();
       } else if (this.pw.length <= 6) {
-        (msg = "비밀번호를 7자 이상 입력해주세요"),
+        (msg = "비밀번호를 7자 이상 입력해주세요."),
           (err = false),
           this.$refs.pw.focus();
       } else if (!this.validBirth(this.birth)) {
-        (msg = "올바른 생년월일을 입력해주세요"),
+        (msg = "올바른 생년월일을 입력해주세요."),
           (err = false),
           this.$refs.birth.focus();
       } else if (this.gender == null) {
-        alert("성별을 선택해 주세요");
-        (msg = "성별을 선택해 주세요"),
+        alert("성별을 선택해 주세요.");
+        (msg = "성별을 선택해 주세요."),
           (err = false),
           this.$refs.gender.focus();
       }
       err &&
         !this.phone &&
-        ((msg = "핸드폰번호를 입력해주세요"),
+        ((msg = "핸드폰번호를 입력해주세요."),
         (err = false),
         this.$refs.phone.focus());
       err &&
         !this.name &&
-        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
+        ((msg = "이름을 입력해주세요."),
+        (err = false),
+        this.$refs.name.focus());
+      err &&
+        !this.emailchecked &&
+        ((msg = "이메일 중복 확인을 해주세요."), (err = false)),
+        this.$refs.checkbutton.focus();
 
       if (!err) alert(msg);
       else this.insertHandler();
@@ -167,6 +175,21 @@ export default {
       this.gender = null;
       this.birth = null;
       this.phone = null;
+    },
+    emailCheck() {
+      http
+        .get(`/user/${this.email}`)
+        .then(({ data }) => {
+          if (data) {
+            alert("회원가입 가능한 이메일입니다.");
+            this.emailchecked = true;
+          } else {
+            alert("이미 존재하는 이메일입니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
     },
     validEmail(email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
