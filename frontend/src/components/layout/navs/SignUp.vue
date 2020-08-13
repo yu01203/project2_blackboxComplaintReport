@@ -3,15 +3,35 @@
     <div class="modal-body">
       <div class="form-group">
         <label>이메일 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          ref="email"
-          placeholder="이메일을 입력하세요"
-          v-model="email"
-        />
-        <button id="checkbutton" @click="emailCheck">이메일 중복 확인</button>
+        <div class="d-flex">
+          <input
+            type="text"
+            class="form-control mr-3"
+            id="email"
+            ref="email"
+            placeholder="이메일을 입력하세요"
+            v-model="email"
+          />
+          <b-button
+            id="checkbutton"
+            class="border-danger"
+            style="width: 30%; padding: 0px;"
+            @click="validEmailCheck"
+          >
+            <span
+              style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >중</span>
+            <span
+              style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >복</span>
+            <span
+              style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >확</span>
+            <span
+              style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >인</span>
+          </b-button>
+        </div>
       </div>
       <div class="form-group">
         <label>비밀번호 :</label>
@@ -73,7 +93,24 @@
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-lg btn-block login-btn" @click="checkHandlerInsert">회원가입</button>
+        <button
+          id="signupbutton"
+          class="btn btn-primary btn-lg btn-block login-btn"
+          @click="checkHandlerInsert"
+        >
+          <span
+            style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >회</span>
+          <span
+            style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >원</span>
+          <span
+            style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >가</span>
+          <span
+            style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >입</span>
+        </button>
       </div>
     </div>
   </b-modal>
@@ -139,8 +176,9 @@ export default {
         this.$refs.name.focus());
       err &&
         !this.emailchecked &&
-        ((msg = "이메일 중복 확인을 해주세요."), (err = false)),
-        this.$refs.checkbutton.focus();
+        ((msg = "이메일 중복 확인을 해주세요."),
+        (err = false),
+        this.$refs.checkbutton.focus());
 
       if (!err) alert(msg);
       else this.insertHandler();
@@ -176,6 +214,17 @@ export default {
       this.birth = null;
       this.phone = null;
     },
+    validEmailCheck() {
+      let err = true;
+      let msg = "";
+      if (!this.validEmail(this.email)) {
+        (msg = "이메일 형식을 지켜주세요."),
+          (err = false),
+          this.$refs.email.focus();
+      }
+      if (!err) alert(msg);
+      else this.emailCheck();
+    },
     emailCheck() {
       http
         .get(`/user/${this.email}`)
@@ -204,4 +253,20 @@ export default {
 </script>
 
 <style>
+#checkbutton {
+  background: linear-gradient(to bottom, #ff8888, white);
+}
+
+#signupbutton {
+  background: linear-gradient(
+    45deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    navy,
+    purple
+  );
+}
 </style>

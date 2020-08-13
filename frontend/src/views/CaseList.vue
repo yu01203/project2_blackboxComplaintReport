@@ -30,22 +30,24 @@
       </div>
       <!-- find term calendar -->
       <div class="col d-flex">
-        <b-form-group id="input-group-3" label="시작 날짜 선택">
+        <b-form-group id="input-group-3">
           <b-form-datepicker
             id="example-datepicker1"
             v-model="startdate"
             class="mb-2"
             @input="optionController"
             label-help
+            label-no-date-selected="시작 날짜"
           ></b-form-datepicker>
         </b-form-group>
-        <b-form-group id="input-group-3" label="종료 날짜 선택">
+        <b-form-group id="input-group-3">
           <b-form-datepicker
             id="example-datepicker2"
             v-model="enddate"
             class="mb-2"
             @input="optionController"
             label-help
+            label-no-date-selected="종료 날짜"
           ></b-form-datepicker>
         </b-form-group>
       </div>
@@ -190,13 +192,19 @@ export default {
     findTerm() {
       const emptyItems = new Array();
       this.templist_find = emptyItems;
-      if (this.startdate.length != 0 && this.enddate.length != 0) {
-        for (var i in this.templist_select) {
-          if (
-            this.startdate <= this.templist_select[i].date &&
-            this.templist_select[i].date <= this.enddate
-          ) {
-            this.templist_find.push(this.templist_select[i]);
+
+      if (this.startdate != 0 && this.enddate != 0) {
+        if (this.startdate > this.enddate) {
+          alert("시작 날짜보다 종료 날짜가 더 이릅니다.");
+          this.enddate = "";
+        } else {
+          for (var i in this.templist_select) {
+            if (
+              this.startdate <= this.templist_select[i].date &&
+              this.templist_select[i].date <= this.enddate
+            ) {
+              this.templist_find.push(this.templist_select[i]);
+            }
           }
         }
       } else {
