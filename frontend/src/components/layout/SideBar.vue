@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #sidebar-1 {
   padding: 15px;
 }

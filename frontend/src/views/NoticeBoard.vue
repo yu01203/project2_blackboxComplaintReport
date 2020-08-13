@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 th {
   background: #17a2b8;
 }
