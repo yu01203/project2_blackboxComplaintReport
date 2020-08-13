@@ -24,26 +24,12 @@
       </p>
       <p>
         <label>위반일자 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="date"
-          readonly
-          ref="date"
-          v-model="violationitem.date"
-        />
+        <input type="text" class="form-control" id="date" readonly ref="date" v-model="date" />
       </p>
 
       <p>
         <label>위반시간 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="time"
-          readonly
-          ref="time"
-          v-model="violationitem.time"
-        />
+        <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
       </p>
       <p>
         <label>위반차량번호 :</label>
@@ -92,22 +78,19 @@
 
 <script>
 import http from "@/util/http-common";
-// import vuePlayer from "@algoz098/vue-player";
 
 export default {
   name: "CaseModal",
-  components: {
-    // vuePlayer,
-  },
+  components: {},
   props: {
     violationitem: {
       type: Object,
     },
     date: {
-      type: Object,
+      type: String,
     },
     time: {
-      type: Object,
+      type: String,
     },
   },
   data() {

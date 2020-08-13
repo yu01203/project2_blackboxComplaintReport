@@ -190,17 +190,46 @@ export default {
     findTerm() {
       const emptyItems = new Array();
       this.templist_find = emptyItems;
-      if (this.startdate.length != 0 && this.enddate.length != 0) {
-        for (var i in this.templist_select) {
-          if (
-            this.startdate <= this.templist_select[i].date &&
-            this.templist_select[i].date <= this.enddate
-          ) {
-            this.templist_find.push(this.templist_select[i]);
+      console.log(this.startdate, this.enddate);
+
+      // var tempStart = null;
+      // var tempEnd = null;
+
+      // if (this.startdate && !this.enddate) {
+      //   tempStart = this.startdate;
+      // } else if (!this.startdate && !this.enddate) {
+      //   tempEnd = this.enddate;
+      // }
+
+      if (this.startdate && this.enddate) {
+        if (this.startdate > this.enddate) {
+          alert("뭐하냐 지금");
+          // this.startdate = new String();
+          // this.enddate = new String();
+        } else {
+          for (var i in this.templist_select) {
+            if (
+              this.startdate <= this.templist_select[i].date &&
+              this.templist_select[i].date <= this.enddate
+            ) {
+              this.templist_find.push(this.templist_select[i]);
+            } else {
+              this.templist_find = this.templist_select;
+            }
           }
+          // if (this.startdate && this.enddate) {
+          //   for (var i in this.templist_select) {
+          //     if (
+          //       this.startdate <= this.templist_select[i].date &&
+          //       this.templist_select[i].date <= this.enddate
+          //     ) {
+          //       this.templist_find.push(this.templist_select[i]);
+          //     }
+          //   }
+          // } else {
+          //   this.templist_find = this.templist_select;
+          // }
         }
-      } else {
-        this.templist_find = this.templist_select;
       }
     },
     searchOnlist() {

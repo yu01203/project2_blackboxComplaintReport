@@ -26,7 +26,8 @@
               ></b-form-select>
             </b-list-group-item>
             <div class="d-flex justify-content-between text-secondary">
-              <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p>
+              <!-- <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p> -->
+              <p class="mb-0">{{ date }} {{ time }}</p>
             </div>
             <div>
               <p class="mb-0" style="font-size: 18px">{{ violationitem.address }}</p>
@@ -71,25 +72,21 @@ export default {
       statusChanged: 0,
     };
   },
+  created() {},
   mounted: function () {
-    this.getFormatDate(this.violationitem);
+    this.transDateTime();
+    // this.getFormatDate(this.violationitem);
     this.mountStatus();
-    // this.changeColor();
-    // this.DateTransform();
   },
   updated() {
-    console.log("Document Updated");
     this.changeStatus();
-    // this.changeColor();
   },
   watch: {
     selectedNo: function () {
-      // alert("here!");
       this.violationitem.reportStatus = this.selectedNo;
       http
         .put(
           `/violation/${this.violationitem.userNo}/${this.violationitem.violationNo}/${this.violationitem.reportStatus}`,
-          // `/violation`,
           {
             userNo: this.violationitem.userNo,
             violationNo: this.violationitem.violationNo,
@@ -129,19 +126,15 @@ export default {
       if (selected == 0) {
         this.selected1 = 0;
         this.classes = "bg-secondary text-light";
-        // this.violationitem.reportStatus = 0;
       } else if (selected == 1) {
         this.selected1 = 1;
         this.classes = "bg-primary text-white";
-        // this.violationitem.reportStatus = 1;
       } else if (selected == 2) {
         this.selected1 = 2;
         this.classes = "bg-success text-white";
-        // this.violationitem.reportStatus = 2;
       }
     },
     changeStatus() {
-      // console.log("changeStatus on");
       var selected = this.selected1;
       if (selected == 0) {
         this.classes = "bg-secondary text-light";
@@ -151,20 +144,6 @@ export default {
         this.classes = "bg-success text-white";
       }
       this.selectedNo = this.selected1;
-      // http
-      //   .put(`/violation`, {
-      //     reportStatus: changedNum,
-      //   })
-      //   .then(({ data }) => {
-      //     let msg = "저장에 실패하였습니다.";
-      //     if (data === "success") {
-      //       msg = "저장이 완료되었습니다.";
-      //     }
-      //     alert(msg);
-      //   })
-      //   .catch(() => {
-      //     alert("에러가 발생했습니다.");
-      //   });
     },
     updateStatus() {
       if (
@@ -200,6 +179,30 @@ export default {
     },
     clickPrevent(event) {
       event.stopPropagation();
+    },
+    transDateTime() {
+      var RawDate = this.violationitem.date.split("-");
+      var newDate =
+        RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
+      this.$store.state.violationitems;
+      this.date = newDate;
+
+      var RawTime = this.violationitem.time.split(":");
+      if (RawTime[0] >= 12) {
+        var ApTime = RawTime[0] - 12;
+        if (ApTime === 0) {
+          ApTime = 12;
+        }
+        var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      } else {
+        var AmTime = RawTime[0].slice(0, 1);
+        if (AmTime == 0) {
+          AmTime = 12;
+        }
+        newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      }
     },
   },
   computed: {
