@@ -1,5 +1,6 @@
 package com.ssafy.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -114,20 +116,26 @@ public class UserController {
 				map.put("wrong", WRONG);
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 			}
-			
-			if(user != null) {
-				map.put("userinfo", user);
-				map.put("success", SUCCESS);
-				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-			} else {
-				map.put("noUser", "noUser");
-				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
-			}
+
+			map.put("userinfo", user);
+			map.put("success", SUCCESS);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("error", ERROR);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
+	}
+	
+	@ApiOperation(value = "")
+	@GetMapping("{email}")
+	public boolean checkEmailValid(@PathVariable String email) {
+		logger.debug("이메일 중복 조회 - 호출");
+		try {
+			User user = service.detail(email);
+			if(user == null) return true;
+		} catch (Exception e) { e.printStackTrace(); }
+		return false;
 	}
 	
 	@ApiOperation(value = "회원등록 후 성공 여부를 반환한다.")
@@ -243,9 +251,10 @@ public class UserController {
 	
 	@ApiOperation(value = "모든 회원 리스트를 반환한다.")
 	@GetMapping("all")
-	public ResponseEntity<List<User>> userList(List<User> list) {
+	public ResponseEntity<List<User>> userList() {
 		logger.debug("회원 리스트 - 호출");
 		
+		List<User> list = new ArrayList<User>();
 		try {
 			list = service.userList();
 		} catch (Exception e) {
