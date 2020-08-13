@@ -42,26 +42,12 @@
           </p>
           <p>
             <label>위반일자 :</label>
-            <input
-              type="text"
-              class="form-control"
-              id="date"
-              readonly
-              ref="date"
-              v-model="violationitem.date"
-            />
+            <input type="text" class="form-control" id="date" readonly ref="date" v-model="date" />
           </p>
 
           <p>
             <label>위반시간 :</label>
-            <input
-              type="text"
-              class="form-control"
-              id="time"
-              readonly
-              ref="time"
-              v-model="violationitem.time"
-            />
+            <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
           </p>
           <p>
             <label>위반차량번호 :</label>
@@ -123,12 +109,16 @@
 </template>
 
 <script>
-// import http from "@/util/http-common";
-
 var KakaoApi = process.env.VUE_APP_KAKAO_API_KEY;
 
 export default {
   name: "Map",
+  data() {
+    return {
+      date: "",
+      time: ""
+    }
+  }
   props: {
     items: {
       type: Array,
@@ -136,8 +126,6 @@ export default {
   },
   data() {
     return {
-      // items: this.$store.state.violationitems,
-      // items: [],
       options2: [
         { item: "신호위반", name: "신호위반" },
         { item: "끼어들기 금지 위반", name: "끼어들기 금지 위반" },
@@ -171,6 +159,7 @@ export default {
       script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${KakaoApi}`;
       document.head.appendChild(script);
     }
+    this.transDateTime();
   },
   methods: {
     initMap() {
@@ -181,41 +170,7 @@ export default {
       };
 
       var map = new kakao.maps.Map(container, options);
-      // map.setMapTypeId(kakao.maps.MapTypeId.HYBIRD);
 
-      // Make Markers Ver. 1
-      // var positions = new Array();
-      // for (var i = 0; i < this.DummyLoc.length; i++) {
-      //   positions.push({
-      //     latlng: new kakao.maps.LatLng(
-      //       this.DummyLoc[i]["lat"],
-      //       this.DummyLoc[i]["lng"]
-      //     ),
-      //   });
-      // }
-      // for (var j = 0; j < positions.length; j++) {
-      //   var marker = new kakao.maps.Marker({
-      //     map: map,
-      //     position: positions[j].latlng,
-      //     clickable: true,
-      //   });
-
-      //   // kakao.maps.event.addListener(marker, "click", function () {
-      //   //   alert(this.DummyLoc[j]["violationNo"]);
-      //   // });
-      // }
-      // marker.setMap(map);
-      // ver1 필수 코드
-      // var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-      //   iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-      // // 인포윈도우를 생성합니다
-      // var infowindow = new kakao.maps.InfoWindow({
-      //   content: iwContent,
-      //   removable: iwRemoveable,
-      // });
-
-      // Make Markers Ver. 2
       for (var i = 0; i < this.items.length; i++) {
         const violationitem = this.items[i];
 
@@ -239,47 +194,47 @@ export default {
           // removable: iwRemoveable,
         });
 
-        // 도전 원본
         (function (marker, infowindow) {
-          // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다
           kakao.maps.event.addListener(marker, "click", function () {
-            // infowindow.open(map, marker);
             document
-              .getElementById(
-                //     //     // 이거는 1만 된단 말이지
-                "modalButton" + violationitem.violationNo
-              )
+              .getElementById("modalButton" + violationitem.violationNo)
               .click();
-            // this.$ref["modalref" + violationitem.violationNo].show();
           });
           kakao.maps.event.addListener(marker, "mouseover", function () {
             infowindow.open(map, marker);
           });
-
-          // // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
           kakao.maps.event.addListener(marker, "mouseout", function () {
             infowindow.close();
           });
         })(marker, infowindow);
       }
     },
+    transDateTime() {
+      var RawDate = this.violationitem.date.split("-");
+      var newDate =
+        RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
+      this.$store.state.violationitems;
+      this.date = newDate;
+
+      var RawTime = this.violationitem.time.split(":");
+      if (RawTime[0] >= 12) {
+        var ApTime = RawTime[0] - 12;
+        if (ApTime === 0) {
+          ApTime = 12;
+        }
+        var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      } else {
+        var AmTime = RawTime[0].slice(0, 1);
+        if (AmTime == 0) {
+          AmTime = 12;
+        }
+        newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      }
+    },
   },
-  created() {
-    // http
-    //   .get(`/violation/${this.$session.get("userNo")}`)
-    //   .then(({ data }) => {
-    //     if (data) {
-    //       // this.local_violationitems = data;
-    //       this.items = data;
-    //       // alert("ㅔㅗ");
-    //     } else {
-    //       alert(" 실패했습니다.");
-    //     }
-    //   })
-    //   .catch(() => {
-    //     alert("에러가 발생했습니다.");
-    //   });
-  },
+  created() {},
 };
 </script>
 

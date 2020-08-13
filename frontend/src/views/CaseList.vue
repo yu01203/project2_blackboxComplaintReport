@@ -206,9 +206,19 @@ export default {
               this.templist_find.push(this.templist_select[i]);
             }
           }
+          // if (this.startdate && this.enddate) {
+          //   for (var i in this.templist_select) {
+          //     if (
+          //       this.startdate <= this.templist_select[i].date &&
+          //       this.templist_select[i].date <= this.enddate
+          //     ) {
+          //       this.templist_find.push(this.templist_select[i]);
+          //     }
+          //   }
+          // } else {
+          //   this.templist_find = this.templist_select;
+          // }
         }
-      } else {
-        this.templist_find = this.templist_select;
       }
     },
     searchOnlist() {
