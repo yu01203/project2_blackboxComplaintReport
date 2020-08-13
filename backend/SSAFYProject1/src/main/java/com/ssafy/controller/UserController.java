@@ -127,7 +127,7 @@ public class UserController {
 		}
 	}
 	
-	@ApiOperation(value = "")
+	@ApiOperation(value = "이메일의 중복 여부를 판단하여 반환한다.")
 	@GetMapping("{email}")
 	public boolean checkEmailValid(@PathVariable String email) {
 		logger.debug("이메일 중복 조회 - 호출");
