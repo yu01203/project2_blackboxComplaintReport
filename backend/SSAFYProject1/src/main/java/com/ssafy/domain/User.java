@@ -11,16 +11,19 @@ public class User {
 	private boolean isSNS;
 
 	public User() {}
-	public User(int userNo, String email, String password, String name, String gender, String birth, String phone,
-			boolean isSNS) {
+	public User(int userNo, String email, String name, String gender, String birth, String phone, boolean isSNS) {
 		this.userNo = userNo;
 		this.email = email;
-		this.password = password;
 		this.name = name;
 		this.gender = gender;
 		this.birth = birth;
 		this.phone = phone;
 		this.isSNS = isSNS;
+	}
+	public User(int userNo, String email, String password, String name, String gender, String birth, String phone,
+			boolean isSNS) {
+		this(userNo, email, name, gender, birth, phone, isSNS);
+		this.password = password;
 	}
 
 	public int getUserNo() {

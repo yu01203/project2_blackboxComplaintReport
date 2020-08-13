@@ -3,14 +3,35 @@
     <div class="modal-body">
       <div class="form-group">
         <label>이메일 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          ref="email"
-          placeholder="이메일을 입력하세요"
-          v-model="email"
-        />
+        <div class="d-flex">
+          <input
+            type="text"
+            class="form-control mr-3"
+            id="email"
+            ref="email"
+            placeholder="이메일을 입력하세요"
+            v-model="email"
+          />
+          <b-button
+            id="checkbutton"
+            class="border-danger"
+            style="width: 30%; padding: 0px;"
+            @click="validEmailCheck"
+          >
+            <span
+              style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >중</span>
+            <span
+              style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >복</span>
+            <span
+              style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >확</span>
+            <span
+              style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+            >인</span>
+          </b-button>
+        </div>
       </div>
       <div class="form-group">
         <label>비밀번호 :</label>
@@ -72,7 +93,24 @@
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-lg btn-block login-btn" @click="checkHandlerInsert">회원가입</button>
+        <button
+          id="signupbutton"
+          class="btn btn-primary btn-lg btn-block login-btn"
+          @click="checkHandlerInsert"
+        >
+          <span
+            style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >회</span>
+          <span
+            style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >원</span>
+          <span
+            style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >가</span>
+          <span
+            style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
+          >입</span>
+        </button>
       </div>
     </div>
   </b-modal>
@@ -101,6 +139,7 @@ export default {
       state: 123,
       naverLoginURL:
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
+      emailchecked: false,
     };
   },
   methods: {
@@ -108,31 +147,38 @@ export default {
       let err = true;
       let msg = "";
       if (!this.validEmail(this.email)) {
-        (msg = "이메일 형식을 지켜주세요"),
+        (msg = "이메일 형식을 지켜주세요."),
           (err = false),
           this.$refs.email.focus();
       } else if (this.pw.length <= 6) {
-        (msg = "비밀번호를 7자 이상 입력해주세요"),
+        (msg = "비밀번호를 7자 이상 입력해주세요."),
           (err = false),
           this.$refs.pw.focus();
       } else if (!this.validBirth(this.birth)) {
-        (msg = "올바른 생년월일을 입력해주세요"),
+        (msg = "올바른 생년월일을 입력해주세요."),
           (err = false),
           this.$refs.birth.focus();
       } else if (this.gender == null) {
-        alert("성별을 선택해 주세요");
-        (msg = "성별을 선택해 주세요"),
+        alert("성별을 선택해 주세요.");
+        (msg = "성별을 선택해 주세요."),
           (err = false),
           this.$refs.gender.focus();
       }
       err &&
         !this.phone &&
-        ((msg = "핸드폰번호를 입력해주세요"),
+        ((msg = "핸드폰번호를 입력해주세요."),
         (err = false),
         this.$refs.phone.focus());
       err &&
         !this.name &&
-        ((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
+        ((msg = "이름을 입력해주세요."),
+        (err = false),
+        this.$refs.name.focus());
+      err &&
+        !this.emailchecked &&
+        ((msg = "이메일 중복 확인을 해주세요."),
+        (err = false),
+        this.$refs.checkbutton.focus());
 
       if (!err) alert(msg);
       else this.insertHandler();
@@ -168,6 +214,32 @@ export default {
       this.birth = null;
       this.phone = null;
     },
+    validEmailCheck() {
+      let err = true;
+      let msg = "";
+      if (!this.validEmail(this.email)) {
+        (msg = "이메일 형식을 지켜주세요."),
+          (err = false),
+          this.$refs.email.focus();
+      }
+      if (!err) alert(msg);
+      else this.emailCheck();
+    },
+    emailCheck() {
+      http
+        .get(`/user/${this.email}`)
+        .then(({ data }) => {
+          if (data) {
+            alert("회원가입 가능한 이메일입니다.");
+            this.emailchecked = true;
+          } else {
+            alert("이미 존재하는 이메일입니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러가 발생했습니다.");
+        });
+    },
     validEmail(email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
       return re.test(email);
@@ -180,5 +252,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#checkbutton {
+  background: linear-gradient(to bottom, #ff8888, white);
+}
+
+#signupbutton {
+  background: linear-gradient(
+    45deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    navy,
+    purple
+  );
+}
 </style>
