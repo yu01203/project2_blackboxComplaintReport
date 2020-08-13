@@ -1,6 +1,7 @@
 package com.ssafy.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -114,9 +115,14 @@ public class UserController {
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 			}
 			
-			map.put("userinfo", user);
-			map.put("success", SUCCESS);
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			if(user != null) {
+				map.put("userinfo", user);
+				map.put("success", SUCCESS);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("noUser", "noUser");
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("error", ERROR);
@@ -233,5 +239,18 @@ public class UserController {
 			return new ResponseEntity<String>(ERROR, HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+	}
+	
+	@ApiOperation(value = "모든 회원 리스트를 반환한다.")
+	@GetMapping("all")
+	public ResponseEntity<List<User>> userList(List<User> list) {
+		logger.debug("회원 리스트 - 호출");
+		
+		try {
+			list = service.userList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 	}
 }
