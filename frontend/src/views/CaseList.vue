@@ -3,25 +3,26 @@
     <br />
     <h1 class="text-center">제보목록</h1>
     <!-- <div class="d-flex justify-content-between align-items-center"> -->
-    <div class="row align-items-center">
+    <div class="row align-items-center text-center mb-2 mx-0" style="width:100%">
       <!-- filter button -->
-      <div class="col-3.5">
+      <div class="col-12 col-md-6 col-lg-4 text-center px-0 mb-2">
         <b-form-checkbox-group
           v-model="selected"
           :options="options"
-          class="mb-3"
+          class="mx-0"
           value-field="item"
           text-field="name"
           disabled-field="notEnabled"
           @input="optionController"
+          style="width:100%"
         ></b-form-checkbox-group>
       </div>
       <!-- items dropdown -->
-      <div class="col-2.5">
+      <div class="col-12 col-md-6 col-lg-2 mb-2">
         <b-form-select
           v-model="selected2"
           :options="options2"
-          class="mb-0"
+          class="my-0"
           value-field="item"
           text-field="name"
           disabled-field="notEnabled"
@@ -29,22 +30,22 @@
         ></b-form-select>
       </div>
       <!-- find term calendar -->
-      <div class="col d-flex">
-        <b-form-group id="input-group-3">
+      <div class="col-12 col-md-5 col-lg-3 mb-2 d-flex">
+        <b-form-group id="input-group-3" class="px-0 my-auto col-6">
           <b-form-datepicker
             id="example-datepicker1"
             v-model="startdate"
-            class="mb-2"
+            class
             @input="optionController"
             label-help
             label-no-date-selected="시작 날짜"
           ></b-form-datepicker>
         </b-form-group>
-        <b-form-group id="input-group-3">
+        <b-form-group id="input-group-3" class="px-0 my-auto col-6">
           <b-form-datepicker
             id="example-datepicker2"
             v-model="enddate"
-            class="mb-2"
+            class
             @input="optionController"
             label-help
             label-no-date-selected="종료 날짜"
@@ -52,9 +53,14 @@
         </b-form-group>
       </div>
       <!-- search bar -->
-      <div class="col">
-        <span class="mr-2">search :</span>
-        <input class="mr-2" type="text" v-model="searchText" @keydown.enter="optionController" />
+      <div class="col-12 col-md-7 col-lg-3 mb-2">
+        <!-- <label for="searchBar" class="mr-2 mb-0">search</label> -->
+        <b-input-group id="searchBar">
+          <b-input-group-prepend is-text>
+            <b-icon icon="search"></b-icon>
+          </b-input-group-prepend>
+          <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
+        </b-input-group>
         <!-- <b-button variant="danger" @click="optionController">Button</b-button> -->
       </div>
     </div>
