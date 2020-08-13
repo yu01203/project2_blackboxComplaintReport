@@ -12,7 +12,7 @@
     <!-- 세부사항 -->
     <div>
       <p>
-        위반항목 :
+        위반항목
         <b-form-select
           v-model="violationitem.item"
           :options="options2"
@@ -23,40 +23,46 @@
         ></b-form-select>
       </p>
       <p>
-        <label>위반일자 :</label>
+        <label>위반일자</label>
         <input type="text" class="form-control" id="date" readonly ref="date" v-model="date" />
       </p>
 
       <p>
-        <label>위반시간 :</label>
+        <label for="time">위반시간</label>
         <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
       </p>
       <p>
-        <label>위반차량번호 :</label>
-        <input type="text" class="form-control" id="item" ref="item" v-model="violationitem.carNum" />
-      </p>
-      <p>
-        <label>위반장소 :</label>
-        <input type="text" class="form-control" id="item" ref="item" v-model="violationitem.spot" />
-      </p>
-      <p>
-        <label>위반위치 :</label>
+        <label for="carNum">위반차량번호</label>
         <input
           type="text"
           class="form-control"
-          id="item"
+          id="carNum"
+          ref="carNum"
+          v-model="violationitem.carNum"
+        />
+      </p>
+      <p>
+        <label for="spot">위반장소</label>
+        <input type="text" class="form-control" id="spot" ref="spot" v-model="violationitem.spot" />
+      </p>
+      <p>
+        <label for="address">위반위치</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
           readonly
-          ref="item"
+          ref="address"
           v-model="violationitem.address"
         />
       </p>
       <p>
-        <label>신고내용 :</label>
+        <label for="contents">신고내용</label>
         <input
           type="text"
           class="form-control"
-          id="item"
-          ref="item"
+          id="contents"
+          ref="contents"
           v-model="violationitem.contents"
         />
       </p>
