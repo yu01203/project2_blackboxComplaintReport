@@ -14,5 +14,5 @@ CREATE TABLE `ssafyproject1`.`violation` (
   `lat` VARCHAR(45) NOT NULL,
   `lng` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`violation_no`, `user_no`),
-  FOREIGN KEY (`user_no`) REFERENCES `user` (`user_no`))
+  FOREIGN KEY (`user_no`) REFERENCES `user` (`user_no`) on delete cascade)
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_bin;
