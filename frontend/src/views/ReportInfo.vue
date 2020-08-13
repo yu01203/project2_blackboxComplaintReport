@@ -5,15 +5,15 @@
       <h1 class="text-center mb-3">전체 유저 제보현황</h1>
       <b-container class="bv-example-row bv-example-row-flex-cols">
         <b-row align-v="stretch">
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">신고 미접수 현황</h2>
             <Chart1 />
           </b-col>
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">접수완료 현황</h2>
             <Chart2 />
           </b-col>
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">처리완료 현황</h2>
             <Chart3 />
           </b-col>
@@ -26,15 +26,15 @@
       <h1 class="text-center mb-3">개인 제보현황</h1>
       <b-container class="bv-example-row bv-example-row-flex-cols">
         <b-row align-v="stretch">
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">신고 미접수 현황</h2>
             <ChartPersonal1 />
           </b-col>
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">접수완료 현황</h2>
             <ChartPersonal2 />
           </b-col>
-          <b-col>
+          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
             <h2 class="text-center">처리완료 현황</h2>
             <ChartPersonal3 />
           </b-col>
