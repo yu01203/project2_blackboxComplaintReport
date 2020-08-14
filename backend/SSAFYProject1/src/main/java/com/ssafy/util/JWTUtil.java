@@ -16,7 +16,7 @@ public class JWTUtil {
 
 		try {
 			// 토큰 유효 기간
-			Long EXPIRATION_TIME = 1000L * 60L * 60L;
+			Long EXPIRATION_TIME = 1000L * 60L * 60L * 24L * 2L;
 			Date issuedAt = new Date();
 			Date notBefore = new Date(issuedAt.getTime());
 			Date expiresAt = new Date(issuedAt.getTime() + EXPIRATION_TIME);

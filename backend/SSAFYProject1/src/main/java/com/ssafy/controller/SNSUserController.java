@@ -116,7 +116,7 @@ public class SNSUserController {
 			e.printStackTrace();
 		}
 
-		return "redirect:http://localhost:8081?token=" + JWT_token;
+		return "redirect:http:localhost:8081//?token=" + JWT_token; // i3a211.p.ssafy.io
 	}
 
 	/*
