@@ -38,6 +38,7 @@
             @input="optionController"
             label-help
             label-no-date-selected="시작 날짜"
+            :max="maxdate"
           ></b-form-datepicker>
         </b-form-group>
         <b-form-group id="input-group-3" class="px-0 my-auto col-6">
@@ -48,6 +49,8 @@
             @input="optionController"
             label-help
             label-no-date-selected="종료 날짜"
+            :min="startdate"
+            :max="today"
           ></b-form-datepicker>
         </b-form-group>
       </div>
@@ -144,7 +147,12 @@ export default {
         { item: "고속도로 갓길통행 위반", name: "고속도로 갓길통행 위반" },
         { item: "기타", name: "기타" },
       ],
+      maxdate: "",
+      today: "",
     };
+  },
+  mounted() {
+    this.getToday();
   },
   created() {
     http
@@ -198,33 +206,30 @@ export default {
       const emptyItems = new Array();
       this.templist_find = emptyItems;
 
-      if (this.startdate != 0 && this.enddate != 0) {
-        if (this.startdate > this.enddate) {
-          alert("시작 날짜보다 종료 날짜가 더 이릅니다.");
-          this.enddate = "";
-        } else {
-          for (var i in this.templist_select) {
-            if (
-              this.startdate <= this.templist_select[i].date &&
-              this.templist_select[i].date <= this.enddate
-            ) {
-              this.templist_find.push(this.templist_select[i]);
-            } else {
-              this.templist_find = this.templist_select;
-            }
+      if (this.enddate) {
+        this.maxdate = this.enddate;
+      }
+
+      if (this.startdate.length != 0 && this.enddate.length != 0) {
+        for (var i in this.templist_select) {
+          // input Date Transformation
+          var tempDate = this.templist_select[i].date.split("-");
+
+          if (tempDate[1] < 10) {
+            tempDate[1] = "0" + tempDate[1];
+          }
+
+          if (tempDate[2] < 10) {
+            tempDate[2] = "0" + tempDate[2];
+          }
+
+          const newDate = tempDate[0] + "-" + tempDate[1] + "-" + tempDate[2];
+          if (this.startdate <= newDate && newDate <= this.enddate) {
+            this.templist_find.push(this.templist_select[i]);
           }
         }
       } else {
-        for (var j in this.templist_select) {
-          if (
-            this.startdate <= this.templist_select[j].date &&
-            this.templist_select[j].date <= this.enddate
-          ) {
-            this.templist_find.push(this.templist_select[j]);
-          } else {
-            this.templist_find = this.templist_select;
-          }
-        }
+        this.templist_find = this.templist_select;
       }
     },
     searchOnlist() {
@@ -246,6 +251,24 @@ export default {
       this.selectItem();
       this.findTerm();
       this.searchOnlist();
+    },
+    getToday() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      this.today = today;
+      this.maxdate = today;
     },
   },
   computed: {},
