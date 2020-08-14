@@ -60,9 +60,14 @@ export default {
         //   label: "내용",
         // },
         {
-          key: "notice_regtime",
+          key: "notice_date",
           label: "작성일자",
-          tdClass: "notice_regtime",
+          tdClass: "notice_date",
+        },
+        {
+          key: "notice_time",
+          label: "작성시간",
+          tdClass: "notice_time",
         },
       ],
     };
@@ -113,7 +118,11 @@ export default {
   width: 150px;
 }
 
-.notice_regtime {
-  width: 300px;
+.notice_date {
+  width: 200px;
+}
+
+.notice_time {
+  width: 200px;
 }
 </style>
