@@ -6,7 +6,7 @@
 
 
 	<select id="selectNotice" resultType="notice">
-		select notice_no, notice_id, notice_title, notice_content, notice_regtime
+		select notice_no, notice_id, notice_title, notice_content, notice_date, notice_time
 		  from notice
 		 order by notice_no desc
 	</select>
@@ -15,14 +15,14 @@
 	
 	<insert id="insertNotice" parameterType="notice">
 		insert into notice(
-			notice_title, notice_id, notice_content
+			notice_title, notice_id, notice_content, notice_date, notice_time
 		) values (
-			#{notice_title}, #{notice_id}, #{notice_content}
+			#{notice_title}, #{notice_id}, #{notice_content}, date_format(now(), '%Y-%m-%d'), date_format(now(), '%H:%i:%s')
 		)
 	</insert>
 	
 	<select id="selectNoticeBynotice_no" resultType="notice">
-		select notice_no, notice_id, notice_title, notice_content, notice_regtime
+		select notice_no, notice_id, notice_title, notice_content, notice_date, notice_time
 		  from notice 
 		 where notice_no = #{notice_no}
 	</select>
