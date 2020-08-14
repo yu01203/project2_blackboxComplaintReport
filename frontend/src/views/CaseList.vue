@@ -1,8 +1,7 @@
 <template>
   <div>
     <br />
-    <h1 class="text-center">제보목록</h1>
-    <!-- <div class="d-flex justify-content-between align-items-center"> -->
+    <h1 class="text-center mb-3">제보목록</h1>
     <div class="row align-items-center text-center mb-2 mx-0" style="width:100%">
       <!-- filter button -->
       <div class="col-12 col-md-6 col-lg-4 text-center px-0 mb-2">

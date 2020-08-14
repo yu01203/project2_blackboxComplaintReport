@@ -1,5 +1,7 @@
 <template>
   <div>
+    <br />
+    <h1 class="text-center mb-3">회원관리</h1>
     <table class="table">
       <thead>
         <tr>
@@ -55,7 +57,7 @@ export default {
           }
           alert(msg);
           this.$router.go();
-          })
+        })
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
