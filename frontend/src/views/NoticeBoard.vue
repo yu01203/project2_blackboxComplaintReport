@@ -4,10 +4,11 @@
     <h1 class="text-center mb-3">공지사항</h1>
     <div v-if="this.$session.get('email') == 'admin'" class="float-right mb-3">
       <router-link to="/noticeWrite" class="nav-link" align="right">
-        <b-button class="float-left bg-info border-info">글쓰기</b-button>
+        <b-button class="float-left bg-warning border-warning">글쓰기</b-button>
       </router-link>
     </div>
     <b-table
+      id="noticeBoard"
       bordered
       outlined
       hover
@@ -43,32 +44,31 @@ export default {
           key: "notice_no",
           label: "글 번호",
           sortable: true,
+          tdClass: "notice_no",
         },
-        {
-          key: "notice_id",
-          label: "작성자",
-        },
+        // {
+        //   key: "notice_id",
+        //   label: "작성자",
+        // },
         {
           key: "notice_title",
           label: "제목",
+          tdClass: "notice_title",
         },
-        {
-          key: "notice_content",
-          label: "내용",
-        },
+        // {
+        //   key: "notice_content",
+        //   label: "내용",
+        // },
         {
           key: "notice_regtime",
           label: "작성일자",
-          //   variant: "danger",
+          tdClass: "notice_regtime",
         },
       ],
     };
   },
   methods: {
-    //rowClicked(item, index) {
     rowClicked(item) {
-      //alert("Index: " + index + "\n\nItem: " + JSON.stringify(item) + item.articleno + " " + index); //너무 힘들게 찾음 ㅡㅡ
-
       this.$session.set("notice_no", item.notice_no);
       this.$session.set("notice_id", item.notice_id);
       this.$session.set("notice_title", item.notice_title);
@@ -89,23 +89,31 @@ export default {
 };
 </script>
 
-<style scoped>
-th {
+<style>
+/* #noticeBoard > thead {
   background: #17a2b8;
 }
 
-th > div {
+#noticeBoard > thead > tr > th > div {
   color: white;
   font-size: 120%;
   font-weight: normal;
-}
+} */
 
 .page-item .page-link {
-  color: #17a2b8;
+  color: red;
 }
 
 .page-item.active .page-link {
-  background-color: #17a2b8 !important;
-  border-color: #17a2b8 !important;
+  background-color: red !important;
+  border-color: red !important;
+}
+
+.notice_no {
+  width: 150px;
+}
+
+.notice_regtime {
+  width: 300px;
 }
 </style>

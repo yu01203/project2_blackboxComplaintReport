@@ -19,7 +19,11 @@
           <td>{{ userdata.name }}</td>
           <td>{{ userdata.phone }}</td>
           <td>
-            <button @click="userDel(userdata.email)">삭제</button>
+            <b-button
+              @click="userDel(userdata.email)"
+              class="bg-warning border-warning"
+              style="padding: 4px 8px;"
+            >삭제</b-button>
           </td>
         </tr>
       </tbody>
