@@ -1,8 +1,7 @@
 <template>
   <div>
     <br />
-    <h1 class="text-center">제보목록</h1>
-    <!-- <div class="d-flex justify-content-between align-items-center"> -->
+    <h1 class="text-center mb-3">제보목록</h1>
     <div class="row align-items-center text-center mb-2 mx-0" style="width:100%">
       <!-- filter button -->
       <div class="col-12 col-md-6 col-lg-4 text-center px-0 mb-2">
@@ -210,20 +209,21 @@ export default {
               this.templist_select[i].date <= this.enddate
             ) {
               this.templist_find.push(this.templist_select[i]);
+            } else {
+              this.templist_find = this.templist_select;
             }
           }
-          // if (this.startdate && this.enddate) {
-          //   for (var i in this.templist_select) {
-          //     if (
-          //       this.startdate <= this.templist_select[i].date &&
-          //       this.templist_select[i].date <= this.enddate
-          //     ) {
-          //       this.templist_find.push(this.templist_select[i]);
-          //     }
-          //   }
-          // } else {
-          //   this.templist_find = this.templist_select;
-          // }
+        }
+      } else {
+        for (var j in this.templist_select) {
+          if (
+            this.startdate <= this.templist_select[j].date &&
+            this.templist_select[j].date <= this.enddate
+          ) {
+            this.templist_find.push(this.templist_select[j]);
+          } else {
+            this.templist_find = this.templist_select;
+          }
         }
       }
     },
