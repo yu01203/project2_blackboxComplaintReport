@@ -11,7 +11,6 @@ export default {
 
   mounted() {
     // Overwriting base render method with actual data.
-    console.log("chart1 mounted data 받아옴");
     http
       .get(`/situation`)
       .then(({ data }) => {
