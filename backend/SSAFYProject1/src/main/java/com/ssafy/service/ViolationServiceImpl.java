@@ -60,23 +60,27 @@ public class ViolationServiceImpl implements ViolationService {
 			JSONTokener tokener = new JSONTokener(response.toString());
 			JSONObject object = new JSONObject(tokener);
 			
-			JSONArray array = object.getJSONArray("results");
-			JSONObject addr = object.getJSONArray("results").getJSONObject(2);
-			String regionRo = addr.getJSONObject("land").getString("name");
+			int status = (int) object.getJSONObject("status").get("code");
+			System.out.println(status);
 			
-			JSONObject region = addr.getJSONObject("region");
-			String regionDo = region.getJSONObject("area1").getString("name");
-			String regionSiGu = region.getJSONObject("area2").getString("name");
-			
-			System.out.println(regionDo + " " + regionSiGu + " " + regionRo);
-			String address = regionDo + " " + regionSiGu + " " + regionRo;
-			violation.setAddress(address);
-			
-			System.out.println(violation.toString());
+			if(status == 0) {
+				JSONArray array = object.getJSONArray("results");
+				JSONObject addr = object.getJSONArray("results").getJSONObject(0);
+
+				JSONObject region = addr.getJSONObject("region");
+				String regionDo = region.getJSONObject("area1").getString("name");
+				String regionSiGu = region.getJSONObject("area2").getString("name");
+				String regionDong = region.getJSONObject("area3").getString("name");
+
+				System.out.println(regionDo + " " + regionSiGu + " " + regionDong);
+				String address = regionDo + " " + regionSiGu + " " + regionDong;
+				violation.setAddress(address);
+
+				System.out.println(violation.toString());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return repository.insert(violation);
 	}
 
