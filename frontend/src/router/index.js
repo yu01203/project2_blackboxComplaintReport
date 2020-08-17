@@ -11,6 +11,7 @@ import NoticeDetail from "@/components/notice/NoticeDetail.vue";
 import NoticeModify from "@/components/notice/NoticeModify.vue";
 import UserManagement from "../views/UserManagement.vue";
 import GeoTest from "../views/GeoTest.vue";
+import HowToUse from "../views/HowToUse.vue";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,11 @@ const routes = [
     path: "/usermanagement",
     name: "usermanagement",
     component: UserManagement,
+  },
+  {
+    path: "/howtouse",
+    name: "howtouse",
+    component: HowToUse,
   },
 ];
 
