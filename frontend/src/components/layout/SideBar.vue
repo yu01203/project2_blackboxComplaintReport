@@ -40,9 +40,12 @@
           style="text-decoration: none; color: navy; margin-left: 20px;"
         >회원관리</router-link>
       </p>
-      <!-- <p>
-        <router-link to="/geotest" style="text-decoration: none; color: navy;">죠로케이션 테스트</router-link>
-      </p>-->
+      <p>
+        <router-link
+          to="/howtouse"
+          style="text-decoration: none; color: navy; margin-left: 20px;"
+        >이용방법</router-link>
+      </p>
     </div>
   </b-sidebar>
 </template>
