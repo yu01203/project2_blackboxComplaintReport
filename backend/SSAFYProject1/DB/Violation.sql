@@ -7,7 +7,7 @@ CREATE TABLE `ssafyproject1`.`violation` (
   `time` VARCHAR(45) NOT NULL,
   `car_num` VARCHAR(45) NULL,
   `spot` VARCHAR(45) NULL,
-  `address` VARCHAR(50) NOT NULL,
+  `address` VARCHAR(50) NULL,
   `contents` VARCHAR(100) NULL,
   `video_url` VARCHAR(50) NOT NULL,
   `report_status` INT NULL,
