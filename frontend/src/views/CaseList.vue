@@ -246,10 +246,10 @@ export default {
       this.searchviolationitems = emptyItems;
       for (var i in this.templist_find) {
         if (
-          this.templist_find[i].contents.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].spot.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].carNum.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].address.indexOf(this.searchText) != -1
+          this.templist_find[i].contents.includes(this.searchText) ||
+          this.templist_find[i].spot.includes(this.searchText) ||
+          this.templist_find[i].carNum.includes(this.searchText) ||
+          this.templist_find[i].address.includes(this.searchText)
         ) {
           this.searchviolationitems.push(this.templist_find[i]);
         }
