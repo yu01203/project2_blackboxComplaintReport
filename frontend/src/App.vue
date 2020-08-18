@@ -45,7 +45,7 @@ export default {
   color: navy;
 }
 
-@import "~@/scss/_typo.scss";
+/* @import "~@/scss/_typo.scss"; */
 
 * {
   font-family: "Nanum Gothic", "Noto Sans KR", "Do Hyeon", sans-serif;
