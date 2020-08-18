@@ -216,26 +216,26 @@ export default {
       if (this.startdate.length != 0 && this.enddate.length != 0) {
         for (var i in this.templist_select) {
           // input Date Transformation
-          // var tempDate = this.templist_select[i].date.split("-");
+          var tempDate = this.templist_select[i].date.split("-");
 
-          // if (tempDate[1] < 10) {
-          //   tempDate[1] = "0" + tempDate[1];
-          // }
+          if (tempDate[1] < 10) {
+            tempDate[1] = "0" + tempDate[1];
+          }
 
-          // if (tempDate[2] < 10) {
-          //   tempDate[2] = "0" + tempDate[2];
-          // }
+          if (tempDate[2] < 10) {
+            tempDate[2] = "0" + tempDate[2];
+          }
 
-          // const newDate = tempDate[0] + "-" + tempDate[1] + "-" + tempDate[2];
-          // if (this.startdate <= newDate && newDate <= this.enddate) {
-          //   this.templist_find.push(this.templist_select[i]);
-          // }
-          if (
-            this.startdate <= this.templist_select[i].date &&
-            this.templist_select[i].date <= this.enddate
-          ) {
+          const newDate = tempDate[0] + "-" + tempDate[1] + "-" + tempDate[2];
+          if (this.startdate <= newDate && newDate <= this.enddate) {
             this.templist_find.push(this.templist_select[i]);
           }
+          // if (
+          //   this.startdate <= this.templist_select[i].date &&
+          //   this.templist_select[i].date <= this.enddate
+          // ) {
+          //   this.templist_find.push(this.templist_select[i]);
+          // }
         }
       } else {
         this.templist_find = this.templist_select;
