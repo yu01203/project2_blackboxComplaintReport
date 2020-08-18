@@ -1,5 +1,5 @@
 <template>
-  <b-col cols="4">
+  <b-col class="col-12 col-sm-6 col-md-4">
     <div>
       <div
         v-b-modal="modalId(violationitem.violationNo)"
@@ -7,7 +7,7 @@
         style="width: 100%;"
         class="shadow mb-4 bg-white rounded p-1"
       >
-        <div class="mx-auto" no-body style="max-width: 20rem;">
+        <div class="mx-auto my-2" no-body style="max-width: 20rem;">
           <div style="pointer-events: none">
             <video style="width:100%">
               <source :src="violationitem.videoUrl" type="video/mp4" />
@@ -22,7 +22,7 @@
                 value-field="item"
                 text-field="name"
                 disabled-field="notEnabled"
-                style="width:100% "
+                :style="styles"
               ></b-form-select>
             </b-list-group-item>
             <div class="d-flex justify-content-between text-secondary">
@@ -67,6 +67,7 @@ export default {
       ],
       selectedNo: this.violationitem.reportStatus,
       classes: "",
+      styles: "",
       date: "",
       time: "",
       statusChanged: 0,
@@ -125,23 +126,29 @@ export default {
       var selected = this.violationitem.reportStatus;
       if (selected == 0) {
         this.selected1 = 0;
-        this.classes = "bg-secondary text-light";
+        this.classes = "border-0";
+        this.styles = "width:100%; background-color: #F1EEE6; color:#616161";
       } else if (selected == 1) {
         this.selected1 = 1;
-        this.classes = "bg-primary text-white";
+        // this.classes = "text-dark";
+        this.styles = "width:100%; background-color: #B6CADA; color:#616161";
       } else if (selected == 2) {
         this.selected1 = 2;
-        this.classes = "bg-success text-white";
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #0f4c81";
       }
     },
     changeStatus() {
       var selected = this.selected1;
       if (selected == 0) {
-        this.classes = "bg-secondary text-light";
+        this.classes = "border-0";
+        this.styles = "width:100%; background-color: #F1EEE6; color:#616161";
       } else if (selected == 1) {
-        this.classes = "bg-primary text-white";
+        // this.classes = "text-dark ";
+        this.styles = "width:100%; background-color: #B6CADA; color:#616161 ";
       } else if (selected == 2) {
-        this.classes = "bg-success text-white";
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #0f4c81";
       }
       this.selectedNo = this.selected1;
     },
@@ -212,4 +219,11 @@ export default {
 </script>
 
 <style>
+.bgblue {
+  background-color: #0f4c81;
+}
+
+.bguviolet {
+  background-color: #5f4b8b;
+}
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div style="width:100%">
     <!-- <Map :items="this.items" /> -->
-    <Map :items="this.$store.state.violationitems" />
+    <div>
+      <Map :items="this.$store.state.violationitems" />
+    </div>
   </div>
 </template>
 
@@ -39,8 +41,8 @@ export default {
             alert(" 실패했습니다.");
           }
         })
-        .catch(() => {
-          alert("에러가 발생했습니다.");
+        .catch((err) => {
+          alert("에러가 발생했습니다." + " " + err);
         });
     }
     // else {
