@@ -2,7 +2,7 @@
   <b-modal id="modal-multi-3" title="회원가입" hide-footer>
     <div class="modal-body">
       <div class="form-group">
-        <label>이메일 :</label>
+        <label @click="awesomeFunc">이메일 :</label>
         <div class="d-flex">
           <input
             type="text"
@@ -13,7 +13,7 @@
             v-model="email"
           />
           <b-button
-            id="checkbutton"
+            :id="awesomeId"
             class="border-danger"
             style="width: 30%; padding: 0px;"
             @click="validEmailCheck"
@@ -94,7 +94,7 @@
       </div>
       <div class="form-group">
         <button
-          id="signupbutton"
+          :id="awesomeId2"
           class="btn btn-primary btn-lg btn-block login-btn"
           @click="checkHandlerInsert"
         >
@@ -140,6 +140,9 @@ export default {
       naverLoginURL:
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
       emailchecked: false,
+      awesomeVar: 0,
+      awesomeId: "",
+      awesomeId2: "",
     };
   },
   methods: {
@@ -247,6 +250,16 @@ export default {
     validBirth(birth) {
       var re = /^\d{4}-\d{2}-\d{2}$/;
       return re.test(birth);
+    },
+    awesomeFunc() {
+      this.awesomeVar += 1;
+      if (this.awesomeVar % 7 === 0) {
+        this.awesomeId = "checkbutton";
+        this.awesomeId2 = "signupbutton";
+      } else {
+        this.awesomeId = "";
+        this.awesomeId2 = "";
+      }
     },
   },
 };
