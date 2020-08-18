@@ -39,6 +39,9 @@
             label-help
             label-no-date-selected="시작 날짜"
             :max="maxdate"
+            today-button
+            reset-button
+            close-button
           ></b-form-datepicker>
         </b-form-group>
         <b-form-group id="input-group-3" class="px-0 my-auto col-6">
