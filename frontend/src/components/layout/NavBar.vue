@@ -1,81 +1,140 @@
 <template>
-  <!-- <nav
-    class="d-flex justify-content-around navbar navbar-light fixed-top border-bottom border-danger p-1"
-    style="padding: 16px; background-color: #ffffff;"
-  >-->
-  <nav
-    class="container navbar navbar-light fixed-top border-bottom p-1"
-    style="padding: 16px; background-color: #ffffff;"
-  >
-    <!-- 1 -->
-    <b-button v-b-toggle.sidebar-1 class="float-left bg-danger border-danger">MENU</b-button>
-    <div v-if="this.$session.get('email') != null"></div>
-
-    <!-- 2 -->
-    <div class="text-center">
-      <router-link to="/" style="text-decoration: none;">
-        <!-- <h1 class="ft-bhs" style="margin: 0px;">분노의 민원</h1> -->
+  <div id="nav-bar">
+    <div class="text-center bg-white" style="height:100px">
+      <a href="/" style="text-decoration: none;">
         <img
           src="@/assets/logos/Logo_1.png"
+          class="mb-0"
           alt="logo-image"
-          style="width: 40%; margin-bottom: 10px;"
+          style="height:100%; width:auto"
         />
-      </router-link>
+      </a>
     </div>
-
-    <!-- 3 -->
     <div>
-      <div>
-        <b-button
-          v-if="this.$session.get('email') == null"
-          v-b-modal.modal-1
-          class="float-right bg-danger rounded border-danger"
-          style="padding: 7px 13px;"
-        >
-          <div>
-            <a style="color: white; text-decoration: none;">로그인</a>
-          </div>
-        </b-button>
+      <b-navbar toggleable="md" class="py-1" type="dark" variant style="background-color: #515151">
+        <b-navbar-toggle target="nav-collapse" @click="toggleClick"></b-navbar-toggle>
 
+        <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
+          <b-navbar-nav class="w-100 justify-content-between" style="max-width:1080px">
+            <!-- <b-navbar-nav class="w-100 justify-content-left" style="max-width:1080px"> -->
+            <b-nav-item to="/">
+              <b-icon icon="house-door"></b-icon>
+              <span>&nbsp;정문</span>
+            </b-nav-item>
+            <b-nav-item to="/noticeboard">
+              <b-icon icon="info-circle"></b-icon>
+              <span>&nbsp;공지사항</span>
+              <!-- <b-icon icon="chat-left-text"></b-icon> -->
+            </b-nav-item>
+            <b-nav-item to="/caselist">
+              <b-icon icon="list"></b-icon>
+              <span>&nbsp;제보목록</span>
+            </b-nav-item>
+            <b-nav-item to="/reportinfo">
+              <b-icon icon="bar-chart"></b-icon>
+              <span>&nbsp;제보현황</span>
+            </b-nav-item>
+            <b-nav-item to="/mapmain">
+              <b-icon icon="map"></b-icon>
+              <span>&nbsp;지도보기</span>
+            </b-nav-item>
+            <b-nav-item to="/howtouse">
+              <b-icon icon="question-circle"></b-icon>
+              <span>&nbsp;이용방법</span>
+            </b-nav-item>
+
+            <!-- 사용자 버튼 -->
+            <li v-if="windowWidth > 767">
+              <!-- 비로그인 상태 -->
+              <b-nav-item v-if="this.$session.get('email') == null" v-b-modal.modal-1>
+                <b-icon icon="power"></b-icon>
+                <a>&nbsp;로그인</a>
+              </b-nav-item>
+
+              <!-- 로그인 상태 -->
+              <b-nav-item-dropdown v-if="this.$session.get('email') != null" right no-caret>
+                <template v-slot:button-content>
+                  <b-icon icon="person-circle"></b-icon>
+                  <span>&nbsp;사용자</span>
+                </template>
+                <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
+                  <b-icon icon="person-lines-fill"></b-icon>
+                  <span>&nbsp;회원정보 수정</span>
+                </b-dropdown-item>
+                <hr />
+
+                <b-dropdown-item v-on:click="sessionDistroy">
+                  <i class="fas fa-running fa-lg"></i>
+                  <span>&nbsp;로그아웃</span>
+                </b-dropdown-item>
+              </b-nav-item-dropdown>
+            </li>
+          </b-navbar-nav>
+        </b-collapse>
+
+        <!-- 그리드 축소 상태 사용자 버튼 -->
+        <b-navbar-nav id="sm-user" class="ml-auto mr-2 my-0 py-0" v-if="!toggled">
+          <b-nav-item v-if="windowWidth <= 767">
+            <b-nav-item
+              id="nav-user-item"
+              v-if="this.$session.get('email') == null"
+              v-b-modal.modal-1
+            >
+              <b-icon icon="power"></b-icon>
+              <a>&nbsp;로그인</a>
+            </b-nav-item>
+
+            <a
+              v-if="this.$session.get('email') != null"
+              v-b-toggle
+              href="#user-collapse"
+              @click.prevent
+              class="text-decoration-none py-0"
+            >
+              <b-nav-item id="nav-user-item">
+                <b-icon icon="person-circle"></b-icon>
+                <span>&nbsp;사용자</span>
+              </b-nav-item>
+            </a>
+          </b-nav-item>
+        </b-navbar-nav>
+
+        <!-- 모달 -->
         <div>
-          <b-button
-            v-if="this.$session.get('email') != null && !this.$session.get('isSNS')"
-            v-b-modal.modal-memberInfo
-            class="bg-danger rounded border-danger"
-            style="padding: 7px 13px;"
-          >
-            <div>
-              <a style="color: white; text-decoration: none;">회원정보</a>
-            </div>
-          </b-button>&nbsp;
-          <b-button
-            v-if="this.$session.get('email') != null"
-            v-on:click="sessionDistroy"
-            class="bg-danger rounded border-danger"
-            style="padding: 7px 13px;"
-          >
-            <div>
-              <a style="cursor: pointer; color: white; text-decoration: none;">로그아웃</a>
-            </div>
-          </b-button>
+          <!-- 로그인 -->
+          <LoginModal />
+          <!-- 이메일 찾기 -->
+          <SearchEmail />
+          <!-- 비밀번호 찾기 -->
+          <SearchPassword />
+          <!-- 회원가입 -->
+          <SignUp />
+          <!-- 회원정보 -->
+          <MemberInfo />
         </div>
-      </div>
+      </b-navbar>
 
-      <!-- 모달 -->
-      <div>
-        <!-- 로그인 -->
-        <LoginModal />
-        <!-- 이메일 찾기 -->
-        <SearchEmail />
-        <!-- 비밀번호 찾기 -->
-        <SearchPassword />
-        <!-- 회원가입 -->
-        <SignUp />
-        <!-- 회원정보 -->
-        <MemberInfo />
-      </div>
+      <!-- 토글시 사용자 드랍다운 구역 -->
+      <b-collapse
+        class="bg-white border boder-bottom"
+        v-if="windowWidth <= 767 && !toggled"
+        id="user-collapse"
+      >
+        <div class="p-3" style="list-style: none; height:75%">
+          <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
+            <b-icon icon="person-lines-fill"></b-icon>
+            <span>&nbsp;회원정보 수정</span>
+          </b-dropdown-item>
+          <hr />
+
+          <b-dropdown-item v-on:click="sessionDistroy">
+            <i class="fas fa-running fa-lg"></i>
+            <span>&nbsp;로그아웃</span>
+          </b-dropdown-item>
+        </div>
+      </b-collapse>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -102,6 +161,9 @@ export default {
   },
   data: function () {
     return {
+      // 반응형 창 크기 측정 데이터
+      windowWidth: window.innerWidth,
+      toggled: false,
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
       pw: "", // 백엔드로 보낼 때 password 변수에 담아서 ex) password: this.pw
@@ -121,19 +183,14 @@ export default {
     };
   },
   mounted: function () {
-    // this.$store.dispatch("getViolations");
-    // console.log("여기는 마운티드");
-    // console.log(this.$session.get("email"));
-    // console.log(this.$session.get("userNo"));
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth;
+    };
   },
   computed: {
     ...mapGetters(["violationitems"]),
   },
   methods: {
-    // getVio() {
-    //   this.$store.dispatch("getViolations");
-    // },
-    // 세션 삭제
     sessionDistroy() {
       if (this.access_token != null) {
         alert("네이버 로그아웃");
@@ -156,13 +213,24 @@ export default {
       this.$router.push("/");
       this.$router.go();
     },
+    toggleClick() {
+      if (!this.toggled) {
+        this.toggled = true;
+      } else {
+        this.toggled = false;
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 /* 로그인 모달 */
-#modal-1___BV_modal_header_ {
+/* #modal-1___BV_modal_header_ {
   padding: 16px 16px 16px 32px;
+} */
+
+#nav-user-item > .nav-link {
+  padding: 0;
 }
 </style>
