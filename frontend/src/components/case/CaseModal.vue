@@ -6,7 +6,16 @@
       <video id="video1" style="width:100%" controls>
         <source :src="violationitem.videoUrl" type="video/mp4" />
       </video>
-      <a :href="violationitem.videoUrl" download class="btn btn-success" style="width:100%">영상 다운로드</a>
+
+      <a
+        :href="violationitem.videoUrl"
+        download
+        class="btn btn-success"
+        style="width:100%; background-color: #0f4c81"
+      >
+        <!-- 아이콘 왜 안되지? -->
+        <b-icon icon="cloud-arrow-down-fill" aria-hidden="true"></b-icon>영상 다운로드
+      </a>
     </div>
     <hr />
     <!-- 세부사항 -->
@@ -68,12 +77,15 @@
       </p>
       <hr />
       <div class="d-flex justify-content-between mb-3">
-        <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
+        <b-button
+          class="border-0"
+          style="width: 45%; background-color:#B6CADA;"
+          @click="saveHandler"
+        >저장하기</b-button>
         <b-button variant="danger" style="width: 45%;" @click="deleteHandler">삭제하기</b-button>
       </div>
       <b-button
-        variant="info"
-        style="width: 100%;"
+        style="width: 100%; background-color: #0f4c81"
         href="http://onetouch.police.go.kr/"
         onclick="window.open(this.href);return false;"
         target="_blank"

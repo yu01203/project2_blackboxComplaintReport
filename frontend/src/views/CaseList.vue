@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <br />
-    <h1 class="text-center mb-3">제보목록</h1>
-    <div class="row align-items-center text-center mb-2 mx-0" style="width:100%">
+  <div class="pt-3">
+    <!-- <h1 class="text-center mb-3">제보목록</h1> -->
+    <!-- filter division -->
+    <div
+      id="filter-division"
+      class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
+      style="width:100%; border-radius:5px"
+    >
       <!-- filter button -->
-      <div class="col-12 col-md-6 col-lg-4 text-center px-0 mb-2">
+      <div class="col-12 text-left my-2">
         <b-form-checkbox-group
           v-model="selected"
           :options="options"
@@ -17,7 +21,7 @@
         ></b-form-checkbox-group>
       </div>
       <!-- items dropdown -->
-      <div class="col-12 col-md-6 col-lg-2 mb-2">
+      <div class="col-12 col-md-5 col-lg-4 mb-2">
         <b-form-select
           v-model="selected2"
           :options="options2"
@@ -29,7 +33,7 @@
         ></b-form-select>
       </div>
       <!-- find term calendar -->
-      <div class="col-12 col-md-5 col-lg-3 mb-2 d-flex">
+      <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
         <b-form-group id="input-group-3" class="px-0 my-auto col-6">
           <b-form-datepicker
             id="example-datepicker1"
@@ -37,39 +41,43 @@
             class
             @input="optionController"
             label-help
-            label-no-date-selected="시작 날짜"
+            label-no-date-selected="시작일"
             :max="maxdate"
             today-button
             reset-button
             close-button
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           ></b-form-datepicker>
         </b-form-group>
         <b-form-group id="input-group-3" class="px-0 my-auto col-6">
           <b-form-datepicker
             id="example-datepicker2"
             v-model="enddate"
+            right
             class
             @input="optionController"
             label-help
-            label-no-date-selected="종료 날짜"
+            label-no-date-selected="종료일"
             :min="startdate"
             :max="today"
+            today-button
+            reset-button
+            close-button
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           ></b-form-datepicker>
         </b-form-group>
       </div>
       <!-- search bar -->
-      <div class="col-12 col-md-7 col-lg-3 mb-2">
-        <!-- <label for="searchBar" class="mr-2 mb-0">search</label> -->
+      <div class="col-12 col-md-12 col-lg-3 mb-2">
         <b-input-group id="searchBar">
           <b-input-group-prepend is-text>
             <b-icon icon="search"></b-icon>
           </b-input-group-prepend>
           <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
         </b-input-group>
-        <!-- <b-button variant="danger" @click="optionController">Button</b-button> -->
       </div>
     </div>
-    <!-- cards -->
+    <!-- cards divison -->
     <div
       v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
     >
@@ -99,10 +107,6 @@
 
 <script>
 import http from "@/util/http-common";
-
-// 기존 폼
-// import Case from "@/components/case/Case.vue";
-// 유튜브 폼
 import Case from "@/components/case/CaseTube.vue";
 
 export default {
@@ -284,4 +288,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#filter-division {
+  background-color: rgba(15, 76, 129, 0.7);
+}
+</style>

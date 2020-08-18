@@ -1,6 +1,10 @@
 <template>
   <div id="nav-bar">
-    <div class="text-center bg-white" style="height:100px">
+    <div
+      id="main-logo"
+      class="d-none d-md-block text-center bg-white border-bottom"
+      style="height:100px"
+    >
       <a href="/" style="text-decoration: none;">
         <img
           src="@/assets/logos/Logo_1.png"
@@ -11,8 +15,46 @@
       </a>
     </div>
     <div>
-      <b-navbar toggleable="md" class="py-1" type="dark" variant style="background-color: #515151">
-        <b-navbar-toggle target="nav-collapse" @click="toggleClick"></b-navbar-toggle>
+      <b-navbar toggleable="md" class="py-1 shadow-sm" type="light" variant="white">
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <!-- 분민 로고 -->
+        <div class="ml-auto d-md-none" style="height:56px">
+          <a href="/">
+            <img
+              src="@/assets/logos/Logo_ico.png"
+              alt="mini-logo-image"
+              style="height:100%; rgba:(0,0,0,0)"
+            />
+          </a>
+        </div>
+
+        <!-- 그리드 축소 상태 사용자 버튼 -->
+        <b-navbar-nav id="sm-user" class="ml-auto mr-2 my-0 py-0">
+          <b-nav-item class="d-md-none">
+            <b-nav-item
+              id="nav-user-item"
+              v-if="this.$session.get('email') == null"
+              v-b-modal.modal-1
+            >
+              <b-icon icon="power"></b-icon>
+              <a>&nbsp;로그인</a>
+            </b-nav-item>
+
+            <a
+              v-if="this.$session.get('email') != null"
+              v-b-toggle
+              href="#user-collapse"
+              @click.prevent
+              class="text-decoration-none py-0"
+            >
+              <b-nav-item id="nav-user-item">
+                <b-icon icon="person-circle"></b-icon>
+                <span>&nbsp;사용자</span>
+              </b-nav-item>
+            </a>
+          </b-nav-item>
+        </b-navbar-nav>
 
         <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
           <b-navbar-nav class="w-100 justify-content-between" style="max-width:1080px">
@@ -44,7 +86,7 @@
             </b-nav-item>
 
             <!-- 사용자 버튼 -->
-            <li v-if="windowWidth > 767">
+            <li class="d-none d-md-block">
               <!-- 비로그인 상태 -->
               <b-nav-item v-if="this.$session.get('email') == null" v-b-modal.modal-1>
                 <b-icon icon="power"></b-icon>
@@ -72,33 +114,6 @@
           </b-navbar-nav>
         </b-collapse>
 
-        <!-- 그리드 축소 상태 사용자 버튼 -->
-        <b-navbar-nav id="sm-user" class="ml-auto mr-2 my-0 py-0" v-if="!toggled">
-          <b-nav-item v-if="windowWidth <= 767">
-            <b-nav-item
-              id="nav-user-item"
-              v-if="this.$session.get('email') == null"
-              v-b-modal.modal-1
-            >
-              <b-icon icon="power"></b-icon>
-              <a>&nbsp;로그인</a>
-            </b-nav-item>
-
-            <a
-              v-if="this.$session.get('email') != null"
-              v-b-toggle
-              href="#user-collapse"
-              @click.prevent
-              class="text-decoration-none py-0"
-            >
-              <b-nav-item id="nav-user-item">
-                <b-icon icon="person-circle"></b-icon>
-                <span>&nbsp;사용자</span>
-              </b-nav-item>
-            </a>
-          </b-nav-item>
-        </b-navbar-nav>
-
         <!-- 모달 -->
         <div>
           <!-- 로그인 -->
@@ -115,11 +130,7 @@
       </b-navbar>
 
       <!-- 토글시 사용자 드랍다운 구역 -->
-      <b-collapse
-        class="bg-white border boder-bottom"
-        v-if="windowWidth <= 767 && !toggled"
-        id="user-collapse"
-      >
+      <b-collapse class="bg-white border boder-bottom d-md-none" id="user-collapse">
         <div class="p-3" style="list-style: none; height:75%">
           <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
             <b-icon icon="person-lines-fill"></b-icon>
@@ -162,8 +173,7 @@ export default {
   data: function () {
     return {
       // 반응형 창 크기 측정 데이터
-      windowWidth: window.innerWidth,
-      toggled: false,
+      // windowWidth: window.innerWidth,
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
       pw: "", // 백엔드로 보낼 때 password 변수에 담아서 ex) password: this.pw
@@ -182,11 +192,11 @@ export default {
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
-  mounted: function () {
-    window.onresize = () => {
-      this.windowWidth = window.innerWidth;
-    };
-  },
+  // mounted: function () {
+  //   window.onresize = () => {
+  //     this.windowWidth = window.innerWidth;
+  //   };
+  // },
   computed: {
     ...mapGetters(["violationitems"]),
   },
@@ -212,13 +222,6 @@ export default {
       this.joindate = "";
       this.$router.push("/");
       this.$router.go();
-    },
-    toggleClick() {
-      if (!this.toggled) {
-        this.toggled = true;
-      } else {
-        this.toggled = false;
-      }
     },
   },
 };

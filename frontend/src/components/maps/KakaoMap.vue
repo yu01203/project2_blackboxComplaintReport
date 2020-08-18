@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <!-- Map Division -->
-    <div id="map"></div>
+    <div id="map-body" style="height:100%">
+      <!-- Map Division -->
+      <div id="map" style="width:auto; height:100%"></div>
+    </div>
     <!-- Modal Division -->
     <div v-for="( violationitem, index ) in items" :key="violationitem.violationNo">
       <b-button
@@ -309,13 +311,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #map {
-  width: 80vw;
-  height: 80vh;
+  min-width: 400px;
+  min-height: 720px;
 }
 
-label {
+/* label {
   margin-bottom: 0;
-}
+} */
 </style>
