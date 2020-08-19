@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <h1 class="text-center mb-3">회원관리</h1>
     <table class="table">

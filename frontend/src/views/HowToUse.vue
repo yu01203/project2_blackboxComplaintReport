@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <h1 class="text-center mb-3">사이트 이용 방법</h1>
     <div class="divdiv">

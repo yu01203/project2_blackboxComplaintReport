@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <h1 class="text-center mb-3">공지사항</h1>
     <div v-if="this.$session.get('email') == 'admin'" class="float-right mb-3">
