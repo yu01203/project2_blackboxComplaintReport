@@ -1,15 +1,17 @@
-<template>
-  <div>
-    <!-- <Map :items="this.items" /> -->
-    <Map :items="this.$store.state.violationitems" />
+<template >
+  <div class="p-0" style="height: 100%; margin-top:-148px">
+    <div class="d-md-none" style="padding-top:84px;"></div>
+    <div style="height: 100%;">
+      <Map :items="this.$store.state.violationitems" />
+    </div>
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
 
-import Map from "@/components/KakaoMap.vue";
-// import Map from "@/components/NaverMap.vue";
+import Map from "@/components/maps/KakaoMap.vue";
+// import Map from "@/components/maps/NaverMap.vue";
 
 export default {
   name: "MapMain",
@@ -39,8 +41,8 @@ export default {
             alert(" 실패했습니다.");
           }
         })
-        .catch(() => {
-          alert("에러가 발생했습니다.");
+        .catch((err) => {
+          alert("에러가 발생했습니다." + " " + err);
         });
     }
     // else {

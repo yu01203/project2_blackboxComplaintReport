@@ -6,13 +6,22 @@
       <video id="video1" style="width:100%" controls>
         <source :src="violationitem.videoUrl" type="video/mp4" />
       </video>
-      <a :href="violationitem.videoUrl" download class="btn btn-success" style="width:100%">영상 다운로드</a>
+
+      <a
+        :href="violationitem.videoUrl"
+        download
+        class="btn btn-success"
+        style="width:100%; background-color: #0f4c81"
+      >
+        <!-- 아이콘 왜 안되지? -->
+        <b-icon icon="cloud-arrow-down-fill" aria-hidden="true"></b-icon>영상 다운로드
+      </a>
     </div>
     <hr />
     <!-- 세부사항 -->
     <div>
       <p>
-        위반항목 :
+        위반항목
         <b-form-select
           v-model="violationitem.item"
           :options="options2"
@@ -23,65 +32,60 @@
         ></b-form-select>
       </p>
       <p>
-        <label>위반일자 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="date"
-          readonly
-          ref="date"
-          v-model="violationitem.date"
-        />
+        <label>위반일자</label>
+        <input type="text" class="form-control" id="date" readonly ref="date" v-model="date" />
       </p>
 
       <p>
-        <label>위반시간 :</label>
+        <label for="time">위반시간</label>
+        <input type="text" class="form-control" id="time" readonly ref="time" v-model="time" />
+      </p>
+      <p>
+        <label for="carNum">위반차량번호</label>
         <input
           type="text"
           class="form-control"
-          id="time"
-          readonly
-          ref="time"
-          v-model="violationitem.time"
+          id="carNum"
+          ref="carNum"
+          v-model="violationitem.carNum"
         />
       </p>
       <p>
-        <label>위반차량번호 :</label>
-        <input type="text" class="form-control" id="item" ref="item" v-model="violationitem.carNum" />
+        <label for="spot">위반장소</label>
+        <input type="text" class="form-control" id="spot" ref="spot" v-model="violationitem.spot" />
       </p>
       <p>
-        <label>위반장소 :</label>
-        <input type="text" class="form-control" id="item" ref="item" v-model="violationitem.spot" />
-      </p>
-      <p>
-        <label>위반위치 :</label>
+        <label for="address">위반위치</label>
         <input
           type="text"
           class="form-control"
-          id="item"
+          id="address"
           readonly
-          ref="item"
+          ref="address"
           v-model="violationitem.address"
         />
       </p>
       <p>
-        <label>신고내용 :</label>
+        <label for="contents">신고내용</label>
         <input
           type="text"
           class="form-control"
-          id="item"
-          ref="item"
+          id="contents"
+          ref="contents"
           v-model="violationitem.contents"
         />
       </p>
       <hr />
       <div class="d-flex justify-content-between mb-3">
-        <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
+        <b-button
+          class="border-0"
+          style="width: 45%; background-color:#B6CADA;"
+          @click="saveHandler"
+        >저장하기</b-button>
         <b-button variant="danger" style="width: 45%;" @click="deleteHandler">삭제하기</b-button>
       </div>
       <b-button
-        variant="info"
-        style="width: 100%;"
+        style="width: 100%; background-color: #0f4c81"
         href="http://onetouch.police.go.kr/"
         onclick="window.open(this.href);return false;"
         target="_blank"
@@ -92,22 +96,19 @@
 
 <script>
 import http from "@/util/http-common";
-// import vuePlayer from "@algoz098/vue-player";
 
 export default {
   name: "CaseModal",
-  components: {
-    // vuePlayer,
-  },
+  components: {},
   props: {
     violationitem: {
       type: Object,
     },
     date: {
-      type: Object,
+      type: String,
     },
     time: {
-      type: Object,
+      type: String,
     },
   },
   data() {

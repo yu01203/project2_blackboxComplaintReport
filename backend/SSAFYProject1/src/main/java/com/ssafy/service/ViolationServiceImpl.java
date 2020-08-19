@@ -60,23 +60,39 @@ public class ViolationServiceImpl implements ViolationService {
 			JSONTokener tokener = new JSONTokener(response.toString());
 			JSONObject object = new JSONObject(tokener);
 			
-			JSONArray array = object.getJSONArray("results");
-			JSONObject addr = object.getJSONArray("results").getJSONObject(2);
-			String regionRo = addr.getJSONObject("land").getString("name");
+			int status = (int) object.getJSONObject("status").get("code");
+			System.out.println(status);
 			
-			JSONObject region = addr.getJSONObject("region");
-			String regionDo = region.getJSONObject("area1").getString("name");
-			String regionSiGu = region.getJSONObject("area2").getString("name");
-			
-			System.out.println(regionDo + " " + regionSiGu + " " + regionRo);
-			String address = regionDo + " " + regionSiGu + " " + regionRo;
-			violation.setAddress(address);
-			
-			System.out.println(violation.toString());
+			if(status == 0) {
+				JSONArray array = object.getJSONArray("results");
+				JSONObject addr = null; JSONObject region = null;
+				String address = null; String regionRo = ""; String regionNum1 = ""; String regionNum2 = "";
+
+				int size = object.getJSONArray("results").length();
+				if(size == 3) { // 도로명 주소가 있을 경우
+					addr = object.getJSONArray("results").getJSONObject(2);
+					
+					regionRo = addr.getJSONObject("land").getString("name");
+					regionNum1 = addr.getJSONObject("land").getString("number1");
+					
+					if(addr.getJSONObject("land").getString("number2").length() > 0)
+						regionNum2 = addr.getJSONObject("land").getString("number2");
+				} else addr = object.getJSONArray("results").getJSONObject(1); // 도로명 주소가 없을 경우
+				region = addr.getJSONObject("region");
+				
+				String regionDo = region.getJSONObject("area1").getString("name");
+				String regionSiGu = region.getJSONObject("area2").getString("name");
+				String regionDong = region.getJSONObject("area3").getString("name");
+				
+				address = regionDo + " " + regionSiGu + " " + regionDong + " " + regionRo + " " + regionNum1 + (regionNum2.length() > 0 ? ("-" + regionNum2) : "");
+				address = address.trim();
+				
+				violation.setAddress(address);
+				System.out.println(violation.toString());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return repository.insert(violation);
 	}
 

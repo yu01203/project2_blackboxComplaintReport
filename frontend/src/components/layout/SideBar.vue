@@ -3,7 +3,11 @@
     <div id="sidebar-content" class="d-flex flex-column px-4 py-0">
       <p>
         <router-link to="/">
-          <img src="@/assets/Logo_solid.png" alt="logo" style="width:100%; margin-bottom: 10px;" />
+          <img
+            src="@/assets/logos/Logo_solid.png"
+            alt="logo"
+            style="width:100%; margin-bottom: 10px;"
+          />
         </router-link>
       </p>
       <p>
@@ -30,9 +34,18 @@
           style="text-decoration: none; color: navy; margin-left: 20px;"
         >지도보기</router-link>
       </p>
-      <!-- <p>
-        <router-link to="/geotest" style="text-decoration: none; color: navy;">죠로케이션 테스트</router-link>
-      </p>-->
+      <p v-if="this.$session.get('email') == 'admin'">
+        <router-link
+          to="/usermanagement"
+          style="text-decoration: none; color: navy; margin-left: 20px;"
+        >회원관리</router-link>
+      </p>
+      <p>
+        <router-link
+          to="/howtouse"
+          style="text-decoration: none; color: navy; margin-left: 20px;"
+        >이용방법</router-link>
+      </p>
     </div>
   </b-sidebar>
 </template>
@@ -43,7 +56,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #sidebar-1 {
   padding: 15px;
 }

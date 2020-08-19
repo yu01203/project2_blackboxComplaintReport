@@ -4,25 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.repository.NoticeDAO">
 
-
 	<select id="selectNotice" resultType="notice">
-		select notice_no, notice_id, notice_title, notice_content, notice_regtime
+		select notice_no, notice_id, notice_title, notice_content, notice_date, notice_time
 		  from notice
 		 order by notice_no desc
 	</select>
 	
-
-	
 	<insert id="insertNotice" parameterType="notice">
-		insert into notice(
-			notice_title, notice_id, notice_content
-		) values (
-			#{notice_title}, #{notice_id}, #{notice_content}
+		insert into notice(notice_title, notice_id, notice_content, notice_date, notice_time)
+		values (#{notice_title}, #{notice_id}, #{notice_content}, date_format(now(), '%Y년 %m월 %d일'),
+			<if test="calendar.getInstance().getTime().getHours() gte 12">
+				date_format(now(), '오후 %H시 %i분')
+			</if>
+			<if test="calendar.getInstance().getTime().getHours() lt 12">
+				date_format(now(), '오전 %H시 %i분')
+			</if>
 		)
 	</insert>
 	
 	<select id="selectNoticeBynotice_no" resultType="notice">
-		select notice_no, notice_id, notice_title, notice_content, notice_regtime
+		select notice_no, notice_id, notice_title, notice_content, notice_date, notice_time
 		  from notice 
 		 where notice_no = #{notice_no}
 	</select>

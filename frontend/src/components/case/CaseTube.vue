@@ -1,5 +1,5 @@
 <template>
-  <b-col cols="4">
+  <b-col class="col-12 col-sm-6 col-md-4">
     <div>
       <div
         v-b-modal="modalId(violationitem.violationNo)"
@@ -7,7 +7,7 @@
         style="width: 100%;"
         class="shadow mb-4 bg-white rounded p-1"
       >
-        <div class="mx-auto" no-body style="max-width: 20rem;">
+        <div class="mx-auto my-2" no-body style="max-width: 20rem;">
           <div style="pointer-events: none">
             <video style="width:100%">
               <source :src="violationitem.videoUrl" type="video/mp4" />
@@ -22,11 +22,13 @@
                 value-field="item"
                 text-field="name"
                 disabled-field="notEnabled"
-                style="width:100% "
+                :style="styles"
               ></b-form-select>
             </b-list-group-item>
-            <div class="d-flex justify-content-between text-secondary">
-              <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p>
+            <div class="d-flex justify-content-left text-secondary">
+              <!-- <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p> -->
+              <p class="mb-0">{{ date }}</p>
+              <p class="ml-2 mb-0">{{ time }}</p>
             </div>
             <div>
               <p class="mb-0" style="font-size: 18px">{{ violationitem.address }}</p>
@@ -66,30 +68,27 @@ export default {
       ],
       selectedNo: this.violationitem.reportStatus,
       classes: "",
+      styles: "",
       date: "",
       time: "",
       statusChanged: 0,
     };
   },
+  created() {},
   mounted: function () {
-    this.getFormatDate(this.violationitem);
+    this.transDateTime();
+    // this.getFormatDate(this.violationitem);
     this.mountStatus();
-    // this.changeColor();
-    // this.DateTransform();
   },
   updated() {
-    console.log("Document Updated");
     this.changeStatus();
-    // this.changeColor();
   },
   watch: {
     selectedNo: function () {
-      // alert("here!");
       this.violationitem.reportStatus = this.selectedNo;
       http
         .put(
           `/violation/${this.violationitem.userNo}/${this.violationitem.violationNo}/${this.violationitem.reportStatus}`,
-          // `/violation`,
           {
             userNo: this.violationitem.userNo,
             violationNo: this.violationitem.violationNo,
@@ -128,43 +127,31 @@ export default {
       var selected = this.violationitem.reportStatus;
       if (selected == 0) {
         this.selected1 = 0;
-        this.classes = "bg-secondary text-light";
-        // this.violationitem.reportStatus = 0;
+        this.classes = "border-0";
+        this.styles = "width:100%; background-color: #F1EEE6; color:#616161";
       } else if (selected == 1) {
         this.selected1 = 1;
-        this.classes = "bg-primary text-white";
-        // this.violationitem.reportStatus = 1;
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #B6CADA;";
       } else if (selected == 2) {
         this.selected1 = 2;
-        this.classes = "bg-success text-white";
-        // this.violationitem.reportStatus = 2;
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #0f4c81";
       }
     },
     changeStatus() {
-      // console.log("changeStatus on");
       var selected = this.selected1;
       if (selected == 0) {
-        this.classes = "bg-secondary text-light";
+        this.classes = "border-0";
+        this.styles = "width:100%; background-color: #F1EEE6; color:#616161";
       } else if (selected == 1) {
-        this.classes = "bg-primary text-white";
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #B6CADA; ";
       } else if (selected == 2) {
-        this.classes = "bg-success text-white";
+        this.classes = "text-white";
+        this.styles = "width:100%; background-color: #0f4c81";
       }
       this.selectedNo = this.selected1;
-      // http
-      //   .put(`/violation`, {
-      //     reportStatus: changedNum,
-      //   })
-      //   .then(({ data }) => {
-      //     let msg = "저장에 실패하였습니다.";
-      //     if (data === "success") {
-      //       msg = "저장이 완료되었습니다.";
-      //     }
-      //     alert(msg);
-      //   })
-      //   .catch(() => {
-      //     alert("에러가 발생했습니다.");
-      //   });
     },
     updateStatus() {
       if (
@@ -201,6 +188,30 @@ export default {
     clickPrevent(event) {
       event.stopPropagation();
     },
+    transDateTime() {
+      var RawDate = this.violationitem.date.split("-");
+      var newDate =
+        RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
+      this.$store.state.violationitems;
+      this.date = newDate;
+
+      var RawTime = this.violationitem.time.split(":");
+      if (RawTime[0] >= 12) {
+        var ApTime = RawTime[0] - 12;
+        if (ApTime === 0) {
+          ApTime = 12;
+        }
+        var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      } else {
+        var AmTime = RawTime[0].slice(0, 1);
+        if (AmTime == 0) {
+          AmTime = 12;
+        }
+        newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
+        this.time = newTime;
+      }
+    },
   },
   computed: {
     ...mapGetters(["violationitems"]),
@@ -209,4 +220,11 @@ export default {
 </script>
 
 <style>
+.bgblue {
+  background-color: #0f4c81;
+}
+
+.bguviolet {
+  background-color: #5f4b8b;
+}
 </style>

@@ -1,5 +1,7 @@
 package com.ssafy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User detailByNo(int userNo) throws Exception {
 		return repo.selectUserByNo(userNo);
+	}
+
+	@Override
+	public List<User> userList() throws Exception {
+		return repo.selectAll();
 	}
 	
 }

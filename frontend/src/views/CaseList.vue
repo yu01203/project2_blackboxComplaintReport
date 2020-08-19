@@ -1,101 +1,130 @@
 <template>
-  <div>
-    <br />
-    <h1 class="text-center">제보목록</h1>
-    <!-- <div class="d-flex justify-content-between align-items-center"> -->
-    <div class="row align-items-center">
-      <!-- filter button -->
-      <div class="col-3.5">
-        <b-form-checkbox-group
-          v-model="selected"
-          :options="options"
-          class="mb-3"
-          value-field="item"
-          text-field="name"
-          disabled-field="notEnabled"
-          @input="optionController"
-        ></b-form-checkbox-group>
-      </div>
-      <!-- items dropdown -->
-      <div class="col-2.5">
-        <b-form-select
-          v-model="selected2"
-          :options="options2"
-          class="mb-0"
-          value-field="item"
-          text-field="name"
-          disabled-field="notEnabled"
-          @input="optionController"
-        ></b-form-select>
-      </div>
-      <!-- find term calendar -->
-      <div class="col d-flex">
-        <b-form-group id="input-group-3" label="시작 날짜 선택">
-          <b-form-datepicker
-            id="example-datepicker1"
-            v-model="startdate"
-            class="mb-2"
-            @input="optionController"
-            label-help
-          ></b-form-datepicker>
-        </b-form-group>
-        <b-form-group id="input-group-3" label="종료 날짜 선택">
-          <b-form-datepicker
-            id="example-datepicker2"
-            v-model="enddate"
-            class="mb-2"
-            @input="optionController"
-            label-help
-          ></b-form-datepicker>
-        </b-form-group>
-      </div>
-      <!-- search bar -->
-      <div class="col">
-        <span class="mr-2">search :</span>
-        <input class="mr-2" type="text" v-model="searchText" @keydown.enter="optionController" />
-        <!-- <b-button variant="danger" @click="optionController">Button</b-button> -->
-      </div>
-    </div>
-    <!-- cards -->
+  <div style="height:100%">
     <div
-      v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
+      v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
+      class="pt-3 container"
     >
-      <b-container class="bv-example-row">
-        <b-row>
-          <Case
-            v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
-            :key="violationitem.violationNo"
-            :violationitem="violationitem"
-          />
-        </b-row>
-      </b-container>
+      <!-- filter division -->
+      <div
+        id="filter-division"
+        class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
+        style="width:100%; border-radius:5px"
+      >
+        <!-- Report Condition Check Boxes -->
+        <div class="col-12 text-left my-2">
+          <b-form-checkbox-group
+            v-model="selected"
+            :options="options"
+            class="mx-0"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+            @input="optionController"
+            style="width:100%"
+          ></b-form-checkbox-group>
+        </div>
+        <!-- items dropdown -->
+        <div class="col-12 col-md-5 col-lg-4 mb-2">
+          <b-form-select
+            v-model="selected2"
+            :options="options2"
+            class="my-0"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+            @input="optionController"
+          ></b-form-select>
+        </div>
+        <!-- find term calendar -->
+        <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
+          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+            <b-form-datepicker
+              id="example-datepicker1"
+              v-model="startdate"
+              class
+              @input="optionController"
+              label-help
+              label-no-date-selected="시작일"
+              :max="maxdate"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            ></b-form-datepicker>
+          </b-form-group>
+          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+            <b-form-datepicker
+              id="example-datepicker2"
+              v-model="enddate"
+              right
+              class
+              @input="optionController"
+              label-help
+              label-no-date-selected="종료일"
+              :min="startdate"
+              :max="today"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            ></b-form-datepicker>
+          </b-form-group>
+        </div>
+        <!-- search bar -->
+        <div class="col-12 col-md-12 col-lg-3 mb-2">
+          <b-input-group id="searchBar">
+            <b-input-group-prepend is-text>
+              <b-icon icon="search"></b-icon>
+            </b-input-group-prepend>
+            <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
+          </b-input-group>
+        </div>
+      </div>
+      <!-- cards divison -->
+      <div
+        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
+      >
+        <b-container class="bv-example-row">
+          <b-row>
+            <Case
+              v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
+              :key="violationitem.violationNo"
+              :violationitem="violationitem"
+            />
+          </b-row>
+        </b-container>
+      </div>
+      <div v-else>
+        <b-container class="bv-example-row">
+          <b-row>
+            <Case
+              v-for="violationitem in searchviolationitems.slice().reverse()"
+              :key="violationitem.violationNo"
+              :violationitem="violationitem"
+            />
+          </b-row>
+        </b-container>
+      </div>
     </div>
-    <div v-else>
-      <b-container class="bv-example-row">
-        <b-row>
-          <Case
-            v-for="violationitem in searchviolationitems.slice().reverse()"
-            :key="violationitem.violationNo"
-            :violationitem="violationitem"
-          />
-        </b-row>
-      </b-container>
+    <div v-else style="height:100%">
+      <StopPC class="d-none d-md-block" />
+      <StopMobile class="d-md-none" />
     </div>
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
-
-// 기존 폼
-// import Case from "@/components/case/Case.vue";
-// 유튜브 폼
 import Case from "@/components/case/CaseTube.vue";
+import StopPC from "@/views/StopPC.vue";
+import StopMobile from "@/views/StopMobile.vue";
 
 export default {
   name: "CaseList",
   components: {
     Case,
+    StopPC,
+    StopMobile,
   },
   props: {},
   data() {
@@ -137,7 +166,12 @@ export default {
         { item: "고속도로 갓길통행 위반", name: "고속도로 갓길통행 위반" },
         { item: "기타", name: "기타" },
       ],
+      maxdate: "",
+      today: "",
     };
+  },
+  mounted() {
+    this.getToday();
   },
   created() {
     http
@@ -155,7 +189,7 @@ export default {
         }
       })
       .catch(() => {
-        alert("에러가 발생했습니다.");
+        // alert("로그인 후 이용해주세요.");
       });
   },
   methods: {
@@ -190,14 +224,34 @@ export default {
     findTerm() {
       const emptyItems = new Array();
       this.templist_find = emptyItems;
+
+      if (this.enddate) {
+        this.maxdate = this.enddate;
+      }
+
       if (this.startdate.length != 0 && this.enddate.length != 0) {
         for (var i in this.templist_select) {
-          if (
-            this.startdate <= this.templist_select[i].date &&
-            this.templist_select[i].date <= this.enddate
-          ) {
+          // input Date Transformation
+          var tempDate = this.templist_select[i].date.split("-");
+
+          if (tempDate[1] < 10) {
+            tempDate[1] = "0" + tempDate[1];
+          }
+
+          if (tempDate[2] < 10) {
+            tempDate[2] = "0" + tempDate[2];
+          }
+
+          const newDate = tempDate[0] + "-" + tempDate[1] + "-" + tempDate[2];
+          if (this.startdate <= newDate && newDate <= this.enddate) {
             this.templist_find.push(this.templist_select[i]);
           }
+          // if (
+          //   this.startdate <= this.templist_select[i].date &&
+          //   this.templist_select[i].date <= this.enddate
+          // ) {
+          //   this.templist_find.push(this.templist_select[i]);
+          // }
         }
       } else {
         this.templist_find = this.templist_select;
@@ -208,10 +262,10 @@ export default {
       this.searchviolationitems = emptyItems;
       for (var i in this.templist_find) {
         if (
-          this.templist_find[i].contents.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].spot.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].carNum.indexOf(this.searchText) != -1 ||
-          this.templist_find[i].address.indexOf(this.searchText) != -1
+          this.templist_find[i].contents.includes(this.searchText) ||
+          this.templist_find[i].spot.includes(this.searchText) ||
+          this.templist_find[i].carNum.includes(this.searchText) ||
+          this.templist_find[i].address.includes(this.searchText)
         ) {
           this.searchviolationitems.push(this.templist_find[i]);
         }
@@ -223,9 +277,31 @@ export default {
       this.findTerm();
       this.searchOnlist();
     },
+    getToday() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      this.today = today;
+      this.maxdate = today;
+    },
   },
   computed: {},
 };
 </script>
 
-<style></style>
+<style>
+#filter-division {
+  background-color: rgb(15, 76, 129);
+}
+</style>

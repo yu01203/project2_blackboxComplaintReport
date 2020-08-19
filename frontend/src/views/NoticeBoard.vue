@@ -1,14 +1,13 @@
 <template>
-  <div>
+  <div class="container">
     <br />
-    <h1 class="text-center mb-0">공지사항</h1>
-    <br />
-    <div v-if="this.$session.get('email') == 'admin'" class="float-right mb-3">
-      <router-link to="/noticeWrite" class="nav-link" align="right">
-        <b-button class="float-left bg-info border-info">글쓰기</b-button>
-      </router-link>
+    <h1 class="text-center mb-3">공지사항</h1>
+    <!-- <div v-if="this.$session.get('email') == 'admin'" class="float-right mb-3"> -->
+    <div v-if="this.$session.get('email') == 'admin'">
+      <router-link to="/noticeWrite" class="btn btn-warning m-3">글쓰기</router-link>
     </div>
-    <b-table
+    <!-- <b-table
+      id="noticeBoard"
       bordered
       outlined
       hover
@@ -26,61 +25,74 @@
       :per-page="perPage"
       aria-controls="my-table"
       align="center"
-    ></b-pagination>
+    ></b-pagination>-->
+    <div>
+      <b-container class="bv-example-row">
+        <b-row>
+          <Notice
+            v-for="noticeitem in this.$store.state.noticeitems"
+            :key="noticeitem.noticeNo"
+            :noticeitem="noticeitem"
+            @click="rowClicked"
+          />
+        </b-row>
+      </b-container>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
+import Notice from "@/components/notice/Notice.vue";
+
 export default {
   name: "NoticeBoard",
+  components: {
+    Notice,
+  },
   data() {
     return {
-      perPage: 10,
-      currentPage: 1,
-      fields: [
-        {
-          key: "notice_no",
-          label: "글 번호",
-          sortable: true,
-        },
-        {
-          key: "notice_id",
-          label: "작성자",
-        },
-        {
-          key: "notice_title",
-          label: "제목",
-        },
-        {
-          key: "notice_content",
-          label: "내용",
-        },
-        {
-          key: "notice_regtime",
-          label: "작성일자",
-          //   variant: "danger",
-        },
-      ],
+      // perPage: 10,
+      // currentPage: 1,
+      // fields: [
+      //   {
+      //     key: "notice_no",
+      //     label: "글 번호",
+      //     sortable: true,
+      //     tdClass: "notice_no",
+      //   },
+      //   {
+      //     key: "notice_title",
+      //     label: "제목",
+      //     tdClass: "notice_title",
+      //   },
+      //   {
+      //     key: "notice_date",
+      //     label: "작성일자",
+      //     tdClass: "notice_date",
+      //   },
+      //   {
+      //     key: "notice_time",
+      //     label: "작성시간",
+      //     tdClass: "notice_time",
+      //   },
+      // ],
     };
   },
-  methods: {
-    //rowClicked(item, index) {
-    rowClicked(item) {
-      //alert("Index: " + index + "\n\nItem: " + JSON.stringify(item) + item.articleno + " " + index); //너무 힘들게 찾음 ㅡㅡ
-
-      this.$session.set("notice_no", item.notice_no);
-      this.$session.set("notice_id", item.notice_id);
-      this.$session.set("notice_title", item.notice_title);
-      this.$session.set("notice_content", item.notice_content);
-      this.$router.push("/noticeDetail");
-    },
-  },
+  // methods: {
+  //   rowClicked() {
+  //     this.$session.set("notice_no", this.noticeitem.notice_no);
+  //     this.$session.set("notice_id", this.noticeitem.notice_id);
+  //     this.$session.set("notice_title", this.noticeitem.notice_title);
+  //     this.$session.set("notice_content", this.noticeitem.notice_content);
+  //     this.$router.push("/noticeDetail");
+  //   },
+  // },
   computed: {
-    rows() {
-      return this.noticeitems.length;
-    },
+    // rows() {
+    //   return this.noticeitems.length;
+    // },
     ...mapGetters(["noticeitems"]),
   },
 
@@ -91,22 +103,34 @@ export default {
 </script>
 
 <style>
-th {
+/* #noticeBoard > thead {
   background: #17a2b8;
 }
 
-th > div {
+#noticeBoard > thead > tr > th > div {
   color: white;
   font-size: 120%;
   font-weight: normal;
-}
+} */
 
-.page-item .page-link {
-  color: #17a2b8;
+/* .page-item .page-link {
+  color: red;
 }
 
 .page-item.active .page-link {
-  background-color: #17a2b8 !important;
-  border-color: #17a2b8 !important;
+  background-color: red !important;
+  border-color: red !important;
 }
+
+.notice_no {
+  width: 150px;
+}
+
+.notice_date {
+  width: 200px;
+}
+
+.notice_time {
+  width: 200px;
+} */
 </style>

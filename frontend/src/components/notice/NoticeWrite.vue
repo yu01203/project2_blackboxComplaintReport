@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button {
   margin-right: 20px;
   margin-left: 20px;
