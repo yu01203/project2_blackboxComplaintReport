@@ -1,106 +1,114 @@
 <template>
-  <div class="pt-3 container">
-    <!-- <h1 class="text-center mb-3">제보목록</h1> -->
-    <!-- filter division -->
+  <div style="height:100%">
     <div
-      id="filter-division"
-      class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
-      style="width:100%; border-radius:5px"
+      v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
+      class="pt-3 container"
     >
-      <!-- filter button -->
-      <div class="col-12 text-left my-2">
-        <b-form-checkbox-group
-          v-model="selected"
-          :options="options"
-          class="mx-0"
-          value-field="item"
-          text-field="name"
-          disabled-field="notEnabled"
-          @input="optionController"
-          style="width:100%"
-        ></b-form-checkbox-group>
-      </div>
-      <!-- items dropdown -->
-      <div class="col-12 col-md-5 col-lg-4 mb-2">
-        <b-form-select
-          v-model="selected2"
-          :options="options2"
-          class="my-0"
-          value-field="item"
-          text-field="name"
-          disabled-field="notEnabled"
-          @input="optionController"
-        ></b-form-select>
-      </div>
-      <!-- find term calendar -->
-      <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
-        <b-form-group id="input-group-3" class="px-0 my-auto col-6">
-          <b-form-datepicker
-            id="example-datepicker1"
-            v-model="startdate"
-            class
+      <!-- filter division -->
+      <div
+        id="filter-division"
+        class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
+        style="width:100%; border-radius:5px"
+      >
+        <!-- Report Condition Check Boxes -->
+        <div class="col-12 text-left my-2">
+          <b-form-checkbox-group
+            v-model="selected"
+            :options="options"
+            class="mx-0"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
             @input="optionController"
-            label-help
-            label-no-date-selected="시작일"
-            :max="maxdate"
-            today-button
-            reset-button
-            close-button
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          ></b-form-datepicker>
-        </b-form-group>
-        <b-form-group id="input-group-3" class="px-0 my-auto col-6">
-          <b-form-datepicker
-            id="example-datepicker2"
-            v-model="enddate"
-            right
-            class
+            style="width:100%"
+          ></b-form-checkbox-group>
+        </div>
+        <!-- items dropdown -->
+        <div class="col-12 col-md-5 col-lg-4 mb-2">
+          <b-form-select
+            v-model="selected2"
+            :options="options2"
+            class="my-0"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
             @input="optionController"
-            label-help
-            label-no-date-selected="종료일"
-            :min="startdate"
-            :max="today"
-            today-button
-            reset-button
-            close-button
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          ></b-form-datepicker>
-        </b-form-group>
+          ></b-form-select>
+        </div>
+        <!-- find term calendar -->
+        <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
+          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+            <b-form-datepicker
+              id="example-datepicker1"
+              v-model="startdate"
+              class
+              @input="optionController"
+              label-help
+              label-no-date-selected="시작일"
+              :max="maxdate"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            ></b-form-datepicker>
+          </b-form-group>
+          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+            <b-form-datepicker
+              id="example-datepicker2"
+              v-model="enddate"
+              right
+              class
+              @input="optionController"
+              label-help
+              label-no-date-selected="종료일"
+              :min="startdate"
+              :max="today"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            ></b-form-datepicker>
+          </b-form-group>
+        </div>
+        <!-- search bar -->
+        <div class="col-12 col-md-12 col-lg-3 mb-2">
+          <b-input-group id="searchBar">
+            <b-input-group-prepend is-text>
+              <b-icon icon="search"></b-icon>
+            </b-input-group-prepend>
+            <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
+          </b-input-group>
+        </div>
       </div>
-      <!-- search bar -->
-      <div class="col-12 col-md-12 col-lg-3 mb-2">
-        <b-input-group id="searchBar">
-          <b-input-group-prepend is-text>
-            <b-icon icon="search"></b-icon>
-          </b-input-group-prepend>
-          <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
-        </b-input-group>
+      <!-- cards divison -->
+      <div
+        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
+      >
+        <b-container class="bv-example-row">
+          <b-row>
+            <Case
+              v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
+              :key="violationitem.violationNo"
+              :violationitem="violationitem"
+            />
+          </b-row>
+        </b-container>
+      </div>
+      <div v-else>
+        <b-container class="bv-example-row">
+          <b-row>
+            <Case
+              v-for="violationitem in searchviolationitems.slice().reverse()"
+              :key="violationitem.violationNo"
+              :violationitem="violationitem"
+            />
+          </b-row>
+        </b-container>
       </div>
     </div>
-    <!-- cards divison -->
-    <div
-      v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
-    >
-      <b-container class="bv-example-row">
-        <b-row>
-          <Case
-            v-for="violationitem in this.$store.state.violationitems.slice().reverse()"
-            :key="violationitem.violationNo"
-            :violationitem="violationitem"
-          />
-        </b-row>
-      </b-container>
-    </div>
-    <div v-else>
-      <b-container class="bv-example-row">
-        <b-row>
-          <Case
-            v-for="violationitem in searchviolationitems.slice().reverse()"
-            :key="violationitem.violationNo"
-            :violationitem="violationitem"
-          />
-        </b-row>
-      </b-container>
+    <div v-else style="height:100%">
+      <StopPC class="d-none d-md-block" />
+      <StopMobile class="d-md-none" />
     </div>
   </div>
 </template>
@@ -108,11 +116,15 @@
 <script>
 import http from "@/util/http-common";
 import Case from "@/components/case/CaseTube.vue";
+import StopPC from "@/views/StopPC.vue";
+import StopMobile from "@/views/StopMobile.vue";
 
 export default {
   name: "CaseList",
   components: {
     Case,
+    StopPC,
+    StopMobile,
   },
   props: {},
   data() {
@@ -290,6 +302,6 @@ export default {
 
 <style>
 #filter-division {
-  background-color: rgba(15, 76, 129, 0.7);
+  background-color: rgb(15, 76, 129);
 }
 </style>

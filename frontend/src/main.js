@@ -26,6 +26,9 @@ Vue.use(VueSessionStorage);
 Vue.use(VModal);
 Vue.use(VueSession, sessionOptions);
 
+// Global Font Css
+import "@/assets/font.css";
+
 Vue.config.productionTip = false;
 
 var sessionOptions = {

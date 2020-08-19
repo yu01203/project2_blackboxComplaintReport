@@ -3,7 +3,7 @@
     <div
       id="main-logo"
       class="d-none d-md-block text-center bg-white border-bottom"
-      style="height:100px"
+      style="height:60px"
     >
       <a href="/" style="text-decoration: none;">
         <img
@@ -31,7 +31,7 @@
 
         <!-- 그리드 축소 상태 사용자 버튼 -->
         <b-navbar-nav id="sm-user" class="ml-auto mr-2 my-0 py-0">
-          <b-nav-item class="d-md-none">
+          <b-nav-item class="d-md-none ft-nns light">
             <b-nav-item
               id="nav-user-item"
               v-if="this.$session.get('email') == null"
@@ -60,18 +60,14 @@
         <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
           <b-navbar-nav class="w-100 justify-content-between" style="max-width:1080px">
             <!-- <b-navbar-nav class="w-100 justify-content-left" style="max-width:1080px"> -->
-            <b-nav-item to="/">
+            <!-- <b-nav-item to="/">
               <b-icon icon="house-door"></b-icon>
               <span>&nbsp;정문</span>
-            </b-nav-item>
-            <b-nav-item to="/noticeboard">
-              <b-icon icon="info-circle"></b-icon>
-              <span>&nbsp;공지사항</span>
-              <!-- <b-icon icon="chat-left-text"></b-icon> -->
-            </b-nav-item>
+            </b-nav-item>-->
+
             <b-nav-item to="/caselist">
               <b-icon icon="list"></b-icon>
-              <span>&nbsp;제보목록</span>
+              <span class>&nbsp;제보목록</span>
             </b-nav-item>
             <b-nav-item to="/reportinfo">
               <b-icon icon="bar-chart"></b-icon>
@@ -80,6 +76,11 @@
             <b-nav-item to="/mapmain">
               <b-icon icon="map"></b-icon>
               <span>&nbsp;지도보기</span>
+            </b-nav-item>
+            <b-nav-item to="/noticeboard">
+              <b-icon icon="info-circle"></b-icon>
+              <span>&nbsp;공지사항</span>
+              <!-- <b-icon icon="chat-left-text"></b-icon> -->
             </b-nav-item>
             <b-nav-item to="/howtouse">
               <b-icon icon="question-circle"></b-icon>

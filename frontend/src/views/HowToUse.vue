@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <br />
-    <h1 class="text-center mb-3">사이트 이용 방법</h1>
+    <h1 class="text-center mb-3 bolder">사이트 이용 방법</h1>
     <div class="divdiv">
       <h2>1. 민원 처리 상태 관리</h2>
       <img src="@/assets/logos/HowToUse1.png" alt="HowToUse1" style="width: 100%;" />

@@ -1,6 +1,6 @@
 <template >
   <div class="wrapper1" style="height:100%">
-    <NavBar id="navbar" class="fixed-top" />
+    <NavBar id="navbar" class="fixed-top ft-nns" />
     <div class="wrapper2" style="height:100%">
       <!-- <div class="d-md-none" style="margin-bottom:64px"></div> -->
       <!-- <div class="d-none d-md-block" style="margin-bottom:148px"></div> -->
@@ -40,20 +40,6 @@ export default {
 </script>
 
 <style>
-/* Google Font Import */
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700;800&Noto+Sans+KR:wght@300&Do+Hyeon&Black+Han+Sans&display=swap");
-
-.ft-bhs {
-  font-family: "Black Han Sans", sans-serif;
-  color: navy;
-}
-
-/* @import "~@/scss/_typo.scss"; */
-
-* {
-  font-family: "Nanum Gothic", "Noto Sans KR", "Do Hyeon", sans-serif;
-}
-
 /* 라우터 링크 */
 p a {
   color: black;
