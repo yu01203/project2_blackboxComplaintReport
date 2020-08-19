@@ -60,15 +60,11 @@
         <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
           <b-navbar-nav class="w-100 justify-content-between" style="max-width:1080px">
             <!-- <b-navbar-nav class="w-100 justify-content-left" style="max-width:1080px"> -->
-            <b-nav-item to="/">
+            <!-- <b-nav-item to="/">
               <b-icon icon="house-door"></b-icon>
               <span>&nbsp;정문</span>
-            </b-nav-item>
-            <b-nav-item to="/noticeboard">
-              <b-icon icon="info-circle"></b-icon>
-              <span>&nbsp;공지사항</span>
-              <!-- <b-icon icon="chat-left-text"></b-icon> -->
-            </b-nav-item>
+            </b-nav-item>-->
+
             <b-nav-item to="/caselist">
               <b-icon icon="list"></b-icon>
               <span>&nbsp;제보목록</span>
@@ -80,6 +76,11 @@
             <b-nav-item to="/mapmain">
               <b-icon icon="map"></b-icon>
               <span>&nbsp;지도보기</span>
+            </b-nav-item>
+            <b-nav-item to="/noticeboard">
+              <b-icon icon="info-circle"></b-icon>
+              <span>&nbsp;공지사항</span>
+              <!-- <b-icon icon="chat-left-text"></b-icon> -->
             </b-nav-item>
             <b-nav-item to="/howtouse">
               <b-icon icon="question-circle"></b-icon>
