@@ -1,16 +1,18 @@
 package com.ssafy.domain;
 
+import java.util.Calendar;
+
 public class Notice {
 	private int notice_no;
 	private String notice_id;
 	private String notice_title;
 	private String notice_content;
 	private String notice_date;
-	private String notice_time;
+	private Calendar notice_time = Calendar.getInstance();
 
 	public Notice() {}
 	public Notice(int notice_no, String notice_id, String notice_title, String notice_content, String notice_date,
-			String notice_time) {
+			Calendar notice_time) {
 		this.notice_no = notice_no;
 		this.notice_id = notice_id;
 		this.notice_title = notice_title;
@@ -59,11 +61,11 @@ public class Notice {
 		this.notice_date = notice_date;
 	}
 
-	public String getNotice_time() {
+	public Calendar getNotice_time() {
 		return notice_time;
 	}
 
-	public void setNotice_time(String notice_time) {
+	public void setNotice_time(Calendar notice_time) {
 		this.notice_time = notice_time;
 	}
 	
