@@ -66,7 +66,7 @@ public class ViolationServiceImpl implements ViolationService {
 			if(status == 0) {
 				JSONArray array = object.getJSONArray("results");
 				JSONObject addr = null; JSONObject region = null;
-				String address = null; String regionRo = null; String regionNum1 = null; String regionNum2 = null;
+				String address = null; String regionRo = ""; String regionNum1 = ""; String regionNum2 = "";
 
 				int size = object.getJSONArray("results").length();
 				if(size == 3) { // 도로명 주소가 있을 경우
@@ -85,6 +85,7 @@ public class ViolationServiceImpl implements ViolationService {
 				String regionDong = region.getJSONObject("area3").getString("name");
 				
 				address = regionDo + " " + regionSiGu + " " + regionDong + " " + regionRo + " " + regionNum1 + (regionNum2.length() > 0 ? ("-" + regionNum2) : "");
+				address = address.trim();
 				
 				violation.setAddress(address);
 				System.out.println(violation.toString());
