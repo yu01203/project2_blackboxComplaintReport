@@ -8,11 +8,12 @@ public class Notice {
 	private String notice_title;
 	private String notice_content;
 	private String notice_date;
-	private Calendar notice_time = Calendar.getInstance();
+	private String notice_time;
+	private Calendar calendar = Calendar.getInstance();
 
 	public Notice() {}
 	public Notice(int notice_no, String notice_id, String notice_title, String notice_content, String notice_date,
-			Calendar notice_time) {
+			String notice_time) {
 		this.notice_no = notice_no;
 		this.notice_id = notice_id;
 		this.notice_title = notice_title;
@@ -61,12 +62,20 @@ public class Notice {
 		this.notice_date = notice_date;
 	}
 
-	public Calendar getNotice_time() {
+	public String getNotice_time() {
 		return notice_time;
 	}
 
-	public void setNotice_time(Calendar notice_time) {
+	public void setNotice_time(String notice_time) {
 		this.notice_time = notice_time;
+	}
+	
+	public Calendar getCalendar() {
+		return calendar;
+	}
+	
+	public void setCalendar(Calendar calendar) {
+		this.calendar = calendar;
 	}
 	
 	@Override

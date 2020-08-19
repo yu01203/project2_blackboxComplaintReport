@@ -13,10 +13,10 @@
 	<insert id="insertNotice" parameterType="notice">
 		insert into notice(notice_title, notice_id, notice_content, notice_date, notice_time)
 		values (#{notice_title}, #{notice_id}, #{notice_content}, date_format(now(), '%Y년 %m월 %d일'),
-			<if test="notice_time.getInstance().getTime().getHours() gte 12">
+			<if test="calendar.getInstance().getTime().getHours() gte 12">
 				date_format(now(), '오후 %H시 %i분')
 			</if>
-			<if test="notice_time.getInstance().getTime().getHours() lt 12">
+			<if test="calendar.getInstance().getTime().getHours() lt 12">
 				date_format(now(), '오전 %H시 %i분')
 			</if>
 		)
