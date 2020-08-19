@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="this.$session.get('email') == null">
       <br />
-      <h1 class="text-center mb-3">전체 유저 제보현황</h1>
+      <h1 class="text-center mb-3 bolder">전체 유저 제보현황</h1>
       <b-container class="bv-example-row bv-example-row-flex-cols">
         <b-row align-v="stretch">
           <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">

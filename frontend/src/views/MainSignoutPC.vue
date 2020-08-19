@@ -3,23 +3,28 @@
     <div id="main-text" class="d-flex justify-content-center align-items-center h-100">
       <div class="my-auto px-3 py-3 text-center">
         <div id="meaningless-div" style="margin-top:148px"></div>
-        <h1 id="greeting-text" class="text-white mb-3">원 푸시 교통 민원 DB 서비스</h1>
+        <h1 id="greeting-text" class="text-white mb-3 bold">
+          간편
+          <span class="bolder" style="color:#C10016">교통</span> 민원 DB 서비스
+        </h1>
         <img id="greeting-logo" src="@/assets/logos/Logo_solid.png" />
-        <h1 id="first-text" class="text-white mb-5">
+        <h1 id="first-text" class="text-white mb-5 bold">
           서비스 이용을 위해
-          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-1>로그인</span>을 해라
+          <span class="btn btn-danger" v-b-modal.modal-1>
+            <b-icon icon="power"></b-icon>&nbsp;로그인
+          </span>
         </h1>
-        <h1 id="second-text" class="text-white mb-5">
+        <h1 id="second-text" class="text-white mb-5 bold">
           계정이 없으면
-          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-multi-3>회원 가입</span> 해라
+          <span class="bolder" style="color:#C10016;" v-b-modal.modal-multi-3>회원 가입</span> 해라
         </h1>
-        <h3 id="third-text" class="text-white mb-5">
+        <h3 id="third-text" class="text-white mb-5 bold">
           자세한 서비스 설명은
-          <span>
+          <span class="bolder">
             <router-link
               to="/howtouse"
-              class="text-decoration-none hover-none"
-              style="color:#dac0a7;font-weight: bold"
+              class="text-decoration-none hover-none bolder"
+              style="color:#C10016"
             >이용방법</router-link>
           </span>&nbsp;페이지를 확인하고잉
         </h3>
@@ -37,7 +42,7 @@ export default {
 <style scoped>
 .content {
   position: relative;
-  background-color: rgba(24, 12, 12, 0.267);
+  background-color: rgba(24, 12, 12, 0.712);
   width: 100vw;
   height: 100vh;
 }
