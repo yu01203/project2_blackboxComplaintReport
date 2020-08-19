@@ -65,17 +65,28 @@ public class ViolationServiceImpl implements ViolationService {
 			
 			if(status == 0) {
 				JSONArray array = object.getJSONArray("results");
-				JSONObject addr = object.getJSONArray("results").getJSONObject(0);
+				JSONObject addr = null; JSONObject region = null;
+				String address = null; String regionRo = null; String regionNum1 = null; String regionNum2 = null;
 
-				JSONObject region = addr.getJSONObject("region");
+				int size = object.getJSONArray("results").length();
+				if(size == 3) { // 도로명 주소가 있을 경우
+					addr = object.getJSONArray("results").getJSONObject(2);
+					
+					regionRo = addr.getJSONObject("land").getString("name");
+					regionNum1 = addr.getJSONObject("land").getString("number1");
+					
+					if(addr.getJSONObject("land").getString("number2").length() > 0)
+						regionNum2 = addr.getJSONObject("land").getString("number2");
+				} else addr = object.getJSONArray("results").getJSONObject(1); // 도로명 주소가 없을 경우
+				region = addr.getJSONObject("region");
+				
 				String regionDo = region.getJSONObject("area1").getString("name");
 				String regionSiGu = region.getJSONObject("area2").getString("name");
 				String regionDong = region.getJSONObject("area3").getString("name");
-
-				System.out.println(regionDo + " " + regionSiGu + " " + regionDong);
-				String address = regionDo + " " + regionSiGu + " " + regionDong;
+				
+				address = regionDo + " " + regionSiGu + " " + regionDong + " " + regionRo + " " + regionNum1 + (regionNum2.length() > 0 ? ("-" + regionNum2) : "");
+				
 				violation.setAddress(address);
-
 				System.out.println(violation.toString());
 			}
 		} catch (Exception e) {
