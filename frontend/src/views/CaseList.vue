@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-3">
+  <div class="pt-3 container">
     <!-- <h1 class="text-center mb-3">제보목록</h1> -->
     <!-- filter division -->
     <div
@@ -177,7 +177,7 @@ export default {
         }
       })
       .catch(() => {
-        alert("에러가 발생했습니다.");
+        alert("로그인 후 이용해주세요.");
       });
   },
   methods: {

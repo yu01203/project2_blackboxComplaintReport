@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="this.$session.get('email') == null">
       <br />
       <h1 class="text-center mb-3">전체 유저 제보현황</h1>

@@ -1,7 +1,8 @@
-<template>
-  <div style="width:100%">
+<template >
+  <div class="p-0" style="height: 100%; margin-top:-148px">
+    <div class="d-md-none" style="padding-top:84px;"></div>
     <!-- <Map :items="this.items" /> -->
-    <div>
+    <div style="height: 100%;">
       <Map :items="this.$store.state.violationitems" />
     </div>
   </div>

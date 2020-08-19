@@ -83,18 +83,7 @@ export default {
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
-
-  created() {
-    // 네이버 로그인
-    if (this.access_token != null) {
-      this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
-      this.$session.set("email", this.jwt.decode(this.access_token).email);
-      this.$session.set("name", this.jwt.decode(this.access_token).name);
-      this.$session.set("gender", this.jwt.decode(this.access_token).gender);
-      this.$session.set("birth", this.jwt.decode(this.access_token).birth);
-      this.$session.set("token", this.access_token);
-    }
-  },
+  created() {},
   methods: {
     checkHandlerLogin() {
       let err = true;

@@ -50,7 +50,8 @@
             >
               <b-nav-item id="nav-user-item">
                 <b-icon icon="person-circle"></b-icon>
-                <span>&nbsp;사용자</span>
+                <span v-if="this.$session.get('email') == 'admin'">&nbsp;관리자</span>
+                <span v-else>&nbsp;사용자</span>
               </b-nav-item>
             </a>
           </b-nav-item>
@@ -94,11 +95,23 @@
               </b-nav-item>
 
               <!-- 로그인 상태 -->
+
               <b-nav-item-dropdown v-if="this.$session.get('email') != null" right no-caret>
                 <template v-slot:button-content>
                   <b-icon icon="person-circle"></b-icon>
                   <span>&nbsp;사용자</span>
                 </template>
+
+                <div v-if="this.$session.get('email') == 'admin'">
+                  <b-dropdown-item class="p-0 m-0" to="usermanagement/">
+                    <!-- <router-link to="/usermanagement"> -->
+                    <b-icon icon="people"></b-icon>
+                    <span>&nbsp;회원관리</span>
+                    <!-- </router-link> -->
+                  </b-dropdown-item>
+                  <hr class="mx-0 px-0" />
+                </div>
+
                 <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
                   <b-icon icon="person-lines-fill"></b-icon>
                   <span>&nbsp;회원정보 수정</span>
@@ -132,6 +145,18 @@
       <!-- 토글시 사용자 드랍다운 구역 -->
       <b-collapse class="bg-white border boder-bottom d-md-none" id="user-collapse">
         <div class="p-3" style="list-style: none; height:75%">
+          <b-dropdown-item
+            v-if="this.$session.get('email') == 'admin'"
+            class="p-0 m-0"
+            to="usermanagement/"
+          >
+            <!-- <router-link to="/usermanagement"> -->
+            <b-icon icon="people"></b-icon>
+            <span>&nbsp;회원관리</span>
+            <!-- </router-link> -->
+          </b-dropdown-item>
+          <hr />
+
           <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
             <b-icon icon="person-lines-fill"></b-icon>
             <span>&nbsp;회원정보 수정</span>
@@ -223,6 +248,17 @@ export default {
       this.$router.push("/");
       this.$router.go();
     },
+  },
+  created() {
+    // 네이버 로그인
+    if (this.access_token != null) {
+      this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
+      this.$session.set("email", this.jwt.decode(this.access_token).email);
+      this.$session.set("name", this.jwt.decode(this.access_token).name);
+      this.$session.set("gender", this.jwt.decode(this.access_token).gender);
+      this.$session.set("birth", this.jwt.decode(this.access_token).birth);
+      this.$session.set("token", this.access_token);
+    }
   },
 };
 </script>

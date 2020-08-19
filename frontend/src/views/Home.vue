@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'">
       <CaseList />
       <br />

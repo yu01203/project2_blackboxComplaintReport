@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" style="height:100%">
     <div id="map-body" style="height:100%">
       <!-- Map Division -->
-      <div id="map" style="width:auto; height:100%"></div>
+      <div id="map"></div>
     </div>
     <!-- Modal Division -->
     <div v-for="( violationitem, index ) in items" :key="violationitem.violationNo">
@@ -313,8 +313,8 @@ export default {
 
 <style>
 #map {
-  min-width: 400px;
-  min-height: 720px;
+  min-width: 100%;
+  height: 100%;
 }
 
 /* label {
