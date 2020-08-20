@@ -14,13 +14,8 @@ public class SituationServiceImpl implements SituationService {
 	@Autowired
 	SituationRepository repo;
 	
-//	@Override
-//	public List<Situation> selectAll(String date) throws Exception {
-//		return repo.selectAll(date);
-//	}
 	@Override
 	public List<List<Situation>> selectAll() throws Exception {
-		
 		List<List<Situation>> abc = new ArrayList<List<Situation>>();
 
 		abc.add(repo.select0());
@@ -32,7 +27,6 @@ public class SituationServiceImpl implements SituationService {
 	
 	@Override
 	public List<List<Situation>> selectByUser(int userno) throws Exception {
-		
 		List<List<Situation>> abc = new ArrayList<List<Situation>>();
 
 		abc.add(repo.selectByUser0(userno));
@@ -41,5 +35,4 @@ public class SituationServiceImpl implements SituationService {
 	
 		return abc;
 	}
-
 }

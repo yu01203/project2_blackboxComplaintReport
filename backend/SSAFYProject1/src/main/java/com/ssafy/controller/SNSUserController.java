@@ -57,7 +57,6 @@ public class SNSUserController {
 		naverLoginURL += "&client_secret=" + naverClientSecret;
 		naverLoginURL += "&code=" + code;
 		naverLoginURL += "&state=" + state;
-		System.out.println("네이버 아이디 로그인 URL >> " + naverLoginURL);
 
 		try { // 접근 토큰 발급 요청
 			URL url = new URL(naverLoginURL);
@@ -81,11 +80,9 @@ public class SNSUserController {
 				JSONTokener tokener = new JSONTokener(response.toString());
 				JSONObject accessObject = new JSONObject(tokener);
 				access_token = accessObject.getString("access_token");
-				System.out.println("access_token >> " + access_token);
 
 				tokener = new JSONTokener(getUserInfo(access_token).toString());
 				JSONObject userInfoObject = new JSONObject(tokener).getJSONObject("response");
-				System.out.println(userInfoObject);
 
 				int id = userInfoObject.getInt("id");
 				String email = userInfoObject.getString("email");
