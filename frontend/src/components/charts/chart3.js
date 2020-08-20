@@ -55,7 +55,8 @@ export default {
           datasets: [
             {
               label: "교통 사고 현황",
-              backgroundColor: "#ff8888",
+              borderColor: "rgba(100, 100, 100, 1)",
+              backgroundColor: "rgba(15, 76, 129, 0.6)",
               data: [
                 this.items[2][0].count,
                 this.items[2][1].count,
