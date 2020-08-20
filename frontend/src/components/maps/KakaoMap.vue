@@ -24,8 +24,8 @@
           <a
             :href="violationitem.videoUrl"
             download
-            class="btn btn-success"
-            style="width:100%"
+            class="btn"
+            style="width:100%; background-color: #0f4c81; color: white;"
           >영상 다운로드</a>
         </div>
         <hr />
@@ -108,8 +108,7 @@
           </p>
           <hr />
           <b-button
-            variant="info"
-            style="width: 100%;"
+            style="width: 100%; background-color: #0f4c81; color: white;"
             href="http://onetouch.police.go.kr/"
             onclick="window.open(this.href);return false;"
             target="_blank"

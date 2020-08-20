@@ -2,7 +2,7 @@
   <div style="height:100%">
     <div
       v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
-      class="pt-3 container"
+      class="pt-3 px-0 container"
     >
       <!-- filter division -->
       <div

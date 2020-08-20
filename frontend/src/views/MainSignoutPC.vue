@@ -16,7 +16,7 @@
         </h1>
         <h1 id="second-text" class="text-white mb-5 bold">
           계정이 없으면
-          <span class="bolder" style="color:#C10016;" v-b-modal.modal-multi-3>회원 가입</span> 해라
+          <span class="bolder" style="color:#C10016;" v-b-modal.modal-multi-3>회원 가입</span> 해주세요
         </h1>
         <h3 id="third-text" class="text-white mb-5 bold">
           자세한 서비스 설명은
@@ -26,7 +26,7 @@
               class="text-decoration-none hover-none bolder"
               style="color:#C10016"
             >이용방법</router-link>
-          </span>&nbsp;페이지를 확인하고잉
+          </span>&nbsp;페이지를 확인
         </h3>
       </div>
     </div>

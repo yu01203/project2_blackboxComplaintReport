@@ -6,11 +6,11 @@
         <img id="greeting-logo" src="@/assets/logos/Logo_ico.png" alt="Logo-iconic-image" />
         <h5 id="first-text" class="text-white mb-5">
           서비스 이용을 위해
-          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-1>로그인</span>을 해라
+          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-1>로그인</span>
         </h5>
         <h5 id="second-text" class="text-white mb-5">
           계정이 없으면
-          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-multi-3>회원 가입</span> 해라
+          <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-multi-3>회원 가입</span> 해주세요
         </h5>
         <p id="third-text" class="text-white mb-5">
           자세한 서비스 설명은
@@ -21,7 +21,7 @@
               class="text-decoration-none hover-none"
               style="color:#dac0a7;font-weight: bold"
             >이용방법</router-link>
-          </span>&nbsp;페이지를 확인하고잉
+          </span>&nbsp;페이지를 확인
         </p>
       </div>
     </div>

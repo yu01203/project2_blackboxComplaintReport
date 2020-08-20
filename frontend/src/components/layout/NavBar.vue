@@ -51,7 +51,7 @@
               <b-nav-item id="nav-user-item">
                 <b-icon icon="person-circle"></b-icon>
                 <span v-if="this.$session.get('email') == 'admin'">&nbsp;관리자</span>
-                <span v-else>&nbsp;사용자</span>
+                <span v-else>&nbsp;{{ name }}</span>
               </b-nav-item>
             </a>
           </b-nav-item>
@@ -92,7 +92,7 @@
               <b-nav-item-dropdown v-if="this.$session.get('email') != null" right no-caret>
                 <template v-slot:button-content>
                   <b-icon icon="person-circle"></b-icon>
-                  <span>&nbsp;사용자</span>
+                  <span>&nbsp;{{ name }}</span>
                 </template>
 
                 <div v-if="this.$session.get('email') == 'admin'">
@@ -235,7 +235,9 @@ export default {
       this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
       this.$session.set("email", this.jwt.decode(this.access_token).email);
       this.$session.set("isSNS", this.jwt.decode(this.access_token).isSNS);
+      this.$session.set("name", this.jwt.decode(this.access_token).name);
       this.$session.set("token", this.access_token);
+      this.name = this.jwt.decode(this.access_token).name;
     }
   },
 };

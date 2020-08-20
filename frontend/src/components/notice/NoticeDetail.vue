@@ -31,11 +31,12 @@
     >
       <router-link to="/noticeModify" class="btn btn-primary">수정</router-link>
       <button type="button" class="btn btn-danger" @click="deleteHandler">삭제</button>
-      <router-link to="/noticeboard" class="btn btn-info">목록</router-link>
+      <router-link to="/noticeboard" class="btn" style="background-color: #0f4c81; color: white;">목록</router-link>
     </div>
     <div class="mt-3" v-if="this.$session.get('email') != 'admin'">
-      <router-link to="/noticeboard" class="btn btn-info">목록</router-link>
+      <router-link to="/noticeboard" class="btn" style="background-color: #0f4c81; color: white;">목록</router-link>
     </div>
+    <br />
   </div>
 </template>
 

@@ -1,36 +1,37 @@
 <template>
   <div style="height: 100%">
+    <br />
     <!-- 전체 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') == null" style="height: 100%">
       <div>
         <h1 class="text-center mb-3">전체 등록 현황</h1>
       </div>
       <div class="row align-items-center justify-content-center text-center mb-3 py-2">
-        <div class="col-12 col-lg-4 shadow p-3 mb-5 rounded" style="max-width: 25rem;">
+        <div class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded" style="max-width: 20rem;">
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ wholeCount }} 건</p>
+            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
           </div>
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -44,7 +45,7 @@
       >
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">신고 미접수 현황</h2>
           <hr />
@@ -52,7 +53,7 @@
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">접수완료 현황</h2>
           <hr />
@@ -60,7 +61,7 @@
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">처리완료 현황</h2>
           <hr />
@@ -74,31 +75,31 @@
         <h1 class="text-center mb-3">나의 등록 현황</h1>
       </div>
       <div class="row align-items-center justify-content-center text-center mb-3 py-2">
-        <div class="col-12 col-lg-4 shadow p-3 mb-5 rounded" style="max-width: 25rem;">
+        <div class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded" style="max-width: 20rem;">
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:15vh">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:15vh">{{ yearCount }}건</p>
           </div>
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p style="font-size:15vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:15vh">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -112,7 +113,7 @@
       >
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">신고 미접수 현황</h2>
           <hr />
@@ -120,7 +121,7 @@
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">접수완료 현황</h2>
           <hr />
@@ -128,7 +129,7 @@
         </div>
         <div
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
-          style="max-width: 25rem;"
+          style="max-width: 20rem;"
         >
           <h2 class="text-left">처리완료 현황</h2>
           <hr />
@@ -220,7 +221,6 @@ export default {
                 var now = new Date();
                 if (j == now.getMonth() - 1) {
                   monthCount += currentCount;
-                  console.log(monthCount);
                 }
               }
             }
