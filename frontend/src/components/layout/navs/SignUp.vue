@@ -147,7 +147,11 @@ export default {
       awesomeVar: 0,
       awesomeId: "",
       awesomeId2: "",
+      today: "",
     };
+  },
+  mounted() {
+    this.getToday();
   },
   methods: {
     checkHandlerInsert() {
@@ -274,6 +278,10 @@ export default {
         birthDate += number.substr(6);
       }
       this.birth = birthDate;
+      if (this.birth >= this.today) {
+        alert("잘못된 날짜입니다.");
+        this.birth = "";
+      }
     },
     inputPhoneNumber() {
       var number = this.phone.replace(/[^0-9]/g, "");
@@ -309,6 +317,23 @@ export default {
         this.awesomeId = "";
         this.awesomeId2 = "";
       }
+    },
+    getToday() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      this.today = today;
     },
   },
 };
