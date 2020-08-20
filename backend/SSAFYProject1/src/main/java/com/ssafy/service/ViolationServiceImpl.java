@@ -61,8 +61,6 @@ public class ViolationServiceImpl implements ViolationService {
 			JSONObject object = new JSONObject(tokener);
 			
 			int status = (int) object.getJSONObject("status").get("code");
-			System.out.println(status);
-			
 			if(status == 0) {
 				JSONArray array = object.getJSONArray("results");
 				JSONObject addr = null; JSONObject region = null;
@@ -88,7 +86,6 @@ public class ViolationServiceImpl implements ViolationService {
 				address = address.trim();
 				
 				violation.setAddress(address);
-				System.out.println(violation.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

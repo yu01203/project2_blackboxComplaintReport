@@ -26,7 +26,6 @@
               ></b-form-select>
             </b-list-group-item>
             <div class="d-flex justify-content-left text-secondary">
-              <!-- <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p> -->
               <p class="mb-0">{{ date }}</p>
               <p class="ml-2 mb-0">{{ time }}</p>
             </div>
@@ -77,7 +76,6 @@ export default {
   created() {},
   mounted: function () {
     this.transDateTime();
-    // this.getFormatDate(this.violationitem);
     this.mountStatus();
   },
   updated() {
@@ -103,7 +101,7 @@ export default {
         .then(({ data }) => {
           let msg = "저장에 실패하였습니다.";
           if (data === "success") {
-            msg = "상태가 성공적으로 변경되었단다.";
+            msg = "상태가 성공적으로 변경되었습니다.";
           }
           alert(msg);
           this.$router.go();

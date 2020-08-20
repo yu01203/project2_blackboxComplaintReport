@@ -6,7 +6,7 @@
         <div class="d-flex">
           <input
             type="text"
-            class="form-control mr-3"
+            class="form-control mr-3 ft-nss light"
             id="email"
             ref="email"
             placeholder="이메일을 입력하세요"
@@ -37,7 +37,7 @@
         <label>비밀번호 :</label>
         <input
           type="password"
-          class="form-control"
+          class="form-control ft-nss light"
           id="pw"
           ref="pw"
           placeholder="비밀번호를 입력하세요"
@@ -61,14 +61,6 @@
         <label for="one">남</label>
         <input type="radio" id="two" value="여" v-model="gender" />
         <label for="two">여</label>
-        <!-- <input
-                type="text"
-                class="form-control"
-                id="gender"
-                ref="gender"
-                placeholder="남 또는 여"
-                v-model="gender"
-        />-->
       </div>
       <div class="form-group">
         <label>생년월일 :</label>
@@ -79,6 +71,8 @@
           ref="birth"
           placeholder="2020-01-01"
           v-model="birth"
+          maxlength="10"
+          @keyup="inputBirthDate"
         />
       </div>
       <div class="form-group">
@@ -88,8 +82,10 @@
           class="form-control"
           id="phone"
           ref="phone"
-          placeholder="핸드폰 번호를 입력하세요"
+          placeholder="핸드폰 번호를 입력해주세요"
           v-model="phone"
+          maxlength="13"
+          @keyup="inputPhoneNumber"
         />
       </div>
       <div class="form-group">
@@ -143,7 +139,11 @@ export default {
       awesomeVar: 0,
       awesomeId: "",
       awesomeId2: "",
+      today: "",
     };
+  },
+  mounted() {
+    this.getToday();
   },
   methods: {
     checkHandlerInsert() {
@@ -243,6 +243,7 @@ export default {
           alert("에러가 발생했습니다.");
         });
     },
+    // 유효성 검사
     validEmail(email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
       return re.test(email);
@@ -250,6 +251,54 @@ export default {
     validBirth(birth) {
       var re = /^\d{4}-\d{2}-\d{2}$/;
       return re.test(birth);
+    },
+    inputBirthDate() {
+      var number = this.birth.replace(/[^0-9]/g, "");
+      var birthDate = "";
+
+      if (number.length < 5) {
+        return number;
+      } else if (number.length < 7) {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4);
+      } else {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4, 2);
+        birthDate += "-";
+        birthDate += number.substr(6);
+      }
+      this.birth = birthDate;
+      if (this.birth >= this.today) {
+        alert("잘못된 날짜입니다.");
+        this.birth = "";
+      }
+    },
+    inputPhoneNumber() {
+      var number = this.phone.replace(/[^0-9]/g, "");
+      var phone = "";
+
+      if (number.length < 4) {
+        return number;
+      } else if (number.length < 7) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3);
+      } else if (number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+      } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+      }
+      this.phone = phone;
     },
     awesomeFunc() {
       this.awesomeVar += 1;
@@ -260,6 +309,23 @@ export default {
         this.awesomeId = "";
         this.awesomeId2 = "";
       }
+    },
+    getToday() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      this.today = today;
     },
   },
 };

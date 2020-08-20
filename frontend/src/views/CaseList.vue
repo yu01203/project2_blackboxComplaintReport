@@ -1,9 +1,6 @@
 <template>
   <div style="height:100%">
-    <div
-      v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
-      class="pt-3 container"
-    >
+    <div v-if="this.$session.get('email') != null" class="pt-3 px-0 container">
       <!-- filter division -->
       <div
         id="filter-division"
@@ -187,9 +184,6 @@ export default {
         } else {
           alert(" 실패했습니다.");
         }
-      })
-      .catch(() => {
-        // alert("로그인 후 이용해주세요.");
       });
   },
   methods: {
@@ -246,12 +240,6 @@ export default {
           if (this.startdate <= newDate && newDate <= this.enddate) {
             this.templist_find.push(this.templist_select[i]);
           }
-          // if (
-          //   this.startdate <= this.templist_select[i].date &&
-          //   this.templist_select[i].date <= this.enddate
-          // ) {
-          //   this.templist_find.push(this.templist_select[i]);
-          // }
         }
       } else {
         this.templist_find = this.templist_select;
@@ -262,10 +250,14 @@ export default {
       this.searchviolationitems = emptyItems;
       for (var i in this.templist_find) {
         if (
-          this.templist_find[i].contents.includes(this.searchText) ||
-          this.templist_find[i].spot.includes(this.searchText) ||
-          this.templist_find[i].carNum.includes(this.searchText) ||
-          this.templist_find[i].address.includes(this.searchText)
+          (this.templist_find[i].contents != null &&
+            this.templist_find[i].contents.includes(this.searchText)) ||
+          (this.templist_find[i].spot != null &&
+            this.templist_find[i].spot.includes(this.searchText)) ||
+          (this.templist_find[i].carNum != null &&
+            this.templist_find[i].carNum.includes(this.searchText)) ||
+          (this.templist_find[i].address != null &&
+            this.templist_find[i].address.includes(this.searchText))
         ) {
           this.searchviolationitems.push(this.templist_find[i]);
         }

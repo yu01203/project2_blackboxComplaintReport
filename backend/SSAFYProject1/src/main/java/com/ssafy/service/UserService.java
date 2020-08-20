@@ -17,7 +17,7 @@ public interface UserService {
 
 	int modify(User user) throws Exception;
 
-	int remove(String email) throws Exception; // 리스트로 회원을 한꺼번에 remove 할지 고민
+	int remove(String email) throws Exception;
 	
 	String findEmail(User user) throws Exception;
 	

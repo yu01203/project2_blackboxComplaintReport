@@ -3,7 +3,6 @@
     <div class="h-100 d-flex align-items-center">
       <div class="mx-auto text-center text-white">
         <p class="font-italic" style="font-size:10vh">어라...?</p>
-        <p>로그인도 안했는데 성급하시기는...!</p>
         <h5>로그인이 되어있지 않아</h5>
         <h5>데이터를 불러올 수 없습니다.</h5>
         <h5 class="mt-3">로그인 후 다시 이용해주세요.</h5>

@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.repository.NoticeDAO;
 import com.ssafy.domain.Notice;
 
-
-
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	

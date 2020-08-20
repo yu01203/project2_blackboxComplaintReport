@@ -55,7 +55,8 @@ export default {
           datasets: [
             {
               label: "교통 사고 현황",
-              backgroundColor: "#ff8888",
+              borderColor: "rgba(100, 100, 100, 1)",
+              backgroundColor: "rgba(15, 76, 129, 0.6)",
               data: [
                 this.items[0][0].count,
                 this.items[0][1].count,
@@ -83,8 +84,6 @@ export default {
               {
                 ticks: {
                   max: this.maxNum + 10,
-                  // max: Math.max(...this.items[0].data) + 10,
-                  // display: false,
                   beginAtZero: true,
                 },
               },

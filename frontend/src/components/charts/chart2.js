@@ -1,8 +1,8 @@
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 import http from "@/util/http-common";
 
 export default {
-  extends: Line,
+  extends: Bar,
   data() {
     return {
       items: [],
@@ -55,7 +55,8 @@ export default {
           datasets: [
             {
               label: "교통 사고 현황",
-              backgroundColor: "#ff8888",
+              borderColor: "rgba(100, 100, 100, 1)",
+              backgroundColor: "rgba(15, 76, 129, 0.6)",
               data: [
                 this.items[1][0].count,
                 this.items[1][1].count,
@@ -83,8 +84,6 @@ export default {
               {
                 ticks: {
                   max: this.maxNum + 10,
-                  // max: Math.max(...this.items[0].data) + 10,
-                  // display: false,
                   beginAtZero: true,
                 },
               },

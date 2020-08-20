@@ -14,32 +14,27 @@ public class SituationServiceImpl implements SituationService {
 	@Autowired
 	SituationRepository repo;
 	
-//	@Override
-//	public List<Situation> selectAll(String date) throws Exception {
-//		return repo.selectAll(date);
-//	}
 	@Override
 	public List<List<Situation>> selectAll() throws Exception {
-		
-		List<List<Situation>> abc = new ArrayList<List<Situation>>();
+		List<List<Situation>> listAll = new ArrayList<List<Situation>>();
 
-		abc.add(repo.select0());
-		abc.add(repo.select1());
-		abc.add(repo.select2());	
+		listAll.add(repo.selectReportStatus0ThisYear());
+		listAll.add(repo.selectReportStatus1ThisYear());
+		listAll.add(repo.selectReportStatus2ThisYear());
+		listAll.add(repo.allCnt());
 		
-		return abc;
+		return listAll;
 	}
 	
 	@Override
 	public List<List<Situation>> selectByUser(int userno) throws Exception {
-		
-		List<List<Situation>> abc = new ArrayList<List<Situation>>();
+		List<List<Situation>> listUser = new ArrayList<List<Situation>>();
 
-		abc.add(repo.selectByUser0(userno));
-		abc.add(repo.selectByUser1(userno));
-		abc.add(repo.selectByUser2(userno));	
+		listUser.add(repo.selectByUserReportStatus0ThisYear(userno));
+		listUser.add(repo.selectByUserReportStatus1ThisYear(userno));
+		listUser.add(repo.selectByUserReportStatus2ThisYear(userno));
+		listUser.add(repo.userCnt(userno));	
 	
-		return abc;
+		return listUser;
 	}
-
 }

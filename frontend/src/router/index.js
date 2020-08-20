@@ -10,7 +10,6 @@ import NoticeWrite from "@/components/notice/NoticeWrite.vue";
 import NoticeDetail from "@/components/notice/NoticeDetail.vue";
 import NoticeModify from "@/components/notice/NoticeModify.vue";
 import UserManagement from "../views/UserManagement.vue";
-import GeoTest from "../views/GeoTest.vue";
 import HowToUse from "../views/HowToUse.vue";
 
 Vue.use(VueRouter);
@@ -40,11 +39,6 @@ const routes = [
     path: "/noticeboard",
     name: "NoticeBoard",
     component: NoticeBoard,
-  },
-  {
-    path: "/geotest",
-    name: "GeoTest",
-    component: GeoTest,
   },
   {
     path: "/noticeWrite",

@@ -3,14 +3,14 @@
     <div class="form-group">
       <label class="d-flex">
         이메일:
-        <div class="ml-1" v-text="this.$session.get('email')"></div>
+        <div class="ml-1 ft-nss light" v-text="this.$session.get('email')"></div>
       </label>
     </div>
     <div class="form-group">
-      <label>비밀번호:</label>
+      <label for="pw">비밀번호</label>
       <input
         type="password"
-        class="form-control"
+        class="form-control ft-nss"
         id="pw"
         ref="pw"
         placeholder="비밀번호를 입력하세요"
@@ -18,10 +18,10 @@
       />
     </div>
     <div class="form-group">
-      <label>비밀번호 확인:</label>
+      <label for="pw_re">비밀번호 확인</label>
       <input
         type="password"
-        class="form-control"
+        class="form-control ft-nss light"
         id="pw_re"
         ref="pw_re"
         placeholder="비밀번호 한번 더 입력하세요"
@@ -29,10 +29,7 @@
       />
     </div>
     <div class="form-group">
-      <label class="d-flex">
-        이름:
-        <div class="ml-1" v-text="this.$session.get('name')"></div>
-      </label>
+      <label for="name" class="d-flex">이름</label>
       <input
         type="text"
         class="form-control"
@@ -42,17 +39,14 @@
         v-model="name"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group ft-nss light">
       <label>성별 :</label>
       <input type="radio" id="one" value="남" v-model="gender" />
       <label for="one">남</label>
       <input type="radio" id="two" value="여" v-model="gender" />
       <label for="two">여</label>
-      <!-- <label class="d-flex">
-              성별:
-              <div class="ml-1" v-text="this.$session.get('gender')"></div>
-      </label>-->
       <input
+        hidden
         type="text"
         class="form-control"
         id="gender"
@@ -62,37 +56,35 @@
       />
     </div>
     <div class="form-group">
-      <label class="d-flex">
-        생년월일:
-        <div class="ml-1" v-text="this.$session.get('birth')"></div>
-      </label>
+      <label for="birth" class="d-flex ft-nss light">생년월일</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control ft-nss light"
         id="birth"
         ref="birth"
         placeholder="2020-01-01"
         v-model="birth"
+        maxlength="10"
+        @keyup="inputBirthDate"
       />
     </div>
     <div class="form-group">
-      <label class="d-flex">
-        핸드폰 번호:
-        <div class="ml-1" v-text="this.$session.get('phone')"></div>
-      </label>
+      <label for="phone" class="d-flex ft-nss light">핸드폰 번호</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control ft-nss light"
         id="phone"
         ref="phone"
         placeholder="핸드폰 번호를 입력하세요"
         v-model="phone"
+        maxlength="13"
+        @keyup="inputPhoneNumber"
       />
     </div>
     <div class="form-group d-flex justify-content-around">
-      <button class="btn btn-info" @click="checkHandlerModify">회원정보수정</button>
-      <button class="btn btn-info" @click="deleteHandler">
-        <div style="padding: 0px 12px; color: white;">회원탈퇴</div>
+      <button class="btn btn-info ft-nss light" @click="checkHandlerModify">회원정보수정</button>
+      <button class="btn btn-info ft-nss light" @click="deleteHandler">
+        <div class="ft-nss light" style="padding: 0px 12px; color: white;">회원탈퇴</div>
       </button>
     </div>
   </b-modal>
@@ -169,7 +161,6 @@ export default {
       else this.modifyHandler();
     },
     deleteHandler() {
-      console.log(this.$session.get("email"));
       http
         .post(
           `/user/del`,
@@ -232,6 +223,50 @@ export default {
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
+    },
+    inputBirthDate() {
+      var number = this.birth.replace(/[^0-9]/g, "");
+      var birthDate = "";
+
+      if (number.length < 5) {
+        return number;
+      } else if (number.length < 7) {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4);
+      } else {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4, 2);
+        birthDate += "-";
+        birthDate += number.substr(6);
+      }
+      this.birth = birthDate;
+    },
+    inputPhoneNumber() {
+      var number = this.phone.replace(/[^0-9]/g, "");
+      var phone = "";
+
+      if (number.length < 4) {
+        return number;
+      } else if (number.length < 7) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3);
+      } else if (number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+      } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+      }
+      this.phone = phone;
     },
   },
 };

@@ -49,8 +49,7 @@ public class ViolationController {
 		User user = userService.detailByNo(userNo);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else {
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) {
 			List<Violation> nullList = new ArrayList<Violation>();
 			return new ResponseEntity<List<Violation>>(nullList, HttpStatus.BAD_REQUEST);
 		}
@@ -65,8 +64,7 @@ public class ViolationController {
 		User user = userService.detailByNo(userNo);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else {
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) {
 			Violation nullVio = new Violation();
 			return new ResponseEntity<Violation>(nullVio, HttpStatus.BAD_REQUEST);
 		}
@@ -90,9 +88,7 @@ public class ViolationController {
 		User user = userService.detailByNo(violation.getUserNo());
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if(violationService.modifyViolation(violation) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
@@ -104,9 +100,7 @@ public class ViolationController {
 		User user = userService.detailByNo(userNo);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if(violationService.modifyCondition(violationNo, userNo, reportStatus) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
@@ -118,9 +112,7 @@ public class ViolationController {
 		User user = userService.detailByNo(userNo);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if(violationService.removeViolation(violationNo, userNo) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 	}
