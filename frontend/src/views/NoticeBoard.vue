@@ -33,7 +33,6 @@
             v-for="noticeitem in this.$store.state.noticeitems"
             :key="noticeitem.noticeNo"
             :noticeitem="noticeitem"
-            @click="rowClicked"
           />
         </b-row>
       </b-container>
