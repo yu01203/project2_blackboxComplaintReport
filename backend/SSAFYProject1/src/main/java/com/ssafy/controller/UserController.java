@@ -106,7 +106,7 @@ public class UserController {
 			User user = service.detail(email);
 			
 			new JWTUtil();
-			if(!JWTUtil.verifyToken(token).equals("관리자")) {
+			if(!JWTUtil.verifyToken(token).equals("admin")) {
 				map.put("wrong", WRONG);
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 			}
@@ -157,7 +157,7 @@ public class UserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		new JWTUtil();
-		if(!JWTUtil.verifyToken(token).equals(user.getName())) {
+		if(!JWTUtil.verifyToken(token).equals(user.getEmail())) {
 			map.put("wrong", WRONG);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 		}
@@ -189,8 +189,8 @@ public class UserController {
 			User user = service.detail(email);
 			
 			new JWTUtil();
-			if(JWTUtil.verifyToken(token).equals(user.getName()) || JWTUtil.verifyToken(token).equals("관리자")) System.out.println("토큰 검증 완료!!");
-			else return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+			if(!JWTUtil.verifyToken(token).equals(user.getEmail()) || !JWTUtil.verifyToken(token).equals("admin"))
+				return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 			
 			if(service.remove(email) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
@@ -246,11 +246,8 @@ public class UserController {
 		logger.debug("회원 리스트 - 호출");
 		
 		List<User> list = new ArrayList<User>();
-		try {
-			list = service.userList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		try { list = service.userList(); }
+		catch (Exception e) { e.printStackTrace(); }
 		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 	}
 }
