@@ -49,13 +49,10 @@ export default {
 
 .content:after {
   background-image: url("~@/assets/images/home-bg.jpg");
-  /* background-size: 100%; */
-
   background-attachment: fixed;
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
-
   content: "";
   display: block;
   position: absolute;
@@ -89,12 +86,10 @@ export default {
   0% {
     opacity: 0;
     top: 100px;
-    /* top: 80%; */
   }
   25% {
     opacity: 1;
     top: 70px;
-    /* top: 50%; */
   }
   70% {
     opacity: 1;
@@ -126,7 +121,6 @@ export default {
 #greeting-logo {
   opacity: 0;
   position: relative;
-  /* position: absolute; */
   animation-name: popup-logo;
   animation-duration: 6s;
   animation-delay: 2s;

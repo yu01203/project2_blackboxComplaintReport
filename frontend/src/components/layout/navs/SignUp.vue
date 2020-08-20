@@ -61,14 +61,6 @@
         <label for="one">남</label>
         <input type="radio" id="two" value="여" v-model="gender" />
         <label for="two">여</label>
-        <!-- <input
-                type="text"
-                class="form-control"
-                id="gender"
-                ref="gender"
-                placeholder="남 또는 여"
-                v-model="gender"
-        />-->
       </div>
       <div class="form-group">
         <label>생년월일 :</label>

@@ -11,15 +11,9 @@
 import http from "@/util/http-common";
 
 import Map from "@/components/maps/KakaoMap.vue";
-// import Map from "@/components/maps/NaverMap.vue";
 
 export default {
   name: "MapMain",
-  data() {
-    return {
-      // items: [],
-    };
-  },
   components: {
     Map,
   },
@@ -33,10 +27,7 @@ export default {
         })
         .then(({ data }) => {
           if (data) {
-            // this.local_violationitems = data;
-            // this.items = data;
             this.$store.state.violationitems = data;
-            // alert("ㅔㅗ");
           } else {
             alert(" 실패했습니다.");
           }
@@ -45,9 +36,6 @@ export default {
           alert("에러가 발생했습니다." + " " + err);
         });
     }
-    // else {
-    //   alert("미로그인 사용자");
-    // }
   },
 };
 </script>

@@ -119,7 +119,6 @@ export default {
 #greeting-logo {
   opacity: 0;
   position: relative;
-  /* position: absolute; */
   animation-name: popup-logo;
   animation-duration: 6s;
   animation-delay: 2s;

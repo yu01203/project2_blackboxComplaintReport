@@ -26,7 +26,6 @@
               ></b-form-select>
             </b-list-group-item>
             <div class="d-flex justify-content-left text-secondary">
-              <!-- <p class="mb-0">{{ violationitem.date }} {{ violationitem.time }}</p> -->
               <p class="mb-0">{{ date }}</p>
               <p class="ml-2 mb-0">{{ time }}</p>
             </div>
@@ -77,7 +76,6 @@ export default {
   created() {},
   mounted: function () {
     this.transDateTime();
-    // this.getFormatDate(this.violationitem);
     this.mountStatus();
   },
   updated() {

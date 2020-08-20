@@ -107,10 +107,6 @@
             />
           </p>
           <hr />
-          <!-- <div class="d-flex justify-content-between mb-3">
-            <b-button variant="primary" style="width: 45%;" @click="saveHandler">저장하기</b-button>
-            <b-button variant="danger" style="width: 45%;" @click="deleteHandler">삭제하기</b-button>
-          </div>-->
           <b-button
             variant="info"
             style="width: 100%;"
@@ -159,8 +155,6 @@ export default {
       ],
       date: [],
       time: [],
-      // startLat: 37.5138,
-      // startLng: 126.981,
       startLat: 37.5013391,
       startLng: 127.0391208,
     };
@@ -191,21 +185,6 @@ export default {
         center: new kakao.maps.LatLng(this.startLat, this.startLng),
         level: MapOptionLevel,
       };
-
-      // if (this.startLat && this.startLng) {
-      //   var options = {
-      //     center: new kakao.maps.LatLng(this.startLat, this.startLng),
-      //     level: 3,
-      //   };
-      //   alert("Success!");
-      // } else {
-      //   options = {
-      //     center: new kakao.maps.LatLng(37.5138, 126.981),
-      //     level: 7,
-      //   };
-      //   alert("Failed...");
-      // }
-
       var map = new kakao.maps.Map(container, options);
 
       for (var i = 0; i < this.items.length; i++) {
@@ -213,26 +192,6 @@ export default {
 
         // Date And Time Divison
         this.transDateTime(violationitem.date, violationitem.time);
-        // var RawDate = violationitem.date.split("-");
-        // var newDate =
-        //   RawDate[0] + "년" + " " + RawDate[1] + "월" + " " + RawDate[2] + "일";
-        // this.date.push(newDate);
-
-        // var RawTime = violationitem.time.split(":");
-        // if (RawTime[0] >= 12) {
-        //   var ApTime = RawTime[0] - 12;
-        //   if (ApTime === 0) {
-        //     ApTime = 12;
-        //   }
-        //   var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
-        // } else {
-        //   var AmTime = RawTime[0].slice(0, 1);
-        //   if (AmTime == 0) {
-        //     AmTime = 12;
-        //   }
-        //   newTime = "오전" + " " + AmTime + "시" + " " + RawTime[1] + "분";
-        // }
-        // this.time.push(newTime);
 
         var markerPosition = new kakao.maps.LatLng(
           violationitem.lat,
@@ -262,10 +221,8 @@ export default {
           "</div>" +
           "</div>";
 
-        // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
           content: content,
-          // removable: iwRemoveable,
         });
 
         (function (marker, infowindow) {
@@ -316,8 +273,4 @@ export default {
   min-width: 100%;
   height: 100%;
 }
-
-/* label {
-  margin-bottom: 0;
-} */
 </style>

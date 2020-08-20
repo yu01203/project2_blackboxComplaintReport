@@ -1,7 +1,6 @@
 <template>
   <b-modal :id="'modal' + violationitem.violationNo" title="제보 상세보기" hide-footer>
     <!-- 동영상 -->
-    <!-- 이거 자주 접속하면 요금폭탄맨~~~ -->
     <div class="text-center justify-content-center p-0">
       <video id="video1" style="width:100%" controls>
         <source :src="violationitem.videoUrl" type="video/mp4" />
@@ -12,10 +11,7 @@
         download
         class="btn btn-success"
         style="width:100%; background-color: #0f4c81"
-      >
-        <!-- 아이콘 왜 안되지? -->
-        <b-icon icon="cloud-arrow-down-fill" aria-hidden="true"></b-icon>영상 다운로드
-      </a>
+      >영상 다운로드</a>
     </div>
     <hr />
     <!-- 세부사항 -->
