@@ -52,7 +52,7 @@ public class NoticeController {
 		logger.debug("writeNotice - 호출");
 		
 		new JWTUtil();
-		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if(!JWTUtil.verifyToken(token).equals("admin")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if (noticeService.writeNotice(notice)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
@@ -70,7 +70,7 @@ public class NoticeController {
 		logger.debug("updateNotice - 호출");
 		
 		new JWTUtil();
-		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if(!JWTUtil.verifyToken(token).equals("admin")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if (noticeService.updateNotice(notice)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
@@ -81,7 +81,7 @@ public class NoticeController {
 		logger.debug("deleteNotice - 호출");
 		
 		new JWTUtil();
-		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if(!JWTUtil.verifyToken(token).equals("admin")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 		if (noticeService.deleteNotice(notice_no)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
