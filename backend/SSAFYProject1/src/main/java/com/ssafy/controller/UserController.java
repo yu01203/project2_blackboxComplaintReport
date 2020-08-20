@@ -50,7 +50,6 @@ public class UserController {
 	@PostMapping("login") // 로그인
 	public @ResponseBody ResponseEntity<String> login(@RequestBody Map<String, Object> param, Map<String, Object> map) {
 		logger.debug("login - 호출");
-		System.out.println(param);
 		
 		String JWT_token = null;
 		User input = new User();
@@ -72,13 +71,9 @@ public class UserController {
 				object.put("userinfo", new JSONObject(user));
 				object.put("success", SUCCESS);
 				
-				System.out.println(object.toString());
-				// System.out.println(gson.toJson(map));
-				
 				new JWTUtil();
 				JWT_token = JWTUtil.createJWTToken(user.getName(), user.getEmail(), user.getBirth(), user.getGender(), user.getUserNo(), false);
 				object.put("token", JWT_token);
-				System.out.println(JWT_token);
 				
 				return new ResponseEntity<String>(object.toString(), HttpStatus.OK); // gson.toJson(map)
 			} else {
@@ -111,8 +106,7 @@ public class UserController {
 			User user = service.detail(email);
 			
 			new JWTUtil();
-			if (JWTUtil.verifyToken(token).equals("관리자")) System.out.println("토큰 검증 완료!!");
-			else {
+			if(!JWTUtil.verifyToken(token).equals("관리자")) {
 				map.put("wrong", WRONG);
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 			}
@@ -142,7 +136,6 @@ public class UserController {
 	@PostMapping // 회원 등록
 	public ResponseEntity<String> signUp(@RequestBody User user, Model model) {
 		logger.debug("회원등록 - 호출");
-		System.out.println(user);		
 		
 		try {
 			if(service.detail(user.getEmail()) != null) return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
@@ -161,12 +154,10 @@ public class UserController {
 	@PutMapping // 회원 수정
 	public ResponseEntity<Map<String, Object>> update(@RequestBody User user, @RequestHeader("token") String token) {
 		logger.debug("회원수정 - 호출");
-		System.out.println("유저 토큰 >> " + token);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals(user.getName())) System.out.println("토큰 검증 완료!!");
-		else {
+		if(!JWTUtil.verifyToken(token).equals(user.getName())) {
 			map.put("wrong", WRONG);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 		}
