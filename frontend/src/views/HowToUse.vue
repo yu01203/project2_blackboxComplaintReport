@@ -1,9 +1,12 @@
 <template>
   <div class="container">
     <br />
-    <h1 class="text-center mb-3 bolder">사이트 이용 방법</h1>
-    <div class="divdiv">
-      <h2 style="background-color: #FFFFF0;">1. 민원 처리 상태 관리</h2>
+    <h1 class="text-center mb-3">사이트 이용 방법</h1>
+    <div class="divdiv shadow p-3 mb-5 bg-white rounded">
+      <div class="mx-auto" style="width:auto;">
+        <h2 style="background-color: #FFFFF0; width:auto">1. 민원 처리 상태 관리</h2>
+      </div>
+      <hr />
       <img
         src="@/assets/logos/HowToUse1.png"
         alt="HowToUse1"
@@ -13,6 +16,7 @@
         1) 초기 상태는
         <span style="background-color: #FFFFF0;">신고 미접수</span>로 아직 스마트 국민제보 사이트에 민원을 접수하기 전 단계입니다.
       </p>
+      <hr />
       <img
         src="@/assets/logos/HowToUse2.png"
         alt="HowToUse2"
@@ -27,12 +31,14 @@
 
     <div class="divdiv shadow p-3 mb-5 bg-white rounded">
       <h2 style="background-color: #FFFFF0;">2. 민원 상세정보 입력 및 저장</h2>
+      <hr />
       <img
         src="@/assets/logos/HowToUse3.png"
         alt="HowToUse3"
         style="width: 100%; border: solid 2px"
       />
       <p>1) 제보 상세보기에서는 다음의 빈칸들을 작성 후 저장하기를 누릅니다.</p>
+      <hr />
       <img
         src="@/assets/logos/HowToUse4.png"
         alt="HowToUse4"
