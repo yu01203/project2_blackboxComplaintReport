@@ -26,9 +26,7 @@ public class JWTUtil {
 			token = JWT.create().withIssuer("auth0").withSubject(name).withAudience("ssafy").withClaim("isSNS", isSNS)
 					.withClaim("email", email).withClaim("name", name).withClaim("birth", birthday).withClaim("userNo", userNo)
 					.withClaim("gender", gender).withNotBefore(notBefore).withExpiresAt(expiresAt).sign(algorithm);
-		} catch (Exception e) {
-			System.err.println("err: " + e);
-		}
+		} catch (Exception e) { System.err.println("err: " + e); }
 		return token;
 	}
 	
@@ -39,11 +37,7 @@ public class JWTUtil {
 			String result = JWT.require(Algorithm.HMAC256(tokenSecret.getBytes())).build()
 					.verify(token.replace("Bearer", "")).getClaim("name").asString();
 			
-			System.out.println("result >> " + result);
 			return result;
-		} catch (Exception e) {
-			System.out.println("token값 인증 오류" + e.getMessage());
-			return "error";
-		}
+		} catch (Exception e) { return "error"; }
 	}
 }

@@ -50,17 +50,10 @@ public class NoticeController {
 	@PostMapping
 	public ResponseEntity<String> writeNotice(@RequestBody Notice notice, @RequestHeader("token") String token) {
 		logger.debug("writeNotice - 호출");
-		System.out.println(notice);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals("관리자")) System.out.println("토큰 검증 완료!!");
-		else {
-			return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		}
-		
-		if (noticeService.writeNotice(notice)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		}
+		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if (noticeService.writeNotice(notice)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
     @ApiOperation(value = "글번호에 해당하는 공지사항의 정보를 반환한다.", response = Notice.class)    
@@ -77,14 +70,8 @@ public class NoticeController {
 		logger.debug("updateNotice - 호출");
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals("관리자")) System.out.println("토큰 검증 완료!!");
-		else {
-			return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		}
-		
-		if (noticeService.updateNotice(notice)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		}
+		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if (noticeService.updateNotice(notice)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
     
@@ -92,15 +79,10 @@ public class NoticeController {
 	@DeleteMapping("{notice_no}")
 	public ResponseEntity<String> deleteNotice(@PathVariable int notice_no, @RequestHeader("token") String token) {
 		logger.debug("deleteNotice - 호출");
-		System.out.println(token);
 		
 		new JWTUtil();
-		if(JWTUtil.verifyToken(token).equals("관리자")) System.out.println("토큰 검증 완료!!");
-		else return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
-		
-		if (noticeService.deleteNotice(notice_no)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		}
+		if(!JWTUtil.verifyToken(token).equals("관리자")) return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
+		if (noticeService.deleteNotice(notice_no)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 
