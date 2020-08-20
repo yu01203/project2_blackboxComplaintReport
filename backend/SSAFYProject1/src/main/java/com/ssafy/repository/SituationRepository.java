@@ -6,15 +6,19 @@ import com.ssafy.domain.Situation;
 
 @Repository
 public interface SituationRepository {
-	List<Situation> select0() throws Exception;
+	List<Situation> selectReportStatus0ThisYear() throws Exception;
 
-	List<Situation> select1() throws Exception;
+	List<Situation> selectReportStatus1ThisYear() throws Exception;
 
-	List<Situation> select2() throws Exception;
+	List<Situation> selectReportStatus2ThisYear() throws Exception;
+	
+	List<Situation> allCnt() throws Exception;
 
-	List<Situation> selectByUser0(int userno) throws Exception;
+	List<Situation> selectByUserReportStatus0ThisYear(int userno) throws Exception;
 
-	List<Situation> selectByUser1(int userno) throws Exception;
+	List<Situation> selectByUserReportStatus1ThisYear(int userno) throws Exception;
 
-	List<Situation> selectByUser2(int userno) throws Exception;
+	List<Situation> selectByUserReportStatus2ThisYear(int userno) throws Exception;
+	
+	List<Situation> userCnt(int userno) throws Exception;
 }
