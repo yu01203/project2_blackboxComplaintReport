@@ -32,6 +32,8 @@
           ref="birth"
           placeholder="2020-01-01"
           v-model="birth"
+          maxlength="10"
+          @keyup="inputBirthDate"
         />
       </div>
       <div class="form-group">
@@ -43,6 +45,8 @@
           ref="phone"
           placeholder="핸드폰 번호를 입력하세요"
           v-model="phone"
+          maxlength="13"
+          @keyup="inputPhoneNumber"
         />
       </div>
       <div class="form-group">
@@ -99,6 +103,50 @@ export default {
         .catch(() => {
           alert("에러가 발생했습니다.");
         });
+    },
+    inputBirthDate() {
+      var number = this.birth.replace(/[^0-9]/g, "");
+      var birthDate = "";
+
+      if (number.length < 5) {
+        return number;
+      } else if (number.length < 7) {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4);
+      } else {
+        birthDate += number.substr(0, 4);
+        birthDate += "-";
+        birthDate += number.substr(4, 2);
+        birthDate += "-";
+        birthDate += number.substr(6);
+      }
+      this.birth = birthDate;
+    },
+    inputPhoneNumber() {
+      var number = this.phone.replace(/[^0-9]/g, "");
+      var phone = "";
+
+      if (number.length < 4) {
+        return number;
+      } else if (number.length < 7) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3);
+      } else if (number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+      } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+      }
+      this.phone = phone;
     },
   },
 };
