@@ -189,7 +189,7 @@ public class UserController {
 			User user = service.detail(email);
 			
 			new JWTUtil();
-			if(!JWTUtil.verifyToken(token).equals(user.getEmail()) || !JWTUtil.verifyToken(token).equals("admin"))
+			if(!JWTUtil.verifyToken(token).equals(user.getEmail()) && !JWTUtil.verifyToken(token).equals("admin"))
 				return new ResponseEntity<String>(WRONG, HttpStatus.BAD_REQUEST);
 			
 			if(service.remove(email) == 1) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
