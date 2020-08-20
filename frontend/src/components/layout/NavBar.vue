@@ -59,12 +59,6 @@
 
         <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
           <b-navbar-nav class="w-100 justify-content-between" style="max-width:1080px">
-            <!-- <b-navbar-nav class="w-100 justify-content-left" style="max-width:1080px"> -->
-            <!-- <b-nav-item to="/">
-              <b-icon icon="house-door"></b-icon>
-              <span>&nbsp;정문</span>
-            </b-nav-item>-->
-
             <b-nav-item to="/caselist">
               <b-icon icon="list"></b-icon>
               <span class>&nbsp;제보목록</span>
@@ -80,7 +74,6 @@
             <b-nav-item to="/noticeboard">
               <b-icon icon="info-circle"></b-icon>
               <span>&nbsp;공지사항</span>
-              <!-- <b-icon icon="chat-left-text"></b-icon> -->
             </b-nav-item>
             <b-nav-item to="/howtouse">
               <b-icon icon="question-circle"></b-icon>
@@ -96,7 +89,6 @@
               </b-nav-item>
 
               <!-- 로그인 상태 -->
-
               <b-nav-item-dropdown v-if="this.$session.get('email') != null" right no-caret>
                 <template v-slot:button-content>
                   <b-icon icon="person-circle"></b-icon>
@@ -105,10 +97,8 @@
 
                 <div v-if="this.$session.get('email') == 'admin'">
                   <b-dropdown-item class="p-0 m-0" to="usermanagement/">
-                    <!-- <router-link to="/usermanagement"> -->
                     <b-icon icon="people"></b-icon>
                     <span>&nbsp;회원관리</span>
-                    <!-- </router-link> -->
                   </b-dropdown-item>
                   <hr class="mx-0 px-0" />
                 </div>
@@ -151,10 +141,8 @@
             class="p-0 m-0"
             to="usermanagement/"
           >
-            <!-- <router-link to="/usermanagement"> -->
             <b-icon icon="people"></b-icon>
             <span>&nbsp;회원관리</span>
-            <!-- </router-link> -->
           </b-dropdown-item>
           <hr />
 
@@ -198,8 +186,6 @@ export default {
   },
   data: function () {
     return {
-      // 반응형 창 크기 측정 데이터
-      // windowWidth: window.innerWidth,
       // 백엔드에서 필요로 하는 데이터
       email: this.$session.get("email"),
       pw: "", // 백엔드로 보낼 때 password 변수에 담아서 ex) password: this.pw
@@ -218,22 +204,15 @@ export default {
         "https://nid.naver.com/oauth2.0/authorize?response_type=code",
     };
   },
-  // mounted: function () {
-  //   window.onresize = () => {
-  //     this.windowWidth = window.innerWidth;
-  //   };
-  // },
   computed: {
     ...mapGetters(["violationitems"]),
   },
   methods: {
     sessionDistroy() {
       if (this.access_token != null) {
-        alert("네이버 로그아웃");
         http.post(`/sns/logout`).then(({ data }) => {
           if (data == "success") {
             alert("로그아웃 " + data);
-            location.href = "http://localhost:8080/";
           }
         });
       }
@@ -255,9 +234,7 @@ export default {
     if (this.access_token != null) {
       this.$session.set("userNo", this.jwt.decode(this.access_token).userNo);
       this.$session.set("email", this.jwt.decode(this.access_token).email);
-      this.$session.set("name", this.jwt.decode(this.access_token).name);
-      this.$session.set("gender", this.jwt.decode(this.access_token).gender);
-      this.$session.set("birth", this.jwt.decode(this.access_token).birth);
+      this.$session.set("isSNS", this.jwt.decode(this.access_token).isSNS);
       this.$session.set("token", this.access_token);
     }
   },
@@ -265,11 +242,6 @@ export default {
 </script>
 
 <style scoped>
-/* 로그인 모달 */
-/* #modal-1___BV_modal_header_ {
-  padding: 16px 16px 16px 32px;
-} */
-
 #nav-user-item > .nav-link {
   padding: 0;
 }

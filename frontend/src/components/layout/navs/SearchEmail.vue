@@ -91,7 +91,6 @@ export default {
           phone: this.phone,
         })
         .then(({ data }) => {
-          console.log(data);
           if (data == "fail") {
             alert("없는 회원입니다.");
           }

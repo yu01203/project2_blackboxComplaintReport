@@ -84,8 +84,6 @@ export default {
               {
                 ticks: {
                   max: this.maxNum + 10,
-                  // max: Math.max(...this.items[0].data) + 10,
-                  // display: false,
                   beginAtZero: true,
                 },
               },

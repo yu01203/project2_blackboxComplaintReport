@@ -48,10 +48,6 @@
       <label for="one">남</label>
       <input type="radio" id="two" value="여" v-model="gender" />
       <label for="two">여</label>
-      <!-- <label class="d-flex">
-              성별:
-              <div class="ml-1" v-text="this.$session.get('gender')"></div>
-      </label>-->
       <input
         type="text"
         class="form-control"
@@ -173,7 +169,6 @@ export default {
       else this.modifyHandler();
     },
     deleteHandler() {
-      console.log(this.$session.get("email"));
       http
         .post(
           `/user/del`,

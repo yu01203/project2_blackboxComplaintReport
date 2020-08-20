@@ -187,9 +187,6 @@ export default {
         } else {
           alert(" 실패했습니다.");
         }
-      })
-      .catch(() => {
-        // alert("로그인 후 이용해주세요.");
       });
   },
   methods: {
@@ -246,12 +243,6 @@ export default {
           if (this.startdate <= newDate && newDate <= this.enddate) {
             this.templist_find.push(this.templist_select[i]);
           }
-          // if (
-          //   this.startdate <= this.templist_select[i].date &&
-          //   this.templist_select[i].date <= this.enddate
-          // ) {
-          //   this.templist_find.push(this.templist_select[i]);
-          // }
         }
       } else {
         this.templist_find = this.templist_select;

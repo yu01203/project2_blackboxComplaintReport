@@ -109,7 +109,6 @@ export default {
 
           if (data.success === "success") {
             msg = "로그인이 완료되었습니다.";
-            //alert(data.userinfo.userNo);
             this.$session.set("email", this.email);
             this.$session.set("userNo", data.userinfo.userNo);
             this.$session.set("name", data.userinfo.name);
@@ -117,25 +116,16 @@ export default {
             this.$session.set("birth", data.userinfo.birth);
             this.$session.set("phone", data.userinfo.phone);
             this.$session.set("token", data.token);
-            // sessionStorage.setItem("vue-session-key", "this.email");
-            // sessionStorage.setItem("vue-session-key", "data.userinfo.userNo");
-
-            // this.$store.dispatch("getViolations");
-            // console.log("로그인 데이터");
-            // console.log(this.$session.get("email"));
-            console.log(this.$session.get("name"));
             this.$router.push("/");
             this.$router.go();
           }
           alert(msg);
-          // this.getVio();
         })
         .catch(() => {
           alert("에러가 발생했습니다-login.");
         });
     },
     naverLogin() {
-      // this.naverLoginURL += "&client_id=" + this.CLIENT_ID;
       this.naverLoginURL += "&client_id=" + CLIENT_ID;
       this.naverLoginURL += "&redirect_uri=" + this.redirectURI;
       this.naverLoginURL += "&state=" + this.state;
