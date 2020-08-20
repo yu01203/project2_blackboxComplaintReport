@@ -79,7 +79,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:15vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -89,7 +89,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:15vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -99,13 +99,13 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:15vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
       <hr class="pb-3" />
       <div>
-        <h1 class="text-center mb-3">나의 접수 상황별 현황</h1>
+        <h1 class="text-center mb-3">나의 상황별 현황</h1>
       </div>
       <div
         id="all-user-charts"
