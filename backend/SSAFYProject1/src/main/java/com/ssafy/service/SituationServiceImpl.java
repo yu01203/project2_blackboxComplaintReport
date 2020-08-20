@@ -23,7 +23,6 @@ public class SituationServiceImpl implements SituationService {
 		listAll.add(repo.selectReportStatus2ThisYear());
 		listAll.add(repo.allCnt());
 		
-		System.out.println(listAll.toString());
 		return listAll;
 	}
 	
