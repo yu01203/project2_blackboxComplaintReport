@@ -1,9 +1,6 @@
 <template>
   <div style="height:100%">
-    <div
-      class="container px-1"
-      v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
-    >
+    <div class="container px-1" v-if="this.$session.get('email') != null">
       <CaseList />
     </div>
     <div v-else style="min-width:100%; height:100%">

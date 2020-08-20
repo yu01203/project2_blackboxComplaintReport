@@ -122,6 +122,8 @@
 <script>
 var KakaoApi = process.env.VUE_APP_KAKAO_API_KEY;
 
+import MapPin from "@/assets/pngs/map-pin.png";
+
 export default {
   name: "Map",
   props: {
@@ -177,7 +179,7 @@ export default {
       if (this.items.length != 0) {
         this.startLat = this.items[this.items.length - 1].lat;
         this.startLng = this.items[this.items.length - 1].lng;
-        MapOptionLevel = 7;
+        MapOptionLevel = 2;
       }
 
       var options = {
@@ -202,10 +204,16 @@ export default {
           this.startLng = violationitem.lng;
         }
 
+        var imageSrc = MapPin,
+          imageSize = new kakao.maps.Size(30, 50);
+
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
         var marker = new kakao.maps.Marker({
           map: map,
           position: markerPosition,
           clickable: true,
+          image: markerImage,
         });
 
         var content =

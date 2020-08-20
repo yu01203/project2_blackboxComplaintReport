@@ -2,14 +2,14 @@
   <div id="content" style="height:100%;margin-top:-64px">
     <div class="h-100 d-flex align-items-center">
       <div class="mx-auto text-center">
-        <h3 id="greeting-text" class="text-white">간편 교통 민원 DB 서비스</h3>
+        <h4 id="greeting-text" class="text-white">원버튼 간편 교통 민원 DB 서비스</h4>
         <img id="greeting-logo" src="@/assets/logos/Logo_ico.png" alt="Logo-iconic-image" />
         <h5 id="first-text" class="text-white mb-5">
           서비스 이용을 위해
           <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-1>로그인</span>
         </h5>
         <h5 id="second-text" class="text-white mb-5">
-          계정이 없으면
+          계정이 없다면
           <span style="color:#dac0a7;font-weight: bold" v-b-modal.modal-multi-3>회원 가입</span> 해주세요
         </h5>
         <p id="third-text" class="text-white mb-5">
@@ -21,7 +21,7 @@
               class="text-decoration-none hover-none"
               style="color:#dac0a7;font-weight: bold"
             >이용방법</router-link>
-          </span>&nbsp;페이지를 확인
+          </span>&nbsp;페이지 확인
         </p>
       </div>
     </div>
@@ -62,40 +62,38 @@ export default {
 @keyframes popup-text {
   0% {
     opacity: 0;
-    top: 130px;
+    top: 150px;
   }
   25% {
     opacity: 1;
-    top: 100px;
+    top: 120px;
   }
   75% {
     opacity: 1;
-    top: 100px;
+    top: 120px;
   }
   100% {
     opacity: 0;
-    top: 130px;
+    top: 150px;
   }
 }
 
 @keyframes popup-logo {
   0% {
     opacity: 0;
-    top: 140px;
-    /* top: 80%; */
+    top: 160px;
   }
   25% {
     opacity: 1;
-    top: 110px;
-    /* top: 50%; */
+    top: 130px;
   }
   70% {
     opacity: 1;
-    top: 110px;
+    top: 130px;
   }
   100% {
     opacity: 0;
-    top: 140px;
+    top: 160px;
   }
 }
 
@@ -112,7 +110,7 @@ export default {
   opacity: 0;
   position: relative;
   animation-name: popup-text;
-  animation-duration: 7s;
+  animation-duration: 3.5s;
   animation-delay: 1s;
 }
 
@@ -120,34 +118,34 @@ export default {
   opacity: 0;
   position: relative;
   animation-name: popup-logo;
-  animation-duration: 6s;
-  animation-delay: 2s;
+  animation-duration: 3s;
+  animation-delay: 1.5s;
 }
 
 #first-text {
+  opacity: 0;
+  top: -90px;
+  position: relative;
+  animation: description-text 2s ease-in-out 3s;
+  animation-fill-mode: forwards;
+  animation-delay: 4.7s;
+}
+
+#second-text {
   opacity: 0;
   top: -120px;
   position: relative;
   animation: description-text 2s ease-in-out 3s;
   animation-fill-mode: forwards;
-  animation-delay: 8s;
-}
-
-#second-text {
-  opacity: 0;
-  top: -150px;
-  position: relative;
-  animation: description-text 2s ease-in-out 3s;
-  animation-fill-mode: forwards;
-  animation-delay: 8.5s;
+  animation-delay: 5.2s;
 }
 
 #third-text {
   opacity: 0;
-  top: -160px;
+  top: -130px;
   position: relative;
   animation: description-text 2s ease-in-out 3s;
   animation-fill-mode: forwards;
-  animation-delay: 9s;
+  animation-delay: 5.7s;
 }
 </style>

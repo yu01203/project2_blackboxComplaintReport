@@ -4,6 +4,7 @@
       <div class="my-auto px-3 py-3 text-center">
         <div id="meaningless-div" style="margin-top:148px"></div>
         <h1 id="greeting-text" class="text-white mb-3 bold">
+          원버튼
           간편
           <span class="bolder" style="color:#C10016">교통</span> 민원 DB 서비스
         </h1>
@@ -15,7 +16,7 @@
           </span>
         </h1>
         <h1 id="second-text" class="text-white mb-5 bold">
-          계정이 없으면
+          계정이 없다면
           <span class="bolder" style="color:#C10016;" v-b-modal.modal-multi-3>회원 가입</span> 해주세요
         </h1>
         <h3 id="third-text" class="text-white mb-5 bold">
@@ -26,7 +27,7 @@
               class="text-decoration-none hover-none bolder"
               style="color:#C10016"
             >이용방법</router-link>
-          </span>&nbsp;페이지를 확인
+          </span>&nbsp;페이지 확인
         </h3>
       </div>
     </div>
@@ -114,7 +115,7 @@ export default {
   opacity: 0;
   position: relative;
   animation-name: popup-text;
-  animation-duration: 7s;
+  animation-duration: 3.5s;
   animation-delay: 1s;
 }
 
@@ -122,8 +123,8 @@ export default {
   opacity: 0;
   position: relative;
   animation-name: popup-logo;
-  animation-duration: 6s;
-  animation-delay: 2s;
+  animation-duration: 3s;
+  animation-delay: 1.5s;
 }
 
 #first-text {
@@ -132,7 +133,7 @@ export default {
   position: relative;
   animation: description-text 2s ease-in-out 3s;
   animation-fill-mode: forwards;
-  animation-delay: 8s;
+  animation-delay: 4.7s;
 }
 
 #second-text {
@@ -141,7 +142,7 @@ export default {
   position: relative;
   animation: description-text 2s ease-in-out 3s;
   animation-fill-mode: forwards;
-  animation-delay: 8.5s;
+  animation-delay: 5.2s;
 }
 
 #third-text {
@@ -150,6 +151,6 @@ export default {
   position: relative;
   animation: description-text 2s ease-in-out 3s;
   animation-fill-mode: forwards;
-  animation-delay: 9s;
+  animation-delay: 5.7s;
 }
 </style>

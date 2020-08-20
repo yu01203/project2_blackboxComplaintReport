@@ -143,8 +143,8 @@
           >
             <b-icon icon="people"></b-icon>
             <span>&nbsp;회원관리</span>
+            <hr />
           </b-dropdown-item>
-          <hr />
 
           <b-dropdown-item v-if="!this.$session.get('isSNS')" v-b-modal.modal-memberInfo>
             <b-icon icon="person-lines-fill"></b-icon>

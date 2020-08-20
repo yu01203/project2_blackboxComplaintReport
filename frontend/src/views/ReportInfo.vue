@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <hr />
+      <hr class="pb-3" />
       <div>
         <h1 class="text-center mb-3">나의 접수 상황별 현황</h1>
       </div>
@@ -169,9 +169,6 @@ export default {
       wholeCount: null,
       yearCount: null,
       monthCount: null,
-      userWholeCount: null,
-      userYearCount: null,
-      userMonthCount: null,
     };
   },
   mounted() {
@@ -191,7 +188,7 @@ export default {
                 yearCount += currentCount;
 
                 var now = new Date();
-                if (j == now.getMonth() - 1) {
+                if (j == now.getMonth()) {
                   monthCount += currentCount;
                 }
               }
@@ -219,7 +216,7 @@ export default {
                 yearCount += currentCount;
 
                 var now = new Date();
-                if (j == now.getMonth() - 1) {
+                if (j == now.getMonth()) {
                   monthCount += currentCount;
                 }
               }
