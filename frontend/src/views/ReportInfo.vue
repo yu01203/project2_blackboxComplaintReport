@@ -197,6 +197,7 @@ export default {
             }
             this.yearCount = yearCount;
             this.monthCount = monthCount;
+            this.wholeCount = data[3][0];
           } else {
             console.log(" 실패했습니다.");
           }
@@ -225,6 +226,7 @@ export default {
             }
             this.yearCount = yearCount;
             this.monthCount = monthCount;
+            this.wholeCount = data[3][0];
           } else {
             console.log(" 실패했습니다.");
           }
