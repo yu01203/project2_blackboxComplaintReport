@@ -26,9 +26,9 @@
         <div class="form-group">
           <!-- 로그인 버튼 -->
           <a
-            class="btn btn-primary text-decoration-none m-auto"
+            class="btn text-decoration-none m-auto"
             @click="checkHandlerLogin"
-            style="width: 100%; height: 50px;"
+            style="width: 100%; height: 50px; background-color:#0f4c81"
           >
             <p style="color: white; font-size: 20px; margin-top: 4px;">로그인</p>
           </a>
@@ -48,9 +48,9 @@
     </div>
 
     <div class="d-flex justify-content-around">
-      <b-button class="btn btn-primary" v-b-modal.modal-multi-1>이메일 찾기</b-button>
-      <b-button class="btn btn-primary" v-b-modal.modal-multi-2>비밀번호 찾기</b-button>
-      <b-button class="btn btn-primary" v-b-modal.modal-multi-3 style="margin: 0px 10px;">회원가입</b-button>
+      <p class v-b-modal.modal-multi-1>이메일 찾기</p>
+      <p class v-b-modal.modal-multi-2>비밀번호 찾기</p>
+      <p class v-b-modal.modal-multi-3 style="margin: 0px 10px;">회원가입</p>
     </div>
   </b-modal>
 </template>
