@@ -5,7 +5,7 @@
         <div class="form-group">
           <input
             type="text"
-            class="form-control"
+            class="form-control ft-nss light"
             id="email"
             ref="email"
             placeholder="이메일을 입력하세요"
@@ -16,7 +16,7 @@
           <input
             @keypress.enter="checkHandlerLogin"
             type="password"
-            class="form-control"
+            class="form-control ft-nss light"
             id="pw"
             ref="pw"
             placeholder="비밀번호를 입력하세요"

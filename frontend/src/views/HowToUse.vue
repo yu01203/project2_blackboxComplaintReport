@@ -24,8 +24,8 @@
         <span style="color: white; background-color: #0f4c81">처리 완료</span>로 변경합니다.
       </p>
     </div>
-    <br />
-    <div class="divdiv">
+
+    <div class="divdiv shadow p-3 mb-5 bg-white rounded">
       <h2 style="background-color: #FFFFF0;">2. 민원 상세정보 입력 및 저장</h2>
       <img
         src="@/assets/logos/HowToUse3.png"
@@ -45,18 +45,22 @@
       </p>
     </div>
     <br />
-    <div class="divdiv">
+
+    <div class="divdiv shadow p-3 mb-5 bg-white rounded">
       <h2 style="background-color: #FFFFF0;">3. 스마트 국민제보에서 신고하기</h2>
+      <hr />
       <img src="@/assets/logos/HowToUse5.png" alt="HowToUse5" style="width: 100%;" />
       <p>
         1) 스마트 국민제보 사이트에서 회원가입 후
         <span style="color: #28a745">로그인</span>을 합니다.
       </p>
+      <hr />
       <img src="@/assets/logos/HowToUse6.png" alt="HowToUse6" style="width: 100%;" />
       <p>
         2) 메인화면에 보이는
         <span style="color: #28a745">교통위반</span> 버튼을 누릅니다.
       </p>
+      <hr />
       <img src="@/assets/logos/HowToUse7.png" alt="HowToUse7" style="width: 100%;" />
       <p>
         3) 분노의민원 사이트 제보목록에
@@ -64,6 +68,7 @@
         를 보면서 1~8번 순서대로 교통위반신고 항목을 기입하고
         <span style="color: #17a2b8">신고하기</span> 버튼을 누릅니다.
       </p>
+      <hr />
       <img src="@/assets/logos/HowToUse8.png" alt="HowToUse8" style="width: 100%;" />
       <p>
         4) 신고가
