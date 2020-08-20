@@ -1,6 +1,6 @@
 <template>
-  <div class="container-sm mt-3">
-    <h1 class="text-center bold mb-5">사이트 이용 안내</h1>
+  <div class="container-sm">
+    <h1 class="text-center bold mb-3">사이트 이용 안내</h1>
 
     <div class="divdiv shadow-lg p-3 mb-5 bg-white rounded">
       <div class="mx-auto" style="width:auto;">
@@ -12,7 +12,7 @@
       <img
         src="@/assets/logos/HowToUse1.png"
         alt="HowToUse1"
-        style="width: 100%; border: solid 2px"
+        style="width: 100%; border: solid 1px"
       />
       <p>
         1) 초기 상태는
@@ -22,7 +22,7 @@
       <img
         src="@/assets/logos/HowToUse2.png"
         alt="HowToUse2"
-        style="width: 100%; border: solid 2px"
+        style="width: 100%; border: solid 1px"
       />
       <p>
         2) 스마트 국민제보 사이트에 민원을 접수하면
@@ -39,7 +39,7 @@
       <img
         src="@/assets/logos/HowToUse3.png"
         alt="HowToUse3"
-        style="width: 100%; border: solid 2px"
+        style="width: 100%; border: solid 1px"
       />
       <p>
         1) 제보 상세보기에서는 다음의 빈칸들을 작성 후
@@ -49,7 +49,7 @@
       <img
         src="@/assets/logos/HowToUse4.png"
         alt="HowToUse4"
-        style="width: 100%; border: solid 2px"
+        style="width: 100%; border: solid 1px"
       />
       <p>
         2) 영상을

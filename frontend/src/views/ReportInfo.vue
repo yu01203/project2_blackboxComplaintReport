@@ -1,51 +1,148 @@
 <template>
-  <div class="container">
-    <div v-if="this.$session.get('email') == null">
-      <br />
-      <h1 class="text-center mb-3 bolder">전체 유저 제보현황</h1>
-      <b-container class="bv-example-row bv-example-row-flex-cols">
-        <b-row align-v="stretch">
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">신고 미접수 현황</h2>
-            <Chart1 />
-          </b-col>
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">접수완료 현황</h2>
-            <Chart2 />
-          </b-col>
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">처리완료 현황</h2>
-            <Chart3 />
-          </b-col>
-        </b-row>
-      </b-container>
+  <div style="height: 100%">
+    <!-- 전체 사용자 데이터 출력 -->
+    <div v-if="this.$session.get('email') == null" style="height: 100%">
+      <div>
+        <h1 class="text-center mb-3">전체 등록 현황</h1>
+      </div>
+      <div class="row align-items-center justify-content-center text-center mb-3 py-2">
+        <div class="col-12 col-lg-4 shadow p-3 mb-5 rounded" style="max-width: 25rem;">
+          <h2 class="text-center">전체 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ wholeCount }} 건</p>
+          </div>
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-center">{{ year }}년 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ yearCount }}건</p>
+          </div>
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-center">{{ month }}월 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ monthCount }}건</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h1 class="text-center mb-3">접수 상황별 전체 현황</h1>
+      </div>
+      <div
+        id="all-user-charts"
+        class="row align-items-center justify-content-center text-center mb-3 py-2"
+      >
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">신고 미접수 현황</h2>
+          <hr />
+          <Chart1 />
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">접수완료 현황</h2>
+          <hr />
+          <Chart2 />
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">처리완료 현황</h2>
+          <hr />
+          <Chart3 />
+        </div>
+      </div>
     </div>
 
     <div v-if="this.$session.get('email') != null">
-      <br />
-      <h1 class="text-center mb-3">개인 제보현황</h1>
-      <b-container class="bv-example-row bv-example-row-flex-cols">
-        <b-row align-v="stretch">
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">신고 미접수 현황</h2>
-            <ChartPersonal1 />
-          </b-col>
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">접수완료 현황</h2>
-            <ChartPersonal2 />
-          </b-col>
-          <b-col class="mx-auto mb-3 col-12 col-md-4" style="max-width: 25rem;">
-            <h2 class="text-center">처리완료 현황</h2>
-            <ChartPersonal3 />
-          </b-col>
-        </b-row>
-      </b-container>
+      <div>
+        <h1 class="text-center mb-3">나의 등록 현황</h1>
+      </div>
+      <div class="row align-items-center justify-content-center text-center mb-3 py-2">
+        <div class="col-12 col-lg-4 shadow p-3 mb-5 rounded" style="max-width: 25rem;">
+          <h2 class="text-center">전체 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ wholeCount }}건</p>
+          </div>
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-center">{{ year }}년 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ yearCount }}건</p>
+          </div>
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-center">{{ month }}월 등록 건수</h2>
+          <hr />
+          <div>
+            <p style="font-size:15vh">{{ monthCount }}건</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h1 class="text-center mb-3">나의 접수 상황별 현황</h1>
+      </div>
+      <div
+        id="all-user-charts"
+        class="row align-items-center justify-content-center text-center mb-3 py-2"
+      >
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">신고 미접수 현황</h2>
+          <hr />
+          <ChartPersonal1 />
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">접수완료 현황</h2>
+          <hr />
+          <ChartPersonal2 />
+        </div>
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
+          style="max-width: 25rem;"
+        >
+          <h2 class="text-left">처리완료 현황</h2>
+          <hr />
+          <ChartPersonal3 />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
+import http from "@/util/http-common";
+
 import Chart1 from "@/components/charts/chart1";
 import Chart2 from "@/components/charts/chart2";
 import Chart3 from "@/components/charts/chart3";
@@ -62,6 +159,80 @@ export default {
     ChartPersonal1,
     ChartPersonal2,
     ChartPersonal3,
+  },
+  data() {
+    return {
+      item: {},
+      year: null,
+      month: null,
+      wholeCount: null,
+      yearCount: null,
+      monthCount: null,
+      userWholeCount: null,
+      userYearCount: null,
+      userMonthCount: null,
+    };
+  },
+  mounted() {
+    var CurrentDate = new Date();
+    this.year = CurrentDate.getFullYear();
+    this.month = CurrentDate.getMonth() + 1;
+    if (this.$session.get("email")) {
+      http
+        .get(`/situation/${this.$session.get("userNo")}`)
+        .then(({ data }) => {
+          if (data != null) {
+            var yearCount = 0;
+            var monthCount = 0;
+            for (var i = 0; i < 3; i++) {
+              for (var j = 0; j < 12; j++) {
+                const currentCount = data[i][j].count;
+                yearCount += currentCount;
+
+                var now = new Date();
+                if (j == now.getMonth() - 1) {
+                  monthCount += currentCount;
+                }
+              }
+            }
+            this.yearCount = yearCount;
+            this.monthCount = monthCount;
+          } else {
+            console.log(" 실패했습니다.");
+          }
+        })
+        .catch(() => {
+          console.log("에러가 발생했습니다.");
+        });
+    } else {
+      http
+        .get(`/situation`)
+        .then(({ data }) => {
+          if (data != null) {
+            var yearCount = 0;
+            var monthCount = 0;
+            for (var i = 0; i < 3; i++) {
+              for (var j = 0; j < 12; j++) {
+                const currentCount = data[i][j].count;
+                yearCount += currentCount;
+
+                var now = new Date();
+                if (j == now.getMonth() - 1) {
+                  monthCount += currentCount;
+                  console.log(monthCount);
+                }
+              }
+            }
+            this.yearCount = yearCount;
+            this.monthCount = monthCount;
+          } else {
+            console.log(" 실패했습니다.");
+          }
+        })
+        .catch((err) => {
+          console.log(err + "에러가 발생했습니다.");
+        });
+    }
   },
 };
 </script>
