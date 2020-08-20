@@ -1,7 +1,7 @@
 <template>
   <div style="height:100%">
     <div
-      class="container"
+      class="container px-1"
       v-if="this.$session.get('email') != null && this.$session.get('email') != 'admin'"
     >
       <CaseList />

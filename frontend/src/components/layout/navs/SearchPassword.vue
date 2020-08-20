@@ -108,7 +108,8 @@ export default {
           }
           if (data != "fail") {
             alert(
-              "임시 비밀번호 입니다. 로그인 후 비밀번호를 수정해 주세요." + data
+              data +
+                " 임시 비밀번호 입니다. 로그인 후 비밀번호를 수정해 주세요."
             );
             this.$root.$emit("bv::hide::modal", "modal-multi-2");
           }

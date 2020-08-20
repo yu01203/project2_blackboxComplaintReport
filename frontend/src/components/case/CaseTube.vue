@@ -101,7 +101,7 @@ export default {
         .then(({ data }) => {
           let msg = "저장에 실패하였습니다.";
           if (data === "success") {
-            msg = "상태가 성공적으로 변경되었단다.";
+            msg = "상태가 성공적으로 변경되었습니다.";
           }
           alert(msg);
           this.$router.go();

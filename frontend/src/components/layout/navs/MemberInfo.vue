@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="form-group">
-      <label>비밀번호:</label>
+      <label for="pw">비밀번호</label>
       <input
         type="password"
         class="form-control ft-nss"
@@ -18,7 +18,7 @@
       />
     </div>
     <div class="form-group">
-      <label>비밀번호 확인:</label>
+      <label for="pw_re">비밀번호 확인</label>
       <input
         type="password"
         class="form-control ft-nss light"
@@ -29,10 +29,7 @@
       />
     </div>
     <div class="form-group">
-      <label class="d-flex">
-        이름:
-        <div class="ml-1 ft-nss light" v-text="this.$session.get('name')"></div>
-      </label>
+      <label for="name" class="d-flex">이름</label>
       <input
         type="text"
         class="form-control"
@@ -49,6 +46,7 @@
       <input type="radio" id="two" value="여" v-model="gender" />
       <label for="two">여</label>
       <input
+        hidden
         type="text"
         class="form-control"
         id="gender"
@@ -58,10 +56,7 @@
       />
     </div>
     <div class="form-group">
-      <label class="d-flex ft-nss light">
-        생년월일:
-        <div class="ml-1" v-text="this.$session.get('birth')"></div>
-      </label>
+      <label for="birth" class="d-flex ft-nss light">생년월일</label>
       <input
         type="text"
         class="form-control ft-nss light"
@@ -74,10 +69,7 @@
       />
     </div>
     <div class="form-group">
-      <label class="d-flex ft-nss light">
-        핸드폰 번호:
-        <div class="ml-1" v-text="this.$session.get('phone')"></div>
-      </label>
+      <label for="phone" class="d-flex ft-nss light">핸드폰 번호</label>
       <input
         type="text"
         class="form-control ft-nss light"
