@@ -83,7 +83,7 @@ export default {
             yAxes: [
               {
                 ticks: {
-                  max: this.maxNum + 10,
+                  max: this.maxNum * 1.2,
                   beginAtZero: true,
                 },
               },
