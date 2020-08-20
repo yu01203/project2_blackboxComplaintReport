@@ -6,7 +6,7 @@
 <!-- mappers/user.xml -->
 <mapper namespace="com.ssafy.repository.SituationRepository"> <!-- mybatis는 namespace필수!! -->
 
-	<select id="select0" resultType="Situation">
+	<select id="selectReportStatus0ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -17,7 +17,7 @@
 		order by a.month;
 	</select>
 
-	<select id="select1" resultType="Situation">
+	<select id="selectReportStatus1ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -28,7 +28,7 @@
 		order by a.month;
 	</select>
 
-	<select id="select2" resultType="Situation">
+	<select id="selectReportStatus2ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -39,7 +39,15 @@
 		order by a.month;
 	</select>
 
-	<select id="selectByUser0" resultType="Situation">
+	<select id="allCnt" resultType="Integer">
+		select count(*)
+		from violation;
+	</select>
+
+
+
+
+	<select id="selectByUserReportStatus0ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -50,7 +58,7 @@
 		order by a.month;
 	</select>
 	
-	<select id="selectByUser1" resultType="Situation">
+	<select id="selectByUserReportStatus1ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -61,7 +69,7 @@
 		order by a.month;
 	</select>
 	
-	<select id="selectByUser2" resultType="Situation">
+	<select id="selectByUserReportStatus2ThisYear" resultType="Situation">
 		SELECT a.month,
 		ifnull(b.count,00) as count
 		FROM situationLeftJoin a
@@ -71,4 +79,11 @@
 		GROUP by MONTH(date)) b ON a.month = b.month
 		order by a.month;
 	</select>
+	
+	<select id="userCnt" resultType="Integer">
+		select count(*)
+		from violation
+		where user_no = #{userno};
+	</select>
 </mapper>
+
