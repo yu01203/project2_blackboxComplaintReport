@@ -1,5 +1,5 @@
 <template>
-  <div class="content" style="height: 100%; margin-top:-148px">
+  <div class="content" style="height: 100%; margin-top:-108px">
     <div id="main-text" class="d-flex justify-content-center align-items-center h-100">
       <div class="my-auto px-3 py-3 text-center">
         <div id="meaningless-div" style="margin-top:148px"></div>

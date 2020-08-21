@@ -202,7 +202,7 @@ export default {
         var newTime = "오후" + " " + ApTime + "시" + " " + RawTime[1] + "분";
         this.time = newTime;
       } else {
-        var AmTime = RawTime[0].slice(0, 1);
+        var AmTime = RawTime[0];
         if (AmTime == 0) {
           AmTime = 12;
         }

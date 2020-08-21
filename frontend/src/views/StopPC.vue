@@ -1,5 +1,5 @@
 <template>
-  <div id="stop-main" style="height: 100%; margin-top:-148px">
+  <div id="stop-main" style="height: 100%; margin-top:-108px">
     <div class="h-100 d-flex align-items-center">
       <div class="mx-auto text-center text-white">
         <p class="font-italic" style="font-size:15vh">앗...!</p>
