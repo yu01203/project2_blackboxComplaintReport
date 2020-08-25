@@ -6,6 +6,8 @@
 # 프로젝트 소개
 ## 분노의민원
 원 버튼 간편 교통 민원 DB 플랫폼
+차량 주행 중 한번의 버튼 클릭으로 관련 영상 및 정보를
+웹 서버에 전송되어 민원
 
 ## 서비스 목적
 안전하고 간편하게 위반 상황 기록
@@ -23,6 +25,7 @@
 
 # 기타(디벨롭 룰, 개발 일정, 개발자 소개, 자랑하고 싶은 것, 변화된 이슈 등)
 
+# 개발 규칙
 
 ## GIT Branch 변경
 
@@ -38,6 +41,7 @@ $ git clone -b <브랜치 이름> --single-branch <레퍼지토리 주소>
 ```bash
 $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211.git
 ```
+
 ## GIT Workflow
 
 #### Git Bash의 브랜치 상태를 통해 항상 선택된 브랜치를 확인합니다.
@@ -61,6 +65,34 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
    ```
 
 3. Git Lab 프로젝트로 이동하여 Develop 브랜치와 Merge합니다.
+
+# 팀 소개
+### 나도내가무섭조
+- 팀장 : 조원빈 (Front-End)
+    
+    Git : 
+- 팀원
+    - 김남규 (Back-End)
+        
+        Git : 
+    - 김보성 (IoT)
+    
+        Git : 
+    - 박세종 (Front-End)
+    
+        Git : 
+    - 최재빈 (Back-End)
+    
+        Git : https://lab.ssafy.com/justin613
+    - 최정원 (IoT & Front-End)
+    
+        Git : 
+
+
+
+
+
+
 
 ## NPM 패키지 인스톨
 
