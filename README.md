@@ -78,7 +78,17 @@ dist 폴더 생성 => index.html => src 경로 앞에 . 추가
 
 <packaging>jar</packaging>
 ```
+Run as -> Maven clean > install > package 순으로 실행
 
+Project -> target -> .jar 파일 생성
+
+##### Local -> AWS File Send & Service Run
+```bash
+scp -i <pem 파일> <파일> ubuntu@<URL>:<파일>
+sudo mv <파일> /var/www/html
+sudo java -jar <파일>.jar
+sudo service nginx restart
+```
 
 # 서비스 설명
 
