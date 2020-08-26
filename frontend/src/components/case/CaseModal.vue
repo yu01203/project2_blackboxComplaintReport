@@ -63,13 +63,20 @@
       </p>
       <p>
         <label for="contents">신고내용</label>
-        <input
+        <!-- <input
           type="text"
           class="form-control"
           id="contents"
           ref="contents"
           v-model="violationitem.contents"
-        />
+        />-->
+        <textarea
+          id="contents"
+          class="form-control"
+          ref="contents"
+          v-model="violationitem.contents"
+          onkeyup="this.style.height='26px'; this.style.height = this.scrollHeight + 'px';"
+        ></textarea>
       </p>
       <hr />
       <div class="d-flex justify-content-between mb-3">
@@ -198,4 +205,12 @@ export default {
 </script>
 
 <style>
+textarea.form-control {
+  resize: none;
+  line-height: 30px;
+  width: 100%;
+  overflow-y: hidden;
+  height: 60px;
+  border: 1px solid #ccc;
+}
 </style>
