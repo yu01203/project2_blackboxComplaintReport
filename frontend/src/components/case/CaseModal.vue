@@ -47,7 +47,7 @@
         />
       </p>
       <p>
-        <label for="address">위반위치</label>
+        <label for="address">위반장소</label>
         <input
           type="text"
           class="form-control"
@@ -58,7 +58,7 @@
         />
       </p>
       <p>
-        <label for="spot">위반장소</label>
+        <label for="spot">위반위치</label>
         <input type="text" class="form-control" id="spot" ref="spot" v-model="violationitem.spot" />
       </p>
       <p>
