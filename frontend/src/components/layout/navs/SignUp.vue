@@ -2,7 +2,7 @@
   <b-modal id="modal-multi-3" title="회원가입" hide-footer>
     <div class="modal-body">
       <div class="form-group">
-        <label @click="awesomeFunc">이메일 :</label>
+        <label>이메일</label>
         <div class="d-flex">
           <input
             type="text"
@@ -14,27 +14,22 @@
           />
           <b-button
             :id="awesomeId"
-            class="border-danger"
+            class="bg-secondary text-light"
             style="width: 30%; padding: 0px;"
+            ref="checkbutton"
             @click="validEmailCheck"
           >
-            <span
-              style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-            >중</span>
-            <span
-              style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-            >복</span>
-            <span
-              style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-            >확</span>
-            <span
-              style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-            >인</span>
+            <span :id="awesomefont1">중</span>
+            <span :id="awesomefont2">복</span>
+            <span :id="awesomefont3">확</span>
+            <span :id="awesomefont4">인</span>
           </b-button>
         </div>
       </div>
       <div class="form-group">
-        <label>비밀번호 :</label>
+        <label>
+          <span @click="awesomeFunc">비밀</span>번호
+        </label>
         <input
           type="password"
           class="form-control ft-nss light"
@@ -45,7 +40,7 @@
         />
       </div>
       <div class="form-group">
-        <label>이름 :</label>
+        <label>이름</label>
         <input
           type="text"
           class="form-control"
@@ -55,28 +50,34 @@
           v-model="name"
         />
       </div>
-      <div class="form-group">
-        <label>성별 :</label>
-        <input type="radio" id="one" value="남" v-model="gender" />
-        <label for="one">남</label>
-        <input type="radio" id="two" value="여" v-model="gender" />
-        <label for="two">여</label>
+      <div class="form-group ft-nss light mb-1">
+        <label for="gender">성별</label>
+        <div id="gender" class="d-flex">
+          <div class="mr-2">
+            <input type="radio" id="one" value="남" v-model="gender" class="mr-1" />
+            <label for="one">남</label>
+          </div>
+          <div>
+            <input type="radio" id="two" value="여" v-model="gender" class="mr-1" />
+            <label for="two">여</label>
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        <label>생년월일 :</label>
+        <label>생년월일</label>
         <input
           type="text"
           class="form-control"
           id="birth"
           ref="birth"
-          placeholder="2020-01-01"
+          placeholder="예) 2020-01-01"
           v-model="birth"
           maxlength="10"
           @keyup="inputBirthDate"
         />
       </div>
       <div class="form-group">
-        <label>핸드폰 번호 :</label>
+        <label>핸드폰 번호</label>
         <input
           type="text"
           class="form-control"
@@ -91,21 +92,13 @@
       <div class="form-group">
         <button
           :id="awesomeId2"
-          class="btn btn-primary btn-lg btn-block login-btn"
+          class="btn bg-cblue text-light btn-lg btn-block login-btn"
           @click="checkHandlerInsert"
         >
-          <span
-            style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-          >회</span>
-          <span
-            style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-          >원</span>
-          <span
-            style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-          >가</span>
-          <span
-            style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
-          >입</span>
+          <span :id="awesomefont1">회</span>
+          <span :id="awesomefont2">원</span>
+          <span :id="awesomefont3">가</span>
+          <span :id="awesomefont4">입</span>
         </button>
       </div>
     </div>
@@ -139,6 +132,10 @@ export default {
       awesomeVar: 0,
       awesomeId: "",
       awesomeId2: "",
+      awesomefont1: "",
+      awesomefont2: "",
+      awesomefont3: "",
+      awesomefont4: "",
       today: "",
     };
   },
@@ -305,9 +302,17 @@ export default {
       if (this.awesomeVar % 7 === 0) {
         this.awesomeId = "checkbutton";
         this.awesomeId2 = "signupbutton";
+        this.awesomefont1 = "buttonFont1";
+        this.awesomefont2 = "buttonFont2";
+        this.awesomefont3 = "buttonFont3";
+        this.awesomefont4 = "buttonFont4";
       } else {
         this.awesomeId = "";
         this.awesomeId2 = "";
+        this.awesomefont1 = "";
+        this.awesomefont2 = "";
+        this.awesomefont3 = "";
+        this.awesomefont4 = "";
       }
     },
     getToday() {
@@ -347,5 +352,22 @@ export default {
     navy,
     purple
   );
+}
+
+#buttonFont1 {
+  color: red;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#buttonFont2 {
+  color: green;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#buttonFont3 {
+  color: blue;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#buttonFont4 {
+  color: purple;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 </style>
