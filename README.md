@@ -16,6 +16,69 @@
 버튼 한번으로 지난 20초 상황에 대한 기록
 
 # 프로젝트 사용법
+### Import
+```bash
+git clone https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211.git
+```
+
+### Vue.js
+```bash
+cd s03p12a211/frontend
+npm install
+npm run serve
+```
+
+### Deploy
+#### Install NGINX
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install nginx
+```
+
+#### Environment Setting
+```bash
+cd /etc/nginx/sites-available
+vi default
+```
+
+```linux
+# Front-End Setting
+root <Front 빌드 파일 위치>;
+<index 파일명>;
+server_namㄷ <서버 도메인>;
+
+# Back-End Setting
+proxy_pass <웹 사이트 URL>
+```
+
+#### Nginx Start
+```bash
+sudo service nginx start
+or
+sudo systemctl start nginx
+```
+
+#### Deploy
+##### Front-End
+```json
+// package.json
+"script": {
+    "build": "vue-cli-service build"
+}
+```
+```bash
+npm run build
+```
+dist 폴더 생성 => index.html => src 경로 앞에 . 추가
+
+##### Back-End
+``` xml
+<!-- pom.xml-->
+
+<packaging>jar</packaging>
+```
+
 
 # 서비스 설명
 
