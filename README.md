@@ -95,7 +95,7 @@ sudo service nginx restart
 # 컨트리뷰터
 
 # 라이센스
-[Apache License 2.0](https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211/blob/develop/LICENSE)
+[MIT License 2.0](https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211/blob/develop/LICENSE)
 # 기타(디벨롭 룰, 개발 일정, 개발자 소개, 자랑하고 싶은 것, 변화된 이슈 등)
 
 # 개발 규칙
