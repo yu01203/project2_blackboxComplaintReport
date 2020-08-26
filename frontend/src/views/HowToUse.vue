@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" style="max-width:1000px">
     <br />
-    <br />
+    <!-- <br /> -->
     <carousel
       :autoplay="false"
       :nav="true"
@@ -12,7 +12,7 @@
     >
       <!-- 1-1 -->
       <div>
-        <div class="d-none d-md-block mx-auto" style="width:auto;">
+        <div class="d-none d-md-block mx-auto" style="width:100%;">
           <h2>
             <span class="use-title px-3 py-1">1. 민원 처리 상태 관리</span>
           </h2>
@@ -288,6 +288,7 @@ export default {
 p {
   font-size: 140%;
   margin-top: 12px;
+  margin-bottom: 0;
 }
 
 .mobile_p {
@@ -296,5 +297,9 @@ p {
 
 .use-title {
   background-color: #f5f5d8;
+}
+
+.owl-nav {
+  margin-top: 100px;
 }
 </style>
