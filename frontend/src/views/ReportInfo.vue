@@ -1,6 +1,5 @@
 <template>
   <div style="height: 100%">
-    <br />
     <!-- 전체 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') == null" style="height: 100%">
       <br />

@@ -1,7 +1,6 @@
 <template>
   <div style="height:100%">
     <div v-if="this.$session.get('email') != null" class="pt-3 px-0 container">
-      <br />
       <!-- filter division -->
       <div
         id="filter-division"

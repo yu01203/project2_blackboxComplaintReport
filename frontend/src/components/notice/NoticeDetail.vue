@@ -1,7 +1,6 @@
 !<template>
   <div class="container" align="center">
     <div class="col-lg-6 mt-3" align="center">
-      <br />
       <h1>공지사항</h1>
       <div class="form-group" align="center">
         <h5>제목 :</h5>
