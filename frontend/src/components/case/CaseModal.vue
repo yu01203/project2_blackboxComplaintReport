@@ -204,7 +204,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 textarea.form-control {
   resize: none;
   line-height: 30px;
