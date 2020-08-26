@@ -35,10 +35,13 @@
           <br />
           <hr />
           <!-- 네이버 로그인 버튼 -->
+          <div class="text-center font-italic text-muted">
+            <p>혹은</p>
+          </div>
           <div class="text-center">
             <img
               @click="naverLogin"
-              width="60%"
+              width="50%"
               style="cursor: pointer;"
               src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"
             />
@@ -93,7 +96,6 @@ export default {
       err && !this.pw && ((msg = "비밀번호를 입력해주세요"), (err = false)),
         this.$refs.pw.focus();
 
-      console.log(this.email + " " + this.pw);
       if (!err) alert(msg);
       else this.loginHandler();
     },
@@ -105,10 +107,9 @@ export default {
         })
         .then(({ data }) => {
           // JSON 형태
-          let msg = "로그인에 실패하였습니다.";
+          let msg = "아이디 혹은 비밀번호를 다시 확인해주세요.";
 
           if (data.success === "success") {
-            msg = "로그인이 완료되었습니다.";
             this.$session.set("email", this.email);
             this.$session.set("userNo", data.userinfo.userNo);
             this.$session.set("name", data.userinfo.name);
@@ -118,11 +119,12 @@ export default {
             this.$session.set("token", data.token);
             this.$router.push("/");
             this.$router.go();
+          } else {
+            alert(msg);
           }
-          alert(msg);
         })
-        .catch(() => {
-          alert("에러가 발생했습니다-login.");
+        .catch((err) => {
+          alert(err + "에러가 발생했습니다");
         });
     },
     naverLogin() {

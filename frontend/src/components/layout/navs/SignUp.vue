@@ -2,7 +2,7 @@
   <b-modal id="modal-multi-3" title="회원가입" hide-footer>
     <div class="modal-body">
       <div class="form-group">
-        <label @click="awesomeFunc">이메일 :</label>
+        <label @click="awesomeFunc">이메일</label>
         <div class="d-flex">
           <input
             type="text"
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label>비밀번호 :</label>
+        <label>비밀번호</label>
         <input
           type="password"
           class="form-control ft-nss light"
@@ -45,7 +45,7 @@
         />
       </div>
       <div class="form-group">
-        <label>이름 :</label>
+        <label>이름</label>
         <input
           type="text"
           class="form-control"
@@ -56,14 +56,14 @@
         />
       </div>
       <div class="form-group">
-        <label>성별 :</label>
+        <label>성별</label>
         <input type="radio" id="one" value="남" v-model="gender" />
         <label for="one">남</label>
         <input type="radio" id="two" value="여" v-model="gender" />
         <label for="two">여</label>
       </div>
       <div class="form-group">
-        <label>생년월일 :</label>
+        <label>생년월일</label>
         <input
           type="text"
           class="form-control"
@@ -76,7 +76,7 @@
         />
       </div>
       <div class="form-group">
-        <label>핸드폰 번호 :</label>
+        <label>핸드폰 번호</label>
         <input
           type="text"
           class="form-control"
@@ -91,19 +91,23 @@
       <div class="form-group">
         <button
           :id="awesomeId2"
-          class="btn btn-primary btn-lg btn-block login-btn"
+          class="btn bg-cblue text-light btn-lg btn-block login-btn"
           @click="checkHandlerInsert"
         >
           <span
+            :id="awesomeId2"
             style="color: red; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
           >회</span>
           <span
+            :id="awesomeId2"
             style="color: green; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
           >원</span>
           <span
+            :id="awesomeId2"
             style="color: blue; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
           >가</span>
           <span
+            :id="awesomeId2"
             style="color: purple; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"
           >입</span>
         </button>
