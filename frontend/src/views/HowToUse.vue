@@ -281,6 +281,10 @@ export default {
 </script>
 
 <style scoped>
+.owl-carousel {
+  min-height: 500px;
+}
+
 p {
   font-size: 140%;
   margin-top: 12px;

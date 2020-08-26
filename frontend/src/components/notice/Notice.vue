@@ -1,7 +1,11 @@
 <template>
   <b-col cols="12" md="6" lg="4">
     <div>
-      <b-card class="shadow mb-4 bg-white rounded p-1" style="width: 100%;" @click="rowClicked">
+      <b-card
+        class="shadow mb-4 bg-white rounded p-1"
+        style="width: 100%; cursor: pointer"
+        @click="rowClicked"
+      >
         <b-card-body
           style="position:relative; min-height:150px; max-height:200px; padding-top: 5px;"
         >
