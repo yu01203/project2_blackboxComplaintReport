@@ -3,7 +3,7 @@
     <div
       id="main-logo"
       class="d-none d-md-block text-center bg-white border-bottom"
-      style="height:60px"
+      style="height:90px"
     >
       <a href="/" style="text-decoration: none;">
         <img
