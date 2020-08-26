@@ -25,7 +25,7 @@
                 :style="styles"
               ></b-form-select>
             </b-list-group-item>
-            <div class="d-flex justify-content-left text-secondary">
+            <div class="d-flex justify-content-left text-secondary my-2">
               <p class="mb-0">{{ date }}</p>
               <p class="ml-2 mb-0">{{ time }}</p>
             </div>

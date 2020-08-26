@@ -4,11 +4,11 @@
       <!-- filter division -->
       <div
         id="filter-division"
-        class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
+        class="row align-items-center text-center mb-4 mx-0 py-2 text-light"
         style="width:100%; border-radius:5px"
       >
         <!-- Report Condition Check Boxes -->
-        <div class="col-12 text-left my-2">
+        <div class="col-12 text-left mt-2 mb-3">
           <b-form-checkbox-group
             v-model="selected"
             :options="options"
@@ -34,7 +34,7 @@
         </div>
         <!-- find term calendar -->
         <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
-          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+          <b-form-group id="input-group-3" class="pl-0 pr-1 my-auto col-6">
             <b-form-datepicker
               id="example-datepicker1"
               v-model="startdate"
@@ -49,7 +49,7 @@
               :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             ></b-form-datepicker>
           </b-form-group>
-          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+          <b-form-group id="input-group-3" class="pl-1 pr-0 my-auto col-6">
             <b-form-datepicker
               id="example-datepicker2"
               v-model="enddate"
