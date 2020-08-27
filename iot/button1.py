@@ -6,7 +6,7 @@ import subprocess
 
 def make_movie():
 
-    subprocess.call('rm -r sample*.mp4', shell=True)
+    subprocess.call('sudo rm -r sample*.mp4', shell=True)
     print('movie change')
     subprocess.call('MP4Box -fps 30 -add sample0.h264 sample0.mp4', shell=True)
     subprocess.call('MP4Box -fps 30 -add sample1.h264 sample1.mp4', shell=True)
@@ -17,7 +17,7 @@ def make_movie():
     print 'sum movie'
     subprocess.call('ffmpeg -f concat -i input.txt -codec copy output.mp4 -y', shell=True)
     print 'send'
-    #subprocess.call('python Toaws.py', shell=True)
+    subprocess.call('python Toaws.py', shell=True)
     print 'btn complete'
 
 
@@ -25,7 +25,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(18, GPIO.IN)
 flag = 0
-k = 123
+
 try:
     while True:
         inputIO = GPIO.input(18)
@@ -35,17 +35,12 @@ try:
 
 	if flag == 1:
             make_movie()
-	    k += 1
             GPIO.output(17, GPIO.HIGH)
 
         else:
-
             GPIO.output(17, GPIO.LOW)
+
 	flag = 0
-        text = open('/home/pi/Desktop/programs/cases.txt','w')
-        data = ("{}".format(k))
-        text.write(data)
-        text.close()
 
 
 except KeyboardInterrupt:

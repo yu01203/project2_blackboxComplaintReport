@@ -9,9 +9,7 @@ while True:
     i = i % 6
 
     camera.start_recording('sample{}.h264'.format(i))
-    camera.start_preview()
     sleep(5)
-    camera.stop_preview()
     camera.stop_recording()
 
     text = open('/home/pi/Desktop/programs/input.txt','w')
