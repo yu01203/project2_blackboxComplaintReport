@@ -257,7 +257,7 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
         Git : https://lab.ssafy.com/kngking22
     - 김보성 (IoT)
     
-        Git : https://lab.ssafy.com/KIMBOSEO
+        Git : https://lab.ssafy.com/bosong111
     - 박세종 (Front-End)
     
         Git : https://lab.ssafy.com/tpwhd95
