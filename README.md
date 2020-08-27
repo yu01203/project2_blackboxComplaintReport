@@ -250,21 +250,21 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
 ### 나도내가무섭조
 - 팀장 : 조원빈 (Front-End)
     
-    Git : 
+    Git : https://lab.ssafy.com/cwb5116
 - 팀원
     - 김남규 (Back-End)
         
-        Git : 
+        Git : https://lab.ssafy.com/kngking22
     - 김보성 (IoT)
     
-        Git : 
+        Git : https://lab.ssafy.com/KIMBOSEO
     - 박세종 (Front-End)
     
-        Git : 
+        Git : https://lab.ssafy.com/tpwhd95
     - 최재빈 (Back-End)
     
         Git : https://lab.ssafy.com/justin613
     - 최정원 (IoT & Front-End)
     
-        Git : 
+        Git : https://lab.ssafy.com/jungwon9156
 
