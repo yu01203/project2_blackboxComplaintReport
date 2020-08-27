@@ -1,19 +1,33 @@
-# 서울 2반 11조
+# 나도 내가 무섭조(서울 2반 11조)
 
 <img src = "/uploads/b5b24fcf568201fe27804b5194574274/logo.jpg" width="50%" height="50%">
 
 
-# 프로젝트 소개
 ## 분노의민원
-원 버튼 간편 교통 민원 DB 플랫폼
-차량 주행 중 한번의 버튼 클릭으로 관련 영상 및 정보를
-웹 서버에 전송되어 민원
+#### 원 버튼 간편 교통 민원 DB 플랫폼
+차량 주행 중 한번의 버튼 클릭으로 관련 영상 및 정보가 웹 서버에 전송되어 민원 신고에 간편한 서비스 및 본인의 데이터를 관리 기능 제공
 
 ## 서비스 목적
-안전하고 간편하게 위반 상황 기록
+#### 쾌적한 주행 환경 및 에티켓 조성
+안전하고 편리하게 위반 상황을 기록하고, 간편한 민원 신고를 통해 사고와 위반의 발생을 줄이고, 올바른 마인드셋 형성
 
 ## 핵심 기능
-버튼 한번으로 지난 20초 상황에 대한 기록
+
+#### 데이터 기록
+- 카메라 : 지난 20초의 영상
+- GPS : 현재 위치의 좌표
+- 기타 : 현재 날짜 및 시간
+- 리모콘 : 데이터 전송
+
+#### 데이터 보관 및 관리
+- Reverse Geocoding : 좌표를 도로명 주소로 변환하여 관리
+- Naver ID Login :  네이버 아이디로 간편하게 보관 및 관리 개인화
+- JWT Token : 인증된 사용자만 데이터에 접근 가능하여 기밀성 보장
+- Kakao Maps : 데이터를 시각적으로 관리 및 접근
+
+#### 반응형 웹 사이트
+- 사건 발생 시 모바일에서 즉시 이용 가능
+- 데스크 탑 또한 이용 가능
 
 # 프로젝트 사용법
 ### Import
@@ -28,7 +42,24 @@ npm install
 npm run serve
 ```
 
-### Deploy
+### 현재 인스톨된 NPM 패키지 리스트 만들기
+
+```bash
+$ npm shrinkwrap
+```
+
+- 현재 경로에 npm-shrinkwrap.json 작성
+  
+- shrinkwrap: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
+  
+- 해당 npm을 공유받는 사람은 
+
+  ```bash
+  $ npm install
+  ```
+
+  다음의 명령어로 작성된 패키지 리스트대로 설치 가능
+
 #### Install NGINX
 ```bash
 sudo apt-get update
@@ -75,7 +106,6 @@ dist 폴더 생성 => index.html => src 경로 앞에 . 추가
 ##### Back-End
 ``` xml
 <!-- pom.xml-->
-
 <packaging>jar</packaging>
 ```
 Run as -> Maven clean > install > package 순으로 실행
@@ -131,12 +161,9 @@ sudo service nginx restart
 신고가 완료됐다면 분노의 민원 사이트로 돌아와 사진처럼 신고 미접수 상태를 접수 완료 상태로 바꿔줍니다.
 ```
 
-
-# 컨트리뷰터
-
 # 라이센스
 [MIT License 2.0](https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211/blob/develop/LICENSE)
-# 기타(디벨롭 룰, 개발 일정, 개발자 소개, 자랑하고 싶은 것, 변화된 이슈 등)
+# 기타(개발 일정,  자랑하고 싶은 것, 변화된 이슈 등)
 
 # 개발 규칙
 
@@ -201,31 +228,3 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
     
         Git : 
 
-
-
-
-
-
-
-## NPM 패키지 인스톨
-
-- npm install
-  - 평소랑 같이 해주면 됩니다.
-
-## 현재 인스톨된 NPM 패키지 리스트 만들기
-
-```bash
-$ npm shrinkwrap
-```
-
-- 현재 경로에 npm-shrinkwrap.json 작성
-  
-- shrinkwrap: 현재 인스톨된 npm 패키지 json 목록으로 작성하는 패키지
-  
-- 해당 npm을 공유받는 사람은 
-
-  ```bash
-  $ npm install
-  ```
-
-  다음의 명령어로 작성된 패키지 리스트대로 설치 가능
