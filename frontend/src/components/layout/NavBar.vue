@@ -8,9 +8,9 @@
       <a href="/" style="text-decoration: none;">
         <img
           src="@/assets/logos/Logo_1.png"
-          class="mb-0"
+          class="my-2"
           alt="logo-image"
-          style="height:100%; width:auto"
+          style="height:75%; width:auto;"
         />
       </a>
     </div>

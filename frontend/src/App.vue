@@ -3,7 +3,7 @@
     <NavBar id="navbar" class="fixed-top ft-nns" />
     <div class="wrapper2" style="height:100%">
       <div id="main-content" style="height:100%">
-        <div class="d-none d-md-block" style="padding-top:108px; "></div>
+        <div class="d-none d-md-block" style="padding-top:128px;"></div>
         <div class="d-md-none" style="padding-top:64px"></div>
         <router-view />
       </div>
