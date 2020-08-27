@@ -1,17 +1,20 @@
 <template>
   <div style="height: 100%">
-    <br />
     <!-- 전체 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') == null" style="height: 100%">
+      <br />
       <div>
         <h1 class="text-center mb-3">전체 등록 현황</h1>
       </div>
       <div class="row align-items-center justify-content-center text-center mb-3 py-2">
-        <div class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded" style="max-width: 20rem;">
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded"
+          style="max-width: 20rem; height:100%"
+        >
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:4rem;">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -21,7 +24,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -31,14 +34,14 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
-      <hr />
-      <div>
+
+      <!-- <div>
         <h1 class="text-center mb-3">접수 상황별 전체 현황</h1>
-      </div>
+      </div>-->
       <div
         id="all-user-charts"
         class="row align-items-center justify-content-center text-center mb-3 py-2"
@@ -47,7 +50,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">신고 미접수 현황</h2>
+          <h2 class="text-center">신고 미접수 현황</h2>
           <hr />
           <Chart1 />
         </div>
@@ -55,7 +58,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">접수완료 현황</h2>
+          <h2 class="text-center">접수완료 현황</h2>
           <hr />
           <Chart2 />
         </div>
@@ -63,14 +66,16 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">처리완료 현황</h2>
+          <h2 class="text-center">처리완료 현황</h2>
           <hr />
           <Chart3 />
         </div>
       </div>
     </div>
 
+    <!-- 개인 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') != null">
+      <br />
       <div>
         <h1 class="text-center mb-3">나의 등록 현황</h1>
       </div>
@@ -79,7 +84,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -89,7 +94,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -99,7 +104,7 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -115,7 +120,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">신고 미접수 현황</h2>
+          <h2 class="text-center">신고 미접수 현황</h2>
           <hr />
           <ChartPersonal1 />
         </div>
@@ -123,7 +128,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">접수완료 현황</h2>
+          <h2 class="text-center">접수완료 현황</h2>
           <hr />
           <ChartPersonal2 />
         </div>
@@ -131,7 +136,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">처리완료 현황</h2>
+          <h2 class="text-center">처리완료 현황</h2>
           <hr />
           <ChartPersonal3 />
         </div>

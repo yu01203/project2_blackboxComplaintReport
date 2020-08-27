@@ -70,7 +70,7 @@
         <!-- search bar -->
         <div class="col-12 col-md-12 col-lg-3 mb-2">
           <b-input-group id="searchBar">
-            <b-input-group-prepend is-text>
+            <b-input-group-prepend is-text @click="optionController" style="cursor: pointer">
               <b-icon icon="search"></b-icon>
             </b-input-group-prepend>
             <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
@@ -79,7 +79,7 @@
       </div>
       <!-- cards divison -->
       <div
-        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
+        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchWord.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
       >
         <b-container class="bv-example-row">
           <b-row>
@@ -128,6 +128,7 @@ export default {
     return {
       local_violationitems: [],
       searchText: "",
+      searchWord: "",
       searchviolationitems: [],
       selected: [],
       options: [
@@ -171,20 +172,22 @@ export default {
     this.getToday();
   },
   created() {
-    http
-      .get(`/violation/${this.$session.get("userNo")}`, {
-        headers: {
-          token: this.$session.get("token"),
-        },
-      })
-      .then(({ data }) => {
-        if (data != null) {
-          this.local_violationitems = data;
-          this.$store.state.violationitems = data;
-        } else {
-          alert(" 실패했습니다.");
-        }
-      });
+    if (this.$session.get("email")) {
+      http
+        .get(`/violation/${this.$session.get("userNo")}`, {
+          headers: {
+            token: this.$session.get("token"),
+          },
+        })
+        .then(({ data }) => {
+          if (data != null) {
+            this.local_violationitems = data;
+            this.$store.state.violationitems = data;
+          } else {
+            alert(" 실패했습니다.");
+          }
+        });
+    }
   },
   methods: {
     clickFilter() {
@@ -248,16 +251,19 @@ export default {
     searchOnlist() {
       const emptyItems = new Array();
       this.searchviolationitems = emptyItems;
+
+      const searchWord = this.searchText;
+      this.searchWord = searchWord;
       for (var i in this.templist_find) {
         if (
           (this.templist_find[i].contents != null &&
-            this.templist_find[i].contents.includes(this.searchText)) ||
+            this.templist_find[i].contents.includes(searchWord)) ||
           (this.templist_find[i].spot != null &&
-            this.templist_find[i].spot.includes(this.searchText)) ||
+            this.templist_find[i].spot.includes(searchWord)) ||
           (this.templist_find[i].carNum != null &&
-            this.templist_find[i].carNum.includes(this.searchText)) ||
+            this.templist_find[i].carNum.includes(searchWord)) ||
           (this.templist_find[i].address != null &&
-            this.templist_find[i].address.includes(this.searchText))
+            this.templist_find[i].address.includes(searchWord))
         ) {
           this.searchviolationitems.push(this.templist_find[i]);
         }

@@ -168,10 +168,17 @@ export default {
             "bv::hide::modal",
             "modal" + this.violationitem.violationNo
           );
+
           alert(msg);
         })
         .catch(() => {
-          alert("에러가 발생했습니다.");
+          var msg = "에러가 발생했습니다.";
+
+          if (this.violationitem.contents.length > 100) {
+            msg = "제보 내용은 100자 이내로 작성해주세요.";
+          }
+
+          alert(msg);
         });
     },
     deleteHandler() {
@@ -204,7 +211,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 textarea.form-control {
   resize: none;
   line-height: 30px;

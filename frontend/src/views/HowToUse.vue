@@ -1,7 +1,6 @@
 <template>
   <div class="container" style="max-width:1000px">
     <br />
-    <!-- <br /> -->
     <carousel
       :autoplay="false"
       :nav="true"
