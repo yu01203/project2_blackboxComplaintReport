@@ -14,7 +14,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:4rem;">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -24,7 +24,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -34,7 +34,7 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">신고 미접수 현황</h2>
+          <h2 class="text-center">신고 미접수 현황</h2>
           <hr />
           <Chart1 />
         </div>
@@ -58,7 +58,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">접수완료 현황</h2>
+          <h2 class="text-center">접수완료 현황</h2>
           <hr />
           <Chart2 />
         </div>
@@ -66,7 +66,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">처리완료 현황</h2>
+          <h2 class="text-center">처리완료 현황</h2>
           <hr />
           <Chart3 />
         </div>
@@ -84,7 +84,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -94,7 +94,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -104,7 +104,7 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:5vw">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:4rem">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">신고 미접수 현황</h2>
+          <h2 class="text-center">신고 미접수 현황</h2>
           <hr />
           <ChartPersonal1 />
         </div>
@@ -128,7 +128,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">접수완료 현황</h2>
+          <h2 class="text-center">접수완료 현황</h2>
           <hr />
           <ChartPersonal2 />
         </div>
@@ -136,7 +136,7 @@
           class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 bg-white rounded"
           style="max-width: 20rem;"
         >
-          <h2 class="text-left">처리완료 현황</h2>
+          <h2 class="text-center">처리완료 현황</h2>
           <hr />
           <ChartPersonal3 />
         </div>
