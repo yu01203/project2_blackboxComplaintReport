@@ -120,17 +120,13 @@ sudo service nginx restart
 ```
 ![HowToUse6](/uploads/730aee4a420384124fd2fc319fe8d7df/HowToUse6.png)
 ```bash
-스마트 국민제보 사이트에서 회원가입 후 로그인을 합니다
+메인화면에 보이는 교통위반 버튼을 누릅니다.
 ```
 ![HowToUse7](/uploads/433d79f597f4f08d72f273e3389d07d4/HowToUse7.png)
 ```bash
-메인화면에 보이는 교통위반 버튼을 누릅니다.
-```
-![HowToUse8](/uploads/d0fd8751c1746ce1f51c77a3dc7ef70b/HowToUse8.png)
-```bash
 분노의 민원 제보목록에 저장된카드 를 보면서 1~8번 순서대로 교통위반신고 항목을 기입하고 신고하기 버튼을 누릅니다.
 ```
-
+![HowToUse8](/uploads/d0fd8751c1746ce1f51c77a3dc7ef70b/HowToUse8.png)
 ```bash
 신고가 완료됐다면 분노의 민원 사이트로 돌아와 사진처럼 신고 미접수 상태를 접수 완료 상태로 바꿔줍니다.
 ```
