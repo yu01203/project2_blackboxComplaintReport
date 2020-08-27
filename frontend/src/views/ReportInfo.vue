@@ -7,11 +7,14 @@
         <h1 class="text-center mb-3">전체 등록 현황</h1>
       </div>
       <div class="row align-items-center justify-content-center text-center mb-3 py-2">
-        <div class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded" style="max-width: 20rem;">
+        <div
+          class="col-12 col-lg-4 shadow p-3 mb-5 mx-3 rounded"
+          style="max-width: 20rem; height:100%"
+        >
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:7vh; height:100%">{{ wholeCount }}건</p>
           </div>
         </div>
         <div

@@ -172,20 +172,22 @@ export default {
     this.getToday();
   },
   created() {
-    http
-      .get(`/violation/${this.$session.get("userNo")}`, {
-        headers: {
-          token: this.$session.get("token"),
-        },
-      })
-      .then(({ data }) => {
-        if (data != null) {
-          this.local_violationitems = data;
-          this.$store.state.violationitems = data;
-        } else {
-          alert(" 실패했습니다.");
-        }
-      });
+    if (this.$session.get("email")) {
+      http
+        .get(`/violation/${this.$session.get("userNo")}`, {
+          headers: {
+            token: this.$session.get("token"),
+          },
+        })
+        .then(({ data }) => {
+          if (data != null) {
+            this.local_violationitems = data;
+            this.$store.state.violationitems = data;
+          } else {
+            alert(" 실패했습니다.");
+          }
+        });
+    }
   },
   methods: {
     clickFilter() {
