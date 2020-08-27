@@ -76,17 +76,7 @@
             />
           </p>
           <p>
-            <label for="spot">위반장소</label>
-            <input
-              type="text"
-              class="form-control"
-              id="spot"
-              ref="spot"
-              v-model="violationitem.spot"
-            />
-          </p>
-          <p>
-            <label for="address">위반위치</label>
+            <label for="address">위반장소</label>
             <input
               type="text"
               class="form-control"
@@ -94,6 +84,16 @@
               readonly
               ref="address"
               v-model="violationitem.address"
+            />
+          </p>
+          <p>
+            <label for="spot">위반위치</label>
+            <input
+              type="text"
+              class="form-control"
+              id="spot"
+              ref="spot"
+              v-model="violationitem.spot"
             />
           </p>
           <p>

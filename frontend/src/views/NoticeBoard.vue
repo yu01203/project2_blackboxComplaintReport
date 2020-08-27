@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <br />
-    <h1 class="text-center mb-3">공지사항</h1>
+    <!-- <h1 class="text-center mb-3">공지사항</h1> -->
     <div v-if="this.$session.get('email') == 'admin'" class="text-right">
       <router-link to="/noticeWrite" class="btn btn-warning m-3">글쓰기</router-link>
     </div>

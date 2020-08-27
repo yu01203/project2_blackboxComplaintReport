@@ -228,3 +228,47 @@ $ git clone -b develop --single-branch https://lab.ssafy.com/s03-webmobile3-sub2
     
         Git : 
 
+  다음의 명령어로 작성된 패키지 리스트대로 설치 가능
+
+
+
+## IoT
+
+```bash
+$ sudo python button1.py &
+
+$ sudo python gps.py &
+
+$ sudo python testing.py &
+```
+
+명령어를 etc/profile 마지막에 추가하여 자동실행
+
+
+
+### button1.py 
+
+- 기존의 남아있는 잉여 데이터 삭제
+- 리모컨 버튼 입력을 받았을 때 h264 파일을 mp4 파일로 변환
+- 만들어진 mp4 파일을 알맞게 하나의 파일로 만듦
+- Toaws.py를 실행
+
+```python
+def make_movie():
+
+    subprocess.call('rm -r sample*.mp4 -y', shell=True)
+    #print('movie change')
+    subprocess.call('MP4Box -fps 30 -add sample0.h264 sample0.mp4', shell=True)
+    subprocess.call('MP4Box -fps 30 -add sample1.h264 sample1.mp4', shell=True)
+    subprocess.call('MP4Box -fps 30 -add sample2.h264 sample2.mp4', shell=True)
+    subprocess.call('MP4Box -fps 30 -add sample3.h264 sample3.mp4', shell=True)
+    subprocess.call('MP4Box -fps 30 -add sample4.h264 sample4.mp4', shell=True)
+    subprocess.call('MP4Box -fps 30 -add sample5.h264 sample5.mp4', shell=True)
+    #print 'sum movie'
+    subprocess.call('ffmpeg -f concat -i input.txt -codec copy output.mp4 -y', shell=True)
+    #print 'send'
+    subprocess.call('python Toaws.py', shell=True)
+    #print 'btn complete'
+
+```
+

@@ -1,8 +1,8 @@
 <template>
   <div style="height: 100%">
-    <br />
     <!-- 전체 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') == null" style="height: 100%">
+      <br />
       <div>
         <h1 class="text-center mb-3">전체 등록 현황</h1>
       </div>
@@ -35,10 +35,10 @@
           </div>
         </div>
       </div>
-      <hr />
-      <div>
+
+      <!-- <div>
         <h1 class="text-center mb-3">접수 상황별 전체 현황</h1>
-      </div>
+      </div>-->
       <div
         id="all-user-charts"
         class="row align-items-center justify-content-center text-center mb-3 py-2"
@@ -70,7 +70,9 @@
       </div>
     </div>
 
+    <!-- 개인 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') != null">
+      <br />
       <div>
         <h1 class="text-center mb-3">나의 등록 현황</h1>
       </div>

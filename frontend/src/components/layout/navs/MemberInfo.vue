@@ -1,10 +1,8 @@
 <template>
   <b-modal id="modal-memberInfo" title="회원정보" hide-footer>
     <div class="form-group">
-      <label class="d-flex">
-        이메일:
-        <div class="ml-1 ft-nss light" v-text="this.$session.get('email')"></div>
-      </label>
+      <label for="email-info">이메일</label>
+      <div id="email-info" class="ml-1 ft-nss light" v-text="this.$session.get('email')"></div>
     </div>
     <div class="form-group">
       <label for="pw">비밀번호</label>
@@ -39,21 +37,27 @@
         v-model="name"
       />
     </div>
-    <div class="form-group ft-nss light">
-      <label>성별 :</label>
-      <input type="radio" id="one" value="남" v-model="gender" />
-      <label for="one">남</label>
-      <input type="radio" id="two" value="여" v-model="gender" />
-      <label for="two">여</label>
-      <input
-        hidden
-        type="text"
-        class="form-control"
-        id="gender"
-        ref="gender"
-        placeholder="남 또는 여"
-        v-model="gender"
-      />
+    <div class="form-group ft-nss light mb-1">
+      <label for="gender">성별</label>
+      <div id="gender" class="d-flex">
+        <div class="mr-2">
+          <input type="radio" id="one" value="남" v-model="gender" class="mr-1" />
+          <label for="one">남</label>
+        </div>
+        <div>
+          <input type="radio" id="two" value="여" v-model="gender" class="mr-1" />
+          <label for="two">여</label>
+        </div>
+        <input
+          hidden
+          type="text"
+          class="form-control"
+          id="gender"
+          ref="gender"
+          placeholder="남 또는 여"
+          v-model="gender"
+        />
+      </div>
     </div>
     <div class="form-group">
       <label for="birth" class="d-flex ft-nss light">생년월일</label>
@@ -82,8 +86,8 @@
       />
     </div>
     <div class="form-group d-flex justify-content-around">
-      <button class="btn btn-info ft-nss light" @click="checkHandlerModify">회원정보수정</button>
-      <button class="btn btn-info ft-nss light" @click="deleteHandler">
+      <button class="btn bg-cblue ft-nss text-light" @click="checkHandlerModify">회원정보수정</button>
+      <button class="btn btn-danger ft-nss" @click="deleteHandler">
         <div class="ft-nss light" style="padding: 0px 12px; color: white;">회원탈퇴</div>
       </button>
     </div>

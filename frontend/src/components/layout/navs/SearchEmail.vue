@@ -2,7 +2,7 @@
   <b-modal id="modal-multi-1" title="이메일 찾기" hide-footer>
     <div class="modal-body">
       <div class="form-group">
-        <label>이름 :</label>
+        <label for="name">이름</label>
         <input
           type="text"
           class="form-control"
@@ -12,32 +12,43 @@
           v-model="name"
         />
       </div>
-      <div class="form-group">
-        <label>성별 :</label>
-        <input
-          type="text"
-          class="form-control"
-          id="gender"
-          ref="gender"
-          placeholder="남 또는 여"
-          v-model="gender"
-        />
+      <div class="form-group light mb-1">
+        <label for="gender">성별</label>
+        <div id="gender" class="d-flex">
+          <div class="mr-2">
+            <input type="radio" id="one" value="남" v-model="gender" class="mr-1" />
+            <label for="one">남</label>
+          </div>
+          <div>
+            <input type="radio" id="two" value="여" v-model="gender" class="mr-1" />
+            <label for="two">여</label>
+          </div>
+          <input
+            hidden
+            type="text"
+            class="form-control"
+            id="gender"
+            ref="gender"
+            placeholder="남 또는 여"
+            v-model="gender"
+          />
+        </div>
       </div>
       <div class="form-group">
-        <label>생년월일 :</label>
+        <label for="birth">생년월일</label>
         <input
           type="text"
           class="form-control"
           id="birth"
           ref="birth"
-          placeholder="2020-01-01"
+          placeholder="예) 2020-01-01"
           v-model="birth"
           maxlength="10"
           @keyup="inputBirthDate"
         />
       </div>
       <div class="form-group">
-        <label>핸드폰 번호 :</label>
+        <label for="phone">핸드폰 번호</label>
         <input
           type="text"
           class="form-control"
@@ -50,7 +61,7 @@
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-lg btn-block login-btn" @click="findEmail">이메일 찾기</button>
+        <button class="btn bg-cblue text-light btn-lg btn-block login-btn" @click="findEmail">이메일 찾기</button>
       </div>
     </div>
   </b-modal>

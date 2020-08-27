@@ -4,11 +4,11 @@
       <!-- filter division -->
       <div
         id="filter-division"
-        class="row align-items-center text-center mb-3 mx-0 py-2 text-light"
+        class="row align-items-center text-center mb-4 mx-0 py-2 text-light"
         style="width:100%; border-radius:5px"
       >
         <!-- Report Condition Check Boxes -->
-        <div class="col-12 text-left my-2">
+        <div class="col-12 text-left mt-2 mb-3">
           <b-form-checkbox-group
             v-model="selected"
             :options="options"
@@ -34,7 +34,7 @@
         </div>
         <!-- find term calendar -->
         <div class="col-12 col-md-7 col-lg-5 mb-2 d-flex">
-          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+          <b-form-group id="input-group-3" class="pl-0 pr-1 my-auto col-6">
             <b-form-datepicker
               id="example-datepicker1"
               v-model="startdate"
@@ -49,7 +49,7 @@
               :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             ></b-form-datepicker>
           </b-form-group>
-          <b-form-group id="input-group-3" class="px-0 my-auto col-6">
+          <b-form-group id="input-group-3" class="pl-1 pr-0 my-auto col-6">
             <b-form-datepicker
               id="example-datepicker2"
               v-model="enddate"
@@ -70,7 +70,7 @@
         <!-- search bar -->
         <div class="col-12 col-md-12 col-lg-3 mb-2">
           <b-input-group id="searchBar">
-            <b-input-group-prepend is-text>
+            <b-input-group-prepend is-text @click="optionController" style="cursor: pointer">
               <b-icon icon="search"></b-icon>
             </b-input-group-prepend>
             <b-form-input class type="text" v-model="searchText" @keydown.enter="optionController"></b-form-input>
@@ -79,7 +79,7 @@
       </div>
       <!-- cards divison -->
       <div
-        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchText.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
+        v-if="searchviolationitems.length == 0 && selected2 == '전체' && searchWord.length == 0 && selected.length == 0 && startdate.length == 0 && enddate.length == 0"
       >
         <b-container class="bv-example-row">
           <b-row>
@@ -128,6 +128,7 @@ export default {
     return {
       local_violationitems: [],
       searchText: "",
+      searchWord: "",
       searchviolationitems: [],
       selected: [],
       options: [
@@ -248,16 +249,19 @@ export default {
     searchOnlist() {
       const emptyItems = new Array();
       this.searchviolationitems = emptyItems;
+
+      const searchWord = this.searchText;
+      this.searchWord = searchWord;
       for (var i in this.templist_find) {
         if (
           (this.templist_find[i].contents != null &&
-            this.templist_find[i].contents.includes(this.searchText)) ||
+            this.templist_find[i].contents.includes(searchWord)) ||
           (this.templist_find[i].spot != null &&
-            this.templist_find[i].spot.includes(this.searchText)) ||
+            this.templist_find[i].spot.includes(searchWord)) ||
           (this.templist_find[i].carNum != null &&
-            this.templist_find[i].carNum.includes(this.searchText)) ||
+            this.templist_find[i].carNum.includes(searchWord)) ||
           (this.templist_find[i].address != null &&
-            this.templist_find[i].address.includes(this.searchText))
+            this.templist_find[i].address.includes(searchWord))
         ) {
           this.searchviolationitems.push(this.templist_find[i]);
         }

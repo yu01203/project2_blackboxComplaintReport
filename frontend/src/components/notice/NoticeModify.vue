@@ -32,6 +32,7 @@
       <button type="button" class="btn btn-primary" @click="checkHandlerModify">수정완료</button>
       <router-link to="/noticeboard" class="btn btn-info">목록으로</router-link>
     </div>
+    <br />
   </div>
 </template>
 

@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 h1 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 h3 {
   text-align: left;
