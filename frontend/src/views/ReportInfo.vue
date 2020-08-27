@@ -36,10 +36,10 @@
           </div>
         </div>
       </div>
-      <hr />
-      <div>
+
+      <!-- <div>
         <h1 class="text-center mb-3">접수 상황별 전체 현황</h1>
-      </div>
+      </div>-->
       <div
         id="all-user-charts"
         class="row align-items-center justify-content-center text-center mb-3 py-2"
@@ -71,6 +71,7 @@
       </div>
     </div>
 
+    <!-- 개인 사용자 데이터 출력 -->
     <div v-if="this.$session.get('email') != null">
       <br />
       <div>
