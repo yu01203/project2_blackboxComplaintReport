@@ -11,7 +11,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -21,7 +21,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -31,7 +31,7 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@
           <h2 class="text-center">전체 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ wholeCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ wholeCount }}건</p>
           </div>
         </div>
         <div
@@ -91,7 +91,7 @@
           <h2 class="text-center">{{ year }}년 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ yearCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ yearCount }}건</p>
           </div>
         </div>
         <div
@@ -101,7 +101,7 @@
           <h2 class="text-center">{{ month }}월 등록 건수</h2>
           <hr />
           <div>
-            <p class="bolder" style="font-size:11vh">{{ monthCount }}건</p>
+            <p class="bolder" style="font-size:5vw">{{ monthCount }}건</p>
           </div>
         </div>
       </div>
