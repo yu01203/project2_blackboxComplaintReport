@@ -1,6 +1,6 @@
-# 나도 내가 무섭조(서울 2반 11조)
+# 팀명 : 나도 내가 무섭조
 
-<img src = "/uploads/b5b24fcf568201fe27804b5194574274/logo.jpg" width="50%" height="50%">
+<img src = "https://user-images.githubusercontent.com/26289683/93032863-badb6f80-f66e-11ea-8a32-39d94cf18748.png" width="50%" height="50%">
 
 
 ## 분노의민원
@@ -10,6 +10,9 @@
 ## 서비스 목적
 #### 쾌적한 주행 환경 및 에티켓 조성
 안전하고 편리하게 위반 상황을 기록하고, 간편한 민원 신고를 통해 사고와 위반의 발생을 줄이고, 올바른 마인드셋 형성
+
+## UCC 
+https://youtu.be/rwWsN4sbOAQ
 
 ## 핵심 기능
 
@@ -32,7 +35,7 @@
 # 프로젝트 사용법
 ### Import
 ```bash
-git clone https://lab.ssafy.com/s03-webmobile3-sub2/s03p12a211.git
+git clone https://github.com/yu01203/project_2.git
 ```
 
 ### Vue.js
@@ -194,37 +197,37 @@ def make_movie():
 차량 운행중에 교통법규 위반사례를 목격했다면 블랙박스와 연결된 버튼을 눌러 지난 20초 상황에 대해서만 영상을 본인 웹페이지 계정으로 전송합니다.
 ```
 
-![블랙박스사진](/uploads/6685176ae4b93b95b1da5d4343df6272/블랙박스사진.jpg)
-![홈페이지사진1](/uploads/6257cc270385159ba96fc4fa4b759f54/홈페이지사진1.PNG)
-![카드첫클릭](/uploads/362e2c28926b53b0f90a647b94729b38/카드첫클릭.PNG)
+![블랙박스사진](https://user-images.githubusercontent.com/26289683/93033028-61c00b80-f66f-11ea-8ac3-d56f021ab3a0.jpg)
+![홈페이지사진1](https://user-images.githubusercontent.com/26289683/93033026-608ede80-f66f-11ea-9d12-96fe3f9bab0a.PNG)
+![카드첫클릭](https://user-images.githubusercontent.com/26289683/93033024-5ec51b00-f66f-11ea-8500-61be0a56291c.PNG)
 ```bash
 보내온 영상 썸내일을 클릭하게 되면 블랙박스 내 센서로 영상 및 영상정보들이 자동으로 저장되어진 것을 확인할 수 있습니다.
 ```
-![HowToUse1](/uploads/a619d391934835822510474ee01f0c6f/HowToUse1.png)
+![HowToUse1](https://user-images.githubusercontent.com/26289683/93032865-bdd66000-f66e-11ea-8a21-1d2e70970e3c.png)
 ```bash
 초기 상태는 신고 미접수로 아직 스마트 국민제보 사이트에 민원을 접수하기 전 단계입니다
 ```
-![HowToUse3](/uploads/e6106f6af23ffd75004c29b9e82b0ac7/HowToUse3.png)
+![HowToUse3](https://user-images.githubusercontent.com/26289683/93032868-c0d15080-f66e-11ea-8dd5-9cc4af9acd2c.png)
 ```bash
 제보 상세보기에서는 다음의 빈칸들을 작성 후 저장하기를 누릅니다
 ```
-![HowToUse4](/uploads/272fc6084d8f72fc3f3901116929f22b/HowToUse4.png)
+![HowToUse4](https://user-images.githubusercontent.com/26289683/93032870-c2027d80-f66e-11ea-80fa-387da1eebacf.png)
 ```bash
 영상을 다운로드 받은 후 하단의 스마트 국민제보로 신고하러 가기 버튼을 누릅니다.
 ```
-![HowToUse5](/uploads/bda41e62d757f5b8e0e352dd5b0b95c2/HowToUse5.png)
+![HowToUse5](https://user-images.githubusercontent.com/26289683/93032871-c29b1400-f66e-11ea-8ddb-d45159fdbb3a.png)
 ```bash
 스마트 국민제보 사이트에서 회원가입 후 로그인을 합니다
 ```
-![HowToUse6](/uploads/730aee4a420384124fd2fc319fe8d7df/HowToUse6.png)
+![HowToUse6](https://user-images.githubusercontent.com/26289683/93032874-c464d780-f66e-11ea-9c2e-4a90f6cc2c1c.png)
 ```bash
 메인화면에 보이는 교통위반 버튼을 누릅니다.
 ```
-![HowToUse7](/uploads/433d79f597f4f08d72f273e3389d07d4/HowToUse7.png)
+![HowToUse7](https://user-images.githubusercontent.com/26289683/93032876-c62e9b00-f66e-11ea-8270-c619dec37c6e.png)
 ```bash
 분노의 민원 제보목록에 저장된카드 를 보면서 1~8번 순서대로 교통위반신고 항목을 기입하고 신고하기 버튼을 누릅니다.
 ```
-![HowToUse8](/uploads/d0fd8751c1746ce1f51c77a3dc7ef70b/HowToUse8.png)
+![HowToUse8](https://user-images.githubusercontent.com/26289683/93032877-c6c73180-f66e-11ea-903f-252f16d9ee6d.png)
 ```bash
 신고가 완료됐다면 분노의 민원 사이트로 돌아와 사진처럼 신고 미접수 상태를 접수 완료 상태로 바꿔줍니다.
 ```
