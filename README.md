@@ -35,7 +35,7 @@ https://youtu.be/rwWsN4sbOAQ
 # 프로젝트 사용법
 ### Import
 ```bash
-git clone https://github.com/yu01203/project_2.git
+git clone https://github.com/yu01203/project2_blackboxComplaintReport.git
 ```
 
 ### Vue.js
